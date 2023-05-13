@@ -11,12 +11,10 @@ import {
   StackProps,
   Typography,
 } from '@mui/material';
+import { IFinance } from 'src/@types/finance';
 import Iconify from 'src/components/iconify/Iconify';
 import Label from 'src/components/label/Label';
 import Scrollbar from 'src/components/scrollbar/Scrollbar';
-import { fDate, fDateTime } from 'src/utils/formatTime';
-import { fCurrency } from 'src/utils/formatNumber';
-import { IFinance } from 'src/@types/finance';
 import Image from '../../../components/image';
 // utils
 // @types
@@ -39,28 +37,12 @@ export default function FinanceDrawerDrawer({
   onApply,
   ...other
 }: Props) {
-  const { name, cover, description, id, url, category, isPlatinum, institution, updatedAt } = event;
-
-  const [openShare, setOpenShare] = useState(false);
-
-  const [toggleTags, setToggleTags] = useState(true);
+  const { name, cover, description, url, category, isPlatinum, institution } = event;
 
   const [toggleProperties, setToggleProperties] = useState(true);
 
-  const handleToggleTags = () => {
-    setToggleTags(!toggleTags);
-  };
-
   const handleToggleProperties = () => {
     setToggleProperties(!toggleProperties);
-  };
-
-  const handleOpenShare = () => {
-    setOpenShare(true);
-  };
-
-  const handleCloseShare = () => {
-    setOpenShare(false);
   };
 
   return (

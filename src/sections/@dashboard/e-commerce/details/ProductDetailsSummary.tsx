@@ -22,8 +22,6 @@ import { PATH_DASHBOARD } from '../../../../routes/paths';
 import { fShortenNumber, fCurrency } from '../../../../utils/formatNumber';
 // @types
 import { IProduct, ICheckoutCartItem } from '../../../../@types/product';
-// _mock
-import { _socials } from '../../../../_mock/arrays';
 // components
 import Label from '../../../../components/label';
 import Iconify from '../../../../components/iconify';
@@ -283,7 +281,7 @@ export default function ProductDetailsSummary({
         </Stack>
 
         <Stack direction="row" alignItems="center" justifyContent="center">
-          {_socials.map((social) => (
+          {[].map((social: any) => (
             <IconButton key={social.name}>
               <Iconify icon={social.icon} />
             </IconButton>

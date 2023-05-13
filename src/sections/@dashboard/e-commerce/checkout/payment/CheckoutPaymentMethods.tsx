@@ -1,30 +1,27 @@
-import { useState } from 'react';
 // form
 import { Controller, useFormContext } from 'react-hook-form';
 // @mui
 import {
   Box,
-  Card,
-  Radio,
-  Stack,
-  Paper,
   Button,
-  TextField,
-  CardProps,
-  Typography,
-  RadioGroup,
-  CardHeader,
+  Card,
   CardContent,
-  FormHelperText,
+  CardHeader,
+  CardProps,
   FormControlLabel,
+  FormHelperText,
+  Paper,
+  Radio,
+  RadioGroup,
+  Stack,
+  TextField,
+  Typography,
 } from '@mui/material';
 // @types
 import { ICheckoutCardOption, ICheckoutPaymentOption } from '../../../../../@types/product';
 // components
-import Image from '../../../../../components/image';
 import Iconify from '../../../../../components/iconify';
-// section
-import { PaymentNewCardDialog } from '../../../../payment';
+import Image from '../../../../../components/image';
 
 // ----------------------------------------------------------------------
 
@@ -36,58 +33,46 @@ interface Props extends CardProps {
 export default function CheckoutPaymentMethods({ paymentOptions, cardOptions, ...other }: Props) {
   const { control } = useFormContext();
 
-  const [open, setOpen] = useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const handleOpen = () => {};
 
   return (
-    <>
-      <Card {...other}>
-        <CardHeader title="Payment options" />
+    <Card {...other}>
+      <CardHeader title="Payment options" />
 
-        <CardContent>
-          <Controller
-            name="payment"
-            control={control}
-            render={({ field, fieldState: { error } }) => (
-              <>
-                <RadioGroup row {...field}>
-                  <Stack spacing={3} sx={{ width: 1 }}>
-                    {paymentOptions.map((option) => (
-                      <PaymentOption
-                        key={option.title}
-                        option={option}
-                        cardOptions={cardOptions}
-                        hasChild={option.value === 'credit_card'}
-                        isSelected={field.value === option.value}
-                        isCreditMethod={
-                          option.value === 'credit_card' && field.value === 'credit_card'
-                        }
-                        onOpen={handleOpen}
-                      />
-                    ))}
-                  </Stack>
-                </RadioGroup>
+      <CardContent>
+        <Controller
+          name="payment"
+          control={control}
+          render={({ field, fieldState: { error } }) => (
+            <>
+              <RadioGroup row {...field}>
+                <Stack spacing={3} sx={{ width: 1 }}>
+                  {paymentOptions.map((option) => (
+                    <PaymentOption
+                      key={option.title}
+                      option={option}
+                      cardOptions={cardOptions}
+                      hasChild={option.value === 'credit_card'}
+                      isSelected={field.value === option.value}
+                      isCreditMethod={
+                        option.value === 'credit_card' && field.value === 'credit_card'
+                      }
+                      onOpen={handleOpen}
+                    />
+                  ))}
+                </Stack>
+              </RadioGroup>
 
-                {!!error && (
-                  <FormHelperText error sx={{ pt: 1, px: 2 }}>
-                    {error.message}
-                  </FormHelperText>
-                )}
-              </>
-            )}
-          />
-        </CardContent>
-      </Card>
-
-      <PaymentNewCardDialog open={open} onClose={handleClose} />
-    </>
+              {!!error && (
+                <FormHelperText error sx={{ pt: 1, px: 2 }}>
+                  {error.message}
+                </FormHelperText>
+              )}
+            </>
+          )}
+        />
+      </CardContent>
+    </Card>
   );
 }
 

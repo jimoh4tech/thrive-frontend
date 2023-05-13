@@ -5,8 +5,6 @@ import { useRouter } from 'next/router';
 import { Box, Grid, Link, Stack, Divider, Container, Typography, IconButton } from '@mui/material';
 // routes
 import { PATH_PAGE } from '../../routes/paths';
-// _mock
-import { _socials } from '../../_mock/arrays';
 // components
 import Logo from '../../components/logo';
 import Iconify from '../../components/iconify';
@@ -110,7 +108,7 @@ export default function Footer() {
                 mb: { xs: 5, md: 0 },
               }}
             >
-              {_socials.map((social) => (
+              {[].map((social: any) => (
                 <IconButton key={social.name}>
                   <Iconify icon={social.icon} />
                 </IconButton>

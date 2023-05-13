@@ -1,39 +1,26 @@
 // next
 // @mui
-import { Box, Button, Card, Grid, Stack, Typography } from '@mui/material';
+import { Box, Button, Card, Stack, Typography } from '@mui/material';
 // routes
 // utils
 // redux
-import { IFinance } from 'src/@types/finance';
-import { fCurrency } from 'src/utils/formatNumber';
-import { useDispatch } from '../../../redux/store';
 // @types
 // components
+import { IHeath } from 'src/@types/health';
 import Iconify from '../../../components/iconify';
 import Image from '../../../components/image';
-import Label from '../../../components/label';
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  event: IFinance;
-  onViewEvent: (event: IFinance) => void;
+  event: IHeath;
+  onViewEvent: (event: IHeath) => void;
 };
 
 export default function HealthCard({ event, onViewEvent }: Props) {
-  const { id, name, isPlatinum, cover, description, services, category, url } = event;
-
-  const dispatch = useDispatch();
+  const { name, cover, services, url } = event;
 
   // const linkTo = PATH_DASHBOARD.eCommerce.view(paramCase(name));
-
-  const handleApply = async () => {
-    try {
-      // dispatch(addToCart(newProduct));
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   return (
     <Card

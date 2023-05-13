@@ -74,8 +74,6 @@ export default function AuthRegisterForm() {
     handleSubmit,
     getValues,
     control,
-    trigger,
-    setValue,
     formState: { errors, isSubmitting, isSubmitSuccessful },
   } = methods;
 

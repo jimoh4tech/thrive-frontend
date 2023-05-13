@@ -72,13 +72,12 @@ export default function UserListPage() {
 
   const {
     data: { records = [], totalItems } = { records: [], totalItems: 0 },
-    error,
+
     isLoading,
     mutate,
   } = useSWR(`/admin/users${searchVal ? `?q=${searchVal}` : ''}`, fetcher);
 
   const {
-    dense,
     page,
     order,
     orderBy,
@@ -104,8 +103,6 @@ export default function UserListPage() {
     filterRole,
     filterStatus,
   });
-
-  const dataInPage = dataFiltered.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   // const denseHeight = dense ? 52 : 72;
 

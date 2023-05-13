@@ -2,36 +2,31 @@ import { useState } from 'react';
 // next
 import Head from 'next/head';
 // @mui
-import { Stack, Button, Container } from '@mui/material';
+import { Button, Container, Stack } from '@mui/material';
 // routes
-import { fetcher } from 'src/actions';
-import useSWR from 'swr';
-import { useAuthContext } from 'src/auth/useAuthContext';
 import { PATH_DASHBOARD } from '../../routes/paths';
 // utils
 import { fTimestamp } from '../../utils/formatTime';
 // layouts
 import DashboardLayout from '../../layouts/dashboard';
-// _mock_
-import { _allFiles } from '../../_mock/arrays';
 // @types
 import { IFile } from '../../@types/file';
 // components
-import Iconify from '../../components/iconify';
 import ConfirmDialog from '../../components/confirm-dialog';
-import { fileFormat } from '../../components/file-thumbnail';
 import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
-import { useSettingsContext } from '../../components/settings';
-import { useTable, getComparator } from '../../components/table';
 import DateRangePicker, { useDateRangePicker } from '../../components/date-range-picker';
+import { fileFormat } from '../../components/file-thumbnail';
+import Iconify from '../../components/iconify';
+import { useSettingsContext } from '../../components/settings';
+import { getComparator, useTable } from '../../components/table';
 // sections
 import {
-  FileListView,
-  FileGridView,
-  FileFilterType,
-  FileFilterName,
-  FileFilterButton,
   FileChangeViewButton,
+  FileFilterButton,
+  FileFilterName,
+  FileFilterType,
+  FileGridView,
+  FileListView,
   FileNewFolderDialog,
 } from '../../sections/@dashboard/file';
 
@@ -61,17 +56,6 @@ FileManagerPage.getLayout = (page: React.ReactElement) => <DashboardLayout>{page
 export default function FileManagerPage() {
   const table = useTable({ defaultRowsPerPage: 10 });
 
-  const [searchVal, setSearchVal] = useState('');
-
-  const {
-    data: { records: medias, totalItems } = { records: [], totalItems: 0 },
-    error,
-    isLoading,
-    mutate,
-  } = useSWR(`/business-medis${searchVal ? `?q=${searchVal}` : ''}`, fetcher);
-
-  const { user } = useAuthContext();
-
   const {
     startDate,
     endDate,
@@ -92,7 +76,7 @@ export default function FileManagerPage() {
 
   const [filterName, setFilterName] = useState('');
 
-  const [tableData, setTableData] = useState(_allFiles);
+  const [tableData] = useState([]);
 
   const [filterType, setFilterType] = useState<string[]>([]);
 
@@ -109,11 +93,6 @@ export default function FileManagerPage() {
     filterEndDate: endDate,
     isError: !!isError,
   });
-
-  const dataInPage = dataFiltered.slice(
-    table.page * table.rowsPerPage,
-    table.page * table.rowsPerPage + table.rowsPerPage
-  );
 
   const isNotFound =
     (!dataFiltered.length && !!filterName) ||
@@ -152,37 +131,6 @@ export default function FileManagerPage() {
     setFilterType(checked);
   };
 
-  const handleDeleteItem = (id: string) => {
-    const { page, setPage, setSelected } = table;
-    const deleteRow = tableData.filter((row) => row.id !== id);
-    setSelected([]);
-    setTableData(deleteRow);
-
-    if (page > 0) {
-      if (dataInPage.length < 2) {
-        setPage(page - 1);
-      }
-    }
-  };
-
-  const handleDeleteItems = (selected: string[]) => {
-    const { page, rowsPerPage, setPage, setSelected } = table;
-    const deleteRows = tableData.filter((row) => !selected.includes(row.id));
-    setSelected([]);
-    setTableData(deleteRows);
-
-    if (page > 0) {
-      if (selected.length === dataInPage.length) {
-        setPage(page - 1);
-      } else if (selected.length === dataFiltered.length) {
-        setPage(0);
-      } else if (selected.length > dataInPage.length) {
-        const newPage = Math.ceil((tableData.length - selected.length) / rowsPerPage) - 1;
-        setPage(newPage);
-      }
-    }
-  };
-
   const handleClearAll = () => {
     if (onResetPicker) {
       onResetPicker();
@@ -197,10 +145,6 @@ export default function FileManagerPage() {
 
   const handleCloseConfirm = () => {
     setOpenConfirm(false);
-  };
-
-  const handleOpenUploadFile = () => {
-    setOpenUploadFile(true);
   };
 
   const handleCloseUploadFile = () => {
@@ -291,7 +235,7 @@ export default function FileManagerPage() {
             table={table}
             tableData={tableData}
             dataFiltered={dataFiltered}
-            onDeleteRow={handleDeleteItem}
+            onDeleteRow={() => {}}
             isNotFound={isNotFound}
             onOpenConfirm={handleOpenConfirm}
           />
@@ -300,7 +244,7 @@ export default function FileManagerPage() {
             table={table}
             data={tableData}
             dataFiltered={dataFiltered}
-            onDeleteItem={handleDeleteItem}
+            onDeleteItem={() => {}}
             onOpenConfirm={handleOpenConfirm}
           />
         )}
@@ -322,7 +266,6 @@ export default function FileManagerPage() {
             variant="contained"
             color="error"
             onClick={() => {
-              handleDeleteItems(table.selected);
               handleCloseConfirm();
             }}
           >

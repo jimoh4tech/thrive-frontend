@@ -1,5 +1,4 @@
 import { Box, CircularProgress } from '@mui/material';
-import React from 'react';
 
 const Loading = ({ open = false }: { open: boolean }) =>
   open ? (
@@ -20,8 +19,6 @@ const Loading = ({ open = false }: { open: boolean }) =>
         sx={{ position: 'absolute', my: 'auto', top: 0, bottom: 0 }}
       />
     </Box>
-  ) : (
-    <></>
-  );
+  ) : null;
 
 export default Loading;

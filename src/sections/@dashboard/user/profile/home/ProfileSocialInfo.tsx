@@ -1,7 +1,5 @@
 // @mui
 import { Link, Card, CardHeader, Stack } from '@mui/material';
-// _mock
-import { _socials } from '../../../../../_mock/arrays';
 // @types
 import { IUserSocialLink } from '../../../../../@types/user';
 // components
@@ -21,7 +19,7 @@ export default function ProfileSocialInfo({ socialLinks }: Props) {
       <CardHeader title="Social" />
 
       <Stack spacing={2} sx={{ p: 3 }}>
-        {_socials.map((link) => (
+        {[].map((link: any) => (
           <Stack key={link.name} direction="row" sx={{ wordBreak: 'break-all' }}>
             <Iconify
               icon={link.icon}

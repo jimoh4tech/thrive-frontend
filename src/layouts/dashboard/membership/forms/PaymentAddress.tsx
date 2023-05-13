@@ -24,7 +24,7 @@ export type PFormValuesProps = {
 export default function PaymentAddress({
   onInput,
 }: {
-  onInput: (name: keyof FormValuesProps, vaue: string) => void;
+  onInput: (name: keyof PFormValuesProps, vaue: string) => void;
 }) {
   const { user } = useAuthContext();
 
@@ -38,21 +38,19 @@ export default function PaymentAddress({
   const defaultValues = {
     fullName: user?.fullName || '',
     email: user?.email || '',
-    phoneNumber: user?.phoneNumber || '',
+    phoneNumber: user?.phone || '',
     address: user?.address || '',
   };
 
-  const methods = useForm<FormValuesProps>({
+  const methods = useForm<PFormValuesProps>({
     resolver: yupResolver(UpdateUserSchema),
     defaultValues,
   });
 
-  const { handleSubmit, watch } = methods;
-
-  const watchAll = watch();
+  const { watch } = methods;
 
   useEffect(() => {
-    const subscription = watch((value, { name }) => onInput(name!, value!));
+    const subscription = watch((value: any, { name }) => onInput(name!, value));
     return () => subscription.unsubscribe();
   }, [onInput, watch]);
 

@@ -107,7 +107,7 @@ export type IUserAccountGeneral = {
   avatarUrl: string;
   fullName: string;
   email: string;
-  phoneNumber: string;
+  phone: string;
   address: string;
   country: string;
   state: string;
@@ -115,6 +115,7 @@ export type IUserAccountGeneral = {
   zipCode: string;
   company: string;
   isVerified: boolean;
+  isApproved: boolean;
   status: string;
   role: { name: string };
   business: IUserBusiness;

@@ -2,22 +2,20 @@ import { useEffect } from 'react';
 // next
 import { useRouter } from 'next/router';
 // @mui
-import { Box, Stack, Drawer, Typography } from '@mui/material';
+import { Box, Drawer, Stack } from '@mui/material';
 // hooks
-import Image from 'src/components/image/Image';
 import { logo2 } from 'src/assets/images';
+import Image from 'src/components/image/Image';
 import useResponsive from '../../../hooks/useResponsive';
 // config
 import { NAV } from '../../../config-global';
 // components
-import Logo from '../../../components/logo';
-import Scrollbar from '../../../components/scrollbar';
 import { NavSectionVertical } from '../../../components/nav-section';
+import Scrollbar from '../../../components/scrollbar';
 //
-import navConfig from './config-navigation';
-import NavDocs from './NavDocs';
 import NavAccount from './NavAccount';
 import NavToggleButton from './NavToggleButton';
+import navConfig from './config-navigation';
 
 // ----------------------------------------------------------------------
 

@@ -7,7 +7,6 @@ import { IEvent } from 'src/@types/events';
 // redux
 import { fCurrency } from 'src/utils/formatNumber';
 import { fDate } from 'src/utils/formatTime';
-import { useDispatch } from '../../../redux/store';
 // @types
 // components
 import Iconify from '../../../components/iconify';
@@ -21,33 +20,9 @@ type Props = {
 };
 
 export default function EventCard({ event, onViewEvent }: Props) {
-  const {
-    id,
-    name,
-    amount,
-    discout,
-    discountType,
-    isPlatinum,
-    url,
-    location,
-    cover,
-    startDate,
-    endDate,
-    description,
-    category,
-  } = event;
-
-  const dispatch = useDispatch();
+  const { name, amount, location, cover, startDate, endDate, category } = event;
 
   // const linkTo = PATH_DASHBOARD.eCommerce.view(paramCase(name));
-
-  const handleApply = async () => {
-    try {
-      // dispatch(addToCart(newProduct));
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   return (
     <Card

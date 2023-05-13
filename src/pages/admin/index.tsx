@@ -17,8 +17,6 @@ import { PATH_AFTER_LOGIN } from '../../config-global';
 import { PATH_DASHBOARD } from '../../routes/paths';
 // layouts
 import DashboardLayout from '../../layouts/admin';
-// _mock_
-import { _analyticOrderTimeline, _appInvoices } from '../../_mock/arrays';
 // components
 import { useSettingsContext } from '../../components/settings';
 // sections
@@ -160,7 +158,7 @@ export default function IndexPage() {
           <Grid item xs={12} lg={8}>
             <AppNewInvoice
               title="New users"
-              tableData={_appInvoices}
+              tableData={[]}
               tableLabels={[
                 { id: 'id', label: 'Name' },
                 { id: 'category', label: 'Email' },
@@ -172,7 +170,7 @@ export default function IndexPage() {
           </Grid>
 
           <Grid item xs={12} md={6} lg={4}>
-            <AnalyticsOrderTimeline title="Activities Timeline" list={_analyticOrderTimeline} />
+            <AnalyticsOrderTimeline title="Activities Timeline" list={[]} />
           </Grid>
 
           {/*  <Grid item xs={12} md={6} lg={4}>

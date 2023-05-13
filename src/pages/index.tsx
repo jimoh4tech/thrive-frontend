@@ -7,18 +7,18 @@ import MainLayout from '../layouts/main';
 // components
 import ScrollProgress from '../components/scroll-progress';
 // sections
-import {
-  HomeHero,
-  HomeMinimal,
-  HomeDarkMode,
-  HomeLookingFor,
-  HomeForDesigner,
-  HomeColorPresets,
-  HomePricingPlans,
-  HomeAdvertisement,
-  HomeCleanInterfaces,
-  HomeHugePackElements,
-} from '../sections/home';
+// import {
+//   HomeHero,
+//   HomeMinimal,
+//   HomeDarkMode,
+//   HomeLookingFor,
+//   HomeForDesigner,
+//   HomeColorPresets,
+//   HomePricingPlans,
+//   HomeAdvertisement,
+//   HomeCleanInterfaces,
+//   HomeHugePackElements,
+// } from '../sections/home';
 
 // ----------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ export default function HomePage() {
 
       <ScrollProgress />
 
-      <HomeHero />
+      {/* <HomeHero /> */}
 
       <Box
         sx={{
@@ -44,7 +44,7 @@ export default function HomePage() {
           bgcolor: 'background.default',
         }}
       >
-        <HomeMinimal />
+        {/* <HomeMinimal />
 
         <HomeHugePackElements />
 
@@ -60,7 +60,7 @@ export default function HomePage() {
 
         <HomeLookingFor />
 
-        <HomeAdvertisement />
+        <HomeAdvertisement /> */}
       </Box>
     </>
   );

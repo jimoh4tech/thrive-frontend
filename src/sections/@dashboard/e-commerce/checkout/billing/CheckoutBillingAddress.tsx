@@ -3,8 +3,6 @@ import { useState } from 'react';
 import { Grid, Card, Button, Typography, Stack, Box } from '@mui/material';
 // @types
 import { ICheckoutBillingAddress, IProductCheckoutState } from '../../../../../@types/product';
-// _mock
-import { _addressBooks } from '../../../../../_mock/arrays';
 // components
 import Label from '../../../../../components/label';
 import Iconify from '../../../../../components/iconify';
@@ -37,7 +35,7 @@ export default function CheckoutBillingAddress({ checkout, onBackStep, onCreateB
     <>
       <Grid container spacing={3}>
         <Grid item xs={12} md={8}>
-          {_addressBooks.map((address, index) => (
+          {[].map((address, index) => (
             <AddressItem
               key={index}
               address={address}

@@ -56,7 +56,7 @@ interface Props extends CardProps {
 }
 
 export default function AppWelcome({ title, description, action, img, ...other }: Props) {
-  const [isApproved, setIsApproved] = useState(false);
+  const [isApproved] = useState(false);
 
   return (
     <>

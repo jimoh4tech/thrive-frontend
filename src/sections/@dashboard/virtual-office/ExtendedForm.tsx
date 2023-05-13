@@ -1,7 +1,7 @@
 // next
 import * as Yup from 'yup';
 // @mui
-import { Box, Button, Card, Grid, InputAdornment, Typography } from '@mui/material';
+import { Box, Grid, InputAdornment, Typography } from '@mui/material';
 // routes
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useSnackbar } from 'notistack';
@@ -9,7 +9,6 @@ import { useForm } from 'react-hook-form';
 import { virtualOfficeApply } from 'src/actions/virtualOfficeAction';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
 // auth
-import { SeoIllustration } from 'src/assets/illustrations';
 import { Stack } from '@mui/system';
 import { useAuthContext } from '../../../auth/useAuthContext';
 // components
@@ -56,12 +55,7 @@ export default function ExtendedForm() {
     defaultValues,
   });
 
-  const {
-    setValue,
-    handleSubmit,
-    reset,
-    formState: { isSubmitting },
-  } = methods;
+  const { handleSubmit, reset } = methods;
 
   const onSubmit = async (data: FormValuesProps) => {
     try {
@@ -77,17 +71,6 @@ export default function ExtendedForm() {
     }
   };
 
-  const handleDrop = (acceptedFiles: File[], field: keyof typeof defaultValues) => {
-    const file = acceptedFiles[0];
-
-    const newFile = Object.assign(file, {
-      preview: URL.createObjectURL(file),
-    });
-
-    if (newFile) {
-      setValue(field, newFile, { shouldValidate: true });
-    }
-  };
   return (
     <Grid item sx={{ mb: 3, mt: 8 }}>
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>

@@ -1,11 +1,10 @@
 // @mui
-import { Box, Link, Stack, Typography, Breadcrumbs, Button } from '@mui/material';
+import { Box, Breadcrumbs, Button, Link, Stack, Typography } from '@mui/material';
 //
-import { useContext } from 'react';
 import { useAuthContext } from 'src/auth/useAuthContext';
-import { CustomBreadcrumbsProps } from './types';
-import LinkItem from './LinkItem';
 import Iconify from '../iconify/Iconify';
+import LinkItem from './LinkItem';
+import { CustomBreadcrumbsProps } from './types';
 
 // ----------------------------------------------------------------------
 

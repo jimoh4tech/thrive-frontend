@@ -12,7 +12,6 @@ import { fetcher } from 'src/actions';
 // routes
 import { IFinance, IFinanceFilter } from 'src/@types/finance';
 import EventSearch from 'src/sections/@dashboard/event/EventSearch';
-import FinanceList from 'src/sections/@dashboard/finance/FinanceList';
 import HealthList from 'src/sections/@dashboard/health/HealthList';
 import { PATH_DASHBOARD } from '../../routes/paths';
 // @types
@@ -21,7 +20,6 @@ import DashboardLayout from '../../layouts/dashboard';
 // components
 import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
 import FormProvider from '../../components/hook-form';
-import { useSettingsContext } from '../../components/settings';
 // sections
 
 // ----------------------------------------------------------------------
@@ -33,11 +31,6 @@ EcommerceShopPage.getLayout = (page: React.ReactElement) => (
 // ----------------------------------------------------------------------
 
 export default function EcommerceShopPage() {
-  const { themeStretch } = useSettingsContext();
-
-  const [openFilter, setOpenFilter] = useState(false);
-  const [openDialog, setOpenDialog] = useState(false);
-
   const defaultValues = {
     gender: [],
     category: 'All',
@@ -54,34 +47,19 @@ export default function EcommerceShopPage() {
   const [searchVal, setSearchVal] = useState('');
 
   const {
-    data: { records: events = [], totalItems } = { records: [], totalItems: 0 },
-    error,
+    data: { records: events = [] } = { records: [], totalItems: 0 },
+
     isLoading,
-    mutate,
   } = useSWR(`/health/institutions${searchVal ? `?q=${searchVal}` : ''}`, fetcher);
   const onSearch = (val: string) => {
     setSearchVal(val);
   };
 
-  const { reset, watch } = methods;
+  const { watch } = methods;
 
   const values = watch();
 
   const dataFiltered = applyFilter(events, values);
-
-  const handleResetFilter = () => {
-    reset();
-  };
-
-  const handleOpenFilter = () => {
-    setOpenFilter(true);
-  };
-
-  const handleCloseFilter = () => {
-    setOpenFilter(false);
-  };
-
-  const handleApply = () => {};
 
   return (
     <>
@@ -119,7 +97,7 @@ export default function EcommerceShopPage() {
 // ----------------------------------------------------------------------
 
 function applyFilter(events: IFinance[], filters: IFinanceFilter) {
-  const { type, institution, category, sortBy } = filters;
+  const { category, sortBy } = filters;
 
   // SORT BY
   if (sortBy === 'featured') {

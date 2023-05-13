@@ -5,8 +5,6 @@ import { Box, Card, Avatar, Divider, Typography, Stack, IconButton } from '@mui/
 import { fShortenNumber } from '../../../../utils/formatNumber';
 // @types
 import { IUserCard } from '../../../../@types/user';
-// _mock
-import { _socials } from '../../../../_mock/arrays';
 // components
 import Image from '../../../../components/image';
 import Iconify from '../../../../components/iconify';
@@ -80,7 +78,7 @@ export default function UserCard({ user }: Props) {
       </Typography>
 
       <Stack direction="row" alignItems="center" justifyContent="center" sx={{ mt: 1, mb: 3 }}>
-        {_socials.map((social) => (
+        {[].map((social: any) => (
           <IconButton
             key={social.name}
             sx={{

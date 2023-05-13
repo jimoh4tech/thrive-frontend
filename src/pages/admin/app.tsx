@@ -9,8 +9,6 @@ import { AnalyticsOrderTimeline } from 'src/sections/@dashboard/general/analytic
 import { BankingWidgetSummary } from 'src/sections/@dashboard/general/banking';
 // layouts
 import AdminDashboardLayout from '../../layouts/admin';
-// _mock_
-import { _analyticOrderTimeline, _appInvoices } from '../../_mock/arrays';
 // components
 import { useSettingsContext } from '../../components/settings';
 // sections
@@ -141,7 +139,7 @@ export default function GeneralAppPage() {
           <Grid item xs={12} lg={8}>
             <AppNewInvoice
               title="New users"
-              tableData={_appInvoices}
+              tableData={[]}
               tableLabels={[
                 { id: 'id', label: 'Name' },
                 { id: 'category', label: 'Email' },
@@ -153,7 +151,7 @@ export default function GeneralAppPage() {
           </Grid>
 
           <Grid item xs={12} md={6} lg={4}>
-            <AnalyticsOrderTimeline title="Activities Timeline" list={_analyticOrderTimeline} />
+            <AnalyticsOrderTimeline title="Activities Timeline" list={[]} />
           </Grid>
 
           {/*  <Grid item xs={12} md={6} lg={4}>

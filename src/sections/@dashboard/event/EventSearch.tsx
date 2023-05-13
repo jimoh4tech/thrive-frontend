@@ -1,9 +1,6 @@
-import match from 'autosuggest-highlight/match';
-import parse from 'autosuggest-highlight/parse';
-import { useState } from 'react';
 // next
 // @mui
-import { Autocomplete, InputAdornment, Link, Typography } from '@mui/material';
+import { Autocomplete, InputAdornment } from '@mui/material';
 // utils
 // routes
 // @types
@@ -11,8 +8,6 @@ import { IEvent } from 'src/@types/events';
 // components
 import { CustomTextField } from '../../../components/custom-input';
 import Iconify from '../../../components/iconify';
-import Image from '../../../components/image';
-import SearchNotFound from '../../../components/search-not-found';
 
 // ----------------------------------------------------------------------
 
@@ -22,15 +17,8 @@ interface IEventSearch {
   searchResults?: IEvent[];
 }
 
-export default function EventSearch({
-  onInputChange,
-  onViewEvent,
-  searchResults = [],
-}: IEventSearch) {
-  const [searchVal, setSearchVal] = useState('');
-
+export default function EventSearch({ onInputChange, searchResults = [] }: IEventSearch) {
   const _onInputChange = (val: string) => {
-    setSearchVal(val);
     onInputChange(val);
   };
 
@@ -42,7 +30,7 @@ export default function EventSearch({
       options={searchResults}
       onInputChange={(event, value) => _onInputChange(value)}
       getOptionLabel={(event: IEvent) => event.name}
-      noOptionsText={<></>}
+      noOptionsText={null}
       // noOptionsText={<SearchNotFound query={searchVal} />}
       isOptionEqualToValue={(option, value) => option.id === value.id}
       componentsProps={{

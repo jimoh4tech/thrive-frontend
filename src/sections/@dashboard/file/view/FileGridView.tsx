@@ -1,6 +1,6 @@
-import { useState, useRef } from 'react';
+import { useRef, useState } from 'react';
 // @mui
-import { Collapse, Box, Divider, Button } from '@mui/material';
+import { Box, Button, Collapse } from '@mui/material';
 // @types
 import { IFile } from '../../../../@types/file';
 // components
@@ -9,10 +9,9 @@ import { TableProps } from '../../../../components/table';
 //
 import FilePanel from '../FilePanel';
 import FileCard from '../item/FileCard';
-import FileFolderCard from '../item/FileFolderCard';
-import FileShareDialog from '../portal/FileShareDialog';
 import FileActionSelected from '../portal/FileActionSelected';
 import FileNewFolderDialog from '../portal/FileNewFolderDialog';
+import FileShareDialog from '../portal/FileShareDialog';
 
 // ----------------------------------------------------------------------
 
@@ -47,18 +46,12 @@ export default function FileGridView({
 
   const [openUploadFile, setOpenUploadFile] = useState(false);
 
-  const [collapseFolders, setCollapseFolders] = useState(false);
-
   const handleOpenShare = () => {
     setOpenShare(true);
   };
 
   const handleCloseShare = () => {
     setOpenShare(false);
-  };
-
-  const handleOpenNewFolder = () => {
-    setOpenNewFolder(true);
   };
 
   const handleCloseNewFolder = () => {

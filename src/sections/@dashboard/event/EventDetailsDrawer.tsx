@@ -15,7 +15,7 @@ import { IEvent } from 'src/@types/events';
 import Iconify from 'src/components/iconify/Iconify';
 import Label from 'src/components/label/Label';
 import Scrollbar from 'src/components/scrollbar/Scrollbar';
-import { fDate, fDateTime } from 'src/utils/formatTime';
+import { fDateTime } from 'src/utils/formatTime';
 import { fCurrency } from 'src/utils/formatNumber';
 import Image from '../../../components/image';
 // utils
@@ -44,39 +44,18 @@ export default function EventDetailsDrawer({
     amount,
     cover,
     description,
-    discountType,
     startDate,
-    endDate,
-    discout,
-    id,
     url,
     location,
     organizer,
     category,
     isPlatinum,
-    updatedAt,
   } = event;
-
-  const [openShare, setOpenShare] = useState(false);
-
-  const [toggleTags, setToggleTags] = useState(true);
 
   const [toggleProperties, setToggleProperties] = useState(true);
 
-  const handleToggleTags = () => {
-    setToggleTags(!toggleTags);
-  };
-
   const handleToggleProperties = () => {
     setToggleProperties(!toggleProperties);
-  };
-
-  const handleOpenShare = () => {
-    setOpenShare(true);
-  };
-
-  const handleCloseShare = () => {
-    setOpenShare(false);
   };
 
   return (

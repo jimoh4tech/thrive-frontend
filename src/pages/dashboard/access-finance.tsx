@@ -20,7 +20,6 @@ import DashboardLayout from '../../layouts/dashboard';
 // components
 import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
 import FormProvider from '../../components/hook-form';
-import { useSettingsContext } from '../../components/settings';
 // sections
 
 // ----------------------------------------------------------------------
@@ -32,11 +31,6 @@ EcommerceShopPage.getLayout = (page: React.ReactElement) => (
 // ----------------------------------------------------------------------
 
 export default function EcommerceShopPage() {
-  const { themeStretch } = useSettingsContext();
-
-  const [openFilter, setOpenFilter] = useState(false);
-  const [openDialog, setOpenDialog] = useState(false);
-
   const defaultValues = {
     gender: [],
     category: 'All',
@@ -53,34 +47,19 @@ export default function EcommerceShopPage() {
   const [searchVal, setSearchVal] = useState('');
 
   const {
-    data: { records: events = [], totalItems } = { records: [], totalItems: 0 },
-    error,
+    data: { records: events = [] } = { records: [], totalItems: 0 },
+
     isLoading,
-    mutate,
   } = useSWR(`/finance/services${searchVal ? `?q=${searchVal}` : ''}`, fetcher);
   const onSearch = (val: string) => {
     setSearchVal(val);
   };
 
-  const { reset, watch } = methods;
+  const { watch } = methods;
 
   const values = watch();
 
   const dataFiltered = applyFilter(events, values);
-
-  const handleResetFilter = () => {
-    reset();
-  };
-
-  const handleOpenFilter = () => {
-    setOpenFilter(true);
-  };
-
-  const handleCloseFilter = () => {
-    setOpenFilter(false);
-  };
-
-  const handleApply = () => {};
 
   return (
     <>
@@ -105,7 +84,7 @@ export default function EcommerceShopPage() {
             justifyContent="space-between"
             sx={{ mb: 2 }}
           >
-            <EventSearch onInputChange={onSearch} onViewEvent={(event) => {}} searchResults={[]} />
+            <EventSearch onInputChange={onSearch} onViewEvent={() => {}} searchResults={[]} />
 
             {/* <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
               <ShopFilterDrawer
@@ -139,7 +118,7 @@ export default function EcommerceShopPage() {
 // ----------------------------------------------------------------------
 
 function applyFilter(events: IFinance[], filters: IFinanceFilter) {
-  const { type, institution, category, sortBy } = filters;
+  const { category, sortBy } = filters;
 
   // SORT BY
   if (sortBy === 'featured') {

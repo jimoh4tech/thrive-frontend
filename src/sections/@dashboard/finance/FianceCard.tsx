@@ -1,17 +1,14 @@
 // next
 // @mui
-import { Box, Button, Card, Grid, Stack, Typography } from '@mui/material';
+import { Box, Button, Card, Stack, Typography } from '@mui/material';
 // routes
 // utils
 // redux
 import { IFinance } from 'src/@types/finance';
-import { fCurrency } from 'src/utils/formatNumber';
-import { useDispatch } from '../../../redux/store';
 // @types
 // components
 import Iconify from '../../../components/iconify';
 import Image from '../../../components/image';
-import Label from '../../../components/label';
 
 // ----------------------------------------------------------------------
 
@@ -21,19 +18,7 @@ type Props = {
 };
 
 export default function FianceCard({ event, onViewEvent }: Props) {
-  const { id, name, isPlatinum, cover, description, institution, category, url } = event;
-
-  const dispatch = useDispatch();
-
-  // const linkTo = PATH_DASHBOARD.eCommerce.view(paramCase(name));
-
-  const handleApply = async () => {
-    try {
-      // dispatch(addToCart(newProduct));
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const { name, cover, institution, url } = event;
 
   return (
     <Card

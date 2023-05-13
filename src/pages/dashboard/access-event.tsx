@@ -20,7 +20,6 @@ import DashboardLayout from '../../layouts/dashboard';
 // components
 import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
 import FormProvider from '../../components/hook-form';
-import { useSettingsContext } from '../../components/settings';
 // sections
 
 // ----------------------------------------------------------------------
@@ -32,11 +31,6 @@ EcommerceShopPage.getLayout = (page: React.ReactElement) => (
 // ----------------------------------------------------------------------
 
 export default function EcommerceShopPage() {
-  const { themeStretch } = useSettingsContext();
-
-  const [openFilter, setOpenFilter] = useState(false);
-  const [openDialog, setOpenDialog] = useState(false);
-
   const defaultValues = {
     gender: [],
     category: 'All',
@@ -53,34 +47,19 @@ export default function EcommerceShopPage() {
   const [searchVal, setSearchVal] = useState('');
 
   const {
-    data: { records: events = [], totalItems } = { records: [], totalItems: 0 },
-    error,
+    data: { records: events = [] } = { records: [], totalItems: 0 },
+
     isLoading,
-    mutate,
   } = useSWR(`/events${searchVal ? `?q=${searchVal}` : ''}`, fetcher);
   const onSearch = (val: string) => {
     setSearchVal(val);
   };
 
-  const { reset, watch } = methods;
+  const { watch } = methods;
 
   const values = watch();
 
   const dataFiltered = applyFilter(events, values);
-
-  const handleResetFilter = () => {
-    reset();
-  };
-
-  const handleOpenFilter = () => {
-    setOpenFilter(true);
-  };
-
-  const handleCloseFilter = () => {
-    setOpenFilter(false);
-  };
-
-  const handleApply = () => {};
 
   return (
     <>
@@ -158,7 +137,7 @@ export default function EcommerceShopPage() {
 // ----------------------------------------------------------------------
 
 function applyFilter(events: IEvent[], filters: IEventFilter) {
-  const { type, priceRange, organizers, category, sortBy } = filters;
+  const { priceRange, category, sortBy } = filters;
 
   const min = priceRange[0];
 

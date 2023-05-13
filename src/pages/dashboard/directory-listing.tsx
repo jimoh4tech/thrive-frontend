@@ -2,24 +2,15 @@ import { useState } from 'react';
 // next
 import Head from 'next/head';
 // @mui
-import {
-  Card,
-  Container,
-  Divider,
-  Tab,
-  Table,
-  TableBody,
-  TableContainer,
-  Tabs,
-} from '@mui/material';
+import { Card, Container, Table, TableBody, TableContainer } from '@mui/material';
 // routes
 import { useSnackbar } from 'notistack';
 import { fetcher } from 'src/actions';
 import { approveUser } from 'src/actions/admin/usersAction';
 import Loading from 'src/components/loading';
-import useSWR from 'swr';
 import DashboardLayout from 'src/layouts/dashboard/DashboardLayout';
-import { PATH_ADMIN, PATH_DASHBOARD } from '../../routes/paths';
+import useSWR from 'swr';
+import { PATH_DASHBOARD } from '../../routes/paths';
 // @types
 import { IUserAccountGeneral } from '../../@types/user';
 // _mock_
@@ -61,13 +52,11 @@ export default function UserListPage() {
 
   const {
     data: { records = [], totalItems } = { records: [], totalItems: 0 },
-    error,
     isLoading,
     mutate,
   } = useSWR(`/directory-listing${searchVal ? `?q=${searchVal}` : ''}`, fetcher);
 
   const {
-    dense,
     page,
     order,
     orderBy,
@@ -94,8 +83,6 @@ export default function UserListPage() {
     filterStatus,
   });
 
-  const dataInPage = dataFiltered.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
-
   // const denseHeight = dense ? 52 : 72;
 
   const isFiltered = searchVal !== '' || filterRole !== 'all' || filterStatus !== 'all';
@@ -104,11 +91,6 @@ export default function UserListPage() {
     (!dataFiltered.length && !!searchVal) ||
     (!dataFiltered.length && !!filterRole) ||
     (!dataFiltered.length && !!filterStatus);
-
-  const handleFilterStatus = (event: React.SyntheticEvent<Element, Event>, newValue: string) => {
-    setPage(0);
-    setFilterStatus(newValue);
-  };
 
   const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPage(0);

@@ -10,7 +10,6 @@ import { PATH_AUTH } from '../../routes/paths';
 // components
 import Iconify from '../../components/iconify';
 // sections
-import AuthVerifyCodeForm from '../../sections/auth/AuthVerifyCodeForm';
 // assets
 import { EmailInboxIcon } from '../../assets/icons';
 

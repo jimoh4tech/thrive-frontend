@@ -1,25 +1,13 @@
 // next
-import NextLink from 'next/link';
 // @mui
-import {
-  Button,
-  Dialog,
-  DialogContent,
-  Grid,
-  Link,
-  Typography,
-  useMediaQuery,
-} from '@mui/material';
+import { Button, Dialog, DialogContent, Typography } from '@mui/material';
 // layouts
 // routes
-import { Box, Container, Stack, useTheme } from '@mui/system';
-import { useEffect, useState } from 'react';
-import { useAuthContext } from 'src/auth/useAuthContext';
-import useResponsive from 'src/hooks/useResponsive';
-import { initiatePayment, verifyPayment } from 'src/actions/paymentAction';
+import { Box, Container, Stack } from '@mui/system';
 import { useSnackbar } from 'notistack';
-import useSWR from 'swr';
-import { PATH_AUTH } from '../../../routes/paths';
+import { useState } from 'react';
+import { initiatePayment } from 'src/actions/paymentAction';
+import { useAuthContext } from 'src/auth/useAuthContext';
 // components
 import Iconify from '../../../components/iconify';
 // sections
@@ -97,7 +85,7 @@ const PaymentPopup = ({
               }}
             >
               <Box>
-                <PaymentAddress onInput={(name, value) => setData({ ...data, name: value })} />
+                <PaymentAddress onInput={(name, value) => setData({ ...data, fullName: value })} />
               </Box>
 
               <Box>

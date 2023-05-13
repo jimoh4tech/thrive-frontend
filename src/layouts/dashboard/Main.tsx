@@ -1,8 +1,8 @@
 // @mui
 import { Box, BoxProps } from '@mui/material';
 // hooks
-import { useAuthContext } from 'src/auth/useAuthContext';
 import { logo2 } from 'src/assets/images';
+import { useAuthContext } from 'src/auth/useAuthContext';
 import useResponsive from '../../hooks/useResponsive';
 // config
 import { HEADER, NAV } from '../../config-global';
@@ -28,21 +28,12 @@ export default function Main({ children, sx, ...other }: BoxProps) {
 
   const isDesktop = useResponsive('up', 'lg');
 
-  const render = (
-    <>
-      {(() =>
-        // @ts-ignore
-        !user?.isApproved ? (
-          <UserPending />
-        ) : !user?.business ? (
-          <UserApproved />
-        ) : !user?.premuimSub ? (
-          <UserSubscribe />
-        ) : (
-          children
-        ))()}
-    </>
-  );
+  const render = () => {
+    if (!user?.isApproved) return <UserPending />;
+    if (!user?.business) return <UserApproved />;
+    if (!user?.platinumSub) return <UserSubscribe />;
+    return children;
+  };
 
   if (isNavHorizontal) {
     return (
@@ -60,7 +51,7 @@ export default function Main({ children, sx, ...other }: BoxProps) {
           backgroundImage: logo2.src,
         }}
       >
-        {render}
+        {render()}
       </Box>
     );
   }
@@ -84,7 +75,7 @@ export default function Main({ children, sx, ...other }: BoxProps) {
       }}
       {...other}
     >
-      {render}
+      {render()}
     </Box>
   );
 }

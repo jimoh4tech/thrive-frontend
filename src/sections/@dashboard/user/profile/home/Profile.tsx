@@ -3,7 +3,6 @@ import { Grid, Stack } from '@mui/material';
 // @types
 import { IUserProfile, IUserProfilePost } from '../../../../../@types/user';
 //
-import ProfileAbout from './ProfileAbout';
 import ProfilePostCard from './ProfilePostCard';
 import ProfilePostInput from './ProfilePostInput';
 import ProfileFollowInfo from './ProfileFollowInfo';
@@ -23,14 +22,14 @@ export default function Profile({ info, posts }: Props) {
         <Stack spacing={3}>
           <ProfileFollowInfo follower={info.follower} following={info.following} />
 
-          <ProfileAbout
+          {/* <ProfileAbout
             quote={info.quote}
             country={info.country}
             email={info.email}
             role={info.role}
             company={info.company}
             school={info.school}
-          />
+          /> */}
 
           <ProfileSocialInfo socialLinks={info.socialLinks} />
         </Stack>

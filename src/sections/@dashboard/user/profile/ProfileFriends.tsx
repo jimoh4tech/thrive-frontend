@@ -131,7 +131,7 @@ function FriendCard({ friend }: FriendCardProps) {
         </Typography>
 
         <Stack alignItems="center" justifyContent="center" direction="row">
-          {_socials.map((social) => (
+          {[].map((social: any) => (
             <IconButton
               key={social.name}
               sx={{

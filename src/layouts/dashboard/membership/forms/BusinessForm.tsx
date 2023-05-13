@@ -47,7 +47,7 @@ const SOCIAL_LINKS = [
 type FormValuesProps = {
   name: string;
   email: string;
-  photoURL: CustomFile | string | null;
+  avatarUrl: CustomFile | string | null;
   phone: string | null;
   country: string | null;
   address: string | null;
@@ -108,7 +108,7 @@ export default function CreateBusinessProfile() {
   const [submitting, setIsSubmitting] = useState(false);
   const [paymentRef, setPaymentRef] = useState<string | null>(null);
 
-  const [business, setBusiness] = useState<FormValuesProps | null>(null);
+  const [business, setBusiness] = useState<FormValuesProps | any>(null);
 
   const {
     setValue,
@@ -146,9 +146,10 @@ export default function CreateBusinessProfile() {
       //   _data.append(keys[i], business[keys[i]]);
       // }
       setOpenPaymentPopup(false);
-      if (business?.logo) delete business?.logo;
-      if (business?.cac) delete business?.cac;
-      const res = await createBusiness(business);
+      const { logo, cac, ...rest } = business;
+      console.log(cac, logo);
+
+      const res = await createBusiness(rest);
 
       enqueueSnackbar(res.data.message);
       reset();

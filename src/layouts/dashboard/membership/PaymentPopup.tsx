@@ -25,7 +25,7 @@ const PaymentPopup = ({
   open: boolean;
   onClose?: VoidFunction;
   items: PaymentProps['items'];
-  cb?: (ref: string, txnId?: number) => Promise<void>;
+  cb?: (ref: string, txnId?: number) => void;
 }) => {
   const { user } = useAuthContext();
 

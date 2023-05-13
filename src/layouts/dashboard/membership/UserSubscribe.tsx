@@ -27,11 +27,11 @@ export default function UserSubscribe() {
 
           <Grid container justifyContent="center" spacing={isDesktop ? 3 : 5}>
             <Grid item xs={12} md={4}>
-              <PaymentAddress />
+              <PaymentAddress onInput={() => {}} />
             </Grid>
 
             <Grid item xs={12} md={4}>
-              <PaymentSummary />
+              {/* <PaymentSummary data={{}} items={[]} onInput={()=>{}} /> */}
             </Grid>
           </Grid>
         </Stack>

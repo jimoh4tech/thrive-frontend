@@ -27,7 +27,7 @@ import FormProvider, {
 type FormValuesProps = {
   displayName: string;
   email: string;
-  photoURL: CustomFile | string | null;
+  avatarUrl: CustomFile | string | null;
   phoneNumber: string | null;
   country: string | null;
   address: string | null;
@@ -46,7 +46,7 @@ export default function AccountGeneral() {
   const UpdateUserSchema = Yup.object().shape({
     displayName: Yup.string().required('Name is required'),
     email: Yup.string().required('Email is required').email('Email must be a valid email address'),
-    photoURL: Yup.mixed().required('Avatar is required'),
+    avatarUrl: Yup.mixed().required('Avatar is required'),
     phoneNumber: Yup.string().required('Phone number is required'),
     country: Yup.string().required('Country is required'),
     address: Yup.string().required('Address is required'),
@@ -59,15 +59,14 @@ export default function AccountGeneral() {
   const defaultValues = {
     displayName: user?.fullName || '',
     email: user?.email || '',
-    photoURL: user?.photoURL || null,
-    phoneNumber: user?.phoneNumber || '',
+    avatarUrl: user?.avatarUrl || null,
+    phoneNumber: user?.phone || '',
     country: user?.country || '',
     address: user?.address || '',
     state: user?.state || '',
     city: user?.city || '',
     zipCode: user?.zipCode || '',
-    about: user?.about || '',
-    isPublic: user?.isPublic || false,
+    isPublic: user?.isApproved || false,
   };
 
   const methods = useForm<FormValuesProps>({
@@ -100,7 +99,7 @@ export default function AccountGeneral() {
       });
 
       if (file) {
-        setValue('photoURL', newFile, { shouldValidate: true });
+        setValue('avatarUrl', newFile, { shouldValidate: true });
       }
     },
     [setValue]
@@ -112,7 +111,7 @@ export default function AccountGeneral() {
         <Grid item xs={12} md={4}>
           <Card sx={{ py: 10, px: 3, textAlign: 'center' }}>
             <RHFUploadAvatar
-              name="photoURL"
+              name="avatarUrl"
               maxSize={3145728}
               onDrop={handleDrop}
               helperText={

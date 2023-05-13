@@ -1,29 +1,27 @@
-import * as Yup from 'yup';
 import { useCallback, useEffect, useMemo } from 'react';
+import * as Yup from 'yup';
 // next
-import { useRouter } from 'next/router';
 // form
-import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
 // @mui
 import { LoadingButton } from '@mui/lab';
-import { Box, Card, Grid, Stack, Typography, InputAdornment } from '@mui/material';
+import { Box, Card, Grid, InputAdornment, Stack, Typography } from '@mui/material';
 // routes
-import { PATH_DASHBOARD } from '../../../routes/paths';
 // @types
 import { IProduct } from '../../../@types/product';
 // components
-import { CustomFile } from '../../../components/upload';
-import { useSnackbar } from '../../../components/snackbar';
 import FormProvider, {
-  RHFSwitch,
-  RHFSelect,
-  RHFEditor,
-  RHFUpload,
-  RHFTextField,
-  RHFRadioGroup,
   RHFAutocomplete,
+  RHFEditor,
+  RHFRadioGroup,
+  RHFSelect,
+  RHFSwitch,
+  RHFTextField,
+  RHFUpload,
 } from '../../../components/hook-form';
+import { useSnackbar } from '../../../components/snackbar';
+import { CustomFile } from '../../../components/upload';
 
 // ----------------------------------------------------------------------
 
@@ -69,7 +67,7 @@ type Props = {
 };
 
 export default function ProductNewEditForm({ isEdit, currentProduct }: Props) {
-  const { push } = useRouter();
+  // const { push } = useRouter();‚
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -83,7 +81,7 @@ export default function ProductNewEditForm({ isEdit, currentProduct }: Props) {
 
   const defaultValues = useMemo(
     () => ({
-      name: currentProduct?.fullName || '',
+      name: currentProduct?.name || '',
       description: currentProduct?.description || '',
       images: currentProduct?.images || [],
       code: currentProduct?.code || '',
@@ -130,7 +128,7 @@ export default function ProductNewEditForm({ isEdit, currentProduct }: Props) {
       await new Promise((resolve) => setTimeout(resolve, 500));
       reset();
       enqueueSnackbar(!isEdit ? 'Create success!' : 'Update success!');
-      push(PATH_DASHBOARD.eCommerce.list);
+      // push(PATH_DASHBOARD.eCommerce.list);
       console.log('DATA', data);
     } catch (error) {
       console.error(error);

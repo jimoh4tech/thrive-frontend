@@ -1,22 +1,20 @@
-import { paramCase } from 'change-case';
 // next
 import NextLink from 'next/link';
 // @mui
-import { Box, Card, Link, Stack, Fab } from '@mui/material';
+import { Box, Card, Fab, Link, Stack } from '@mui/material';
 // routes
-import { PATH_DASHBOARD } from '../../../../routes/paths';
 // utils
 import { fCurrency } from '../../../../utils/formatNumber';
 // redux
-import { useDispatch } from '../../../../redux/store';
 import { addToCart } from '../../../../redux/slices/product';
+import { useDispatch } from '../../../../redux/store';
 // @types
 import { IProduct } from '../../../../@types/product';
 // components
-import Iconify from '../../../../components/iconify';
-import Label from '../../../../components/label';
-import Image from '../../../../components/image';
 import { ColorPreview } from '../../../../components/color-utils';
+import Iconify from '../../../../components/iconify';
+import Image from '../../../../components/image';
+import Label from '../../../../components/label';
 
 // ----------------------------------------------------------------------
 
@@ -29,7 +27,7 @@ export default function ShopProductCard({ product }: Props) {
 
   const dispatch = useDispatch();
 
-  const linkTo = PATH_DASHBOARD.eCommerce.view(paramCase(name));
+  // const linkTo = PATH_DASHBOARD.eCommerce.view(paramCase(name));
 
   const handleAddCart = async () => {
     const newProduct = {
@@ -99,7 +97,7 @@ export default function ShopProductCard({ product }: Props) {
       </Box>
 
       <Stack spacing={2.5} sx={{ p: 3 }}>
-        <Link component={NextLink} href={linkTo} color="inherit" variant="subtitle2" noWrap>
+        <Link component={NextLink} href="linkTo" color="inherit" variant="subtitle2" noWrap>
           {name}
         </Link>
 

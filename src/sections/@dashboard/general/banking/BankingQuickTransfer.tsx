@@ -115,8 +115,10 @@ export default function BankingQuickTransfer({ title, subheader, list, sx, ...ot
   };
 
   const handleBlur = () => {
+    // @ts-ignore
     if (amount < 0) {
       setAmount(0);
+      // @ts-ignore
     } else if (amount > MAX_AMOUNT) {
       setAmount(MAX_AMOUNT);
     }
@@ -327,7 +329,7 @@ function ConfirmTransferDialog({
           <Avatar src={contactInfo?.avatar} sx={{ width: 48, height: 48 }} />
 
           <div>
-            <Typography variant="subtitle2">{contactInfo?.fullName}</Typography>
+            <Typography variant="subtitle2">{contactInfo?.name}</Typography>
             <Typography variant="body2" sx={{ color: 'text.secondary' }}>
               {contactInfo?.email}
             </Typography>

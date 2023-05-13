@@ -1,27 +1,24 @@
-import { useState } from 'react';
-import { paramCase } from 'change-case';
-import parse from 'autosuggest-highlight/parse';
 import match from 'autosuggest-highlight/match';
+import parse from 'autosuggest-highlight/parse';
+import { useState } from 'react';
 // next
-import { useRouter } from 'next/router';
 // @mui
-import { Link, Typography, Autocomplete, InputAdornment } from '@mui/material';
+import { Autocomplete, InputAdornment, Link, Typography } from '@mui/material';
 // utils
 import axios from '../../../../utils/axios';
 // routes
-import { PATH_DASHBOARD } from '../../../../routes/paths';
 // @types
 import { IProduct } from '../../../../@types/product';
 // components
-import Image from '../../../../components/image';
-import Iconify from '../../../../components/iconify';
 import { CustomTextField } from '../../../../components/custom-input';
+import Iconify from '../../../../components/iconify';
+import Image from '../../../../components/image';
 import SearchNotFound from '../../../../components/search-not-found';
 
 // ----------------------------------------------------------------------
 
 export default function ShopProductSearch() {
-  const { push } = useRouter();
+  // const { push } = useRouter();
 
   const [searchProducts, setSearchProducts] = useState('');
 
@@ -43,7 +40,7 @@ export default function ShopProductSearch() {
   };
 
   const handleGotoProduct = (name: string) => {
-    push(PATH_DASHBOARD.eCommerce.view(paramCase(name)));
+    // push(PATH_DASHBOARD.eCommerce.view(paramCase(name)));
   };
 
   const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {

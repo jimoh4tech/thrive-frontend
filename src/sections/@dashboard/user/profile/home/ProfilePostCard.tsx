@@ -80,7 +80,7 @@ export default function ProfilePostCard({ post }: Props) {
     <Card>
       <CardHeader
         disableTypography
-        avatar={<CustomAvatar src={user?.photoURL} alt={user?.fullName} name={user?.fullName} />}
+        avatar={<CustomAvatar src={user?.avatarUrl} alt={user?.fullName} name={user?.fullName} />}
         title={
           <Link color="inherit" variant="subtitle2">
             {user?.fullName}
@@ -190,7 +190,7 @@ export default function ProfilePostCard({ post }: Props) {
           p: (theme) => theme.spacing(0, 3, 3, 3),
         }}
       >
-        <CustomAvatar src={user?.photoURL} alt={user?.fullName} name={user?.fullName} />
+        <CustomAvatar src={user?.avatarUrl} alt={user?.fullName} name={user?.fullName} />
 
         <InputBase
           fullWidth

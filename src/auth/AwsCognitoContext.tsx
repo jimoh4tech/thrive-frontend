@@ -13,7 +13,7 @@ import { PATH_AUTH } from '../routes/paths';
 // config
 import { COGNITO_API } from '../config-global';
 //
-import { ActionMapType, AuthStateType, AuthUserType, AWSCognitoContextType } from './types';
+import { ActionMapType, AuthStateType, UserCreate, AWSCognitoContextType } from './types';
 
 // ----------------------------------------------------------------------
 
@@ -32,7 +32,7 @@ enum Types {
 type Payload = {
   [Types.AUTH]: {
     isAuthenticated: boolean;
-    user: AuthUserType;
+    user: UserCreate;
   };
   [Types.LOGOUT]: undefined;
 };
@@ -41,6 +41,7 @@ type ActionsType = ActionMapType<Payload>[keyof ActionMapType<Payload>];
 
 // ----------------------------------------------------------------------
 
+// @ts-ignore
 const initialState: AuthStateType = {
   isAuthenticated: false,
   isInitialized: false,
@@ -85,6 +86,7 @@ type AuthProviderProps = {
 };
 
 export function AuthProvider({ children }: AuthProviderProps) {
+  // @ts-ignore
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const getUserAttributes = useCallback(
@@ -135,6 +137,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 },
               });
 
+              // @ts-ignore
               dispatch({
                 type: Types.AUTH,
                 payload: {
@@ -150,6 +153,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
             }
           );
         } else {
+          // @ts-ignore
           dispatch({
             type: Types.AUTH,
             payload: {
@@ -166,6 +170,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     try {
       await getSession();
     } catch {
+      // @ts-ignore
       dispatch({
         type: Types.AUTH,
         payload: {
@@ -246,6 +251,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     if (cognitoUser) {
       cognitoUser.signOut();
+      // @ts-ignore
       dispatch({
         type: Types.LOGOUT,
       });

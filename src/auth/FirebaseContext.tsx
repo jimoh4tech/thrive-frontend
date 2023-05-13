@@ -15,7 +15,7 @@ import { getFirestore, collection, doc, getDoc, setDoc } from 'firebase/firestor
 // config
 import { FIREBASE_API } from '../config-global';
 //
-import { ActionMapType, AuthStateType, AuthUserType, FirebaseContextType } from './types';
+import { ActionMapType, UserCreate, FirebaseContextType } from './types';
 
 // ----------------------------------------------------------------------
 
@@ -32,7 +32,7 @@ enum Types {
 type Payload = {
   [Types.INITIAL]: {
     isAuthenticated: boolean;
-    user: AuthUserType;
+    user: UserCreate;
   };
 };
 
@@ -40,13 +40,14 @@ type ActionsType = ActionMapType<Payload>[keyof ActionMapType<Payload>];
 
 // ----------------------------------------------------------------------
 
-const initialState: AuthStateType = {
+const initialState: UserCreate = {
+  // @ts-ignore
   isInitialized: false,
   isAuthenticated: false,
   user: null,
 };
 
-const reducer = (state: AuthStateType, action: ActionsType) => {
+const reducer = (state: UserCreate, action: ActionsType) => {
   if (action.type === Types.INITIAL) {
     return {
       isInitialized: true,
@@ -80,6 +81,7 @@ type AuthProviderProps = {
 };
 
 export function AuthProvider({ children }: AuthProviderProps) {
+  // @ts-ignore
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const initialize = useCallback(() => {
@@ -92,6 +94,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
           const profile = docSnap.data();
 
+          // @ts-ignore
           dispatch({
             type: Types.INITIAL,
             payload: {
@@ -104,6 +107,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
             },
           });
         } else {
+          // @ts-ignore
           dispatch({
             type: Types.INITIAL,
             payload: {

@@ -31,7 +31,7 @@ export default function NavAccount() {
   return (
     <Link component={NextLink} href={PATH_DASHBOARD.user.account} underline="none" color="inherit">
       <StyledRoot>
-        <CustomAvatar src={user?.photoURL} alt={user?.fullName} name={user?.fullName} />
+        <CustomAvatar src={user?.avatarUrl} alt={user?.fullName} name={user?.fullName} />
 
         <Box sx={{ ml: 2, minWidth: 0 }}>
           <Typography variant="subtitle2" noWrap>

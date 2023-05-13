@@ -1,5 +1,4 @@
 export { default as Profile } from './home/Profile';
-export { default as ProfileAbout } from './home/ProfileAbout';
 export { default as ProfilePostCard } from './home/ProfilePostCard';
 export { default as ProfileFollowInfo } from './home/ProfileFollowInfo';
 export { default as ProfileSocialInfo } from './home/ProfileSocialInfo';

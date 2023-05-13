@@ -18,7 +18,7 @@ export type AuthStateType = {
   isInitialized: boolean;
   paymentSuccess: boolean;
   txnId: boolean | null;
-  user: IUserAccountGeneral;
+  user: IUserAccountGeneral | null;
 };
 
 // ----------------------------------------------------------------------

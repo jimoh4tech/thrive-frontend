@@ -1,31 +1,29 @@
-import * as Yup from 'yup';
 import { useCallback, useEffect, useMemo } from 'react';
+import * as Yup from 'yup';
 // next
-import { useRouter } from 'next/router';
 // form
-import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Controller, useForm } from 'react-hook-form';
 // @mui
 import { LoadingButton } from '@mui/lab';
-import { Box, Card, Grid, Stack, Switch, Typography, FormControlLabel } from '@mui/material';
+import { Box, Card, FormControlLabel, Grid, Stack, Switch, Typography } from '@mui/material';
 // utils
 import { fData } from '../../../utils/formatNumber';
 // routes
-import { PATH_DASHBOARD } from '../../../routes/paths';
 // @types
 import { IUserAccountGeneral } from '../../../@types/user';
 // assets
 import { countries } from '../../../assets/data';
 // components
-import Label from '../../../components/label';
-import { CustomFile } from '../../../components/upload';
-import { useSnackbar } from '../../../components/snackbar';
 import FormProvider, {
   RHFSelect,
   RHFSwitch,
   RHFTextField,
   RHFUploadAvatar,
 } from '../../../components/hook-form';
+import Label from '../../../components/label';
+import { useSnackbar } from '../../../components/snackbar';
+import { CustomFile } from '../../../components/upload';
 
 // ----------------------------------------------------------------------
 
@@ -39,7 +37,7 @@ type Props = {
 };
 
 export default function UserNewEditForm({ isEdit = false, currentUser }: Props) {
-  const { push } = useRouter();
+  // const { push } = useRouter();
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -60,7 +58,7 @@ export default function UserNewEditForm({ isEdit = false, currentUser }: Props) 
     () => ({
       name: currentUser?.fullName || '',
       email: currentUser?.email || '',
-      phoneNumber: currentUser?.phoneNumber || '',
+      phoneNumber: currentUser?.phone || '',
       address: currentUser?.address || '',
       country: currentUser?.country || '',
       state: currentUser?.state || '',
@@ -78,6 +76,7 @@ export default function UserNewEditForm({ isEdit = false, currentUser }: Props) 
 
   const methods = useForm<FormValuesProps>({
     resolver: yupResolver(NewUserSchema),
+    // @ts-ignore
     defaultValues,
   });
 
@@ -94,10 +93,10 @@ export default function UserNewEditForm({ isEdit = false, currentUser }: Props) 
 
   useEffect(() => {
     if (isEdit && currentUser) {
-      reset(defaultValues);
+      // reset(defaultValues);
     }
     if (!isEdit) {
-      reset(defaultValues);
+      // reset(defaultValues);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isEdit, currentUser]);
@@ -107,7 +106,7 @@ export default function UserNewEditForm({ isEdit = false, currentUser }: Props) 
       await new Promise((resolve) => setTimeout(resolve, 500));
       reset();
       enqueueSnackbar(!isEdit ? 'Create success!' : 'Update success!');
-      push(PATH_DASHBOARD.user.list);
+      // push(PATH_DASHBOARD.user.list);
       console.log('DATA', data);
     } catch (error) {
       console.error(error);

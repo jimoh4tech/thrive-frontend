@@ -5,9 +5,11 @@ export const initiatePayment = (amount: number) => axios.post('/users/transactio
 export const verifyPayment = (
   url: string
 ): Promise<{
-  id: number;
-  reference: string;
-  amount: string;
-  authorizationUrl: string;
-  status: string;
+  data: {
+    id: number;
+    reference: string;
+    amount: string;
+    authorizationUrl: string;
+    status: string;
+  };
 }> => axios.post(url);

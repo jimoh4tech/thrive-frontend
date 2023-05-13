@@ -89,7 +89,7 @@ export default function BusinessCover({
     <StyledRoot>
       <StyledInfo>
         {/* <CustomAvatar
-          // src={user?.photoURL}
+          // src={user?.avatarUrl}
           // alt={user?.fullName}
           name={name}
           sx={{

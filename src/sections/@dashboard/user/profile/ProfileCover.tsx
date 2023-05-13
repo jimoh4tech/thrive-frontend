@@ -51,7 +51,7 @@ export default function ProfileCover({ name, role, cover }: IUserProfileCover) {
     <StyledRoot>
       <StyledInfo>
         <CustomAvatar
-          src={user?.photoURL}
+          src={user?.avatarUrl}
           alt={user?.fullName}
           name={user?.fullName}
           sx={{

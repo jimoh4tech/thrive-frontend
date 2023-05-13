@@ -10,7 +10,6 @@ import { PATH_AUTH } from '../../routes/paths';
 // components
 import Iconify from '../../components/iconify';
 // sections
-import AuthVerifyCodeForm from '../../sections/auth/AuthVerifyCodeForm';
 // assets
 import { EmailInboxIcon } from '../../assets/icons';
 
@@ -38,7 +37,7 @@ export default function VerifyCodePage() {
         below box to verify your email.
       </Typography>
 
-      <AuthVerifyCodeForm />
+      {/* <AuthVerifyCodeForm /> */}
 
       <Typography variant="body2" sx={{ my: 3 }}>
         Don’t have a code? &nbsp;

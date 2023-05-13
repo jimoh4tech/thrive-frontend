@@ -1,5 +1,5 @@
 // @mui
-import { AppBar, IconButton, Toolbar } from '@mui/material';
+import { AppBar, IconButton, Stack, Toolbar } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 // utils
 import { bgBlur } from '../../../utils/cssStyles';
@@ -13,7 +13,7 @@ import Iconify from '../../../components/iconify';
 import Logo from '../../../components/logo';
 import { useSettingsContext } from '../../../components/settings';
 //
-import Searchbar from './Searchbar';
+import AccountPopover from './AccountPopover';
 
 // ----------------------------------------------------------------------
 
@@ -44,7 +44,21 @@ export default function Header({ onOpenNav }: Props) {
         </IconButton>
       )}
 
-      <Searchbar />
+      {/* <Searchbar /> */}
+
+      <Stack
+        flexGrow={1}
+        direction="row"
+        alignItems="center"
+        justifyContent="flex-end"
+        spacing={{ xs: 0.5, sm: 1.5 }}
+      >
+        {/* <LanguagePopover /> */}
+
+        {/* <ContactsPopover /> */}
+
+        <AccountPopover />
+      </Stack>
     </>
   );
 
@@ -68,7 +82,7 @@ export default function Header({ onOpenNav }: Props) {
           }),
           ...(isNavHorizontal && {
             width: 1,
-            bgcolor: 'background.default !important',
+            bgcolor: 'background.default',
             height: HEADER.H_DASHBOARD_DESKTOP_OFFSET,
             borderBottom: `dashed 1px ${theme.palette.divider}`,
           }),
@@ -82,7 +96,6 @@ export default function Header({ onOpenNav }: Props) {
         sx={{
           height: 1,
           px: { lg: 5 },
-          background: '#FFF !important',
         }}
       >
         {renderContent}

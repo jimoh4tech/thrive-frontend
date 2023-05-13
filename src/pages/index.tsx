@@ -1,67 +1,23 @@
 // next
 import Head from 'next/head';
-// @mui
-import { Box } from '@mui/material';
-// layouts
-import MainLayout from '../layouts/main';
-// components
-import ScrollProgress from '../components/scroll-progress';
+// auth
+import GuestGuard from '../auth/GuestGuard';
 // sections
-// import {
-//   HomeHero,
-//   HomeMinimal,
-//   HomeDarkMode,
-//   HomeLookingFor,
-//   HomeForDesigner,
-//   HomeColorPresets,
-//   HomePricingPlans,
-//   HomeAdvertisement,
-//   HomeCleanInterfaces,
-//   HomeHugePackElements,
-// } from '../sections/home';
+import Login from '../sections/auth/Login';
+// import Login from '../../sections/auth/LoginAuth0';
 
 // ----------------------------------------------------------------------
 
-HomePage.getLayout = (page: React.ReactElement) => <MainLayout> {page} </MainLayout>;
-
-// ----------------------------------------------------------------------
-
-export default function HomePage() {
+export default function LoginPage() {
   return (
     <>
       <Head>
-        <title> The starting point for your next project | ICSS Thrive</title>
+        <title> Login | ICSS Thrive</title>
       </Head>
 
-      <ScrollProgress />
-
-      {/* <HomeHero /> */}
-
-      <Box
-        sx={{
-          overflow: 'hidden',
-          position: 'relative',
-          bgcolor: 'background.default',
-        }}
-      >
-        {/* <HomeMinimal />
-
-        <HomeHugePackElements />
-
-        <HomeForDesigner />
-
-        <HomeDarkMode />
-
-        <HomeColorPresets />
-
-        <HomeCleanInterfaces />
-
-        <HomePricingPlans />
-
-        <HomeLookingFor />
-
-        <HomeAdvertisement /> */}
-      </Box>
+      <GuestGuard>
+        <Login />
+      </GuestGuard>
     </>
   );
 }

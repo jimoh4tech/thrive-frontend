@@ -3,7 +3,7 @@ import { Auth0Client } from '@auth0/auth0-spa-js';
 // config
 import { AUTH0_API } from '../config-global';
 //
-import { ActionMapType, AuthStateType, AuthUserType, Auth0ContextType } from './types';
+import { ActionMapType, AuthStateType, Auth0ContextType } from './types';
 
 // ----------------------------------------------------------------------
 

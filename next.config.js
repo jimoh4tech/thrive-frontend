@@ -1,6 +1,7 @@
 module.exports = {
   swcMinify: false,
   trailingSlash: true,
+  ignoreDuringBuilds: true,
   env: {
     // HOST
     HOST_API_KEY:

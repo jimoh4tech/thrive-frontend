@@ -4,6 +4,15 @@ import Head from 'next/head';
 // @mui
 import { Button, Container, Stack } from '@mui/material';
 // routes
+import {
+  FileChangeViewButton,
+  FileFilterButton,
+  FileFilterName,
+  FileFilterType,
+  FileGridView,
+  FileListView,
+  FileNewFolderDialog,
+} from 'src/sections/@dashboard/file';
 import { PATH_DASHBOARD } from '../../routes/paths';
 // utils
 import { fTimestamp } from '../../utils/formatTime';
@@ -20,15 +29,6 @@ import Iconify from '../../components/iconify';
 import { useSettingsContext } from '../../components/settings';
 import { getComparator, useTable } from '../../components/table';
 // sections
-import {
-  FileChangeViewButton,
-  FileFilterButton,
-  FileFilterName,
-  FileFilterType,
-  FileGridView,
-  FileListView,
-  FileNewFolderDialog,
-} from '../../sections/@dashboard/file';
 
 // ----------------------------------------------------------------------
 

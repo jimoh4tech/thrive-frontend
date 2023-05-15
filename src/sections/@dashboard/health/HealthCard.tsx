@@ -6,15 +6,15 @@ import { Box, Button, Card, Stack, Typography } from '@mui/material';
 // redux
 // @types
 // components
-import { IHeath } from 'src/@types/health';
+import { IHealth } from 'src/@types/health';
 import Iconify from '../../../components/iconify';
 import Image from '../../../components/image';
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  event: IHeath;
-  onViewEvent: (event: IHeath) => void;
+  event: IHealth;
+  onViewEvent: (event: IHealth) => void;
 };
 
 export default function HealthCard({ event, onViewEvent }: Props) {

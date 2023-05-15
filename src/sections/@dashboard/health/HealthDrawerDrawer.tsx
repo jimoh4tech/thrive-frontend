@@ -11,10 +11,10 @@ import {
   StackProps,
   Typography,
 } from '@mui/material';
-import { IFinance } from 'src/@types/finance';
 import Iconify from 'src/components/iconify/Iconify';
 import Label from 'src/components/label/Label';
 import Scrollbar from 'src/components/scrollbar/Scrollbar';
+import { IHealth } from 'src/@types/health';
 import Image from '../../../components/image';
 // utils
 // @types
@@ -24,20 +24,20 @@ import Image from '../../../components/image';
 // ----------------------------------------------------------------------
 
 interface Props extends DrawerProps {
-  event: IFinance;
+  institution: IHealth;
   onClose: VoidFunction;
   onApply: VoidFunction;
 }
 
 export default function HealthDrawerDrawer({
-  event,
   open,
+  institution,
   //
   onClose,
   onApply,
   ...other
 }: Props) {
-  const { name, cover, description, url, category, isPlatinum, institution } = event;
+  const { name, cover, description, url, category, isPlatinum } = institution;
 
   const [toggleProperties, setToggleProperties] = useState(true);
 
@@ -60,7 +60,7 @@ export default function HealthDrawerDrawer({
     >
       <Scrollbar sx={{ height: 1 }}>
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ p: 2.5 }}>
-          <Typography variant="h6"> Event Details </Typography>
+          <Typography variant="h6"> institution Details </Typography>
 
           {/* <Checkbox
             color="warning"
@@ -124,7 +124,7 @@ export default function HealthDrawerDrawer({
           </Stack>
         </Stack>
         <Box p={2.5}>
-          <Typography variant="h6">About Event</Typography>
+          <Typography variant="h6">About institution</Typography>
           <Typography>{description}</Typography>
         </Box>
 

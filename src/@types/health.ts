@@ -1,4 +1,4 @@
-export type IHeath = {
+export type IHealth = {
   id: number;
   name: string;
   isPlatinum: boolean | null;
@@ -14,7 +14,7 @@ export type IHeath = {
   updatedAt: string;
 };
 
-export type IHeathFilter = {
+export type IHealthFilter = {
   institution: string[];
   category: string;
   type: string;

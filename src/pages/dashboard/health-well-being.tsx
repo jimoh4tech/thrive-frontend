@@ -10,9 +10,9 @@ import { Container, Stack } from '@mui/material';
 // redux
 import { fetcher } from 'src/actions';
 // routes
-import { IFinance, IFinanceFilter } from 'src/@types/finance';
-import EventSearch from 'src/sections/@dashboard/event/EventSearch';
+import { IHealth, IHealthFilter } from 'src/@types/health';
 import HealthList from 'src/sections/@dashboard/health/HealthList';
+import EventSearch from 'src/sections/@dashboard/event/EventSearch';
 import { PATH_DASHBOARD } from '../../routes/paths';
 // @types
 // layouts
@@ -40,14 +40,14 @@ export default function EcommerceShopPage() {
     sortBy: 'featured',
   };
 
-  const methods = useForm<IFinanceFilter>({
+  const methods = useForm<IHealthFilter>({
     defaultValues,
   });
 
   const [searchVal, setSearchVal] = useState('');
 
   const {
-    data: { records: events = [] } = { records: [], totalItems: 0 },
+    data: { records: institutioms = [] } = { records: [], totalItems: 0 },
 
     isLoading,
   } = useSWR(`/health/institutions${searchVal ? `?q=${searchVal}` : ''}`, fetcher);
@@ -59,7 +59,7 @@ export default function EcommerceShopPage() {
 
   const values = watch();
 
-  const dataFiltered = applyFilter(events, values);
+  const dataFiltered = applyFilter(institutioms, values);
 
   return (
     <>
@@ -87,7 +87,7 @@ export default function EcommerceShopPage() {
             <EventSearch onInputChange={onSearch} onViewEvent={(event) => {}} searchResults={[]} />
           </Stack>
 
-          <HealthList events={dataFiltered} loading={isLoading} />
+          <HealthList institutions={dataFiltered} loading={isLoading} />
         </FormProvider>
       </Container>
     </>
@@ -96,32 +96,32 @@ export default function EcommerceShopPage() {
 
 // ----------------------------------------------------------------------
 
-function applyFilter(events: IFinance[], filters: IFinanceFilter) {
+function applyFilter(institutioms: IHealth[], filters: IHealthFilter) {
   const { category, sortBy } = filters;
 
   // SORT BY
   if (sortBy === 'featured') {
-    events = orderBy(events, ['sold'], ['desc']);
+    institutioms = orderBy(institutioms, ['sold'], ['desc']);
   }
 
   if (sortBy === 'newest') {
-    events = orderBy(events, ['createdAt'], ['desc']);
+    institutioms = orderBy(institutioms, ['createdAt'], ['desc']);
   }
 
   if (sortBy === 'priceDesc') {
-    events = orderBy(events, ['price'], ['desc']);
+    institutioms = orderBy(institutioms, ['price'], ['desc']);
   }
 
   if (sortBy === 'priceAsc') {
-    events = orderBy(events, ['price'], ['asc']);
+    institutioms = orderBy(institutioms, ['price'], ['asc']);
   }
 
   if (category !== 'All') {
-    events = events.filter((product) => product.category === category);
+    institutioms = institutioms.filter((product) => product.category === category);
   }
 
   // if (rating) {
-  //   events = events.filter((product) => {
+  //   institutioms = institutioms.filter((product) => {
   //     const convertRating = (value: string) => {
   //       if (value === 'up4Star') return 4;
   //       if (value === 'up3Star') return 3;
@@ -132,5 +132,5 @@ function applyFilter(events: IFinance[], filters: IFinanceFilter) {
   //   });
   // }
 
-  return events;
+  return institutioms;
 }

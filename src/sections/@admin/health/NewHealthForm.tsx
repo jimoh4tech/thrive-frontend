@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import { LoadingButton } from '@mui/lab';
 import { Card, Grid, Stack, Typography } from '@mui/material';
 // routes
-import { IHeath } from 'src/@types/health';
+import { IHealth } from 'src/@types/health';
 import { creator, loader } from 'src/actions';
 import { uploadSingle } from 'src/utils/cloudinary';
 // @types
@@ -27,7 +27,7 @@ import { useSnackbar } from '../../../components/snackbar';
 
 // ----------------------------------------------------------------------
 
-export type FormValuesProps = IHeath & { cover: any };
+export type FormValuesProps = IHealth & { cover: any };
 
 export default function NewHealthForm() {
   const { enqueueSnackbar } = useSnackbar();

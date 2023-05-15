@@ -3,7 +3,8 @@ import { Box, BoxProps } from '@mui/material';
 // @type
 // components
 import { useState } from 'react';
-import { IFinance } from 'src/@types/finance';
+import { IMedia } from 'src/@types/media';
+import { IHealth } from 'src/@types/health';
 import { SkeletonProductItem } from '../../../components/skeleton';
 import HealthCard from './HealthCard';
 import HealthDrawerDrawer from './HealthDrawerDrawer';
@@ -12,12 +13,12 @@ import HealthDrawerDrawer from './HealthDrawerDrawer';
 // ----------------------------------------------------------------------
 
 interface Props extends BoxProps {
-  events: IFinance[];
+  institutions: IHealth[];
   loading: boolean;
 }
 
-export default function HealthList({ events, loading, ...other }: Props) {
-  const [event, setEvent] = useState<IFinance | null>(null);
+export default function HealthList({ institutions, loading, ...other }: Props) {
+  const [institution, setIntitution] = useState<IHealth | null>(null);
   const [open, setOpen] = useState(false);
 
   return (
@@ -32,14 +33,14 @@ export default function HealthList({ events, loading, ...other }: Props) {
       }}
       {...other}
     >
-      {(loading ? [...Array(12)] : events).map((_event, index) =>
-        _event ? (
+      {(loading ? [...Array(12)] : institutions).map((_inst, index) =>
+        _inst ? (
           <HealthCard
-            key={_event.id}
-            event={_event}
-            onViewEvent={(__event) =>
+            key={_inst.id}
+            event={_inst}
+            onViewEvent={(__inst) =>
               setOpen(() => {
-                setEvent(__event);
+                setIntitution(__inst);
                 return true;
               })
             }
@@ -48,10 +49,10 @@ export default function HealthList({ events, loading, ...other }: Props) {
           <SkeletonProductItem key={index} />
         )
       )}
-      {event && (
+      {institution && (
         <HealthDrawerDrawer
           open={open}
-          event={event}
+          institution={institution}
           onClose={() => setOpen(false)}
           onApply={() => {}}
         />

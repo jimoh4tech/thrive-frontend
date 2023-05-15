@@ -14,7 +14,7 @@ type AuthGuardProps = {
 };
 
 export default function AuthGuard({ children }: AuthGuardProps) {
-  const { isAuthenticated, isInitialized } = useAuthContext();
+  const { isAuthenticated, isInitialized, user } = useAuthContext();
 
   const { pathname, push } = useRouter();
 
@@ -27,7 +27,7 @@ export default function AuthGuard({ children }: AuthGuardProps) {
     if (isAuthenticated) {
       setRequestedLocation(null);
     }
-  }, [isAuthenticated, pathname, push, requestedLocation]);
+  }, [isAuthenticated, pathname, push, requestedLocation, user]);
 
   if (!isInitialized) {
     return <LoadingScreen />;
@@ -38,6 +38,12 @@ export default function AuthGuard({ children }: AuthGuardProps) {
       setRequestedLocation(pathname);
     }
     return <Login />;
+  }
+
+  if (user?.role?.id > 2 && (pathname || '').split('/').includes('dashboard')) {
+    push('/admin/users');
+
+    return <LoadingScreen />;
   }
 
   return <> {children} </>;

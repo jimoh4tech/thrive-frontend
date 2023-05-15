@@ -4,6 +4,7 @@ import Head from 'next/head';
 import { Container } from '@mui/material';
 // routes
 import NewTemplateForm from 'src/sections/@admin/template/NewTemplateForm';
+import NewHealthForm from 'src/sections/@admin/health/NewHealthForm';
 import { PATH_ADMIN } from '../../../routes/paths';
 // layouts
 import DashboardLayout from '../../../layouts/admin';
@@ -45,7 +46,7 @@ export default function BlogNewPostPage() {
           ]}
         />
 
-        <NewTemplateForm />
+        <NewHealthForm />
       </Container>
     </>
   );

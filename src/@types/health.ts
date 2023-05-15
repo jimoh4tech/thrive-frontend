@@ -3,7 +3,8 @@ export type IHeath = {
   name: string;
   isPlatinum: boolean | null;
   url: string | null;
-  cover: string;
+  cover?: string;
+  logo?: string;
   description: string;
   category: any;
   institution: any;

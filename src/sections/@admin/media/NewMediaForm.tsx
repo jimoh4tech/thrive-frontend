@@ -45,7 +45,7 @@ export default function NewMediaForm() {
     name: '',
     description: '',
     mediaUrl: null,
-    caetogryId: 1,
+    categoryId: 1,
   };
 
   const methods = useForm<FormValuesProps>({

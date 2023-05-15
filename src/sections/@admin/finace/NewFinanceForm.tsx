@@ -48,7 +48,7 @@ export default function NewFinanceForm() {
     name: '',
     description: '',
     cover: '',
-    caetogryId: null,
+    categoryId: null,
     institutionId: null,
     url: '',
   };

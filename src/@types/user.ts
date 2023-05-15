@@ -117,7 +117,7 @@ export type IUserAccountGeneral = {
   isVerified: boolean;
   isApproved: boolean;
   status: string;
-  role: { name: string };
+  role: { name: string; id: number };
   business: IUserBusiness;
   virtualOffice?: any;
   platinumSub: [{ id: number }];

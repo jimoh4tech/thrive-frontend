@@ -58,7 +58,7 @@ export default function NewEventForm() {
     endDate: null,
     description: '',
     cover: '',
-    caetogryId: null,
+    categoryId: null,
     organizerId: null,
     amount: 0,
     discount: 0,
@@ -246,7 +246,7 @@ export default function NewEventForm() {
 
                 <RHFTextField type="number" name="discount" label="Discount" />
 
-                <RHFSelect native name="discountType" label="Discount Type">
+                <RHFSelect native name="descountType" label="Discount Type">
                   <option value="" />
                   {['fixed', 'percent'].map((val) => (
                     <option key={val} value={val}>

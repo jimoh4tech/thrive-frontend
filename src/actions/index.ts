@@ -13,6 +13,8 @@ const endpoints = {
   finance: '/finance/services',
   financeCats: '/finance/categories',
   financeInstitutions: '/finance/institutions',
+  healthCats: '/health/categories',
+  healthInstitutions: '/health/institutions',
 };
 
 export const fetcher = async (url: string) => (await axiosInstance.get(url)).data;

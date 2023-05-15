@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import { LoadingButton } from '@mui/lab';
 import { Card, Grid, Stack, Typography } from '@mui/material';
 // routes
-import { IMedia } from 'src/@types/media';
+import { IHeath } from 'src/@types/health';
 import { creator, loader } from 'src/actions';
 import { uploadSingle } from 'src/utils/cloudinary';
 // @types
@@ -27,25 +27,33 @@ import { useSnackbar } from '../../../components/snackbar';
 
 // ----------------------------------------------------------------------
 
-export type FormValuesProps = IMedia & { mediaUrl: any };
+export type FormValuesProps = IHeath & { cover: any };
 
-export default function NewMediaForm() {
+export default function NewHealthForm() {
   const { enqueueSnackbar } = useSnackbar();
 
   const [categories, setCategories] = useState([]);
 
   const NewTemplateSchema = Yup.object().shape({
     name: Yup.string().required('Title is required'),
-    description: Yup.string().required('Description is required'),
-    categoryId: Yup.string().required('Category is required'),
-    mediaUrl: Yup.mixed().required('mediaUrl is required'),
+    email: Yup.string().email('Invalid email address').required('Title is required'),
+    phome: Yup.string().required('Title is required'),
+    bio: Yup.string().required('Bio is required'),
+    logo: Yup.mixed(),
+    url: Yup.string().url('Invalid url'),
+    cover: Yup.mixed().required('cover is required'),
+    categoryId: Yup.number().required('Pls select a category'),
   });
 
   const defaultValues = {
     name: '',
-    description: '',
-    mediaUrl: null,
-    categoryId: 1,
+    email: '',
+    phone: '',
+    bio: '',
+    logo: '',
+    url: '',
+    cover: null,
+    categoryId: null,
   };
 
   const methods = useForm<FormValuesProps>({
@@ -63,13 +71,11 @@ export default function NewMediaForm() {
   const onSubmit = async (data: FormValuesProps) => {
     try {
       const {
-        data: { public_id, format, height, width, folder, bytes, url },
-      } = await uploadSingle(data.mediaUrl, 'template');
-      await creator('template', {
+        data: { public_id },
+      } = await uploadSingle(data.cover, 'health');
+      await creator('healthInstitutions', {
         ...data,
-        mediaUrl: public_id,
-        format: format || url.split('.')[url.split('.').length - 1],
-        metadata: { height, width, folder, bytes },
+        cover: public_id,
       });
 
       reset();
@@ -83,7 +89,7 @@ export default function NewMediaForm() {
   };
 
   const handleDrop = useCallback(
-    (acceptedFiles: File[]) => {
+    (acceptedFiles: File[], field: 'cover' | 'logo') => {
       const file = acceptedFiles[0];
 
       const newFile = Object.assign(file, {
@@ -91,19 +97,19 @@ export default function NewMediaForm() {
       });
 
       if (file) {
-        setValue('mediaUrl', newFile, { shouldValidate: true });
+        setValue(field, newFile, { shouldValidate: true });
       }
     },
     [setValue]
   );
 
-  const handleRemoveFile = () => {
-    setValue('mediaUrl', null);
+  const handleRemoveFile = (field: 'cover' | 'logo') => {
+    setValue(field, null);
   };
 
   const getCategories = useCallback(async () => {
     try {
-      const _categories = await loader('templateCats');
+      const _categories = await loader('healthCats');
 
       setCategories(_categories);
     } catch (error) {
@@ -123,14 +129,36 @@ export default function NewMediaForm() {
         <Grid item xs={12} md={8}>
           <Card sx={{ p: 3 }}>
             <Stack spacing={3}>
-              <RHFTextField name="name" label="Media Title" />
+              <RHFTextField name="name" label="Provider Name" />
+
+              <RHFTextField name="email" label="Provider Email" />
+
+              <RHFTextField name="phone" label="Provider Phone Number" />
+
+              <RHFTextField name="url" label="Provider Website" />
 
               <Stack spacing={1}>
                 <Typography variant="subtitle2" sx={{ color: 'text.secondary' }}>
                   Description
                 </Typography>
 
-                <RHFEditor simple name="description" />
+                <RHFEditor simple name="bio" />
+              </Stack>
+
+              <Stack spacing={1}>
+                <Typography variant="subtitle2" sx={{ color: 'text.secondary' }}>
+                  Provider Logo
+                </Typography>
+
+                <RHFUpload
+                  accept={{
+                    'image/*': [],
+                  }}
+                  name="logo"
+                  maxSize={3145728}
+                  onDrop={(_) => handleDrop(_, 'logo')}
+                  onDelete={() => handleRemoveFile('logo')}
+                />
               </Stack>
 
               <Stack spacing={1}>
@@ -141,24 +169,11 @@ export default function NewMediaForm() {
                 <RHFUpload
                   accept={{
                     'image/*': [],
-                    'audio/*': [],
-                    'video/*': [],
-                    'text/*': ['.csv', '.txt', ''],
-                    'application/*': [
-                      '.doc',
-                      '.xls',
-                      '.xlsx',
-                      '.docx',
-                      '.gz',
-                      '.pdf',
-                      '.rar',
-                      '.zip',
-                    ],
                   }}
-                  name="mediaUrl"
+                  name="cover"
                   maxSize={3145728}
-                  onDrop={handleDrop}
-                  onDelete={handleRemoveFile}
+                  onDrop={(_) => handleDrop(_, 'cover')}
+                  onDelete={() => handleRemoveFile('cover')}
                 />
               </Stack>
             </Stack>

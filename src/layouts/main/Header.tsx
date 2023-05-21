@@ -53,7 +53,7 @@ export default function Header() {
 
           {isDesktop && <NavDesktop isOffset={isOffset} data={navConfig} />}
 
-          <Button variant="contained" href="/auth/login">
+          <Button variant="contained" href="/login">
             Register / Login
           </Button>
 

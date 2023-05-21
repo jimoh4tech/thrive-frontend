@@ -47,6 +47,7 @@ export default function HomePage() {
                   <Stack
                     justifyContent="center"
                     alignItems="center"
+                    spacing={2}
                     sx={{
                       border: '1px solid #eee',
                       height: 60,
@@ -56,6 +57,9 @@ export default function HomePage() {
                   >
                     <Iconify icon={_.icon} color="primary.main" width={40} />
                   </Stack>
+                  <Typography mt={2} variant="h4">
+                    {_.title}
+                  </Typography>
                   <Typography component="div" dangerouslySetInnerHTML={{ __html: _.text }} />
                   <Button
                     href="/register"

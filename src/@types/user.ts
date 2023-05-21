@@ -100,12 +100,15 @@ export type IUserCard = {
 // ----------------------------------------------------------------------
 
 export type IUserAccountGeneral = {
+  gender: string;
   id: number;
   icssId: string;
   dob: string;
   createdAt: string;
   avatarUrl: string;
   fullName: string;
+  firstName: string;
+  lastName: string;
   email: string;
   phone: string;
   address: string;
@@ -121,6 +124,7 @@ export type IUserAccountGeneral = {
   business: IUserBusiness;
   virtualOffice?: any;
   platinumSub: [{ id: number }];
+  bio: string;
 };
 
 export type IUserAccountBillingCreditCard = {

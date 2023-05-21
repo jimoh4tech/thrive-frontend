@@ -36,24 +36,12 @@ export type IBlogNewPost = {
 };
 
 export type IBlogPost = {
-  id: string;
-  cover: string;
+  id: number;
   title: string;
-  description: string;
-  createdAt: Date | string | number;
-  view: number;
-  comment: number;
-  share: number;
-  favorite: number;
-  author: {
-    name: string;
-    avatarUrl: string;
-  };
-  tags: string[];
   body: string;
-  favoritePerson: {
-    name: string;
-    avatarUrl: string;
-  }[];
-  comments: IBlogPostComment[];
+  image: string;
+  comment: number;
+  like: number;
+  tags: string[];
+  createdAt: string;
 };

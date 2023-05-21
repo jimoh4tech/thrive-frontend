@@ -37,7 +37,7 @@ export default function UserProfilePage() {
   return (
     <>
       <Head>
-        <title> Web Address | Minimal UI</title>
+        <title> Web Address | ICSS Thrive</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>

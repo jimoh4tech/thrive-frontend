@@ -1,7 +1,8 @@
 // @mui
+import { AppBar, Box, BoxProps, Button, Container, Toolbar } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { Box, Button, AppBar, Toolbar, Container, Link, BoxProps } from '@mui/material';
 // hooks
+import { LogoFull } from 'src/components/logo/Logo';
 import useOffSetTop from '../../hooks/useOffSetTop';
 import useResponsive from '../../hooks/useResponsive';
 // utils
@@ -9,14 +10,11 @@ import { bgBlur } from '../../utils/cssStyles';
 // config
 import { HEADER } from '../../config-global';
 // routes
-import { PATH_DOCS, PATH_MINIMAL_ON_STORE } from '../../routes/paths';
 // components
-import Logo from '../../components/logo';
-import Label from '../../components/label';
 //
-import NavMobile from './nav/mobile';
 import navConfig from './nav/config-navigation';
 import NavDesktop from './nav/desktop';
+import NavMobile from './nav/mobile';
 
 // ----------------------------------------------------------------------
 
@@ -49,24 +47,14 @@ export default function Header() {
         }}
       >
         <Container sx={{ height: 1, display: 'flex', alignItems: 'center' }}>
-          <Logo />
-
-          <Link
-            href={PATH_DOCS.changelog}
-            target="_blank"
-            rel="noopener"
-            underline="none"
-            sx={{ ml: 1 }}
-          >
-            <Label color="info"> v4.3.0 </Label>
-          </Link>
+          <LogoFull sx={{ maxWidth: 150 }} />
 
           <Box sx={{ flexGrow: 1 }} />
 
           {isDesktop && <NavDesktop isOffset={isOffset} data={navConfig} />}
 
-          <Button variant="contained" target="_blank" rel="noopener" href={PATH_MINIMAL_ON_STORE}>
-            Purchase Now
+          <Button variant="contained" href="/auth/login">
+            Register / Login
           </Button>
 
           {!isDesktop && <NavMobile isOffset={isOffset} data={navConfig} />}

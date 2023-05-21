@@ -1,13 +1,13 @@
-import { m, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 // @mui
-import { alpha } from '@mui/material/styles';
 import { IconButton, Stack, Typography } from '@mui/material';
+import { alpha } from '@mui/material/styles';
 // utils
 import { fData } from '../../../utils/formatNumber';
 //
-import Iconify from '../../iconify';
 import { varFade } from '../../animate';
-import FileThumbnail, { fileData } from '../../file-thumbnail';
+import { fileData } from '../../file-thumbnail';
+import Iconify from '../../iconify';
 //
 import { UploadProps } from '../types';
 
@@ -45,13 +45,13 @@ export default function MultiFilePreview({ thumbnail, files, onRemove, sx }: Upl
                 ...sx,
               }}
             >
-              <FileThumbnail
+              {/* <FileThumbnail
                 tooltip
                 imageView
                 file={file}
                 sx={{ position: 'absolute' }}
                 imgSx={{ position: 'absolute' }}
-              />
+              /> */}
 
               {onRemove && (
                 <IconButton
@@ -93,7 +93,7 @@ export default function MultiFilePreview({ thumbnail, files, onRemove, sx }: Upl
               ...sx,
             }}
           >
-            <FileThumbnail file={file} />
+            {/* <FileThumbnail file={file} /> */}
 
             <Stack flexGrow={1} sx={{ minWidth: 0 }}>
               <Typography variant="subtitle2" noWrap>

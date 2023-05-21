@@ -12,27 +12,33 @@ const ROOTS_ADMIN = '/admin';
 
 export const PATH_AUTH = {
   root: ROOTS_AUTH,
-  login: path(ROOTS_AUTH, '/login'),
-  register: path(ROOTS_AUTH, '/register'),
-  loginUnprotected: path(ROOTS_AUTH, '/login-unprotected'),
-  registerUnprotected: path(ROOTS_AUTH, '/register-unprotected'),
-  verify: path(ROOTS_AUTH, '/verify'),
-  resetPassword: path(ROOTS_AUTH, '/reset-password'),
-  newPassword: path(ROOTS_AUTH, '/new-password'),
+  login: '/login',
+  register: '/register',
+  loginUnprotected: '/login-unprotected',
+  registerUnprotected: '/register-unprotected',
+  verify: '/verify',
+  resetPassword: '/reset-password',
+  newPassword: '/new-password',
 };
 
 export const PATH_PAGE = {
-  comingSoon: '/coming-soon',
   maintenance: '/maintenance',
-  pricing: '/pricing',
-  payment: '/payment',
+  announcement: '/announcement',
+  ecosystem: '/ecosystem',
+  directory: '/directory',
+  icssModules: '/icss-modules',
+  services: '/services',
+  icssConsortiums: '/icss-implementing-agencies',
+  marketplace: '/marketplace',
+  icssTfc: '/icss-tfc',
   about: '/about-us',
   contact: '/contact-us',
+
   faqs: '/faqs',
   page403: '/403',
   page404: '/404',
   page500: '/500',
-  components: '/components',
+  commingSoon: '/coming-soon',
 };
 
 export const PATH_ADMIN = {
@@ -80,20 +86,11 @@ export const PATH_DASHBOARD = {
   businessMediaLibrary: path(ROOTS_DASHBOARD, '/business-media'),
   contactSupport: path(ROOTS_DASHBOARD, '/contact-support'),
   upgrade: path(ROOTS_DASHBOARD, '/upgrade'),
+  account: path(ROOTS_DASHBOARD, '/account'),
   networkingMarketplace: {
     businesses: path(ROOTS_DASHBOARD, '/networking-marketplace'),
     community: path(ROOTS_DASHBOARD, '/community'),
     chat: path(ROOTS_DASHBOARD, '/chat'),
-  },
-  user: {
-    // root: path(ROOTS_DASHBOARD, '/user'),
-    // new: path(ROOTS_DASHBOARD, '/user/new'),
-    // list: path(ROOTS_DASHBOARD, '/user/list'),
-    // cards: path(ROOTS_DASHBOARD, '/user/cards'),
-    profile: path(ROOTS_DASHBOARD, '/user/profile'),
-    account: path(ROOTS_DASHBOARD, '/user/account'),
-    // edit: (name: string) => path(ROOTS_DASHBOARD, `/user/${name}/edit`),
-    // demoEdit: path(ROOTS_DASHBOARD, `/user/reece-chung/edit`),
   },
 
   // mail: {

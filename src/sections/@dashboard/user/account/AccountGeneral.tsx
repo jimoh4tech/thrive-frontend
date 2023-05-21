@@ -1,32 +1,38 @@
-import * as Yup from 'yup';
 import { useCallback } from 'react';
+import * as Yup from 'yup';
 // form
-import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Controller, useForm } from 'react-hook-form';
 // @mui
-import { Box, Grid, Card, Stack, Typography } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import { Alert, Card, Grid, Stack, TextField, Typography } from '@mui/material';
 // auth
+import { DatePicker } from '@mui/x-date-pickers';
 import { useAuthContext } from '../../../../auth/useAuthContext';
 // utils
 import { fData } from '../../../../utils/formatNumber';
 // assets
-import { countries } from '../../../../assets/data';
 // components
-import { CustomFile } from '../../../../components/upload';
-import { useSnackbar } from '../../../../components/snackbar';
 import FormProvider, {
-  RHFSwitch,
   RHFSelect,
   RHFTextField,
   RHFUploadAvatar,
 } from '../../../../components/hook-form';
+import { useSnackbar } from '../../../../components/snackbar';
+import { CustomFile } from '../../../../components/upload';
 
 // ----------------------------------------------------------------------
 
 type FormValuesProps = {
-  displayName: string;
   email: string;
+  password: string;
+  phone: string;
+  confirmPassword: string;
+  firstName: string;
+  lastName: string;
+  dob: string;
+
+  displayName: string;
   avatarUrl: CustomFile | string | null;
   phoneNumber: string | null;
   country: string | null;
@@ -35,7 +41,8 @@ type FormValuesProps = {
   city: string | null;
   zipCode: string | null;
   about: string | null;
-  isPublic: boolean;
+  isApproved: boolean;
+  afterSubmit?: string;
 };
 
 export default function AccountGeneral() {
@@ -44,10 +51,11 @@ export default function AccountGeneral() {
   const { user } = useAuthContext();
 
   const UpdateUserSchema = Yup.object().shape({
-    displayName: Yup.string().required('Name is required'),
+    firstName: Yup.string().required('Firstname is required'),
+    lastName: Yup.string().required('Lastname is required'),
     email: Yup.string().required('Email is required').email('Email must be a valid email address'),
     avatarUrl: Yup.mixed().required('Avatar is required'),
-    phoneNumber: Yup.string().required('Phone number is required'),
+    phone: Yup.string().required('Phone number is required'),
     country: Yup.string().required('Country is required'),
     address: Yup.string().required('Address is required'),
     state: Yup.string().required('State is required'),
@@ -57,16 +65,15 @@ export default function AccountGeneral() {
   });
 
   const defaultValues = {
-    displayName: user?.fullName || '',
+    firstName: user?.firstName || '',
+    lastName: user?.lastName || '',
     email: user?.email || '',
     avatarUrl: user?.avatarUrl || null,
-    phoneNumber: user?.phone || '',
-    country: user?.country || '',
+    phone: user?.phone || '',
     address: user?.address || '',
-    state: user?.state || '',
-    city: user?.city || '',
-    zipCode: user?.zipCode || '',
-    isPublic: user?.isApproved || false,
+    isApproved: user?.isApproved || false,
+    gender: user?.gender || '',
+    bio: user?.bio || '',
   };
 
   const methods = useForm<FormValuesProps>({
@@ -77,7 +84,8 @@ export default function AccountGeneral() {
   const {
     setValue,
     handleSubmit,
-    formState: { isSubmitting },
+    control,
+    formState: { errors, isSubmitting, isSubmitSuccessful },
   } = methods;
 
   const onSubmit = async (data: FormValuesProps) => {
@@ -130,54 +138,60 @@ export default function AccountGeneral() {
                 </Typography>
               }
             />
-
-            <RHFSwitch
-              name="isPublic"
-              labelPlacement="start"
-              label="Public Profile"
-              sx={{ mt: 5 }}
-            />
           </Card>
         </Grid>
 
         <Grid item xs={12} md={8}>
           <Card sx={{ p: 3 }}>
-            <Box
-              rowGap={3}
-              columnGap={2}
-              display="grid"
-              gridTemplateColumns={{
-                xs: 'repeat(1, 1fr)',
-                sm: 'repeat(2, 1fr)',
-              }}
-            >
-              <RHFTextField name="displayName" label="Name" />
+            <Stack spacing={2.5}>
+              {!!errors.afterSubmit && <Alert severity="error">{errors.afterSubmit.message}</Alert>}
 
-              <RHFTextField name="email" label="Email Address" />
+              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                <RHFTextField name="firstName" label="First name" />
+                <RHFTextField name="lastName" label="Last name" />
+              </Stack>
 
-              <RHFTextField name="phoneNumber" label="Phone Number" />
+              <RHFTextField name="email" label="Email address" />
 
-              <RHFTextField name="address" label="Address" />
+              <RHFTextField name="phone" label="Phone Number" />
 
-              <RHFSelect native name="country" label="Country" placeholder="Country">
-                <option value="" />
-                {countries.map((country) => (
-                  <option key={country.code} value={country.label}>
-                    {country.label}
-                  </option>
-                ))}
-              </RHFSelect>
+              <Stack direction="row" spacing={2}>
+                <Controller
+                  name="dob"
+                  control={control}
+                  render={({ field, fieldState: { error } }) => (
+                    <DatePicker
+                      label="Date of Birth"
+                      value={field.value}
+                      onChange={(newValue) => {
+                        field.onChange(newValue);
+                      }}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          fullWidth
+                          error={!!error}
+                          helperText={error?.message}
+                        />
+                      )}
+                    />
+                  )}
+                />
 
-              <RHFTextField name="state" label="State/Region" />
+                <RHFSelect native name="gender" label="Gender">
+                  <option value="" />
+                  {['Male', 'Female'].map((val) => (
+                    <option key={val} value={val}>
+                      {val}
+                    </option>
+                  ))}
+                </RHFSelect>
+              </Stack>
 
-              <RHFTextField name="city" label="City" />
-
-              <RHFTextField name="zipCode" label="Zip/Code" />
-            </Box>
+              <RHFTextField name="bio" multiline rows={4} label="Bio" />
+            </Stack>
 
             <Stack spacing={3} alignItems="flex-end" sx={{ mt: 3 }}>
-              <RHFTextField name="about" multiline rows={4} label="About" />
-
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
                 Save Changes
               </LoadingButton>

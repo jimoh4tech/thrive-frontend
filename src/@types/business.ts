@@ -1,4 +1,5 @@
 export type IUserBusiness = {
+  id: number;
   name: string;
   email: string;
   phone: string;
@@ -7,6 +8,7 @@ export type IUserBusiness = {
   address: string;
   state: string;
   industry: string | null;
+  designation: string;
   bio: string | null;
   cac: string;
   cover: string;

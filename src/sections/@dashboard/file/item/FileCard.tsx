@@ -1,73 +1,40 @@
 import { useState } from 'react';
 // @mui
-import {
-  Box,
-  Card,
-  Stack,
-  Button,
-  Divider,
-  MenuItem,
-  Checkbox,
-  CardProps,
-  IconButton,
-} from '@mui/material';
+import { Box, Card, CardProps, IconButton, MenuItem, Stack } from '@mui/material';
+// @ts-ignore
+import { saveAs } from 'file-saver';
 // hooks
+import { IMedia } from 'src/@types/media';
+import { fDateTime } from 'src/utils/formatTime';
 import useCopyToClipboard from '../../../../hooks/useCopyToClipboard';
 // utils
-import { fDateTime } from '../../../../utils/formatTime';
 import { fData } from '../../../../utils/formatNumber';
 // @types
-import { IFileManager } from '../../../../@types/file';
 // components
+import FileThumbnail from '../../../../components/file-thumbnail';
 import Iconify from '../../../../components/iconify';
 import MenuPopover from '../../../../components/menu-popover';
 import { useSnackbar } from '../../../../components/snackbar';
 import TextMaxLine from '../../../../components/text-max-line';
-import FileThumbnail from '../../../../components/file-thumbnail';
-import ConfirmDialog from '../../../../components/confirm-dialog';
 //
-import FileShareDialog from '../portal/FileShareDialog';
 import FileDetailsDrawer from '../portal/FileDetailsDrawer';
 
 // ----------------------------------------------------------------------
 
 interface Props extends CardProps {
-  file: IFileManager;
-  selected?: boolean;
-  onSelect?: VoidFunction;
-  onDelete: VoidFunction;
+  file: IMedia;
 }
 
-export default function FileCard({ file, selected, onSelect, onDelete, sx, ...other }: Props) {
+export default function FileCard({ file, sx, ...other }: Props) {
   const { enqueueSnackbar } = useSnackbar();
 
   const { copy } = useCopyToClipboard();
 
-  const [inviteEmail, setInviteEmail] = useState('');
-
   const [showCheckbox, setShowCheckbox] = useState(false);
-
-  const [openShare, setOpenShare] = useState(false);
-
-  const [openConfirm, setOpenConfirm] = useState(false);
 
   const [openDetails, setOpenDetails] = useState(false);
 
-  const [favorited, setFavorited] = useState(file.isFavorited);
-
   const [openPopover, setOpenPopover] = useState<HTMLElement | null>(null);
-
-  const handleFavorite = () => {
-    setFavorited(!favorited);
-  };
-
-  const handleOpenConfirm = () => {
-    setOpenConfirm(true);
-  };
-
-  const handleCloseConfirm = () => {
-    setOpenConfirm(false);
-  };
 
   const handleShowCheckbox = () => {
     setShowCheckbox(true);
@@ -75,14 +42,6 @@ export default function FileCard({ file, selected, onSelect, onDelete, sx, ...ot
 
   const handleHideCheckbox = () => {
     setShowCheckbox(false);
-  };
-
-  const handleOpenShare = () => {
-    setOpenShare(true);
-  };
-
-  const handleCloseShare = () => {
-    setOpenShare(false);
   };
 
   const handleOpenDetails = () => {
@@ -101,13 +60,9 @@ export default function FileCard({ file, selected, onSelect, onDelete, sx, ...ot
     setOpenPopover(null);
   };
 
-  const handleChangeInvite = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInviteEmail(event.target.value);
-  };
-
   const handleCopy = () => {
     enqueueSnackbar('Copied!');
-    copy(file.url);
+    copy(file.mediaUrl);
   };
 
   return (
@@ -122,7 +77,7 @@ export default function FileCard({ file, selected, onSelect, onDelete, sx, ...ot
           boxShadow: 0,
           bgcolor: 'background.default',
           border: (theme) => `solid 1px ${theme.palette.divider}`,
-          ...((showCheckbox || selected) && {
+          ...(showCheckbox && {
             borderColor: 'transparent',
             bgcolor: 'background.paper',
             boxShadow: (theme) => theme.customShadows.z20,
@@ -131,48 +86,33 @@ export default function FileCard({ file, selected, onSelect, onDelete, sx, ...ot
         }}
         {...other}
       >
-        {(showCheckbox || selected) && onSelect ? (
-          <Checkbox
-            checked={selected}
-            onClick={onSelect}
-            icon={<Iconify icon="eva:radio-button-off-fill" />}
-            checkedIcon={<Iconify icon="eva:checkmark-circle-2-fill" />}
-          />
-        ) : (
-          <FileThumbnail file={file.type} sx={{ width: 40, height: 40 }} />
-        )}
+        <FileThumbnail file={file} sx={{ width: 40, height: 40 }} />
 
-        <TextMaxLine
-          variant="subtitle2"
-          persistent
-          onClick={handleOpenDetails}
-          sx={{ mt: 2, mb: 0.5 }}
-        >
+        <TextMaxLine variant="subtitle2" persistent onClick={handleOpenDetails} sx={{ mt: 2 }}>
           {file.name}
         </TextMaxLine>
 
-        <Stack
-          spacing={0.75}
-          direction="row"
-          alignItems="center"
-          sx={{ typography: 'caption', color: 'text.disabled', mt: 0.5 }}
-        >
-          <Box> {fData(file.size)} </Box>
+        <Stack spacing={0.75} sx={{ typography: 'caption', color: 'text.disabled' }}>
+          <Stack direction="row" justifyContent="space-between">
+            <span>{file.category.name}</span>
+            <span>{fDateTime(file.updatedAt)} </span>
+          </Stack>
+          <Box> {fData(file.metadata.bytes)} </Box>
 
           <Box sx={{ width: 2, height: 2, borderRadius: '50%', bgcolor: 'currentColor' }} />
 
-          <Box> {fDateTime(file.dateModified)} </Box>
+          {/* <Box> {fDateTime(file.dateModified)} </Box> */}
         </Stack>
 
         <Stack direction="row" alignItems="center" sx={{ top: 8, right: 8, position: 'absolute' }}>
-          <Checkbox
+          {/* <Checkbox
             color="warning"
             icon={<Iconify icon="eva:star-outline" />}
             checkedIcon={<Iconify icon="eva:star-fill" />}
             checked={favorited}
             onChange={handleFavorite}
             sx={{ p: 0.75 }}
-          />
+          /> */}
 
           <IconButton color={openPopover ? 'inherit' : 'default'} onClick={handleOpenPopover}>
             <Iconify icon="eva:more-vertical-fill" />
@@ -189,72 +129,19 @@ export default function FileCard({ file, selected, onSelect, onDelete, sx, ...ot
         <MenuItem
           onClick={() => {
             handleClosePopover();
-            handleCopy();
+            saveAs(file.mediaUrl);
           }}
         >
-          <Iconify icon="eva:link-2-fill" />
+          <Iconify icon="eva:arrow-circle-down-fill" color="primary.light" />
           Download
-        </MenuItem>
-
-        <MenuItem
-          onClick={() => {
-            handleClosePopover();
-            handleOpenShare();
-          }}
-        >
-          <Iconify icon="eva:share-fill" />
-          Share
-        </MenuItem>
-
-        <Divider sx={{ borderStyle: 'dashed' }} />
-
-        <MenuItem
-          onClick={() => {
-            handleOpenConfirm();
-            handleClosePopover();
-          }}
-          sx={{ color: 'error.main' }}
-        >
-          <Iconify icon="eva:trash-2-outline" />
-          Delete
         </MenuItem>
       </MenuPopover>
 
       <FileDetailsDrawer
         item={file}
-        favorited={favorited}
-        onFavorite={handleFavorite}
         onCopyLink={handleCopy}
         open={openDetails}
         onClose={handleCloseDetails}
-        onDelete={() => {
-          handleCloseDetails();
-          onDelete();
-        }}
-      />
-
-      <FileShareDialog
-        open={openShare}
-        shared={file.shared}
-        inviteEmail={inviteEmail}
-        onChangeInvite={handleChangeInvite}
-        onCopyLink={handleCopy}
-        onClose={() => {
-          handleCloseShare();
-          setInviteEmail('');
-        }}
-      />
-
-      <ConfirmDialog
-        open={openConfirm}
-        onClose={handleCloseConfirm}
-        title="Delete"
-        content="Are you sure want to delete?"
-        action={
-          <Button variant="contained" color="error" onClick={onDelete}>
-            Delete
-          </Button>
-        }
       />
     </>
   );

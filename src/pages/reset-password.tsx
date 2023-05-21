@@ -4,15 +4,15 @@ import NextLink from 'next/link';
 // @mui
 import { Link, Typography } from '@mui/material';
 // routes
-import { PATH_AUTH } from '../../routes/paths';
+import { PATH_AUTH } from '../routes/paths';
 // layouts
-import CompactLayout from '../../layouts/compact';
+import CompactLayout from '../layouts/compact';
 // components
-import Iconify from '../../components/iconify';
+import Iconify from '../components/iconify';
 // sections
-import AuthResetPasswordForm from '../../sections/auth/AuthResetPasswordForm';
+import AuthResetPasswordForm from '../sections/auth/AuthResetPasswordForm';
 // assets
-import { PasswordIcon } from '../../assets/icons';
+import { PasswordIcon } from '../assets/icons';
 
 // ----------------------------------------------------------------------
 

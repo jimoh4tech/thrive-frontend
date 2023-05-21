@@ -1,50 +1,27 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 // next
 import Head from 'next/head';
 // @mui
-import { Button, Container, Stack } from '@mui/material';
+import { Button, Container, Pagination, Stack } from '@mui/material';
 // routes
+import { useSnackbar } from 'notistack';
+import ReactLoading from 'react-loading';
+import { IQuery, IResDataMany } from 'src/@types/query';
+import { loader } from 'src/actions';
+import { FileFilterButton, FileFilterName, FileGridView } from 'src/sections/@dashboard/file';
+import { IMedia } from 'src/@types/media';
 import { PATH_DASHBOARD } from '../../routes/paths';
 // utils
-import { fTimestamp } from '../../utils/formatTime';
 // layouts
 import DashboardLayout from '../../layouts/dashboard';
 // @types
-import { IFile } from '../../@types/file';
 // components
 import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
 import DateRangePicker, { useDateRangePicker } from '../../components/date-range-picker';
-import { fileFormat } from '../../components/file-thumbnail';
 import Iconify from '../../components/iconify';
 import { useSettingsContext } from '../../components/settings';
-import { getComparator, useTable } from '../../components/table';
+import { useTable } from '../../components/table';
 // sections
-import {
-  FileChangeViewButton,
-  FileFilterButton,
-  FileFilterName,
-  FileFilterType,
-  FileGridView,
-  FileListView,
-  FileNewFolderDialog,
-} from '../../sections/@dashboard/file';
-
-// ----------------------------------------------------------------------
-
-const FILE_TYPE_OPTIONS = [
-  'folder',
-  'txt',
-  'zip',
-  'audio',
-  'image',
-  'video',
-  'word',
-  'excel',
-  'powerpoint',
-  'pdf',
-  'photoshop',
-  'illustrator',
-];
 
 // ----------------------------------------------------------------------
 
@@ -71,61 +48,41 @@ export default function FileManagerPage() {
 
   const { themeStretch } = useSettingsContext();
 
-  const [view, setView] = useState('grid');
-
   const [filterName, setFilterName] = useState('');
 
-  const [tableData] = useState([]);
+  const [media, setMedia] = useState<IResDataMany<IMedia>>({
+    totalItems: 0,
+    totalPages: 0,
+    records: [],
+    currentPage: 0,
+  });
+
+  const [fetching, setFetching] = useState(false);
+  const [query, setQuery] = useState<IQuery>({});
 
   const [filterType, setFilterType] = useState<string[]>([]);
 
-  const [openUploadFile, setOpenUploadFile] = useState(false);
-
-  const dataFiltered = applyFilter({
-    inputData: tableData,
-    comparator: getComparator(table.order, table.orderBy),
-    filterName,
-    filterType,
-    filterStartDate: startDate,
-    filterEndDate: endDate,
-    isError: !!isError,
-  });
-
-  const isNotFound =
-    (!dataFiltered.length && !!filterName) ||
-    (!dataFiltered.length && !!filterType) ||
-    (!dataFiltered.length && !!endDate && !!startDate);
-
   const isFiltered = !!filterName || !!filterType.length || (!!startDate && !!endDate);
 
-  const handleChangeView = (event: React.MouseEvent<HTMLElement>, newView: string | null) => {
-    if (newView !== null) {
-      setView(newView);
-    }
-  };
+  const handleQuery = (_query: IQuery) => setQuery({ ...query, ..._query });
 
   const handleFilterName = (event: React.ChangeEvent<HTMLInputElement>) => {
     table.setPage(0);
     setFilterName(event.target.value);
+
+    handleQuery({ q: event.target.value });
   };
 
   const handleChangeStartDate = (newValue: Date | null) => {
     table.setPage(0);
     onChangeStartDate(newValue);
+    handleQuery({ startDate: newValue || undefined });
   };
 
   const handleChangeEndDate = (newValue: Date | null) => {
     table.setPage(0);
     onChangeEndDate(newValue);
-  };
-
-  const handleFilterType = (type: string) => {
-    const checked = filterType.includes(type)
-      ? filterType.filter((value) => value !== type)
-      : [...filterType, type];
-
-    table.setPage(0);
-    setFilterType(checked);
+    handleQuery({ endDate: newValue || undefined });
   };
 
   const handleClearAll = () => {
@@ -134,13 +91,29 @@ export default function FileManagerPage() {
     }
     setFilterName('');
     setFilterType([]);
+    setQuery({});
   };
 
-  const handleOpenConfirm = () => {};
+  const { enqueueSnackbar } = useSnackbar();
 
-  const handleCloseUploadFile = () => {
-    setOpenUploadFile(false);
-  };
+  const getMedia = useCallback(async () => {
+    try {
+      setFetching(true);
+      const data: IResDataMany<IMedia> = await loader('templateLibrary', query);
+
+      setMedia(data);
+
+      setFetching(false);
+    } catch (error) {
+      enqueueSnackbar(error.message || error, { variant: 'error' });
+    }
+  }, [enqueueSnackbar, query]);
+
+  useEffect(() => {
+    getMedia();
+
+    return () => {};
+  }, [getMedia, query]);
 
   return (
     <>
@@ -148,7 +121,7 @@ export default function FileManagerPage() {
         <title> Business Box | ICSS Thrive</title>
       </Head>
 
-      <Container maxWidth={themeStretch ? false : 'lg'}>
+      <Container maxWidth={themeStretch ? false : 'xl'}>
         <CustomBreadcrumbs
           heading="Business Box"
           links={[
@@ -198,13 +171,6 @@ export default function FileManagerPage() {
                 />
               </>
 
-              <FileFilterType
-                filterType={filterType}
-                onFilterType={handleFilterType}
-                optionsType={FILE_TYPE_OPTIONS}
-                onReset={() => setFilterType([])}
-              />
-
               {isFiltered && (
                 <Button
                   variant="soft"
@@ -215,83 +181,26 @@ export default function FileManagerPage() {
                   Clear
                 </Button>
               )}
+              {fetching && <ReactLoading type="spokes" color="grey" width={25} height={25} />}
             </Stack>
           </Stack>
 
-          <FileChangeViewButton value={view} onChange={handleChangeView} />
+          {/* <FileChangeViewButton value={view} onChange={handleChangeView} /> */}
         </Stack>
 
-        {view === 'list' ? (
-          <FileListView
-            table={table}
-            tableData={tableData}
-            dataFiltered={dataFiltered}
-            onDeleteRow={() => {}}
-            isNotFound={isNotFound}
-            onOpenConfirm={handleOpenConfirm}
-          />
-        ) : (
-          <FileGridView
-            table={table}
-            data={tableData}
-            dataFiltered={dataFiltered}
-            onDeleteItem={() => {}}
-            onOpenConfirm={handleOpenConfirm}
-          />
-        )}
-      </Container>
+        <FileGridView data={media.records} dataFiltered={media.records} />
 
-      <FileNewFolderDialog open={openUploadFile} onClose={handleCloseUploadFile} />
+        <Stack direction="row" justifyContent="center" mt={4}>
+          <Pagination
+            count={media.totalPages}
+            onChange={(e, num) => handleQuery({ page: num })}
+            page={media.currentPage}
+          />{' '}
+          {fetching && <ReactLoading type="spokes" color="grey" width={25} height={25} />}
+        </Stack>
+      </Container>
     </>
   );
 }
 
 // ----------------------------------------------------------------------
-
-function applyFilter({
-  inputData,
-  comparator,
-  filterName,
-  filterType,
-  filterStartDate,
-  filterEndDate,
-  isError,
-}: {
-  inputData: IFile[];
-  comparator: (a: any, b: any) => number;
-  filterName: string;
-  filterType: string[];
-  filterStartDate: Date | null;
-  filterEndDate: Date | null;
-  isError: boolean;
-}) {
-  const stabilizedThis = inputData.map((el, index) => [el, index] as const);
-
-  stabilizedThis.sort((a, b) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) return order;
-    return a[1] - b[1];
-  });
-
-  inputData = stabilizedThis.map((el) => el[0]);
-
-  if (filterName) {
-    inputData = inputData.filter(
-      (file) => file.name.toLowerCase().indexOf(filterName.toLowerCase()) !== -1
-    );
-  }
-
-  if (filterType.length) {
-    inputData = inputData.filter((file) => filterType.includes(fileFormat(file.type)));
-  }
-
-  if (filterStartDate && filterEndDate && !isError) {
-    inputData = inputData.filter(
-      (file) =>
-        fTimestamp(file.dateCreated) >= fTimestamp(filterStartDate) &&
-        fTimestamp(file.dateCreated) <= fTimestamp(filterEndDate)
-    );
-  }
-
-  return inputData;
-}

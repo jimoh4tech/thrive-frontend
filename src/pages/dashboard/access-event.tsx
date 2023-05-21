@@ -1,184 +1,112 @@
-import orderBy from 'lodash/orderBy';
-import { useState } from 'react';
-// form
-import { useForm } from 'react-hook-form';
+import { useCallback, useEffect, useState } from 'react';
 // next
 import Head from 'next/head';
-import useSWR from 'swr';
 // @mui
 import { Container, Stack } from '@mui/material';
-// redux
-import { fetcher } from 'src/actions';
 // routes
-import { IEvent, IEventFilter } from 'src/@types/events';
+import { useSnackbar } from 'notistack';
+import { IQuery, IResDataMany } from 'src/@types/query';
+import { loader } from 'src/actions';
+import Pagination from 'src/components/pagination';
+import SearchBar from 'src/components/search-bar';
 import EventList from 'src/sections/@dashboard/event/EventList';
-import EventSearch from 'src/sections/@dashboard/event/EventSearch';
+import { IEvent } from 'src/@types/events';
 import { PATH_DASHBOARD } from '../../routes/paths';
-// @types
+// utils
 // layouts
 import DashboardLayout from '../../layouts/dashboard';
+// @types
 // components
 import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
-import FormProvider from '../../components/hook-form';
+import { useSettingsContext } from '../../components/settings';
 // sections
 
 // ----------------------------------------------------------------------
 
-EcommerceShopPage.getLayout = (page: React.ReactElement) => (
-  <DashboardLayout>{page}</DashboardLayout>
-);
+FileManagerPage.getLayout = (page: React.ReactElement) => <DashboardLayout>{page}</DashboardLayout>;
 
 // ----------------------------------------------------------------------
 
-export default function EcommerceShopPage() {
-  const defaultValues = {
-    gender: [],
-    category: 'All',
-    colors: [],
-    priceRange: [0, 200],
-    rating: '',
-    sortBy: 'featured',
-  };
+export default function FileManagerPage() {
+  const { themeStretch } = useSettingsContext();
 
-  const methods = useForm<IEventFilter>({
-    defaultValues,
+  const [events, setEvents] = useState<IResDataMany<IEvent>>({
+    totalItems: 0,
+    totalPages: 0,
+    records: [],
+    currentPage: 0,
   });
 
-  const [searchVal, setSearchVal] = useState('');
+  const [fetching, setFetching] = useState(false);
+  const [query, setQuery] = useState<IQuery>({});
 
-  const {
-    data: { records: events = [] } = { records: [], totalItems: 0 },
+  const handleQuery = (_query: IQuery) => setQuery({ ...query, ..._query });
 
-    isLoading,
-  } = useSWR(`/events${searchVal ? `?q=${searchVal}` : ''}`, fetcher);
-  const onSearch = (val: string) => {
-    setSearchVal(val);
+  const handleClearAll = () => {
+    setQuery({});
   };
 
-  const { watch } = methods;
+  const { enqueueSnackbar } = useSnackbar();
 
-  const values = watch();
+  const getEvents = useCallback(async () => {
+    try {
+      setFetching(true);
+      const data = await loader('events', query);
 
-  const dataFiltered = applyFilter(events, values);
+      setEvents(data);
+
+      setFetching(false);
+    } catch (error) {
+      enqueueSnackbar(error.message || error, { variant: 'error' });
+    }
+  }, [enqueueSnackbar, query]);
+
+  useEffect(() => {
+    getEvents();
+
+    return () => {};
+  }, [getEvents, query]);
 
   return (
     <>
       <Head>
-        <title> Access To Events | ICSS Thrive</title>
+        <title> Access to Events | ICSS Thrive</title>
       </Head>
 
-      <Container maxWidth="xl">
-        <FormProvider methods={methods}>
-          <CustomBreadcrumbs
-            heading="Access To Events"
-            links={[{ name: 'Dashboard', href: PATH_DASHBOARD.root }, { name: 'Access To Events' }]}
-          />
+      <Container maxWidth={themeStretch ? false : 'xl'}>
+        <CustomBreadcrumbs
+          heading="Access to Events"
+          links={[
+            {
+              name: 'Dashboard',
+              href: PATH_DASHBOARD.root,
+            },
+            { name: 'Access to Events' },
+          ]}
+        />
 
-          <Stack
-            spacing={2}
-            direction={{ xs: 'column', sm: 'row' }}
-            alignItems={{ sm: 'center' }}
-            justifyContent="space-between"
-            sx={{ mb: 2 }}
-          >
-            <EventSearch onInputChange={onSearch} onViewEvent={(event) => {}} searchResults={[]} />
+        <Stack
+          spacing={2.5}
+          direction={{ xs: 'column', md: 'row' }}
+          alignItems={{ xs: 'flex-end', md: 'center' }}
+          justifyContent="space-between"
+          sx={{ mb: 5 }}
+        >
+          <SearchBar onChange={handleQuery} onClearFilter={handleClearAll} searching={fetching} />
 
-            {/* <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-              <ShopFilterDrawer
-                open={openFilter}
-                onOpen={handleOpenFilter}
-                onClose={handleCloseFilter}
-                onResetFilter={handleResetFilter}
-              />
+          {/* <FileChangeViewButton value={view} onChange={handleChangeView} /> */}
+        </Stack>
 
-              <Shopeventsort />
-            </Stack>
-            */}
-          </Stack>
+        <EventList events={events.records} loading={fetching} />
 
-          {/* <Stack sx={{ mb: 3 }}>
-            {!isDefault && (
-              <Typography variant="body2" gutterBottom>
-                <strong>{dataFiltered.length}</strong>
-                &nbsp;events found
-              </Typography>
-            )}
-          </Stack>  */}
-
-          <EventList events={dataFiltered} loading={isLoading} />
-
-          {/* <ConfirmDialog
-            open={openDialog}
-            onClose={()=>setOpenDialog(false)}
-            title="Delete"
-            content={
-              <>
-                Are you sure want to delete <strong> {table.selected.length} </strong> items?
-              </>
-            }
-            action={
-              <Button
-                variant="contained"
-                color="error"
-                onClick={() => 
-                  handleApply()
-                }
-              >
-                APPLY
-              </Button>
-            }
-          /> */}
-        </FormProvider>
+        <Pagination
+          totalPages={events.totalPages}
+          onChange={(num) => handleQuery({ page: num })}
+          currentPage={events.currentPage}
+        />
       </Container>
     </>
   );
 }
 
 // ----------------------------------------------------------------------
-
-function applyFilter(events: IEvent[], filters: IEventFilter) {
-  const { priceRange, category, sortBy } = filters;
-
-  const min = priceRange[0];
-
-  const max = priceRange[1];
-
-  // SORT BY
-  if (sortBy === 'featured') {
-    events = orderBy(events, ['sold'], ['desc']);
-  }
-
-  if (sortBy === 'newest') {
-    events = orderBy(events, ['createdAt'], ['desc']);
-  }
-
-  if (sortBy === 'priceDesc') {
-    events = orderBy(events, ['price'], ['desc']);
-  }
-
-  if (sortBy === 'priceAsc') {
-    events = orderBy(events, ['price'], ['asc']);
-  }
-
-  if (category !== 'All') {
-    events = events.filter((product) => product.category === category);
-  }
-
-  if (min !== 0 || max !== 200) {
-    events = events.filter((event) => event.amount >= min && event.amount <= max);
-  }
-
-  // if (rating) {
-  //   events = events.filter((product) => {
-  //     const convertRating = (value: string) => {
-  //       if (value === 'up4Star') return 4;
-  //       if (value === 'up3Star') return 3;
-  //       if (value === 'up2Star') return 2;
-  //       return 1;
-  //     };
-  //     return product.totalRating > convertRating(rating);
-  //   });
-  // }
-
-  return events;
-}

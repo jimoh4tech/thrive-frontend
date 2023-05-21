@@ -69,7 +69,7 @@ export default function NewFinanceForm() {
     try {
       const {
         data: { public_id },
-      } = await uploadSingle(data.cover, 'finace');
+      } = await uploadSingle(data.cover, 'finance');
       await creator('finance', { ...data, cover: public_id });
 
       reset();

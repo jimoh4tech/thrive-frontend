@@ -13,6 +13,7 @@ import {
   FileListView,
   FileNewFolderDialog,
 } from 'src/sections/@dashboard/file';
+import { IMedia } from 'src/@types/media';
 import { PATH_DASHBOARD } from '../../routes/paths';
 // utils
 import { fTimestamp } from '../../utils/formatTime';
@@ -20,7 +21,6 @@ import { fTimestamp } from '../../utils/formatTime';
 import DashboardLayout from '../../layouts/dashboard';
 // _mock_
 // @types
-import { IFile } from '../../@types/file';
 // components
 import ConfirmDialog from '../../components/confirm-dialog';
 import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
@@ -259,12 +259,11 @@ export default function FileManagerPage() {
             table={table}
             tableData={tableData}
             dataFiltered={dataFiltered}
-            onDeleteRow={() => {}}
             isNotFound={isNotFound}
-            onOpenConfirm={handleOpenConfirm}
           />
         ) : (
           <FileGridView
+            // @ts-ignore
             table={table}
             data={tableData}
             dataFiltered={dataFiltered}
@@ -313,7 +312,7 @@ function applyFilter({
   filterEndDate,
   isError,
 }: {
-  inputData: IFile[];
+  inputData: IMedia[];
   comparator: (a: any, b: any) => number;
   filterName: string;
   filterType: string[];
@@ -337,15 +336,11 @@ function applyFilter({
     );
   }
 
-  if (filterType.length) {
-    inputData = inputData.filter((file) => filterType.includes(fileFormat(file.type)));
-  }
-
   if (filterStartDate && filterEndDate && !isError) {
     inputData = inputData.filter(
       (file) =>
-        fTimestamp(file.dateCreated) >= fTimestamp(filterStartDate) &&
-        fTimestamp(file.dateCreated) <= fTimestamp(filterEndDate)
+        fTimestamp(file.createdAt) >= fTimestamp(filterStartDate) &&
+        fTimestamp(file.createdAt) <= fTimestamp(filterEndDate)
     );
   }
 

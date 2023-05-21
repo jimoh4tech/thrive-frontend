@@ -1,23 +1,49 @@
 // next
 import NextLink from 'next/link';
-import { useRouter } from 'next/router';
 // @mui
-import { Box, Grid, Link, Stack, Divider, Container, Typography, IconButton } from '@mui/material';
+import { Box, Container, Divider, Grid, IconButton, Link, Stack, Typography } from '@mui/material';
 // routes
+import { LogoFull } from 'src/components/logo/Logo';
+import { fDate } from 'src/utils/formatTime';
+import moment from 'moment';
+import { m } from 'framer-motion';
+import { varFade } from 'src/components/animate';
+import {
+  capstone,
+  dofoll,
+  ehub,
+  giniushub,
+  giz,
+  gopa,
+  hbf,
+  kalros,
+  kb,
+  lapo,
+  leverage,
+  sabi,
+  seyp,
+  valucon,
+  viisaus,
+  weboh,
+} from 'src/assets/images';
+// import Image from 'src/components/image/Image';
+import Image from 'next/image';
 import { PATH_PAGE } from '../../routes/paths';
 // components
-import Logo from '../../components/logo';
 import Iconify from '../../components/iconify';
 
 // ----------------------------------------------------------------------
 
 const LINKS = [
   {
-    headline: 'Minimal',
+    headline: 'Contact Us',
     children: [
-      { name: 'About us', href: PATH_PAGE.about },
-      { name: 'Contact us', href: PATH_PAGE.contact },
-      { name: 'FAQs', href: PATH_PAGE.faqs },
+      { name: 'frontoffice@thrivebiz.ng', href: 'mailto:frontoffice@thrivebiz.ng' },
+      { name: '+2349066189699 +2349060009685 +2348095862293', href: '#' },
+      {
+        name: 'Enterprise Hubs Trinity Avenue by Landmark, Off Ligali Ayorinde, Victoria.',
+        href: PATH_PAGE.faqs,
+      },
     ],
   },
   {
@@ -27,43 +53,63 @@ const LINKS = [
       { name: 'Privacy Policy', href: '#' },
     ],
   },
+];
+
+export const _socials = [
   {
-    headline: 'Contact',
-    children: [
-      { name: 'support@minimals.cc', href: '#' },
-      { name: 'Los Angeles, 359  Hidden Valley Road', href: '#' },
-    ],
+    value: 'facebook',
+    name: 'FaceBook',
+    icon: 'eva:facebook-fill',
+    color: '#1877F2',
+    path: 'https://www.facebook.com/caitlyn.kerluke',
+  },
+  {
+    value: 'instagram',
+    name: 'Instagram',
+    icon: 'ant-design:instagram-filled',
+    color: '#E02D69',
+    path: 'https://www.instagram.com/caitlyn.kerluke',
+  },
+  {
+    value: 'linkedin',
+    name: 'Linkedin',
+    icon: 'eva:linkedin-fill',
+    color: '#007EBB',
+    path: 'https://www.linkedin.com/caitlyn.kerluke',
+  },
+  {
+    value: 'twitter',
+    name: 'Twitter',
+    icon: 'eva:twitter-fill',
+    color: '#00AAEC',
+    path: 'https://www.twitter.com/caitlyn.kerluke',
   },
 ];
 
 // ----------------------------------------------------------------------
 
 export default function Footer() {
-  const { pathname } = useRouter();
+  // const simpleFooter = (
+  //   <Box
+  //     component="footer"
+  //     sx={{
+  //       py: 5,
+  //       textAlign: 'center',
+  //       position: 'relative',
+  //       bgcolor: 'background.default',
+  //     }}
+  //   >
+  //     <Container>
+  //       <Logo sx={{ mb: 1, mx: 'auto' }} />
 
-  const isHome = pathname === '/';
-
-  const simpleFooter = (
-    <Box
-      component="footer"
-      sx={{
-        py: 5,
-        textAlign: 'center',
-        position: 'relative',
-        bgcolor: 'background.default',
-      }}
-    >
-      <Container>
-        <Logo sx={{ mb: 1, mx: 'auto' }} />
-
-        <Typography variant="caption" component="div">
-          © All rights reserved
-          <br /> made by &nbsp;
-          <Link href="https://minimals.cc/"> minimals.cc </Link>
-        </Typography>
-      </Container>
-    </Box>
-  );
+  //       <Typography variant="caption" component="div">
+  //         © All rights reserved
+  //         <br /> made by &nbsp;
+  //         <Link href="https://minimals.cc/"> minimals.cc </Link>
+  //       </Typography>
+  //     </Container>
+  //   </Box>
+  // );
 
   const mainFooter = (
     <Box
@@ -73,7 +119,76 @@ export default function Footer() {
         bgcolor: 'background.default',
       }}
     >
+      {/* ------------------ Sponsors Sections ------------------ */}
+      <Container sx={{ py: 10 }}>
+        <Stack spacing={3}>
+          <m.div variants={varFade().inDown}>
+            <Typography variant="h2" textAlign="center">
+              Supported by
+            </Typography>
+          </m.div>
+          <Typography textAlign="center">
+            ICSS THRIVE is able to offer world-class digital support to thousands of growing
+            businesses because it is supported by
+          </Typography>
+          <Stack direction="row" spacing={10} justifyContent="space-between">
+            {[giz, gopa].map((_, i) => (
+              <Image
+                key={i}
+                alt="Logo"
+                style={{ objectFit: 'contain', maxWidth: i === 0 ? '50%' : '25%' }}
+                height={i === 0 ? 120 : 80}
+                width={500}
+                src={_.src}
+              />
+            ))}
+          </Stack>
+        </Stack>
+      </Container>
+
+      {/* ------------------ Partners Sections ------------------ */}
+      <Box bgcolor="#f3f3f3" py={10}>
+        <Container>
+          <m.div variants={varFade().inDown}>
+            <Typography variant="h2" textAlign="center">
+              Our Project Partners
+            </Typography>
+          </m.div>
+
+          <Grid container spacing={10} justifyContent="center" mt={2}>
+            {[
+              ehub,
+              valucon,
+              weboh,
+              hbf,
+              dofoll,
+              kalros,
+              lapo,
+              sabi,
+              viisaus,
+              giniushub,
+              seyp,
+              capstone,
+              kb,
+              leverage,
+            ].map((_) => (
+              <Grid key={_.src} item xl={2} md={3} sm={4} xs={6}>
+                <Image
+                  alt="Logo"
+                  style={{ objectFit: 'contain' }}
+                  height={100}
+                  width={300}
+                  src={_.src}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </Box>
+
       <Divider />
+
+      {/* -------------------- Base Footer -------------------- */}
 
       <Container sx={{ pt: 10 }}>
         <Grid
@@ -89,15 +204,14 @@ export default function Footer() {
             },
           }}
         >
-          <Grid item xs={12} sx={{ mb: 3 }}>
-            <Logo sx={{ mx: { xs: 'auto', md: 'inherit' } }} />
-          </Grid>
-
-          <Grid item xs={8} md={3}>
-            <Typography variant="body2" sx={{ pr: { md: 5 } }}>
-              The starting point for your next project with ICSS Thrive Kit, built on the newest
-              version of Material-UI ©, ready to be customized to your style.
-            </Typography>
+          <Grid item xs={12} md={3}>
+            <Box>
+              <LogoFull sx={{ maxWidth: 150, mx: { xs: 'auto', md: 'inherit' } }} />
+              <Typography variant="body2" sx={{ pr: { md: 5 } }}>
+                A one-stop digital support center for growing businesses in Nigeria. One-time
+                sign-up. Easy sign-ins.
+              </Typography>
+            </Box>
 
             <Stack
               spacing={1}
@@ -108,44 +222,38 @@ export default function Footer() {
                 mb: { xs: 5, md: 0 },
               }}
             >
-              {[].map((social: any) => (
+              {_socials.map((social: any) => (
                 <IconButton key={social.name}>
-                  <Iconify icon={social.icon} />
+                  <Iconify color="primary.main" icon={social.icon} />
                 </IconButton>
               ))}
             </Stack>
           </Grid>
 
           <Grid item xs={12} md={7}>
-            <Stack
-              spacing={5}
-              justifyContent="space-between"
-              direction={{ xs: 'column', md: 'row' }}
-            >
-              {LINKS.map((list) => (
-                <Stack
-                  key={list.headline}
-                  spacing={2}
-                  alignItems={{ xs: 'center', md: 'flex-start' }}
-                >
-                  <Typography component="div" variant="overline">
+            <Grid container spacing={5} justifyContent="space-between">
+              {LINKS.map((list, i) => (
+                <Grid item xs={6} key={i} spacing={2} textAlign="left">
+                  <Typography color="primary.main" component="div" variant="overline">
                     {list.headline}
                   </Typography>
 
-                  {list.children.map((link) => (
-                    <Link
-                      key={link.name}
-                      component={NextLink}
-                      href={link.href}
-                      color="inherit"
-                      variant="body2"
-                    >
-                      {link.name}
-                    </Link>
+                  {list.children.map((link, _i) => (
+                    <Box>
+                      <Link
+                        key={_i}
+                        component={NextLink}
+                        href={link.href}
+                        color="inherit"
+                        variant="body2"
+                      >
+                        {link.name}
+                      </Link>
+                    </Box>
                   ))}
-                </Stack>
+                </Grid>
               ))}
-            </Stack>
+            </Grid>
           </Grid>
         </Grid>
 
@@ -158,11 +266,11 @@ export default function Footer() {
             textAlign: { xs: 'center', md: 'left' },
           }}
         >
-          © 2021. All rights reserved
+          © {moment().format('yyyy')}. All rights reserved
         </Typography>
       </Container>
     </Box>
   );
 
-  return isHome ? simpleFooter : mainFooter;
+  return mainFooter;
 }

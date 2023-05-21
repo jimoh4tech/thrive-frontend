@@ -1,136 +1,117 @@
-import orderBy from 'lodash/orderBy';
-import { useState } from 'react';
-// form
-import { useForm } from 'react-hook-form';
+import { useCallback, useEffect, useState } from 'react';
 // next
 import Head from 'next/head';
-import useSWR from 'swr';
 // @mui
 import { Container, Stack } from '@mui/material';
-// redux
-import { fetcher } from 'src/actions';
 // routes
-import { IHealth, IHealthFilter } from 'src/@types/health';
+import { useSnackbar } from 'notistack';
+import { IHealth } from 'src/@types/health';
+import { IQuery, IResDataMany } from 'src/@types/query';
+import { loader } from 'src/actions';
+import Pagination from 'src/components/pagination';
+import SearchBar from 'src/components/search-bar';
 import HealthList from 'src/sections/@dashboard/health/HealthList';
-import EventSearch from 'src/sections/@dashboard/event/EventSearch';
 import { PATH_DASHBOARD } from '../../routes/paths';
-// @types
+// utils
 // layouts
 import DashboardLayout from '../../layouts/dashboard';
+// @types
 // components
 import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
-import FormProvider from '../../components/hook-form';
+import { useSettingsContext } from '../../components/settings';
 // sections
 
 // ----------------------------------------------------------------------
 
-EcommerceShopPage.getLayout = (page: React.ReactElement) => (
-  <DashboardLayout>{page}</DashboardLayout>
-);
+FileManagerPage.getLayout = (page: React.ReactElement) => <DashboardLayout>{page}</DashboardLayout>;
 
 // ----------------------------------------------------------------------
 
-export default function EcommerceShopPage() {
-  const defaultValues = {
-    gender: [],
-    category: 'All',
-    colors: [],
-    priceRange: [0, 200],
-    rating: '',
-    sortBy: 'featured',
-  };
+export default function FileManagerPage() {
+  const { themeStretch } = useSettingsContext();
 
-  const methods = useForm<IHealthFilter>({
-    defaultValues,
+  const [health, setEvents] = useState<IResDataMany<IHealth>>({
+    totalItems: 0,
+    totalPages: 0,
+    records: [],
+    currentPage: 0,
   });
 
-  const [searchVal, setSearchVal] = useState('');
+  const [fetching, setFetching] = useState(false);
+  const [query, setQuery] = useState<IQuery>({});
 
-  const {
-    data: { records: institutioms = [] } = { records: [], totalItems: 0 },
+  const handleQuery = (_query: IQuery) => setQuery({ ...query, ..._query });
 
-    isLoading,
-  } = useSWR(`/health/institutions${searchVal ? `?q=${searchVal}` : ''}`, fetcher);
-  const onSearch = (val: string) => {
-    setSearchVal(val);
+  const handleClearAll = () => {
+    setQuery({});
   };
 
-  const { watch } = methods;
+  const { enqueueSnackbar } = useSnackbar();
 
-  const values = watch();
+  const getEvents = useCallback(async () => {
+    try {
+      setFetching(true);
+      const data = await loader('health', query);
 
-  const dataFiltered = applyFilter(institutioms, values);
+      setEvents(data);
+
+      setFetching(false);
+    } catch (error) {
+      enqueueSnackbar(error.message || error, { variant: 'error' });
+    }
+  }, [enqueueSnackbar, query]);
+
+  useEffect(() => {
+    getEvents();
+
+    return () => {};
+  }, [getEvents, query]);
 
   return (
     <>
       <Head>
-        <title> Health and Wellbeing | ICSS Thrive</title>
+        <title> Health & Wellbeing | ICSS Thrive</title>
       </Head>
 
-      <Container maxWidth="xl">
-        <FormProvider methods={methods}>
-          <CustomBreadcrumbs
-            heading="Health and Wellbeing"
-            links={[
-              { name: 'Dashboard', href: PATH_DASHBOARD.root },
-              { name: 'Health and Wellbeing' },
-            ]}
+      <Container maxWidth={themeStretch ? false : 'xl'}>
+        <CustomBreadcrumbs
+          heading="Health & Wellbeing"
+          links={[
+            {
+              name: 'Dashboard',
+              href: PATH_DASHBOARD.root,
+            },
+            { name: 'Health & Wellbeing' },
+          ]}
+        />
+
+        <Stack
+          spacing={2.5}
+          direction={{ xs: 'column', md: 'row' }}
+          alignItems={{ xs: 'flex-end', md: 'center' }}
+          justifyContent="space-between"
+          sx={{ mb: 5 }}
+        >
+          <SearchBar
+            withDateFilter={false}
+            onChange={handleQuery}
+            onClearFilter={handleClearAll}
+            searching={fetching}
           />
 
-          <Stack
-            spacing={2}
-            direction={{ xs: 'column', sm: 'row' }}
-            alignItems={{ sm: 'center' }}
-            justifyContent="space-between"
-            sx={{ mb: 2 }}
-          >
-            <EventSearch onInputChange={onSearch} onViewEvent={(event) => {}} searchResults={[]} />
-          </Stack>
+          {/* <FileChangeViewButton value={view} onChange={handleChangeView} /> */}
+        </Stack>
 
-          <HealthList institutions={dataFiltered} loading={isLoading} />
-        </FormProvider>
+        <HealthList institutions={health.records} loading={fetching} />
+
+        <Pagination
+          totalPages={health.totalPages}
+          onChange={(num) => handleQuery({ page: num })}
+          currentPage={health.currentPage}
+        />
       </Container>
     </>
   );
 }
 
 // ----------------------------------------------------------------------
-
-function applyFilter(institutioms: IHealth[], filters: IHealthFilter) {
-  const { category, sortBy } = filters;
-
-  // SORT BY
-  if (sortBy === 'featured') {
-    institutioms = orderBy(institutioms, ['sold'], ['desc']);
-  }
-
-  if (sortBy === 'newest') {
-    institutioms = orderBy(institutioms, ['createdAt'], ['desc']);
-  }
-
-  if (sortBy === 'priceDesc') {
-    institutioms = orderBy(institutioms, ['price'], ['desc']);
-  }
-
-  if (sortBy === 'priceAsc') {
-    institutioms = orderBy(institutioms, ['price'], ['asc']);
-  }
-
-  if (category !== 'All') {
-    institutioms = institutioms.filter((product) => product.category === category);
-  }
-
-  // if (rating) {
-  //   institutioms = institutioms.filter((product) => {
-  //     const convertRating = (value: string) => {
-  //       if (value === 'up4Star') return 4;
-  //       if (value === 'up3Star') return 3;
-  //       if (value === 'up2Star') return 2;
-  //       return 1;
-  //     };
-  //     return product.totalRating > convertRating(rating);
-  //   });
-  // }
-
-  return institutioms;
-}

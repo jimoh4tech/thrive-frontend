@@ -2,20 +2,33 @@ import { useState } from 'react';
 import * as Yup from 'yup';
 // form
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 // @mui
 import { LoadingButton } from '@mui/lab';
-import { Alert, IconButton, InputAdornment, Stack, TextField } from '@mui/material';
+import { Alert, IconButton, InputAdornment, Stack } from '@mui/material';
 // auth
-import { DatePicker } from '@mui/x-date-pickers';
 import moment from 'moment';
 import { requestVerifyEmail } from 'src/actions/authAction';
 import { phoneRegExp } from 'src/utils/regexp';
 import { useAuthContext } from '../../auth/useAuthContext';
 // components
-import FormProvider, { RHFTextField } from '../../components/hook-form';
+import FormProvider, { RHFSelect, RHFTextField } from '../../components/hook-form';
 import Iconify from '../../components/iconify';
 import VerifyEmail from './VerifyEmail';
+
+const ngos = [
+  { id: '1', name: 'Hope Builders ' },
+  { id: '2', name: 'Valucon' },
+  { id: '3', name: 'Web of Hearts' },
+  { id: '4', name: 'Society for Empowerment of Young Persons' },
+  { id: '5', name: 'LAPO' },
+  { id: '6', name: 'Sabi Hub' },
+  { id: '7', name: 'VIISAUS' },
+  { id: '8', name: 'Dofoll' },
+  { id: '9', name: 'Kairos' },
+  { id: '10', name: 'Genius Hub' },
+  { id: '11', name: 'Others' },
+];
 
 // ----------------------------------------------------------------------
 
@@ -43,7 +56,6 @@ export default function AuthRegisterForm() {
     lastName: Yup.string().required('Last name required'),
     email: Yup.string().required('Email is required').email('Email must be a valid email address'),
     phone: Yup.string().matches(phoneRegExp, 'Phone number is not valid'),
-    dob: Yup.date().required('Date of Birth is required'),
     password: Yup.string()
       .required('Password is required')
       .min(6, 'Pass must not be less than 6 characters'),
@@ -60,7 +72,6 @@ export default function AuthRegisterForm() {
     password: '',
     phomne: '',
     confirmPassword: '',
-    dob: '',
   };
 
   const methods = useForm<FormValuesProps>({
@@ -73,7 +84,6 @@ export default function AuthRegisterForm() {
     setError,
     handleSubmit,
     getValues,
-    control,
     formState: { errors, isSubmitting, isSubmitSuccessful },
   } = methods;
 
@@ -130,22 +140,14 @@ export default function AuthRegisterForm() {
 
           <RHFTextField name="phone" label="Phone Number" />
 
-          <Controller
-            name="dob"
-            control={control}
-            render={({ field, fieldState: { error } }) => (
-              <DatePicker
-                label="Date of Birth"
-                value={field.value}
-                onChange={(newValue) => {
-                  field.onChange(newValue);
-                }}
-                renderInput={(params) => (
-                  <TextField {...params} fullWidth error={!!error} helperText={error?.message} />
-                )}
-              />
-            )}
-          />
+          <RHFSelect native name="ngoId" label="Partner Organization">
+            <option value="" />
+            {ngos.map(({ id, name }) => (
+              <option key={id} value={id}>
+                {name}
+              </option>
+            ))}
+          </RHFSelect>
 
           <RHFTextField
             name="password"

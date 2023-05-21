@@ -2,14 +2,14 @@ import { useState } from 'react';
 // @mui
 import {
   Box,
-  Card,
-  Stack,
   Button,
-  Divider,
-  MenuItem,
-  Checkbox,
+  Card,
   CardProps,
+  Checkbox,
+  Divider,
   IconButton,
+  MenuItem,
+  Stack,
 } from '@mui/material';
 // hooks
 import useCopyToClipboard from '../../../../hooks/useCopyToClipboard';
@@ -18,15 +18,13 @@ import { fData } from '../../../../utils/formatNumber';
 // @types
 import { IFolderManager } from '../../../../@types/file';
 // components
+import ConfirmDialog from '../../../../components/confirm-dialog';
 import Iconify from '../../../../components/iconify';
 import MenuPopover from '../../../../components/menu-popover';
-import TextMaxLine from '../../../../components/text-max-line';
 import { useSnackbar } from '../../../../components/snackbar';
-import ConfirmDialog from '../../../../components/confirm-dialog';
 //
-import FileShareDialog from '../portal/FileShareDialog';
-import FileDetailsDrawer from '../portal/FileDetailsDrawer';
 import FileNewFolderDialog from '../portal/FileNewFolderDialog';
+import FileShareDialog from '../portal/FileShareDialog';
 
 // ----------------------------------------------------------------------
 
@@ -56,8 +54,6 @@ export default function FileFolderCard({
   const [openShare, setOpenShare] = useState(false);
 
   const [openConfirm, setOpenConfirm] = useState(false);
-
-  const [openDetails, setOpenDetails] = useState(false);
 
   const [folderName, setFolderName] = useState(folder.name);
 
@@ -93,14 +89,6 @@ export default function FileFolderCard({
 
   const handleCloseShare = () => {
     setOpenShare(false);
-  };
-
-  const handleOpenDetails = () => {
-    setOpenDetails(true);
-  };
-
-  const handleCloseDetails = () => {
-    setOpenDetails(false);
   };
 
   const handleOpenEditFolder = () => {
@@ -179,10 +167,6 @@ export default function FileFolderCard({
           />
         )}
 
-        <TextMaxLine variant="h6" onClick={handleOpenDetails} sx={{ mt: 1, mb: 0.5 }}>
-          {folder.name}
-        </TextMaxLine>
-
         <Stack
           direction="row"
           alignItems="center"
@@ -246,19 +230,6 @@ export default function FileFolderCard({
           Delete
         </MenuItem>
       </MenuPopover>
-
-      <FileDetailsDrawer
-        item={folder}
-        favorited={favorited}
-        onFavorite={handleFavorite}
-        onCopyLink={handleCopy}
-        open={openDetails}
-        onClose={handleCloseDetails}
-        onDelete={() => {
-          handleCloseDetails();
-          onDelete();
-        }}
-      />
 
       <FileShareDialog
         open={openShare}

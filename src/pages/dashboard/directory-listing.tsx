@@ -1,33 +1,29 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 // next
 import Head from 'next/head';
 // @mui
-import { Card, Container, Table, TableBody, TableContainer } from '@mui/material';
+import { Card, Container, Stack, Table, TableBody, TableContainer } from '@mui/material';
 // routes
 import { useSnackbar } from 'notistack';
-import { fetcher } from 'src/actions';
-import { approveUser } from 'src/actions/admin/usersAction';
+import { IQuery, IResDataMany } from 'src/@types/query';
+import { loader } from 'src/actions';
+import Pagination from 'src/components/pagination';
+import SearchBar from 'src/components/search-bar';
+// routes
+import { IUserBusiness } from 'src/@types/business';
 import Loading from 'src/components/loading';
 import DashboardLayout from 'src/layouts/dashboard/DashboardLayout';
-import useSWR from 'swr';
+import DirectoryTableRow from 'src/sections/@dashboard/directory/DirectoryTableRow';
+import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
+import { useSettingsContext } from '../../components/settings';
 import { PATH_DASHBOARD } from '../../routes/paths';
 // @types
-import { IUserAccountGeneral } from '../../@types/user';
 // _mock_
 // layouts
 // components
-import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
 import Scrollbar from '../../components/scrollbar';
-import { useSettingsContext } from '../../components/settings';
-import {
-  TableHeadCustom,
-  TableNoData,
-  TablePaginationCustom,
-  getComparator,
-  useTable,
-} from '../../components/table';
+import { TableHeadCustom, TableNoData } from '../../components/table';
 // sections
-import { UserTableRow, UserTableToolbar } from '../../sections/@admin/user/list';
 
 // ----------------------------------------------------------------------
 
@@ -36,93 +32,56 @@ const ROLE = ['all', 'member', 'partner', 'admin'];
 const TABLE_HEAD = [
   { id: 'name', label: 'Business Name', align: 'left' },
   { id: 'address', label: 'Address', align: 'left' },
-  { id: 'slug', label: 'Web Address', align: 'left' },
+  { id: 'slug', label: 'Location', align: 'left' },
   { id: 'industry', label: 'Industry', align: 'left' },
   { id: '' },
 ];
 
 // ----------------------------------------------------------------------
 
-UserListPage.getLayout = (page: React.ReactElement) => <DashboardLayout>{page}</DashboardLayout>;
+FileManagerPage.getLayout = (page: React.ReactElement) => <DashboardLayout>{page}</DashboardLayout>;
 
 // ----------------------------------------------------------------------
 
-export default function UserListPage() {
-  const [searchVal, setSearchVal] = useState('');
-
-  const {
-    data: { records = [], totalItems } = { records: [], totalItems: 0 },
-    isLoading,
-    mutate,
-  } = useSWR(`/directory-listing${searchVal ? `?q=${searchVal}` : ''}`, fetcher);
-
-  const {
-    page,
-    order,
-    orderBy,
-    rowsPerPage,
-    setPage,
-    //
-    //
-    onSort,
-    onChangePage,
-    onChangeRowsPerPage,
-  } = useTable();
-
+export default function FileManagerPage() {
   const { themeStretch } = useSettingsContext();
 
-  const [filterRole, setFilterRole] = useState('all');
-
-  const [filterStatus, setFilterStatus] = useState('all');
-
-  const dataFiltered = applyFilter({
-    inputData: records,
-    comparator: getComparator(order, orderBy),
-    searchVal,
-    filterRole,
-    filterStatus,
+  const [businesses, setBusineses] = useState<IResDataMany<IUserBusiness>>({
+    totalItems: 0,
+    totalPages: 0,
+    records: [],
+    currentPage: 0,
   });
 
-  // const denseHeight = dense ? 52 : 72;
+  const [fetching, setFetching] = useState(false);
+  const [query, setQuery] = useState<IQuery>({});
 
-  const isFiltered = searchVal !== '' || filterRole !== 'all' || filterStatus !== 'all';
+  const handleQuery = (_query: IQuery) => setQuery({ ...query, ..._query });
 
-  const isNotFound =
-    (!dataFiltered.length && !!searchVal) ||
-    (!dataFiltered.length && !!filterRole) ||
-    (!dataFiltered.length && !!filterStatus);
-
-  const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPage(0);
-    setSearchVal(e.target.value);
-    mutate();
-  };
-
-  const handleFilterRole = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPage(0);
-    setFilterRole(event.target.value);
-  };
-
-  const handleResetFilter = () => {
-    setSearchVal('');
-    setFilterRole('all');
-    setFilterStatus('all');
+  const handleClearAll = () => {
+    setQuery({});
   };
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const onApproveUser = async (id: number, icssId: string) => {
+  const getEvents = useCallback(async () => {
     try {
-      const res = await approveUser({ icssId, id });
-      await mutate({
-        records: records.map((_: IUserAccountGeneral) => ({ ..._, icssId })),
-        totalItems,
-      });
-      enqueueSnackbar(res.data.message);
-    } catch (err) {
-      enqueueSnackbar(err.message || err, { color: 'error.main' });
+      setFetching(true);
+      const data = await loader('businesses', query);
+
+      setBusineses(data);
+
+      setFetching(false);
+    } catch (error) {
+      enqueueSnackbar(error.message || error, { variant: 'error' });
     }
-  };
+  }, [enqueueSnackbar, query]);
+
+  useEffect(() => {
+    getEvents();
+
+    return () => {};
+  }, [getEvents, query]);
 
   return (
     <>
@@ -136,85 +95,50 @@ export default function UserListPage() {
           links={[{ name: 'Dashboard', href: PATH_DASHBOARD.root }, { name: 'Directory Listing' }]}
         />
 
-        <Card>
-          <UserTableToolbar
-            isFiltered={isFiltered}
-            filterName={searchVal}
-            filterRole={filterRole}
-            optionsRole={ROLE}
-            onFilterName={onSearch}
-            onFilterRole={handleFilterRole}
-            onResetFilter={handleResetFilter}
+        <Stack
+          spacing={2.5}
+          direction={{ xs: 'column', md: 'row' }}
+          alignItems={{ xs: 'flex-end', md: 'center' }}
+          justifyContent="space-between"
+        >
+          <SearchBar
+            withDateFilter={false}
+            onChange={handleQuery}
+            onClearFilter={handleClearAll}
+            searching={fetching}
           />
 
-          <TableContainer sx={{ position: 'relative', overflow: 'unset' }}>
-            {/* <TableSelectedAction
-              // dense={dense}
-              numSelected={selected.length}
-              rowCount={tableData.length}
-              onSelectAllRows={(checked) =>
-                onSelectAllRows(
-                  checked,
-                  tableData.map((row) => row.id)
-                )
-              }
-              action={
-                <Tooltip title="Delete">
-                  <IconButton color="primary" onClick={handleOpenConfirm}>
-                    <Iconify icon="eva:trash-2-outline" />
-                  </IconButton>
-                </Tooltip>
-              }
-            /> */}
+          {/* <FileChangeViewButton value={view} onChange={handleChangeView} /> */}
+        </Stack>
 
+        <Card>
+          <TableContainer sx={{ position: 'relative', overflow: 'unset' }}>
             <Scrollbar>
-              <Loading open={isLoading} />
+              <Loading open={fetching} />
               <Table size="small" sx={{ minWidth: 800 }}>
-                <TableHeadCustom
-                  order={order}
-                  orderBy={orderBy}
-                  headLabel={TABLE_HEAD}
-                  rowCount={totalItems}
-                  onSort={onSort}
-                  // onSelectAllRows={(checked) =>
-                  //   onSelectAllRows(
-                  //     checked,
-                  //     tableData.map((row) => row.id)
-                  //   )
-                  // }
-                />
+                <TableHeadCustom headLabel={TABLE_HEAD} rowCount={businesses.totalItems} />
 
                 <TableBody>
-                  {dataFiltered
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row) => (
-                      <UserTableRow
-                        key={row.id}
-                        row={row}
-                        // onSelectRow={() => onSelectRow(row.id)}
-                        onApprove={(icssId) => onApproveUser(row.id, icssId)}
-                        onDecline={() => {}}
-                        // onEditRow={() => handleEditRow(row.name)}
-                      />
-                    ))}
+                  {businesses.records.map((row) => (
+                    <DirectoryTableRow key={row.id} row={row} />
+                  ))}
 
                   {/* <TableEmptyRows
                     height={denseHeight}
                     emptyRows={emptyRows(page, rowsPerPage, tableData.length)}
                   /> */}
 
-                  <TableNoData isNotFound={isNotFound} />
+                  <TableNoData isNotFound={businesses.totalItems < 1} />
                 </TableBody>
               </Table>
             </Scrollbar>
           </TableContainer>
-
-          <TablePaginationCustom
-            count={dataFiltered.length}
-            page={page}
-            rowsPerPage={rowsPerPage}
-            onPageChange={onChangePage}
-            onRowsPerPageChange={onChangeRowsPerPage}
+          <Pagination
+            withDivider
+            sx={{ justifyContent: 'end' }}
+            totalPages={businesses.totalPages}
+            onChange={(num) => handleQuery({ page: num })}
+            currentPage={businesses.currentPage}
           />
         </Card>
       </Container>
@@ -223,39 +147,3 @@ export default function UserListPage() {
 }
 
 // ----------------------------------------------------------------------
-
-function applyFilter({
-  inputData,
-  comparator,
-  searchVal,
-  filterStatus,
-  filterRole,
-}: {
-  inputData: IUserAccountGeneral[];
-  comparator: (a: any, b: any) => number;
-  searchVal: string;
-  filterStatus: string;
-  filterRole: string;
-}) {
-  const stabilizedThis = inputData.map((el, index) => [el, index] as const);
-
-  stabilizedThis.sort((a, b) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) return order;
-    return a[1] - b[1];
-  });
-
-  inputData = stabilizedThis.map((el) => el[0]);
-
-  if (searchVal) {
-    inputData = inputData.filter(
-      (user) => user.fullName.toLowerCase().indexOf(searchVal.toLowerCase()) !== -1
-    );
-  }
-
-  if (filterStatus !== 'all') {
-    inputData = inputData.filter((user) => user.status === filterStatus);
-  }
-
-  return inputData;
-}

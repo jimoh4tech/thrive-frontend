@@ -60,7 +60,7 @@ type FormValuesProps = {
   bio: string;
 };
 
-export default function CreateBusinessProfile() {
+export default function BusinessProfile() {
   const { revalidateUser } = useAuthContext();
 
   // revalidateUser!();

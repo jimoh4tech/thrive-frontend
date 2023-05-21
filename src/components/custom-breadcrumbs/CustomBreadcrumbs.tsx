@@ -47,11 +47,11 @@ export default function CustomBreadcrumbs({
           )}
         </Box>
 
-        {!user?.platinumSub.length && user?.role.id < 3 && (
+        {/* {!user?.platinumSub.length && user?.role.id < 3 && (
           <Button variant="soft" startIcon={<Iconify icon="material-symbols:bolt-rounded" />}>
             Upgrade to Platinum
           </Button>
-        )}
+        )} */}
       </Stack>
 
       {/* MORE LINK */}

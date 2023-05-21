@@ -54,11 +54,11 @@ const navConfig = [
         path: PATH_DASHBOARD.businessMediaLibrary,
         icon: ICONS.folder,
       },
-      {
-        title: 'Collaboration tool',
-        path: PATH_DASHBOARD.collaborationTools,
-        icon: ICONS.calendar,
-      },
+      // {
+      //   title: 'Collaboration tool',
+      //   path: PATH_DASHBOARD.collaborationTools,
+      //   icon: ICONS.calendar,
+      // },
       {
         title: 'Business Box ',
         path: PATH_DASHBOARD.businessTemplateLibrary,
@@ -70,7 +70,7 @@ const navConfig = [
         icon: ICONS.ecommerce,
         children: [
           {
-            title: 'Bisinesses',
+            title: 'Businesses',
             // roles: ['admin'],
             path: PATH_DASHBOARD.networkingMarketplace.businesses,
           },

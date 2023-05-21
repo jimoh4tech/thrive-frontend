@@ -15,7 +15,7 @@ export default function Register() {
   return (
     <LoginLayout title="Access all the tools you need to boost your business">
       <Stack spacing={2} sx={{ mb: 5, position: 'relative' }}>
-        <Typography variant="h4">Get started with THRIVE.</Typography>
+        <Typography variant="h4">Get started</Typography>
 
         <Stack direction="row" spacing={0.5}>
           <Typography variant="body2"> Already have an account? </Typography>

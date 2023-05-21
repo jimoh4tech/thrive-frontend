@@ -22,7 +22,7 @@ export const NavItem = forwardRef<HTMLDivElement, NavItemDesktopProps>(
         ref={ref}
         disableRipple
         isOffset={isOffset}
-        subItem={subItem}
+        // subItem={subItem}
         active={active}
         open={open}
         {...other}
@@ -43,9 +43,9 @@ export const NavItem = forwardRef<HTMLDivElement, NavItemDesktopProps>(
     }
 
     // Has child
-    if (children) {
-      return renderContent;
-    }
+    // if (children) {
+    //   return renderContent;
+    // }
 
     // Default
     return (

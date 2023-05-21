@@ -1,23 +1,106 @@
 // next
-import Head from 'next/head';
-// auth
-import GuestGuard from '../auth/GuestGuard';
-// sections
-import Login from '../sections/auth/Login';
-// import Login from '../../sections/auth/LoginAuth0';
+// @mui
+import { Box, Button, Grid, Paper, Typography } from '@mui/material';
+// layouts
+import { Container, Stack } from '@mui/system';
+import Iconify from 'src/components/iconify/Iconify';
+import { puyb, sa } from 'src/constants/home';
+import OneTimeSignUp from 'src/sections/about/OneTimeSignUp';
+import Announcement from 'src/sections/home/Announcement';
+import LandingScreen from 'src/sections/home/LandingScreen';
+import MainLayout from '../layouts/main';
 
 // ----------------------------------------------------------------------
 
-export default function LoginPage() {
-  return (
-    <>
-      <Head>
-        <title> Login | ICSS Thrive</title>
-      </Head>
+HomePage.getLayout = (page: React.ReactElement) => (
+  <MainLayout metaTitle="Home" title={<LandingScreen />}>
+    {page}
+  </MainLayout>
+);
 
-      <GuestGuard>
-        <Login />
-      </GuestGuard>
-    </>
+// ----------------------------------------------------------------------
+
+export default function HomePage() {
+  return (
+    <Box
+      sx={{
+        overflow: 'hidden',
+        position: 'relative',
+        bgcolor: 'background.default',
+      }}
+    >
+      <Container sx={{ py: 6 }}>
+        {/* -------------- Power-Up Your Business -------------- */}
+        <Box>
+          <Typography variant="h2" textAlign="center">
+            one-stop digital support for entrepreneurs
+          </Typography>
+          <Grid
+            container
+            direction={{ md: 'row' }}
+            mt={1}
+            spacing={{ md: 4, xs: 2 }}
+            justifyContent="center"
+          >
+            {puyb.map((_, i) => (
+              <Grid item md={4} key={i}>
+                <Paper
+                  sx={{
+                    p: { md: 8, xs: 4 },
+                    width: 1,
+                    borderRadius: 1,
+                    overflow: 'hidden',
+                    position: 'relative',
+                    '&:hover': {
+                      boxShadow: (theme) => theme.customShadows.z20,
+                    },
+                  }}
+                >
+                  <Box sx={{ cursor: 'pointer' }} textAlign="center">
+                    <Iconify icon={_.icon} color="primary.main" width={50} />
+                    <Typography>{_.desc}</Typography>
+                  </Box>
+                </Paper>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+
+        {/* -------------- One-time Sign-up -------------- */}
+        <OneTimeSignUp />
+
+        {/* -------------- Advert -------------- */}
+        <Stack
+          sx={{
+            height: 400,
+            border: 5,
+            borderColor: 'primary.main',
+            justifyContent: 'center',
+            alignItems: 'center',
+            my: 6,
+          }}
+        >
+          <Typography variant="h2">YOUR ADVERT APPEARS HERE</Typography>
+        </Stack>
+      </Container>
+
+      <Box sx={{ bgcolor: '#f2f2f2' }}>
+        <Container sx={{ py: 6 }}>
+          <Stack spacing={6}>
+            <Typography variant="h2" textAlign="center">
+              Special Announcement
+            </Typography>
+
+            <Announcement posts={sa.posts} />
+
+            <Box textAlign="center">
+              <Button variant="contained" startIcon={<Iconify icon="mdi:tick-circle-outline" />}>
+                Read More
+              </Button>
+            </Box>
+          </Stack>
+        </Container>
+      </Box>
+    </Box>
   );
 }

@@ -3,6 +3,8 @@ import { Button, Card, CardHeader, Link, Stack, Typography } from '@mui/material
 import { styled } from '@mui/material/styles';
 import { IUserBusiness } from 'src/@types/business';
 import Iconify from 'src/components/iconify/Iconify';
+// @ts-ignore
+import { RWebShare } from 'react-web-share';
 // @types
 // components
 
@@ -28,7 +30,15 @@ export default function BusinesseAbout({
       <CardHeader
         title={`About ${name}`}
         action={
-          <Button startIcon={<Iconify icon="material-symbols:share-outline" />}>Share</Button>
+          <RWebShare
+            data={{
+              text: 'Web Share',
+              url: slug,
+              title: 'Website Url',
+            }}
+          >
+            <Button startIcon={<Iconify icon="material-symbols:share-outline" />}>Share</Button>
+          </RWebShare>
         }
       />
 

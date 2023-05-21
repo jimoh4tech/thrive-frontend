@@ -30,24 +30,6 @@ export default function FilePanel({
       <Stack flexGrow={1}>
         <Stack direction="row" alignItems="center" spacing={1} flexGrow={1}>
           <Typography variant="h6"> {title} </Typography>
-
-          <IconButton
-            size="small"
-            color="success"
-            onClick={onOpen}
-            sx={{
-              p: 0,
-              width: 24,
-              height: 24,
-              color: 'common.white',
-              bgcolor: 'success.main',
-              '&:hover': {
-                bgcolor: 'success.main',
-              },
-            }}
-          >
-            <Iconify icon="eva:plus-fill" />
-          </IconButton>
         </Stack>
 
         <Typography variant="body2" sx={{ color: 'text.disabled', mt: 0.5 }}>

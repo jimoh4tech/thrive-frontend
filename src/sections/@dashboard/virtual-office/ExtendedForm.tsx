@@ -79,6 +79,7 @@ export default function ExtendedForm() {
             Additional Services
           </Typography>
           <RHFTextField
+            disabled
             name="callForwarding"
             placeholder="Call Forwarding"
             // onChange={(event) =>
@@ -97,6 +98,7 @@ export default function ExtendedForm() {
             }}
           />
           <RHFTextField
+            disabled
             name="bulkDispatch"
             placeholder="Bulk Mail Dispatchg"
             // onChange={(event) =>
@@ -115,6 +117,7 @@ export default function ExtendedForm() {
             }}
           />
           <RHFTextField
+            disabled
             name="vistorHosting"
             placeholder="Visitor Hosting"
             // onChange={(event) =>
@@ -133,6 +136,7 @@ export default function ExtendedForm() {
             }}
           />
           <RHFTextField
+            disabled
             name="adminSupport"
             placeholder="Admin Support"
             // onChange={(event) =>

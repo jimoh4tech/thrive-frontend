@@ -5,7 +5,9 @@ export type IMedia = {
   isPlatinum: boolean;
   mediaUrl: string;
   format: string;
-  category: any;
+
+  metadata: { bytes: number };
+  category: { name: string };
 
   createdAt: string;
   updatedAt: string;

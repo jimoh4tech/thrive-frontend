@@ -28,7 +28,7 @@ export default function GeneralAppPage() {
   return (
     <>
       <Head>
-        <title> General: App | Minimal UI</title>
+        <title> General App | ICSS Thrive</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>

@@ -76,7 +76,7 @@ const LandingScreen = () => {
       <Grid item xs={12} lg={7}>
         <Carousel {...carouselSettings}>
           {[banner1, banner2, banner3, banner4].map((item, i) => (
-            <Box sx={{ position: 'relative', borderRadius: 1, overflow: 'hidden' }}>
+            <Box key={i} sx={{ position: 'relative', borderRadius: 1, overflow: 'hidden' }}>
               <Image alt="ICSS" src={item.src} />
             </Box>
           ))}

@@ -175,7 +175,7 @@ export default function Footer() {
               <Grid key={_.src} item xl={2} md={3} sm={4} xs={6}>
                 <Image
                   alt="Logo"
-                  style={{ objectFit: 'contain' }}
+                  style={{ objectFit: 'contain', width: 'auto' }}
                   height={100}
                   width={300}
                   src={_.src}
@@ -233,20 +233,14 @@ export default function Footer() {
           <Grid item xs={12} md={7}>
             <Grid container spacing={5} justifyContent="space-between">
               {LINKS.map((list, i) => (
-                <Grid item xs={6} key={i} spacing={2} textAlign="left">
+                <Grid item xs={6} key={i} textAlign="left">
                   <Typography color="primary.main" component="div" variant="overline">
                     {list.headline}
                   </Typography>
 
                   {list.children.map((link, _i) => (
-                    <Box>
-                      <Link
-                        key={_i}
-                        component={NextLink}
-                        href={link.href}
-                        color="inherit"
-                        variant="body2"
-                      >
+                    <Box key={_i}>
+                      <Link component={NextLink} href={link.href} color="inherit" variant="body2">
                         {link.name}
                       </Link>
                     </Box>

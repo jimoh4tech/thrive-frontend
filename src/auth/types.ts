@@ -25,7 +25,6 @@ export type AuthStateType = {
 
 export type UserCreate = {
   email: string;
-  dob: string;
   phone: string;
   password: string;
   firstName: string;

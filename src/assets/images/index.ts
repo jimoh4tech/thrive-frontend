@@ -7,6 +7,11 @@ export { default as MSME1 } from './ecosystem/MSME1.jpg';
 export { default as MSME2 } from './ecosystem/MSME2.jpg';
 export { default as MSME3 } from './ecosystem/MSME3.png';
 
+// Tfc
+export { default as tfc1 } from './tfc/tfc1.jpg';
+export { default as tfc2 } from './tfc/tfc2.jpg';
+export { default as tfc3 } from './tfc/tfc3.jpg';
+
 // About Page
 export { default as aboutBg } from './aboutBg.png';
 

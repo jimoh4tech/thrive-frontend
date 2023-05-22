@@ -1,23 +1,20 @@
-import { paramCase } from 'change-case';
 // next
 import NextLink from 'next/link';
 // @mui
+import { Box, Card, CardContent, Link, Stack, Typography } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
-import { Box, Card, Avatar, Typography, CardContent, Stack, Link } from '@mui/material';
 // routes
-import { PATH_DASHBOARD } from '../../routes/paths';
 // hooks
 import useResponsive from '../../hooks/useResponsive';
 // utils
-import { fDate } from '../../utils/formatTime';
 import { fShortenNumber } from '../../utils/formatNumber';
+import { fDate } from '../../utils/formatTime';
 // @types
 import { IBlogPost } from '../../@types/blog';
 // components
-import Image from '../../components/image';
 import Iconify from '../../components/iconify';
+import Image from '../../components/image';
 import TextMaxLine from '../../components/text-max-line';
-import SvgColor from '../../components/svg-color';
 
 // ----------------------------------------------------------------------
 
@@ -41,6 +38,26 @@ export default function BlogPostCard({ post, index }: Props) {
   const isDesktop = useResponsive('up', 'md');
 
   const { image, title, like, comment, createdAt } = post;
+
+  const latestPost = index === 0 || index === 1 || index === 2;
+
+  if (isDesktop && latestPost) {
+    return (
+      <Card>
+        <PostContent
+          title={title}
+          like={like}
+          comment={comment}
+          createdAt={createdAt}
+          index={index}
+        />
+
+        <StyledOverlay />
+
+        <Image alt="cover" src={image} sx={{ height: 360 }} />
+      </Card>
+    );
+  }
 
   return (
     <Card>

@@ -1,10 +1,9 @@
 // @mui
 import { Box, Grid, Typography } from '@mui/material';
 // layouts
-import { Container, bgcolor } from '@mui/system';
-import modules, { intro } from 'src/constants/modules';
+import { Container } from '@mui/system';
 import Image from 'src/components/image/Image';
-import Label from 'src/components/label/Label';
+import modules, { intro } from 'src/constants/modules';
 import MainLayout from '../layouts/main';
 // components
 
@@ -34,11 +33,8 @@ export default function HomePage() {
       {/* @ts-ignore */}
       {Object.keys(modules).map((key: keyof typeof modules, i) => {
         const module = modules[key];
-
         const isOdd = (i + 1) % 2;
-
         let bgColor;
-
         if (i === 0 || i === 3) bgColor = '#f7f7f7';
         if (i === 2) bgColor = '#333';
 

@@ -1,6 +1,9 @@
 // @mui
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 // layouts
+import { Container, Stack } from '@mui/system';
+import Image from 'src/components/image/Image';
+import { section1, section2 } from 'src/constants/tfc';
 import MainLayout from '../layouts/main';
 // components
 
@@ -21,7 +24,29 @@ export default function HomePage() {
         bgcolor: 'background.default',
       }}
     >
-      About Us
+      <Container sx={{ py: 6 }}>
+        <Stack spacing={3}>
+          <Image src={section1.image.src} />
+
+          <Typography component="div" dangerouslySetInnerHTML={{ __html: section1.text }} />
+        </Stack>
+      </Container>
+
+      <Box bgcolor="#f7f7f7" py={6}>
+        <Stack spacing={3}>
+          <Container>
+            <Typography textAlign="center" variant="h3">
+              {section2.title}
+            </Typography>
+          </Container>
+
+          <Stack direction="row" spacing={1} justifyContent="center">
+            {section2.image.map((_, i) => (
+              <Image key={i} src={_.src} />
+            ))}
+          </Stack>
+        </Stack>
+      </Box>
     </Box>
   );
 }

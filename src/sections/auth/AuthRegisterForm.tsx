@@ -39,7 +39,6 @@ type FormValuesProps = {
   confirmPassword: string;
   firstName: string;
   lastName: string;
-  dob: string;
   afterSubmit?: string;
 };
 
@@ -47,8 +46,9 @@ export default function AuthRegisterForm() {
   const { register } = useAuthContext();
 
   const [showPassword, setShowPassword] = useState(false);
-  const [openVerify, setOenVerify] = useState(false);
+  const [openVerify, setOpenVerify] = useState(false);
   const [verifyToken, setVerifyToken] = useState('');
+  const [emailVerifiedToken, setEmailVerifiedToken] = useState<string | null>(null);
   const [userData, setUserData] = useState<FormValuesProps | null>(null);
 
   const RegisterSchema = Yup.object().shape({
@@ -88,13 +88,17 @@ export default function AuthRegisterForm() {
   } = methods;
 
   const onSubmit = async (data: FormValuesProps) => {
+    setUserData(data);
+
     try {
-      setUserData(data);
-      const res = await requestVerifyEmail(data.email);
+      if (emailVerifiedToken) await registerUser(emailVerifiedToken);
+      else {
+        const res = await requestVerifyEmail(data.email);
 
-      setVerifyToken(res.verifyToken);
+        setVerifyToken(res.verifyToken);
 
-      setOenVerify(true);
+        setOpenVerify(true);
+      }
     } catch (error) {
       console.error(error);
       setError('afterSubmit', {
@@ -102,16 +106,17 @@ export default function AuthRegisterForm() {
         message: error.message || error,
       });
     }
+    if (emailVerifiedToken) reset(userData!, { keepValues: true });
   };
 
-  const registerUser = async (emailVerifiedToken: string) => {
-    setOenVerify(false);
+  const registerUser = async (verifiedTooken: string) => {
+    setOpenVerify(false);
+    setEmailVerifiedToken(verifiedTooken);
     try {
       if (userData) {
         await register({
           ...userData,
-          emailVerifiedToken,
-          dob: moment(userData.dob).format('yyyy-MM-DD'),
+          emailVerifiedToken: verifiedTooken,
         });
       }
       reset();

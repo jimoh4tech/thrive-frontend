@@ -1,8 +1,9 @@
 // @mui
-import { ChatBubble } from '@mui/icons-material';
+import { ChatBubble, ViewTimeline, Visibility } from '@mui/icons-material';
 import { Avatar, Box, Button, Card, IconButton, Stack, Typography } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
 import { IUserBusiness } from 'src/@types/business';
+import { useAuthContext } from 'src/auth/useAuthContext';
 import Image from 'src/components/image/Image';
 import SvgColor from 'src/components/svg-color/SvgColor';
 // utils
@@ -29,7 +30,9 @@ type Props = {
 };
 
 export default function BusinesCard({ business }: Props) {
-  const { name, cover, industry, logo } = business;
+  const { user } = useAuthContext();
+
+  const { name, cover, industry, logo, slug } = business;
 
   return (
     <Card sx={{ textAlign: 'center' }}>
@@ -78,9 +81,15 @@ export default function BusinesCard({ business }: Props) {
       </Typography>
 
       <Stack direction="row" alignItems="center" justifyContent="center" sx={{ mt: 1, mb: 3 }}>
-        <Button startIcon={<ChatBubble />} variant="outlined">
-          Chat
-        </Button>
+        {user && user.isApproved ? (
+          <Button startIcon={<ChatBubble />} variant="outlined">
+            Chat
+          </Button>
+        ) : (
+          <Button href={slug} startIcon={<Visibility />} variant="outlined">
+            View Profile
+          </Button>
+        )}
       </Stack>
     </Card>
   );

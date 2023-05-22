@@ -27,8 +27,9 @@ const navConfig = [
         items: [
           { title: 'MSME Development', path: PATH_PAGE.ecosystem },
           { title: 'ICSS TFC', path: PATH_PAGE.icssTfc },
-          { title: 'MSME Market', path: PATH_PAGE.marketplace },
           { title: 'ICSS Implementing Agencies', path: PATH_PAGE.icssConsortiums },
+          { title: 'Announcements', path: PATH_PAGE.announcement },
+          { title: 'MSME Market', path: PATH_PAGE.marketplace },
         ],
       },
     ],

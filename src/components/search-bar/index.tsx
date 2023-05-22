@@ -20,7 +20,11 @@ interface Props {
   onClearFilter: VoidFunction;
   searching: boolean;
   withDateFilter?: boolean;
-  filterOptions?: { name: string; options: { label: string; value: string | number }[] }[];
+  filterOptions?: {
+    label?: string;
+    name: string;
+    options: { label: string; value: string | number }[];
+  }[];
   onChangeOption?: (name: string, value: any) => void;
 }
 
@@ -112,7 +116,7 @@ const SearchBar = ({
       {filterOptions?.length && onChangeOption
         ? filterOptions.map((data) => (
             <FormControl size="small" sx={{ minWidth: 150 }} key={`${data.name}`}>
-              <InputLabel id="demo-select-small-label">{data.name}</InputLabel>
+              <InputLabel id="demo-select-small-label">{data.label || data.name}</InputLabel>
               <Select
                 labelId="demo-select-small-label"
                 id="demo-select-small"

@@ -22,8 +22,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - run: npm ci
-      - run: npm run build
+      - run: sudo npm i
+      - run: sudo npm run build
+      - run: sudo pm2 startOrRestart ecosystem.config.js --env prod
 
       - name: rsync deployments
         uses: burnett01/rsync-deployments@5.1

@@ -7,6 +7,7 @@ import { section1, section2 } from 'src/constants/tfc';
 import { consortiums } from 'src/constants/consortiums';
 import Iconify from 'src/components/iconify/Iconify';
 import { ArrowRight } from '@mui/icons-material';
+import { ehub } from 'src/assets/images';
 import MainLayout from '../layouts/main';
 // components
 
@@ -29,6 +30,34 @@ export default function ICSSAgencies() {
     >
       <Container sx={{ py: 6 }}>
         <Stack spacing={3}>
+          <Paper
+            sx={{
+              p: 4,
+              py: 8,
+              border: '0.5px solid #ccc',
+              borderRadius: 1,
+              position: 'relative',
+              '&:hover': {
+                boxShadow: (theme) => theme.customShadows.z20,
+              },
+              height: '100%',
+            }}
+          >
+            <Image src={ehub.src} maxWidth={100} />
+            <Typography mt={2} variant="h4">
+              Enterprise Hubs
+            </Typography>
+            <Typography component="div" dangerouslySetInnerHTML={{ __html: `<p></p>` }} />
+            <Button
+              href="https://enterprisehubs.com"
+              size="large"
+              color="inherit"
+              variant="outlined"
+              endIcon={<ArrowRight />}
+            >
+              Visit Website
+            </Button>
+          </Paper>
           {consortiums.map((_, i) => (
             <Paper
               sx={{

@@ -35,6 +35,7 @@ import { Provider as ReduxProvider } from 'react-redux';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 // redux
+// @ts-ignore
 import TawkMessengerReact from '@tawk.to/tawk-messenger-react';
 import { store } from '../redux/store';
 // utils

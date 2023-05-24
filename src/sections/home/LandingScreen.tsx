@@ -6,6 +6,7 @@ import Carousel, { CarouselDots } from 'src/components/carousel';
 // components
 import { banner1, banner2, banner3, banner4 } from 'src/assets/images';
 import Iconify from 'src/components/iconify/Iconify';
+import Link from 'next/link';
 import Image from '../../components/image';
 
 const LandingScreen = () => {
@@ -47,7 +48,12 @@ const LandingScreen = () => {
             development program certificate in Nigeria. One-time sign-up. Easy sign-ins.
           </Typography>
           <Box>
-            <Button size="large" startIcon={<Iconify icon="fa:send-o" />} variant="contained">
+            <Button
+              LinkComponent={Link}
+              size="large"
+              startIcon={<Iconify icon="fa:send-o" />}
+              variant="contained"
+            >
               Get Started
             </Button>
           </Box>

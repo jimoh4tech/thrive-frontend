@@ -8,6 +8,7 @@ import { puyb, sa } from 'src/constants/home';
 import OneTimeSignUp from 'src/sections/about/OneTimeSignUp';
 import Announcement from 'src/sections/home/Announcement';
 import LandingScreen from 'src/sections/home/LandingScreen';
+import Link from 'next/link';
 import MainLayout from '../layouts/main';
 
 // ----------------------------------------------------------------------
@@ -84,6 +85,7 @@ export default function HomePage() {
         </Stack>
       </Container>
 
+      {/* -------------- Announcements -------------- */}
       <Box sx={{ bgcolor: '#f2f2f2' }}>
         <Container sx={{ py: 6 }}>
           <Stack spacing={6}>
@@ -94,7 +96,12 @@ export default function HomePage() {
             <Announcement posts={sa.posts} />
 
             <Box textAlign="center">
-              <Button variant="contained" startIcon={<Iconify icon="mdi:tick-circle-outline" />}>
+              <Button
+                LinkComponent={Link}
+                href="/announcements"
+                variant="contained"
+                startIcon={<Iconify icon="mdi:tick-circle-outline" />}
+              >
                 Read More
               </Button>
             </Box>

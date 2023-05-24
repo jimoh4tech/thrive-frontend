@@ -2,9 +2,9 @@
 import { Box, Button, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 // @types
-import { Stack, useTheme } from '@mui/system';
+import { Container, Stack, useTheme } from '@mui/system';
 import { useSnackbar } from 'notistack';
-import { useCallback, useState } from 'react';
+import { Fragment, useCallback, useState } from 'react';
 import ReactLoading from 'react-loading';
 import { IUserBusiness } from 'src/@types/business';
 import { updater } from 'src/actions';
@@ -12,6 +12,8 @@ import Iconify from 'src/components/iconify/Iconify';
 import { UploadAvatar } from 'src/components/upload';
 import UploadButton from 'src/components/upload-button';
 import { uploadSingle } from 'src/utils/cloudinary';
+import { useAuthContext } from 'src/auth/useAuthContext';
+import { CustomAvatar } from 'src/components/custom-avatar';
 import { bgBlur } from '../../../utils/cssStyles';
 // auth
 // components
@@ -19,31 +21,18 @@ import Image from '../../../components/image';
 
 // ----------------------------------------------------------------------
 
-const StyledRoot = styled('div')(({ theme }) => ({
-  '&:before': {
-    ...bgBlur({
-      color: theme.palette.primary.dark,
-      blur: 0.4,
-    }),
-    top: 0,
-    zIndex: 9,
-    content: "''",
-    width: '100%',
-    height: '100%',
-    position: 'absolute',
-  },
-}));
-
-const StyledInfo = styled('div')(({ theme }) => ({}));
-
 // ----------------------------------------------------------------------
 
 export default function BusinessCover({
   business: { name, industry, cover, logo },
+  isPublic,
 }: {
   business: IUserBusiness;
+  isPublic?: boolean;
 }) {
   const theme = useTheme();
+
+  const { user } = useAuthContext();
 
   const [newLogo, setNewLogo] = useState<File | string | null>(null);
   const [newCover, setNewCover] = useState<string | null>(null);
@@ -75,6 +64,8 @@ export default function BusinessCover({
     [enqueueSnackbar]
   );
 
+  const IBox = isPublic ? Container : Fragment;
+
   return (
     <>
       <Box p={4} height="100%">
@@ -103,81 +94,83 @@ export default function BusinessCover({
           }}
         />
 
-        <Stack
-          direction={{ md: 'row' }}
-          justifyContent="space-between"
-          alignItems="center"
-          mt="auto"
-          height="100%"
-        >
-          <Stack direction={{ md: 'row' }} alignItems="center">
-            {/* <CustomAvatar
-          // src={user?.avatarUrl}
-          // alt={user?.fullName}
-          name={name}
-          sx={{
-            mx: 'auto',
-            borderWidth: 2,
-            borderStyle: 'solid',
-            borderColor: 'common.white',
-            width: { xs: 80, md: 128 },
-            height: { xs: 80, md: 128 },
-            fontWeight: 700,
-            fontSize: 60,
-          }}
-        >
-          <Fab variant="soft" sx={{ position: 'absolute' }}>
-            <Iconify icon="ph:camera-rotate-light" width={24} />
-          </Fab>
-        </CustomAvatar> */}
-
-            <UploadAvatar
-              file={newLogo || logo}
-              onDrop={(_) => handleDrop(_, 'logo')}
-              accept={{
-                'image/jpeg': [],
-                'image/png': [],
-              }}
-              uploadText="Logo"
-            />
-            <Box
-              sx={{
-                color: 'common.white',
-                textAlign: { xs: 'center', md: 'left' },
-              }}
-            >
-              <Typography variant="h4" sx={{ opacity: 0.72 }}>
-                {name}
-              </Typography>
-
-              <Typography sx={{ opacity: 0.72 }}>{industry}</Typography>
-            </Box>
-          </Stack>
-          <Box>
-            <UploadButton
-              onDrop={(_) => handleDrop(_, 'cover')}
-              accept={{
-                'image/jpeg': [],
-                'image/png': [],
-              }}
-              render={
-                <Button
-                  sx={{
-                    color: '#fff',
+        <IBox>
+          <Stack
+            direction={{ md: 'row' }}
+            justifyContent="space-between"
+            alignItems="center"
+            mt="auto"
+            height="100%"
+          >
+            <Stack spacing={2} direction={{ md: 'row' }} alignItems="center">
+              {user ? (
+                <UploadAvatar
+                  file={newLogo || logo}
+                  onDrop={(_) => handleDrop(_, 'logo')}
+                  accept={{
+                    'image/jpeg': [],
+                    'image/png': [],
                   }}
-                  variant="soft"
-                  color="inherit"
-                  startIcon={<Iconify icon="ph:camera-rotate-light" width={24} />}
-                >
-                  Edit Cover Picture
-                </Button>
-              }
-            />
-          </Box>
-        </Stack>
+                  uploadText="Logo"
+                />
+              ) : (
+                <CustomAvatar
+                  src={logo}
+                  alt={name}
+                  name={name}
+                  sx={{
+                    mx: 'auto',
+                    borderWidth: 1,
+                    borderStyle: 'solid',
+                    borderColor: 'common.white',
+                    width: { xs: 80, md: 128 },
+                    height: { xs: 80, md: 128 },
+                    fontWeight: 700,
+                    fontSize: 60,
+                  }}
+                />
+              )}
+              <Box
+                sx={{
+                  color: 'common.white',
+                  textAlign: { xs: 'center', md: 'left' },
+                }}
+              >
+                <Typography variant="h4" sx={{ opacity: 0.72 }}>
+                  {name}
+                </Typography>
+
+                <Typography sx={{ opacity: 0.72 }}>{industry}</Typography>
+              </Box>
+            </Stack>
+            {user && (
+              <Box>
+                <UploadButton
+                  onDrop={(_) => handleDrop(_, 'cover')}
+                  accept={{
+                    'image/jpeg': [],
+                    'image/png': [],
+                  }}
+                  render={
+                    <Button
+                      sx={{
+                        color: '#fff',
+                      }}
+                      variant="soft"
+                      color="inherit"
+                      startIcon={<Iconify icon="ph:camera-rotate-light" width={24} />}
+                    >
+                      Edit Cover Picture
+                    </Button>
+                  }
+                />
+              </Box>
+            )}
+          </Stack>
+        </IBox>
       </Box>
 
-      {!loading && <ReactLoading type="spokes" color="grey" width={25} />}
+      {loading && <ReactLoading type="spokes" color="grey" width={25} />}
     </>
   );
 }

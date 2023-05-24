@@ -3,6 +3,9 @@ import { AppBar, Box, BoxProps, Button, Container, Toolbar } from '@mui/material
 import { useTheme } from '@mui/material/styles';
 // hooks
 import { LogoFull } from 'src/components/logo/Logo';
+import { useAuthContext } from 'src/auth/useAuthContext';
+import { SupervisedUserCircle } from '@mui/icons-material';
+import Link from 'next/link';
 import useOffSetTop from '../../hooks/useOffSetTop';
 import useResponsive from '../../hooks/useResponsive';
 // utils
@@ -20,6 +23,7 @@ import NavMobile from './nav/mobile';
 
 export default function Header() {
   const theme = useTheme();
+  const { user } = useAuthContext();
 
   const isDesktop = useResponsive('up', 'md');
 
@@ -53,9 +57,20 @@ export default function Header() {
 
           {isDesktop && <NavDesktop isOffset={isOffset} data={navConfig} />}
 
-          <Button variant="contained" href="/login">
-            Register / Login
-          </Button>
+          {user ? (
+            <Button
+              LinkComponent={Link}
+              href="/dashboard"
+              variant="soft"
+              startIcon={<SupervisedUserCircle />}
+            >
+              My Account
+            </Button>
+          ) : (
+            <Button LinkComponent={Link} variant="contained" href="/login">
+              Register / Login
+            </Button>
+          )}
 
           {!isDesktop && <NavMobile isOffset={isOffset} data={navConfig} />}
         </Container>

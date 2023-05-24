@@ -171,13 +171,21 @@ export default function Footer() {
               capstone,
               kb,
               leverage,
-            ].map((_) => (
-              <Grid key={_.src} item xl={2} md={3} sm={4} xs={6}>
+            ].map((_, i) => (
+              <Grid
+                key={_.src}
+                item
+                xl={i === 0 ? 3 : 2}
+                md={i === 0 ? 4 : 3}
+                sm={i === 0 ? 6 : 4}
+                xs={6}
+              >
+                {i === 0 && <Typography variant="h5">Brought to you by</Typography>}
                 <Image
                   alt="Logo"
                   style={{ objectFit: 'contain', width: 'auto' }}
-                  height={100}
-                  width={300}
+                  height={i === 0 ? 150 : 100}
+                  width={400}
                   src={_.src}
                 />
               </Grid>

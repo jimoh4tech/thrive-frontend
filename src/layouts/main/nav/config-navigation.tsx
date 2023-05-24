@@ -20,7 +20,7 @@ const navConfig = [
   },
   {
     title: 'Ecosystem',
-    path: PATH_PAGE.ecosystem, 
+    path: PATH_PAGE.ecosystem,
     children: [
       {
         subheader: 'Other',

@@ -1,5 +1,6 @@
 import { Button, Grid, Typography } from '@mui/material';
 import { Box, Stack } from '@mui/system';
+import Link from 'next/link';
 import React from 'react';
 import Iconify from 'src/components/iconify/Iconify';
 import Image from 'src/components/image/Image';
@@ -31,7 +32,12 @@ const OneTimeSignUp = () => (
         <Typography component="div" dangerouslySetInnerHTML={{ __html: otsu.desc }} />
 
         <Box>
-          <Button variant="contained" startIcon={<Iconify icon="mdi:tick-circle-outline" />}>
+          <Button
+            LinkComponent={Link}
+            href="/about-us"
+            variant="contained"
+            startIcon={<Iconify icon="mdi:tick-circle-outline" />}
+          >
             Learn More
           </Button>
         </Box>

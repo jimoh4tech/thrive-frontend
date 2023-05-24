@@ -2,6 +2,7 @@
 import { ChatBubble, ViewTimeline, Visibility } from '@mui/icons-material';
 import { Avatar, Box, Button, Card, IconButton, Stack, Typography } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
+import Link from 'next/link';
 import { IUserBusiness } from 'src/@types/business';
 import { useAuthContext } from 'src/auth/useAuthContext';
 import Image from 'src/components/image/Image';
@@ -82,11 +83,16 @@ export default function BusinesCard({ business }: Props) {
 
       <Stack direction="row" alignItems="center" justifyContent="center" sx={{ mt: 1, mb: 3 }}>
         {user && user.isApproved ? (
-          <Button startIcon={<ChatBubble />} variant="outlined">
+          <Button
+            LinkComponent={Link}
+            href="/dashbaord/networking-marketplace/chat"
+            startIcon={<ChatBubble />}
+            variant="outlined"
+          >
             Chat
           </Button>
         ) : (
-          <Button href={slug} startIcon={<Visibility />} variant="outlined">
+          <Button LinkComponent={Link} href={slug} startIcon={<Visibility />} variant="outlined">
             View Profile
           </Button>
         )}

@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 // @mui
 import { List, Drawer, IconButton } from '@mui/material';
 // config
+import { LogoFull } from 'src/components/logo/Logo';
 import { NAV } from '../../../../config-global';
 // components
 import Logo from '../../../../components/logo';
@@ -60,7 +61,7 @@ export default function NavMobile({ isOffset, data }: NavProps) {
         }}
       >
         <Scrollbar>
-          <Logo sx={{ mx: 2.5, my: 3 }} />
+          <LogoFull sx={{ mx: 2.5, my: 3, width: 200, height: 'auto' }} />
 
           <List component="nav" disablePadding>
             {data.map((link) => (

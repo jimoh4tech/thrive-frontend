@@ -4,7 +4,7 @@ import { Box, Button, Paper, Typography } from '@mui/material';
 import { Container, Stack } from '@mui/system';
 import Image from 'src/components/image/Image';
 import { section1, section2 } from 'src/constants/tfc';
-import { consortiums } from 'src/constants/consortiums';
+import { consortiums, enterpriseHub } from 'src/constants/consortiums';
 import Iconify from 'src/components/iconify/Iconify';
 import { ArrowRight } from '@mui/icons-material';
 import { ehub } from 'src/assets/images';
@@ -43,13 +43,13 @@ export default function ICSSAgencies() {
               height: '100%',
             }}
           >
-            <Image src={ehub.src} maxWidth={100} />
+            <Image src={enterpriseHub.logo.src} maxWidth={200} />
             <Typography mt={2} variant="h4">
-              Enterprise Hubs
+              {enterpriseHub.title}
             </Typography>
-            <Typography component="div" dangerouslySetInnerHTML={{ __html: `<p></p>` }} />
+            <Typography component="div" dangerouslySetInnerHTML={{ __html: enterpriseHub.text }} />
             <Button
-              href="https://enterprisehubs.com"
+              href={enterpriseHub.link}
               size="large"
               color="inherit"
               variant="outlined"
@@ -58,36 +58,44 @@ export default function ICSSAgencies() {
               Visit Website
             </Button>
           </Paper>
-          {consortiums.map((_, i) => (
-            <Paper
-              sx={{
-                p: 4,
-                py: 8,
-                border: '0.5px solid #ccc',
-                borderRadius: 1,
-                position: 'relative',
-                '&:hover': {
-                  boxShadow: (theme) => theme.customShadows.z20,
-                },
-                height: '100%',
-              }}
-            >
-              <Image src={_.logo.src} maxWidth={100} />
-              <Typography mt={2} variant="h4">
-                {_.title}
-              </Typography>
-              <Typography component="div" dangerouslySetInnerHTML={{ __html: _.text }} />
-              <Button
-                href={_.link}
-                size="large"
-                color="inherit"
-                variant="outlined"
-                endIcon={<ArrowRight />}
+          {consortiums
+            .sort((a, b) => {
+              const _a = a.title.toUpperCase();
+              const _b = b.title.toUpperCase();
+              // @ts-ignore
+              return _a < _b ? -1 : _a > _b ? 1 : 0;
+            })
+            .map((_, i) => (
+              <Paper
+                key={i}
+                sx={{
+                  p: 4,
+                  py: 8,
+                  border: '0.5px solid #ccc',
+                  borderRadius: 1,
+                  position: 'relative',
+                  '&:hover': {
+                    boxShadow: (theme) => theme.customShadows.z20,
+                  },
+                  height: '100%',
+                }}
               >
-                Visit Website
-              </Button>
-            </Paper>
-          ))}
+                <Image src={_.logo.src} maxWidth={_.logo.width > _.logo.height * 1.5 ? 200 : 100} />
+                <Typography mt={2} variant="h4">
+                  {_.title}
+                </Typography>
+                <Typography component="div" dangerouslySetInnerHTML={{ __html: _.text }} />
+                <Button
+                  href={_.link}
+                  size="large"
+                  color="inherit"
+                  variant="outlined"
+                  endIcon={<ArrowRight />}
+                >
+                  Visit Website
+                </Button>
+              </Paper>
+            ))}
         </Stack>
       </Container>
     </Box>

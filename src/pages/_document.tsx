@@ -23,9 +23,9 @@ export default class MyDocument extends Document {
           <meta name="theme-color" content={palette('light').primary.main} />
 
           {/* Favicon */}
-          <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
-          <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
-          <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+          <link rel="apple-touch-icon" sizes="180x180" href="/favicon/logo.png" />
+          <link rel="icon" type="image/png" sizes="32x32" href="/favicon/logo.png" />
+          <link rel="icon" type="image/png" sizes="16x16" href="/favicon/logo.png" />
 
           {/* Emotion */}
           <meta name="emotion-insertion-point" content="" />
@@ -34,10 +34,10 @@ export default class MyDocument extends Document {
           {/* Meta */}
           <meta
             name="description"
-            content="The starting point for your next project with ICSS Thrive Kit, built on the newest version of Material-UI ©, ready to be customized to your style"
+            content="A one-stop digital support center for growing businesses with ICSS entrepreneurship development program certificate in Nigeria"
           />
-          <meta name="keywords" content="react,material,kit,application,dashboard,admin,template" />
-          <meta name="author" content="ICSS Thrive Kit" />
+          <meta name="keywords" content="ICSS,Thrive,msme,enterpricsehubs" />
+          <meta name="author" content="Cybertech Digitals" />
         </Head>
 
         <body>

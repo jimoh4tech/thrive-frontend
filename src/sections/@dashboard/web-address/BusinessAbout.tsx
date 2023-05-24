@@ -16,6 +16,7 @@ const StyledIcon = styled(Iconify)(({ theme }) => ({
   marginTop: 1,
   flexShrink: 0,
   marginRight: theme.spacing(2),
+  color: theme.palette.primary.main,
 }));
 
 // ----------------------------------------------------------------------

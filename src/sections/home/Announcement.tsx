@@ -54,8 +54,8 @@ const Announcement = ({ posts }: Props) => {
     carouselRef.current?.slickNext();
   };
   return (
-    <Grid container direction="row" alignItems="center">
-      <Grid item sm={1}>
+    <Grid container alignItems="center" justifyContent="space-between">
+      <Grid item xs={12} sm={1}>
         <Button
           onClick={handlePrev}
           variant="soft"
@@ -68,17 +68,17 @@ const Announcement = ({ posts }: Props) => {
         <Carousel ref={carouselRef} {...carouselSettings}>
           {posts.map((item, i) => (
             <Box p={1} key={i}>
-              <BlogPostCard key={item.id} post={item} />
+              <BlogPostCard post={item} />
             </Box>
           ))}
         </Carousel>
       </Grid>
 
-      <Grid item sm={1} textAlign="right">
+      <Grid item xs={12} sm={1}>
         <Button
           onClick={handleNext}
           variant="soft"
-          sx={{ bgcolor: '#fff', display: { xs: 'none', md: 'block' } }}
+          sx={{ bgcolor: '#fff', display: { xs: 'none', md: 'block' }, ml: 'auto' }}
           children={<ChevronRight fontSize="large" />}
         />
       </Grid>

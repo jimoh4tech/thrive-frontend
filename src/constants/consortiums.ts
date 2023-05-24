@@ -1,5 +1,6 @@
 import {
   dofoll,
+  ehub,
   giniushub,
   hbf,
   kalros,
@@ -10,6 +11,14 @@ import {
   viisaus,
   weboh,
 } from 'src/assets/images';
+
+export const enterpriseHub = {
+  link: 'http://valuecon.com.ng',
+  title: ' Enterprise Hub',
+  logo: ehub,
+  text: `<p><Enterprise Hubs is an entrepreneurship resource service focused on providing sustainable digital and physical ecosystems for entrepreneurs to thrive.  Their model includes shared coworking facilities in urban centers, virtual marketplaces, digitally enabled back-office services offered on pay as you need basis, and, ultimately, suburban venture villages. </p><p>
+  Since 2019, Enterprise Hubs has operated entrepreneurship resource centers in Victoria Island, Lagos and in Tarauni GRA Kano, and Asokoro, Abuja. These centers which also offer coworking facilities for SMEs, run a periodic free capacity building event Ventures Day during which accomplished entrepreneurs speaks a on a topic critical to entrepreneurship success, share experiences with and mentor budding entrepreneurs. The sessions also feature peer exchanges, pitching and product presentation. Over the last three years, and despite the Covid-19 pandemic, Enterprise Hubs has hosted hybrid 12 Ventures Day sessions, with over 2000 attendees, supported over 300 ventures, and served over 1000 entrepreneurs, mostly on subsidized rates; such services include physical facilities, virtual offices, downloadable media, training, back office professional services on pay as you go basis, team building sessions and mentoring./p>`,
+};
 
 export const consortiums = [
   {

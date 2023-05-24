@@ -25,7 +25,7 @@ const VerifyEmail = ({
   email: string;
   verifyToken: string;
   onClose?: VoidFunction;
-  cb?: (verifyToken: string) => void;
+  cb?: (emailVerifiedToken: string) => void;
 }) => {
   const { enqueueSnackbar } = useSnackbar();
 

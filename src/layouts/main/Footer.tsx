@@ -155,9 +155,19 @@ export default function Footer() {
             </Typography>
           </m.div>
 
-          <Grid container spacing={10} justifyContent="center" mt={2}>
+          <Stack direction="row" spacing={3} justifyContent="center" alignItems="center" mt={2}>
+            <Typography variant="h3">Brought to you by</Typography>
+            <Image
+              alt="Logo"
+              style={{ objectFit: 'contain', width: 'auto' }}
+              height={150}
+              width={400}
+              src={ehub.src}
+            />
+          </Stack>
+
+          <Grid container spacing={10} justifyContent="center" gridTemplateColumns={10}>
             {[
-              ehub,
               valucon,
               weboh,
               hbf,
@@ -172,19 +182,11 @@ export default function Footer() {
               kb,
               leverage,
             ].map((_, i) => (
-              <Grid
-                key={_.src}
-                item
-                xl={i === 0 ? 3 : 2}
-                md={i === 0 ? 4 : 3}
-                sm={i === 0 ? 6 : 4}
-                xs={6}
-              >
-                {i === 0 && <Typography variant="h5">Brought to you by</Typography>}
+              <Grid key={_.src} item xl={2} xs={5}>
                 <Image
                   alt="Logo"
                   style={{ objectFit: 'contain', width: 'auto' }}
-                  height={i === 0 ? 150 : 100}
+                  height={100}
                   width={400}
                   src={_.src}
                 />

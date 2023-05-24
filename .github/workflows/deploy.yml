@@ -24,7 +24,7 @@ jobs:
 
       - run: sudo npm i
       - run: sudo npm run build
-      - run: sudo pm2 restart frontend
+      # - run: sudo pm2 restart frontend
 
       - name: rsync deployments
         uses: burnett01/rsync-deployments@5.1

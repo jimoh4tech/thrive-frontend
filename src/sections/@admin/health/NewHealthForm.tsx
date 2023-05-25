@@ -29,10 +29,8 @@ import { useSnackbar } from '../../../components/snackbar';
 
 export type FormValuesProps = IHealth & { cover: any };
 
-export default function NewHealthForm() {
+export default function NewHealthForm({ categories }: { categories: any[] }) {
   const { enqueueSnackbar } = useSnackbar();
-
-  const [categories, setCategories] = useState([]);
 
   const NewTemplateSchema = Yup.object().shape({
     name: Yup.string().required('Title is required'),
@@ -106,22 +104,6 @@ export default function NewHealthForm() {
   const handleRemoveFile = (field: 'cover' | 'logo') => {
     setValue(field, null);
   };
-
-  const getCategories = useCallback(async () => {
-    try {
-      const _categories = await loader('healthCats');
-
-      setCategories(_categories);
-    } catch (error) {
-      enqueueSnackbar(error.message || 'Could not fetch template categories', { variant: 'error' });
-    }
-  }, [enqueueSnackbar]);
-
-  useEffect(() => {
-    getCategories();
-
-    return () => {};
-  }, [getCategories]);
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>

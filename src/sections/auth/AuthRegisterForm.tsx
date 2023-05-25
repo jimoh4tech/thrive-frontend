@@ -6,8 +6,6 @@ import { useForm } from 'react-hook-form';
 // @mui
 import { LoadingButton } from '@mui/lab';
 import { Alert, IconButton, InputAdornment, Stack } from '@mui/material';
-// auth
-import moment from 'moment';
 import { requestVerifyEmail } from 'src/actions/authAction';
 import { phoneRegExp } from 'src/utils/regexp';
 import { useAuthContext } from '../../auth/useAuthContext';
@@ -85,6 +83,7 @@ export default function AuthRegisterForm() {
     handleSubmit,
     getValues,
     formState: { errors, isSubmitting, isSubmitSuccessful },
+    trigger,
   } = methods;
 
   const onSubmit = async (data: FormValuesProps) => {
@@ -211,6 +210,8 @@ export default function AuthRegisterForm() {
           email={getValues('email')}
           verifyToken={verifyToken}
           open={openVerify}
+          loading={isSubmitting}
+          onResend={handleSubmit(onSubmit)}
         />
       )}
     </>

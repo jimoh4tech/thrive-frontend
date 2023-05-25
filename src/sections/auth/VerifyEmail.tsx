@@ -1,11 +1,12 @@
 // next
 import NextLink from 'next/link';
 // @mui
-import { Dialog, DialogContent, Link, Typography } from '@mui/material';
+import { Button, Dialog, DialogContent, Link, Typography } from '@mui/material';
 // layouts
 import { useSnackbar } from 'notistack';
 // routes
 import { verifyEmail } from 'src/actions/authAction';
+import { LoadingButton } from '@mui/lab';
 import { PATH_AUTH } from '../../routes/paths';
 // components
 import Iconify from '../../components/iconify';
@@ -20,11 +21,15 @@ const VerifyEmail = ({
   verifyToken,
   onClose,
   cb,
+  onResend,
+  loading,
 }: {
   open: boolean;
+  loading?: boolean;
   email: string;
   verifyToken: string;
   onClose?: VoidFunction;
+  onResend?: VoidFunction;
   cb?: (emailVerifiedToken: string) => void;
 }) => {
   const { enqueueSnackbar } = useSnackbar();
@@ -37,6 +42,11 @@ const VerifyEmail = ({
     } catch (error) {
       enqueueSnackbar(error.message || error);
     }
+  };
+
+  const handleResend = async () => {
+    await onResend!();
+    enqueueSnackbar('Code has be resent');
   };
   return (
     <Dialog open={open}>
@@ -56,7 +66,9 @@ const VerifyEmail = ({
 
         <Typography variant="body2" sx={{ my: 3 }}>
           Don’t have a code? &nbsp;
-          <Link variant="subtitle2">Resend code</Link>
+          <LoadingButton loading={loading} onClick={handleResend} variant="text">
+            Resend code
+          </LoadingButton>
         </Typography>
 
         <Link

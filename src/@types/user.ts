@@ -152,8 +152,8 @@ export type IUserAccountBillingAddress = {
 
 export type IUserAccountChangePassword = {
   oldPassword: string;
-  newPassword: string;
-  confirmNewPassword: string;
+  password: string;
+  confirmPassword: string;
 };
 
 // ----------------------------------------------------------------------

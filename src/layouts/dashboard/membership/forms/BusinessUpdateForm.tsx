@@ -8,6 +8,7 @@ import { Box, Card, Grid, InputAdornment, Stack } from '@mui/material';
 // auth
 import { createBusiness } from 'src/actions/businessActions';
 import Iconify from 'src/components/iconify/Iconify';
+import { updater } from 'src/actions';
 import { useAuthContext } from '../../../../auth/useAuthContext';
 // utils
 // assets
@@ -74,6 +75,10 @@ export default function BusinessUpdateForm() {
     address: Yup.string().required('Address is required'),
     state: Yup.string().required('State is required'),
     industry: Yup.string().required('Business Industry is required'),
+    slug: Yup.string()
+      .trim()
+      .matches(/^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/, 'Invalid slug')
+      .required('Business Industry is required'),
     bio: Yup.string()
       .required('Business description is required')
       .min(500, 'Business description must be above 150 characters'),
@@ -82,6 +87,8 @@ export default function BusinessUpdateForm() {
     instagramLink: Yup.string().url('Invalid URL'),
     linkedinLink: Yup.string().url('Invalid URL'),
   });
+
+  const urlArr = busi.slug.split('/');
 
   const defaultValues = {
     name: busi.name,
@@ -93,7 +100,7 @@ export default function BusinessUpdateForm() {
     state: busi.state,
     industry: busi.industry,
     bio: busi.bio,
-    slug: busi.slug,
+    slug: urlArr[urlArr.length - 1],
     designation: busi.designation,
     facebookLink: busi.facebookLink,
     twitterLink: busi.twitterLink,
@@ -114,8 +121,8 @@ export default function BusinessUpdateForm() {
 
   const onSubmit = async (data: FormValuesProps) => {
     try {
-      const res = await createBusiness(data);
-      enqueueSnackbar(res.data.message);
+      const { message } = await updater('userBusiness', data);
+      enqueueSnackbar(message);
     } catch (err) {
       enqueueSnackbar(err.message || err, { variant: 'error' });
     }
@@ -135,7 +142,7 @@ export default function BusinessUpdateForm() {
                 sm: 'repeat(2, 1fr)',
               }}
             >
-              <RHFTextField name="name" label="Business Name" />
+              <RHFTextField name="name" label="Business Name" disabled />
 
               <RHFTextField name="email" label="Business Email" />
 

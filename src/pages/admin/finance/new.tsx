@@ -4,6 +4,9 @@ import Head from 'next/head';
 import { Container } from '@mui/material';
 // routes
 import NewFinanceForm from 'src/sections/@admin/finace/NewFinanceForm';
+import { useSnackbar } from 'notistack';
+import { useCallback, useEffect, useState } from 'react';
+import { loader } from 'src/actions';
 import { PATH_ADMIN } from '../../../routes/paths';
 // layouts
 import DashboardLayout from '../../../layouts/admin';
@@ -22,6 +25,37 @@ NewFiniancialService.getLayout = (page: React.ReactElement) => (
 
 export default function NewFiniancialService() {
   const { themeStretch } = useSettingsContext();
+  const { enqueueSnackbar } = useSnackbar();
+
+  const [categories, setCategories] = useState([]);
+  const [institutions, setInstitutions] = useState([]);
+
+  const getCategories = useCallback(async () => {
+    try {
+      const _categories = await loader('financeCats');
+
+      setCategories(_categories);
+    } catch (error) {
+      enqueueSnackbar(error.message || 'Could not fetch media categories', { variant: 'error' });
+    }
+  }, [enqueueSnackbar]);
+
+  const getIntitutions = useCallback(async () => {
+    try {
+      const _ = await loader('financeInstitutions');
+
+      setInstitutions(_);
+    } catch (error) {
+      enqueueSnackbar(error.message || 'Could not fetch institutions', { variant: 'error' });
+    }
+  }, [enqueueSnackbar]);
+
+  useEffect(() => {
+    getCategories();
+    getIntitutions();
+
+    return () => {};
+  }, [getCategories, getIntitutions]);
 
   return (
     <>
@@ -45,9 +79,13 @@ export default function NewFiniancialService() {
               name: 'New Finacial Service',
             },
           ]}
+          actions={[
+            { title: 'Category', endpoint: 'financeCats', cb: getCategories },
+            { title: 'Institution', endpoint: 'financeInstitutions', cb: getIntitutions },
+          ]}
         />
 
-        <NewFinanceForm />
+        <NewFinanceForm categories={categories} institutions={institutions} />
       </Container>
     </>
   );

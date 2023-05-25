@@ -41,17 +41,13 @@ export default function NewPasswordPage() {
 
       <AuthNewPasswordForm />
 
-      <Typography variant="body2" sx={{ my: 3 }}>
-        Don’t have a code? &nbsp;
-        <Link variant="subtitle2">Resend code</Link>
-      </Typography>
-
       <Link
         component={NextLink}
         href={PATH_AUTH.login}
         color="inherit"
         variant="subtitle2"
         sx={{
+          mt: 3,
           mx: 'auto',
           alignItems: 'center',
           display: 'inline-flex',

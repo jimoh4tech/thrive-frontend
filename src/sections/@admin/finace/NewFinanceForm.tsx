@@ -29,11 +29,14 @@ import { useSnackbar } from '../../../components/snackbar';
 
 export type FormValuesProps = IEvent & { cover: any };
 
-export default function NewFinanceForm() {
+export default function NewFinanceForm({
+  categories,
+  institutions,
+}: {
+  categories: any[];
+  institutions: any[];
+}) {
   const { enqueueSnackbar } = useSnackbar();
-
-  const [categories, setCategories] = useState([]);
-  const [institutions, setInstitutions] = useState([]);
 
   const NewEventSchema = Yup.object().shape({
     name: Yup.string().required('Finance name is required'),
@@ -103,33 +106,6 @@ export default function NewFinanceForm() {
   const handleRemoveFile = () => {
     setValue('cover', null);
   };
-
-  const getCategories = useCallback(async () => {
-    try {
-      const _ = await loader('financeCats');
-
-      setCategories(_);
-    } catch (error) {
-      enqueueSnackbar(error.message || 'Could not fetch event categories', { variant: 'error' });
-    }
-  }, [enqueueSnackbar]);
-
-  const getInstitutions = useCallback(async () => {
-    try {
-      const _ = await loader('financeInstitutions');
-
-      setInstitutions(_);
-    } catch (error) {
-      enqueueSnackbar(error.message || 'Could not fetch event categories', { variant: 'error' });
-    }
-  }, [enqueueSnackbar]);
-
-  useEffect(() => {
-    getCategories();
-    getInstitutions();
-
-    return () => {};
-  }, [getCategories, getInstitutions]);
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>

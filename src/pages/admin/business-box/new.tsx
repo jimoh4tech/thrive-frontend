@@ -4,6 +4,9 @@ import Head from 'next/head';
 import { Container } from '@mui/material';
 // routes
 import NewTemplateForm from 'src/sections/@admin/template/NewTemplateForm';
+import { useSnackbar } from 'notistack';
+import { useCallback, useEffect, useState } from 'react';
+import { loader } from 'src/actions';
 import { PATH_ADMIN } from '../../../routes/paths';
 // layouts
 import DashboardLayout from '../../../layouts/admin';
@@ -20,6 +23,25 @@ BlogNewPostPage.getLayout = (page: React.ReactElement) => <DashboardLayout>{page
 
 export default function BlogNewPostPage() {
   const { themeStretch } = useSettingsContext();
+  const { enqueueSnackbar } = useSnackbar();
+
+  const [categories, setCategories] = useState([]);
+
+  const getCategories = useCallback(async () => {
+    try {
+      const _categories = await loader('templateCats');
+
+      setCategories(_categories);
+    } catch (error) {
+      enqueueSnackbar(error.message || 'Could not fetch media categories', { variant: 'error' });
+    }
+  }, [enqueueSnackbar]);
+
+  useEffect(() => {
+    getCategories();
+
+    return () => {};
+  }, [getCategories]);
 
   return (
     <>
@@ -29,7 +51,7 @@ export default function BlogNewPostPage() {
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading="Add New Media"
+          heading="Add New Template"
           links={[
             {
               name: 'Admin',
@@ -40,12 +62,13 @@ export default function BlogNewPostPage() {
               href: PATH_ADMIN.businessMedia.library,
             },
             {
-              name: 'Add New Media',
+              name: 'Add New Template',
             },
           ]}
+          actions={[{ title: 'Category', endpoint: 'templateCats', cb: getCategories }]}
         />
 
-        <NewTemplateForm />
+        <NewTemplateForm categories={categories} />
       </Container>
     </>
   );

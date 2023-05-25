@@ -95,7 +95,7 @@ export default function EventDetailsDrawer({
                 textTransform: 'uppercase',
               }}
             >
-              PREMIUM
+              PLATINUM
             </Label>
           )}
 
@@ -139,7 +139,7 @@ export default function EventDetailsDrawer({
         </Stack>
         <Box p={2.5}>
           <Typography variant="h6">About Event</Typography>
-          <Typography>{description}</Typography>
+          <Typography component="div" dangerouslySetInnerHTML={{ __html: description }} />
         </Box>
 
         {/* {hasShared && (

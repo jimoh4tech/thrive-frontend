@@ -7,6 +7,8 @@ import { Stack, Card, InputAdornment, IconButton } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // @types
 import { useState } from 'react';
+import { updater } from 'src/actions';
+import { useAuthContext } from 'src/auth/useAuthContext';
 import { IUserAccountChangePassword } from '../../../../@types/user';
 // components
 import Iconify from '../../../../components/iconify';
@@ -18,13 +20,14 @@ import FormProvider, { RHFTextField } from '../../../../components/hook-form';
 type FormValuesProps = IUserAccountChangePassword;
 
 export default function AccountChangePassword() {
+  const { logout } = useAuthContext();
   const { enqueueSnackbar } = useSnackbar();
 
   const [showPassword, setShowPassword] = useState(false);
 
   const ChangePassWordSchema = Yup.object().shape({
     oldPassword: Yup.string().required('Old Password is required'),
-    newPassword: Yup.string()
+    password: Yup.string()
       .required('New Password is required')
       .min(6, 'Password must be at least 6 characters')
       .test(
@@ -32,13 +35,13 @@ export default function AccountChangePassword() {
         'New password must be different than old password',
         (value, { parent }) => value !== parent.oldPassword
       ),
-    confirmNewPassword: Yup.string().oneOf([Yup.ref('newPassword')], 'Passwords must match'),
+    confirmPassword: Yup.string().oneOf([Yup.ref('password')], 'Passwords must match'),
   });
 
   const defaultValues = {
     oldPassword: '',
-    newPassword: '',
-    confirmNewPassword: '',
+    password: '',
+    confirmPassword: '',
   };
 
   const methods = useForm({
@@ -54,12 +57,12 @@ export default function AccountChangePassword() {
 
   const onSubmit = async (data: FormValuesProps) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      await updater('changepassword', data);
       reset();
-      enqueueSnackbar('Update success!');
-      console.log('DATA', data);
+      enqueueSnackbar('Password change success!');
+      logout();
     } catch (error) {
-      console.error(error);
+      enqueueSnackbar(error.message || error, { variant: 'error' });
     }
   };
 
@@ -68,7 +71,7 @@ export default function AccountChangePassword() {
       <Card>
         <Stack spacing={3} alignItems="flex-end" sx={{ p: 3 }}>
           <RHFTextField
-            name="password"
+            name="oldPassword"
             label="Old Password"
             type={showPassword ? 'text' : 'password'}
             InputProps={{

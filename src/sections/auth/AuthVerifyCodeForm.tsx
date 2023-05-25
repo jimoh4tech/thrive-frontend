@@ -21,7 +21,13 @@ export type CodeVerifyProps = {
   code6: string;
 };
 
-export default function AuthVerifyCodeForm({ onSubmit }: { onSubmit: (data: string) => void }) {
+export default function AuthVerifyCodeForm({
+  onSubmit,
+  loading,
+}: {
+  onSubmit: (data: string) => void;
+  loading?: boolean;
+}) {
   const VerifyCodeSchema = Yup.object().shape({
     code1: Yup.string().required('Code is required'),
     code2: Yup.string().required('Code is required'),
@@ -74,7 +80,7 @@ export default function AuthVerifyCodeForm({ onSubmit }: { onSubmit: (data: stri
           size="large"
           type="submit"
           variant="contained"
-          loading={isSubmitting}
+          loading={loading || isSubmitting}
           sx={{ mt: 3 }}
         >
           Verify

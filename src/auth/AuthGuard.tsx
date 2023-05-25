@@ -46,5 +46,11 @@ export default function AuthGuard({ children }: AuthGuardProps) {
     return <LoadingScreen />;
   }
 
+  if (user?.role?.id < 3 && (pathname || '').split('/').includes('admin')) {
+    push('/dashboard');
+
+    return <LoadingScreen />;
+  }
+
   return <> {children} </>;
 }

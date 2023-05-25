@@ -29,10 +29,8 @@ import { useSnackbar } from '../../../components/snackbar';
 
 export type FormValuesProps = IMedia & { mediaUrl: any };
 
-export default function NewMediaForm() {
+export default function NewMediaForm({ categories }: { categories: any[] }) {
   const { enqueueSnackbar } = useSnackbar();
-
-  const [categories, setCategories] = useState([]);
 
   const NewTemplateSchema = Yup.object().shape({
     name: Yup.string().required('Title is required'),
@@ -100,22 +98,6 @@ export default function NewMediaForm() {
   const handleRemoveFile = () => {
     setValue('mediaUrl', null);
   };
-
-  const getCategories = useCallback(async () => {
-    try {
-      const _categories = await loader('templateCats');
-
-      setCategories(_categories);
-    } catch (error) {
-      enqueueSnackbar(error.message || 'Could not fetch template categories', { variant: 'error' });
-    }
-  }, [enqueueSnackbar]);
-
-  useEffect(() => {
-    getCategories();
-
-    return () => {};
-  }, [getCategories]);
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>

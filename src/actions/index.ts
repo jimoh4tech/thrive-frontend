@@ -5,6 +5,10 @@ import axiosInstance from 'src/utils/axios';
 const endpoints = {
   user: '/users',
   userBusiness: '/users/business',
+
+  resetpassword: '/users/reset-password',
+  changepassword: '/users/change-password',
+
   media: '/business-media',
   mediaCats: '/business-media/categories',
   template: '/business-template',
@@ -28,15 +32,17 @@ const customEndpoints = {
   workspace: 'https://api.workhopper.org/listings',
 };
 
+export type IEndpoints = keyof typeof endpoints;
+
 export const fetcher = async (url: string) => (await axiosInstance.get(url)).data;
 
-export const loader = async (model: keyof typeof endpoints, params: IQuery = {}) =>
+export const loader = async (model: IEndpoints, params: IQuery = {}) =>
   (await axiosInstance.get(endpoints[model], { params })).data;
 
-export const updater = async (model: keyof typeof endpoints, data: any) =>
+export const updater = async (model: IEndpoints, data: any) =>
   (await axiosInstance.put(endpoints[model], data)).data;
 
-export const creator = async (model: keyof typeof endpoints, data: any) =>
+export const creator = async (model: IEndpoints, data: any) =>
   (await axiosInstance.post(endpoints[model], data)).data;
 
 export const download = async (fileUrl: string) =>

@@ -27,7 +27,6 @@ export default function AuthResetPasswordForm() {
 
   const [openVerify, setOpenVerify] = useState(false);
   const [verifyToken, setVerifyToken] = useState('');
-  const [emailVerifiedToken, setEmailVerifiedToken] = useState<string | null>(null);
   const [userData, setUserData] = useState<FormValuesProps | null>(null);
 
   const ResetPasswordSchema = Yup.object().shape({
@@ -49,14 +48,11 @@ export default function AuthResetPasswordForm() {
     setUserData(data);
 
     try {
-      if (emailVerifiedToken) await onResetPassword(emailVerifiedToken);
-      else {
-        const res = await requestVerifyEmail(data.email);
+      const res = await requestVerifyEmail(data.email);
 
-        setVerifyToken(res.verifyToken);
+      setVerifyToken(res.verifyToken);
 
-        setOpenVerify(true);
-      }
+      setOpenVerify(true);
     } catch (error) {
       console.error(error);
       enqueueSnackbar(error.message || error, { variant: 'error' });
@@ -66,7 +62,6 @@ export default function AuthResetPasswordForm() {
   const onResetPassword = async (_emailVerifiedToken: string) => {
     try {
       setOpenVerify(false);
-      setEmailVerifiedToken(_emailVerifiedToken);
       sessionStorage.setItem(
         'email-recovery',
         JSON.stringify({ email: userData?.email, emailVerifiedToken: _emailVerifiedToken })
@@ -100,6 +95,8 @@ export default function AuthResetPasswordForm() {
           email={getValues('email')}
           verifyToken={verifyToken}
           open={openVerify}
+          loading={isSubmitting}
+          onResend={handleSubmit(onSubmit)}
         />
       )}
     </>

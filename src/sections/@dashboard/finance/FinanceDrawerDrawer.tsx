@@ -82,7 +82,7 @@ export default function FinanceDrawerDrawer({
                 textTransform: 'uppercase',
               }}
             >
-              PREMIUM
+              PLATINUM
             </Label>
           )}
 
@@ -124,8 +124,8 @@ export default function FinanceDrawerDrawer({
           </Stack>
         </Stack>
         <Box p={2.5}>
-          <Typography variant="h6">About Event</Typography>
-          <Typography>{description}</Typography>
+          <Typography variant="h6">Description</Typography>
+          <Typography component="div" dangerouslySetInnerHTML={{ __html: description }} />
         </Box>
 
         {/* {hasShared && (

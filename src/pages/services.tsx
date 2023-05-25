@@ -11,7 +11,7 @@ import MainLayout from '../layouts/main';
 // ----------------------------------------------------------------------
 
 HomePage.getLayout = (page: React.ReactElement) => (
-  <MainLayout metaTitle="Premium Services">{page}</MainLayout>
+  <MainLayout metaTitle="Platinum Services">{page}</MainLayout>
 );
 
 // ----------------------------------------------------------------------

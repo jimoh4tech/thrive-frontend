@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import * as Yup from 'yup';
 // form
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -8,6 +8,8 @@ import { LoadingButton } from '@mui/lab';
 import { Alert, Card, Grid, Stack, TextField, Typography } from '@mui/material';
 // auth
 import { DatePicker } from '@mui/x-date-pickers';
+import { updater } from 'src/actions';
+import { uploadSingle } from 'src/utils/cloudinary';
 import { useAuthContext } from '../../../../auth/useAuthContext';
 // utils
 import { fData } from '../../../../utils/formatNumber';
@@ -24,23 +26,13 @@ import { CustomFile } from '../../../../components/upload';
 // ----------------------------------------------------------------------
 
 type FormValuesProps = {
-  email: string;
-  password: string;
   phone: string;
-  confirmPassword: string;
   firstName: string;
   lastName: string;
+  gender: string;
   dob: string;
 
-  displayName: string;
   avatarUrl: CustomFile | string | null;
-  phoneNumber: string | null;
-  country: string | null;
-  address: string | null;
-  state: string | null;
-  city: string | null;
-  zipCode: string | null;
-  about: string | null;
   isApproved: boolean;
   afterSubmit?: string;
 };
@@ -53,24 +45,17 @@ export default function AccountGeneral() {
   const UpdateUserSchema = Yup.object().shape({
     firstName: Yup.string().required('Firstname is required'),
     lastName: Yup.string().required('Lastname is required'),
-    email: Yup.string().required('Email is required').email('Email must be a valid email address'),
     avatarUrl: Yup.mixed().required('Avatar is required'),
     phone: Yup.string().required('Phone number is required'),
-    country: Yup.string().required('Country is required'),
-    address: Yup.string().required('Address is required'),
-    state: Yup.string().required('State is required'),
-    city: Yup.string().required('City is required'),
-    zipCode: Yup.string().required('Zip code is required'),
-    about: Yup.string().required('About is required'),
+    bio: Yup.string(),
+    gender: Yup.string(),
   });
 
   const defaultValues = {
     firstName: user?.firstName || '',
     lastName: user?.lastName || '',
-    email: user?.email || '',
     avatarUrl: user?.avatarUrl || null,
     phone: user?.phone || '',
-    address: user?.address || '',
     isApproved: user?.isApproved || false,
     gender: user?.gender || '',
     bio: user?.bio || '',
@@ -85,41 +70,55 @@ export default function AccountGeneral() {
     setValue,
     handleSubmit,
     control,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
+    setError,
+    getValues,
+    formState: { errors, isSubmitting },
   } = methods;
 
-  const onSubmit = async (data: FormValuesProps) => {
+  const [loading, setLoading] = useState(false);
+
+  const updateProfile = async ({ avatarUrl, ...data }: FormValuesProps) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      enqueueSnackbar('Update success!');
-      console.log('DATA', data);
+      await updater('user', data);
+      enqueueSnackbar('Profile update success!');
     } catch (error) {
       console.error(error);
+      setError('afterSubmit', {
+        ...error,
+        message: error.message || error,
+      });
     }
   };
 
   const handleDrop = useCallback(
-    (acceptedFiles: File[]) => {
-      const file = acceptedFiles[0];
+    async (acceptedFiles: File[]) => {
+      const newFile = acceptedFiles[0];
 
-      const newFile = Object.assign(file, {
-        preview: URL.createObjectURL(file),
-      });
-
-      if (file) {
+      if (newFile) {
+        setLoading(true);
         setValue('avatarUrl', newFile, { shouldValidate: true });
+
+        try {
+          const res = await uploadSingle(newFile, `avatar`);
+          await updater('user', { avatarUrl: res.data.public_id });
+        } catch (err) {
+          console.error(err);
+          enqueueSnackbar(err?.message || err, { variant: 'error' });
+        }
+        setLoading(false);
       }
     },
-    [setValue]
+    [enqueueSnackbar, setValue]
   );
 
   return (
-    <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+    <FormProvider methods={methods} onSubmit={handleSubmit(updateProfile)}>
       <Grid container spacing={3}>
         <Grid item xs={12} md={4}>
           <Card sx={{ py: 10, px: 3, textAlign: 'center' }}>
             <RHFUploadAvatar
               name="avatarUrl"
+              // files={[newDP || getValues('avatarUrl') || '']}
               maxSize={3145728}
               onDrop={handleDrop}
               helperText={
@@ -151,8 +150,6 @@ export default function AccountGeneral() {
                 <RHFTextField name="lastName" label="Last name" />
               </Stack>
 
-              <RHFTextField name="email" label="Email address" />
-
               <RHFTextField name="phone" label="Phone Number" />
 
               <Stack direction="row" spacing={2}>
@@ -178,7 +175,7 @@ export default function AccountGeneral() {
                   )}
                 />
 
-                <RHFSelect native name="gender" label="Gender">
+                <RHFSelect native name="gender" label="Gender" disabled={!!user.gender || false}>
                   <option value="" />
                   {['Male', 'Female'].map((val) => (
                     <option key={val} value={val}>

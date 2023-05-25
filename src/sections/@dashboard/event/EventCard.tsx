@@ -9,6 +9,7 @@ import { fCurrency } from 'src/utils/formatNumber';
 import { fDate } from 'src/utils/formatTime';
 // @types
 // components
+import Label from 'src/components/label/Label';
 import Iconify from '../../../components/iconify';
 import Image from '../../../components/image';
 
@@ -20,7 +21,7 @@ type Props = {
 };
 
 export default function EventCard({ event, onViewEvent }: Props) {
-  const { name, amount, location, cover, startDate, endDate, category } = event;
+  const { name, amount, location, cover, startDate, endDate, category, isPlatinum } = event;
 
   // const linkTo = PATH_DASHBOARD.eCommerce.view(paramCase(name));
 
@@ -35,9 +36,9 @@ export default function EventCard({ event, onViewEvent }: Props) {
       onClick={() => onViewEvent(event)}
     >
       <Box sx={{ position: 'relative', p: 1.5 }}>
-        {/* {isPlatinum && (
+        {isPlatinum && (
           <Label
-            variant="filled"
+            variant="soft"
             color="primary"
             sx={{
               top: 16,
@@ -47,9 +48,9 @@ export default function EventCard({ event, onViewEvent }: Props) {
               textTransform: 'uppercase',
             }}
           >
-            PREMIUM
+            PLATINUM
           </Label>
-        )} */}
+        )}
 
         <Image alt={name} src={cover} ratio="4/3" sx={{ borderRadius: 1 }} />
       </Box>

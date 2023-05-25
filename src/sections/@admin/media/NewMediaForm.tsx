@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback } from 'react';
 import * as Yup from 'yup';
 // next
 // form
@@ -9,10 +9,11 @@ import { LoadingButton } from '@mui/lab';
 import { Card, Grid, Stack, Typography } from '@mui/material';
 // routes
 import { IMedia } from 'src/@types/media';
-import { creator, loader } from 'src/actions';
+import { creator } from 'src/actions';
 import { uploadSingle } from 'src/utils/cloudinary';
 // @types
 // components
+import { useSnackbar } from 'notistack';
 import FormProvider, {
   RHFEditor,
   RHFSelect,
@@ -20,7 +21,6 @@ import FormProvider, {
   RHFTextField,
   RHFUpload,
 } from '../../../components/hook-form';
-import { useSnackbar } from '../../../components/snackbar';
 //
 
 // ----------------------------------------------------------------------
@@ -29,10 +29,8 @@ import { useSnackbar } from '../../../components/snackbar';
 
 export type FormValuesProps = IMedia & { mediaUrl: any };
 
-export default function NewMediaForm() {
+export default function NewMediaForm({ categories }: { categories: any[] }) {
   const { enqueueSnackbar } = useSnackbar();
-
-  const [categories, setCategories] = useState([]);
 
   const NewMediaSchema = Yup.object().shape({
     name: Yup.string().required('Title is required'),
@@ -100,22 +98,6 @@ export default function NewMediaForm() {
   const handleRemoveFile = () => {
     setValue('mediaUrl', null);
   };
-
-  const getCategories = useCallback(async () => {
-    try {
-      const _categories = await loader('mediaCats');
-
-      setCategories(_categories);
-    } catch (error) {
-      enqueueSnackbar(error.message || 'Could not fetch media categories', { variant: 'error' });
-    }
-  }, [enqueueSnackbar]);
-
-  useEffect(() => {
-    getCategories();
-
-    return () => {};
-  }, [getCategories]);
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>

@@ -5,6 +5,9 @@ import { Container } from '@mui/material';
 // routes
 import NewTemplateForm from 'src/sections/@admin/template/NewTemplateForm';
 import NewHealthForm from 'src/sections/@admin/health/NewHealthForm';
+import { useSnackbar } from 'notistack';
+import { useCallback, useEffect, useState } from 'react';
+import { loader } from 'src/actions';
 import { PATH_ADMIN } from '../../../routes/paths';
 // layouts
 import DashboardLayout from '../../../layouts/admin';
@@ -21,6 +24,25 @@ BlogNewPostPage.getLayout = (page: React.ReactElement) => <DashboardLayout>{page
 
 export default function BlogNewPostPage() {
   const { themeStretch } = useSettingsContext();
+  const { enqueueSnackbar } = useSnackbar();
+
+  const [categories, setCategories] = useState([]);
+
+  const getCategories = useCallback(async () => {
+    try {
+      const _categories = await loader('healthCats');
+
+      setCategories(_categories);
+    } catch (error) {
+      enqueueSnackbar(error.message || 'Could not fetch media categories', { variant: 'error' });
+    }
+  }, [enqueueSnackbar]);
+
+  useEffect(() => {
+    getCategories();
+
+    return () => {};
+  }, [getCategories]);
 
   return (
     <>
@@ -44,9 +66,10 @@ export default function BlogNewPostPage() {
               name: 'Add New Media',
             },
           ]}
+          actions={[{ title: 'Category', endpoint: 'healthCats', cb: getCategories }]}
         />
 
-        <NewHealthForm />
+        <NewHealthForm categories={categories} />
       </Container>
     </>
   );

@@ -4,6 +4,9 @@ import Head from 'next/head';
 import { Container } from '@mui/material';
 // routes
 import NewEventForm from 'src/sections/@admin/event/NewEventForm';
+import { useSnackbar } from 'notistack';
+import { useCallback, useEffect, useState } from 'react';
+import { loader } from 'src/actions';
 import { PATH_ADMIN } from '../../../routes/paths';
 // layouts
 import DashboardLayout from '../../../layouts/admin';
@@ -20,6 +23,37 @@ BlogNewPostPage.getLayout = (page: React.ReactElement) => <DashboardLayout>{page
 
 export default function BlogNewPostPage() {
   const { themeStretch } = useSettingsContext();
+  const { enqueueSnackbar } = useSnackbar();
+
+  const [categories, setCategories] = useState([]);
+  const [organizers, setOrganizers] = useState([]);
+
+  const getCategories = useCallback(async () => {
+    try {
+      const _categories = await loader('eventsCats');
+
+      setCategories(_categories);
+    } catch (error) {
+      enqueueSnackbar(error.message || 'Could not fetch media categories', { variant: 'error' });
+    }
+  }, [enqueueSnackbar]);
+
+  const getOrganizers = useCallback(async () => {
+    try {
+      const _categories = await loader('eventsOrganizers');
+
+      setOrganizers(_categories);
+    } catch (error) {
+      enqueueSnackbar(error.message || 'Could not fetch event categories', { variant: 'error' });
+    }
+  }, [enqueueSnackbar]);
+
+  useEffect(() => {
+    getCategories();
+    getOrganizers();
+
+    return () => {};
+  }, [getCategories, getOrganizers]);
 
   return (
     <>
@@ -42,9 +76,13 @@ export default function BlogNewPostPage() {
               name: 'Add New Event',
             },
           ]}
+          actions={[
+            { title: 'Category', endpoint: 'eventsCats', cb: getCategories },
+            { title: 'Organizer', endpoint: 'eventsOrganizers', cb: getOrganizers },
+          ]}
         />
 
-        <NewEventForm />
+        <NewEventForm categories={categories} organizers={organizers} />
       </Container>
     </>
   );

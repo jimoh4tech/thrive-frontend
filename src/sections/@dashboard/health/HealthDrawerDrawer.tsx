@@ -82,7 +82,7 @@ export default function HealthDrawerDrawer({
                 textTransform: 'uppercase',
               }}
             >
-              PREMIUM
+              PLATINUM
             </Label>
           )}
 

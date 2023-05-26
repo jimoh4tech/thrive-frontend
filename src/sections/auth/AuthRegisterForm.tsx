@@ -79,7 +79,7 @@ export default function AuthRegisterForm() {
     try {
       if (emailVerifiedToken) await registerUser(emailVerifiedToken);
       else {
-        const res = await requestVerifyEmail(data.email);
+        const res = await requestVerifyEmail(data.email, 'register');
 
         setVerifyToken(res.verifyToken);
 

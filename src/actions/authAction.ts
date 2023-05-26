@@ -2,9 +2,13 @@ import { UserCreate } from 'src/auth/types';
 import axios from 'src/utils/axios';
 
 // REQUEST VERIFY EMAIL
-export const requestVerifyEmail = async (email: string): Promise<{ verifyToken: string }> => {
+export const requestVerifyEmail = async (
+  email: string,
+  requestType?: 'register' | 'reset-password'
+): Promise<{ verifyToken: string }> => {
   const res = await axios.post('/users/request-verify-email-code', {
     email,
+    requestType,
   });
 
   return res.data;

@@ -23,7 +23,7 @@ export const PATH_AUTH = {
 
 export const PATH_PAGE = {
   maintenance: '/maintenance',
-  announcement: '/announcement',
+  announcement: '/announcements',
   ecosystem: '/ecosystem',
   directory: '/directory',
   icssModules: '/icss-modules',

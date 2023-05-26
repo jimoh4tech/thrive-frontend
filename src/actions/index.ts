@@ -6,6 +6,9 @@ const endpoints = {
   user: '/users',
   userBusiness: '/users/business',
 
+  ngos: '/users/ngos',
+  industries: '/users/industries',
+
   resetpassword: '/users/reset-password',
   changepassword: '/users/change-password',
 

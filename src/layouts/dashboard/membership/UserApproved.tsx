@@ -19,7 +19,7 @@ export default function UserApproved() {
 
       <Container maxWidth={themeStretch ? false : 'xl'}>
         <AppWelcome
-          sx={{ bgcolor: 'success.lighter', color: 'grey.800' }}
+          sx={{ bgcolor: 'success.lighter', color: 'grey.800', pt: 2 }}
           title={`Congrats ${user?.fullName}! \n You have been approved.`}
           description="Please proceed to update your business profile to access the power of the Thrive App."
           img={

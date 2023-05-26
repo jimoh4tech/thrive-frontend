@@ -98,7 +98,7 @@ export default function BusinessUpdateForm() {
     country: busi.country,
     address: busi.address,
     state: busi.state,
-    industry: busi.industry,
+    industry: busi.industry?.id,
     bio: busi.bio,
     slug: urlArr[urlArr.length - 1],
     designation: busi.designation,

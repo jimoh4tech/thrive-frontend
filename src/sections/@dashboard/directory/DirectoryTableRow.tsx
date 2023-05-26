@@ -40,7 +40,7 @@ export default function DirectoryTableRow({ row }: Props) {
       </TableCell>
 
       <TableCell align="left" sx={{ textTransform: 'capitalize' }}>
-        {industry}
+        {industry?.name}
       </TableCell>
 
       {/* <TableCell align="center">

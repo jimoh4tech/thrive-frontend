@@ -140,7 +140,7 @@ export default function BusinessCover({
                   {name}
                 </Typography>
 
-                <Typography sx={{ opacity: 0.72 }}>{industry}</Typography>
+                <Typography sx={{ opacity: 0.72 }}>{industry?.name}</Typography>
               </Box>
             </Stack>
             {user && (

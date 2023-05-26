@@ -81,7 +81,7 @@ export default function BusinesseAbout({
 
           <Typography variant="body2">
             <Link component="span" variant="subtitle2" color="text.primary">
-              {industry}
+              {industry?.name}
             </Link>
           </Typography>
         </Stack>

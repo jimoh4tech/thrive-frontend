@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import * as Yup from 'yup';
 // form
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -8,25 +8,13 @@ import { LoadingButton } from '@mui/lab';
 import { Alert, IconButton, InputAdornment, Stack } from '@mui/material';
 import { requestVerifyEmail } from 'src/actions/authAction';
 import { phoneRegExp } from 'src/utils/regexp';
+import { useSnackbar } from 'notistack';
+import { loader } from 'src/actions';
 import { useAuthContext } from '../../auth/useAuthContext';
 // components
 import FormProvider, { RHFSelect, RHFTextField } from '../../components/hook-form';
 import Iconify from '../../components/iconify';
 import VerifyEmail from './VerifyEmail';
-
-const ngos = [
-  { id: '1', name: 'Hope Builders ' },
-  { id: '2', name: 'Valucon' },
-  { id: '3', name: 'Web of Hearts' },
-  { id: '4', name: 'Society for Empowerment of Young Persons' },
-  { id: '5', name: 'LAPO' },
-  { id: '6', name: 'Sabi Hub' },
-  { id: '7', name: 'VIISAUS' },
-  { id: '8', name: 'Dofoll' },
-  { id: '9', name: 'Kairos' },
-  { id: '10', name: 'Genius Hub' },
-  { id: '11', name: 'Others' },
-];
 
 // ----------------------------------------------------------------------
 
@@ -83,7 +71,6 @@ export default function AuthRegisterForm() {
     handleSubmit,
     getValues,
     formState: { errors, isSubmitting, isSubmitSuccessful },
-    trigger,
   } = methods;
 
   const onSubmit = async (data: FormValuesProps) => {
@@ -128,6 +115,26 @@ export default function AuthRegisterForm() {
     }
     reset(userData!, { keepValues: true });
   };
+
+  const { enqueueSnackbar } = useSnackbar();
+
+  const [ngos, setNgos] = useState([]);
+
+  const getNgos = useCallback(async () => {
+    try {
+      const _ngos = await loader('ngos');
+
+      setNgos(_ngos);
+    } catch (error) {
+      enqueueSnackbar(error.message || 'Could not fetch ngos', { variant: 'error' });
+    }
+  }, [enqueueSnackbar]);
+
+  useEffect(() => {
+    getNgos();
+
+    return () => {};
+  }, [getNgos]);
 
   return (
     <>

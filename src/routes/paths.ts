@@ -89,8 +89,10 @@ export const PATH_DASHBOARD = {
   account: path(ROOTS_DASHBOARD, '/account'),
   networkingMarketplace: {
     businesses: path(ROOTS_DASHBOARD, '/networking-marketplace'),
-    community: path(ROOTS_DASHBOARD, '/community'),
-    chat: path(ROOTS_DASHBOARD, '/chat'),
+    community: path(ROOTS_DASHBOARD, '/networking-marketplace/community'),
+    chat: path(ROOTS_DASHBOARD, '/networking-marketplace/chat'),
+    newChat: path(ROOTS_DASHBOARD, '/networking-marketplace/chat/chat/new'),
+    viewChat: (name: string) => path(ROOTS_DASHBOARD, `/networking-marketplace/chat/${name}`),
   },
 
   // mail: {

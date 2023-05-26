@@ -27,7 +27,7 @@ import { useSnackbar } from '../../../components/snackbar';
 
 // ----------------------------------------------------------------------
 
-export type FormValuesProps = IHealth & { cover: any };
+export type FormValuesProps = IHealth & { cover: any; logo: any };
 
 export default function NewHealthForm({ categories }: { categories: any[] }) {
   const { enqueueSnackbar } = useSnackbar();
@@ -35,9 +35,9 @@ export default function NewHealthForm({ categories }: { categories: any[] }) {
   const NewTemplateSchema = Yup.object().shape({
     name: Yup.string().required('Title is required'),
     email: Yup.string().email('Invalid email address').required('Title is required'),
-    phome: Yup.string().required('Title is required'),
+    phone: Yup.string().required('Title is required'),
     bio: Yup.string().required('Bio is required'),
-    logo: Yup.mixed(),
+    logo: Yup.mixed().optional(),
     url: Yup.string().url('Invalid url'),
     cover: Yup.mixed().required('cover is required'),
     categoryId: Yup.number().required('Pls select a category'),
@@ -48,7 +48,7 @@ export default function NewHealthForm({ categories }: { categories: any[] }) {
     email: '',
     phone: '',
     bio: '',
-    logo: '',
+    logo: null,
     url: '',
     cover: null,
     categoryId: null,
@@ -69,11 +69,19 @@ export default function NewHealthForm({ categories }: { categories: any[] }) {
   const onSubmit = async (data: FormValuesProps) => {
     try {
       const {
-        data: { public_id },
+        data: { public_id: cover },
       } = await uploadSingle(data.cover, 'health');
+
+      if (data.logo) {
+        const {
+          data: { public_id },
+        } = await uploadSingle(data.logo, 'health');
+
+        data.logo = public_id;
+      }
       await creator('healthInstitutions', {
         ...data,
-        cover: public_id,
+        cover,
       });
 
       reset();

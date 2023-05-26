@@ -9,6 +9,8 @@ import { Box, Card, Grid, InputAdornment, Stack, Typography } from '@mui/materia
 import { useCallback, useEffect, useState } from 'react';
 import { createBusiness } from 'src/actions/businessActions';
 import Iconify from 'src/components/iconify/Iconify';
+import { uploadSingle } from 'src/utils/cloudinary';
+import { loader } from 'src/actions';
 import { useAuthContext } from '../../../../auth/useAuthContext';
 // utils
 // assets
@@ -52,8 +54,8 @@ type FormValuesProps = {
   country: string | null;
   address: string | null;
   state: string | null;
-  cac: (File & { preview: string }) | null;
-  logo: (File & { preview: string }) | null;
+  cac: (File & { preview: string }) | string;
+  logo: (File & { preview: string }) | string;
 
   whatsappNumber: string;
   industry: string;
@@ -79,9 +81,9 @@ export default function BusinessProfile() {
     state: Yup.string().required('State is required'),
     industry: Yup.string().required('Business Industry is required'),
     bio: Yup.string()
-      .required('Business description is required')
-      .min(500, 'Business description must be above 150 characters'),
-    cac: Yup.mixed().required('CAC document is required'),
+      .min(30, 'Business description must be above 30 characters')
+      .max(300, 'Business description must be less than 300 characters'),
+    cac: Yup.mixed().optional(),
     logo: Yup.mixed().optional(),
   });
 
@@ -95,8 +97,8 @@ export default function BusinessProfile() {
     state: '',
     industry: '',
     bio: '',
-    cac: null,
-    logo: null,
+    cac: '',
+    logo: '',
   };
 
   const methods = useForm<FormValuesProps>({
@@ -147,7 +149,22 @@ export default function BusinessProfile() {
       // }
       setOpenPaymentPopup(false);
       const { logo, cac, ...rest } = business;
-      console.log(cac, logo);
+
+      if (cac) {
+        const {
+          data: { public_id },
+        } = await uploadSingle(cac, 'cac');
+
+        rest.cac = public_id;
+      }
+
+      if (logo) {
+        const {
+          data: { public_id },
+        } = await uploadSingle(logo, 'logo');
+
+        rest.logo = public_id;
+      }
 
       const res = await createBusiness(rest);
 
@@ -182,6 +199,24 @@ export default function BusinessProfile() {
       window.removeEventListener('storage', onSubmit);
     };
   }, [onSubmit, user]);
+
+  const [industries, setIndustries] = useState([]);
+
+  const getIndustries = useCallback(async () => {
+    try {
+      const _industries = await loader('industries');
+
+      setIndustries(_industries);
+    } catch (error) {
+      enqueueSnackbar(error.message || 'Could not fetch Industries', { variant: 'error' });
+    }
+  }, [enqueueSnackbar]);
+
+  useEffect(() => {
+    getIndustries();
+
+    return () => {};
+  }, [getIndustries]);
 
   return (
     <>
@@ -221,9 +256,9 @@ export default function BusinessProfile() {
 
                 <RHFSelect native name="industry" label="Industry" placeholder="Industry">
                   <option value="" />
-                  {['Fashion', 'Entertainment', 'Information Technology'].map((_, i) => (
-                    <option key={i} value={_}>
-                      {_}
+                  {industries.map((_: { name: string; id: number }) => (
+                    <option key={_.id} value={_.id}>
+                      {_.name}
                     </option>
                   ))}
                 </RHFSelect>
@@ -248,9 +283,9 @@ export default function BusinessProfile() {
                   </Typography>
                   <RHFUpload
                     name="logo"
-                    maxSize={3145728}
+                    maxSize={10145728}
                     onDrop={(_) => handleDrop(_, 'logo')}
-                    onDelete={() => setValue('logo', null, { shouldValidate: true })}
+                    onDelete={() => setValue('logo', '', { shouldValidate: true })}
                   />
                 </Box>
                 <Box>
@@ -259,9 +294,9 @@ export default function BusinessProfile() {
                   </Typography>
                   <RHFUpload
                     name="cac"
-                    maxSize={3145728}
+                    maxSize={10145728}
                     onDrop={(_) => handleDrop(_, 'cac')}
-                    onDelete={() => setValue('cac', null, { shouldValidate: true })}
+                    onDelete={() => setValue('cac', '', { shouldValidate: true })}
                   />
                 </Box>
               </Stack>
@@ -277,6 +312,7 @@ export default function BusinessProfile() {
       </FormProvider>
       <PaymentPopup
         open={openPaymentPopup}
+        onClose={() => setOpenPaymentPopup(false)}
         cb={setPaymentRef}
         items={[
           { name: 'Registration', amount: 500 },

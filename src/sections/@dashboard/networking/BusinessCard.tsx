@@ -78,7 +78,7 @@ export default function BusinesCard({ business }: Props) {
       </Typography>
 
       <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-        {industry}
+        {industry?.name}
       </Typography>
 
       <Stack direction="row" alignItems="center" justifyContent="center" sx={{ mt: 1, mb: 3 }}>

@@ -34,9 +34,9 @@ export default function NewMediaForm({ categories }: { categories: any[] }) {
 
   const NewMediaSchema = Yup.object().shape({
     name: Yup.string().required('Title is required'),
-    description: Yup.string().required('Description is required'),
+    description: Yup.string(),
     categoryId: Yup.string().required('Category is required'),
-    mediaUrl: Yup.mixed().required('mediaUrl is required'),
+    mediaUrl: Yup.mixed().required('MediaUrl is required'),
   });
 
   const defaultValues = {
@@ -138,7 +138,7 @@ export default function NewMediaForm({ categories }: { categories: any[] }) {
                     ],
                   }}
                   name="mediaUrl"
-                  maxSize={3145728}
+                  maxSize={3145728000}
                   onDrop={handleDrop}
                   onDelete={handleRemoveFile}
                 />

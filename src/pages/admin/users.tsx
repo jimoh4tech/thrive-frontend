@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 // next
 import Head from 'next/head';
 // @mui
@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 // routes
 import { useSnackbar } from 'notistack';
-import { fetcher } from 'src/actions';
+import { fetcher, loader } from 'src/actions';
 import { approveUser } from 'src/actions/admin/usersAction';
 import Loading from 'src/components/loading';
 import useSWR from 'swr';
@@ -150,6 +150,36 @@ export default function UserListPage() {
     }
   };
 
+  const [ngos, setNgos] = useState([]);
+  const [industries, setIndustries] = useState([]);
+
+  const getNgos = useCallback(async () => {
+    try {
+      const _ngos = await loader('ngos');
+
+      setNgos(_ngos);
+    } catch (error) {
+      enqueueSnackbar(error.message || 'Could not fetch media Ngos', { variant: 'error' });
+    }
+  }, [enqueueSnackbar]);
+
+  const getIndustries = useCallback(async () => {
+    try {
+      const _ = await loader('industries');
+
+      setIndustries(_);
+    } catch (error) {
+      enqueueSnackbar(error.message || 'Could not fetch Industries', { variant: 'error' });
+    }
+  }, [enqueueSnackbar]);
+
+  useEffect(() => {
+    getNgos();
+    getIndustries();
+
+    return () => {};
+  }, [getNgos, getIndustries]);
+
   return (
     <>
       <Head>
@@ -163,6 +193,10 @@ export default function UserListPage() {
             { name: 'Admin', href: PATH_ADMIN.root },
             { name: 'Users', href: PATH_ADMIN.users },
             { name: 'List' },
+          ]}
+          actions={[
+            { title: 'Ngo', endpoint: 'ngos', cb: getNgos },
+            { title: 'Industry', endpoint: 'industries', cb: getIndustries },
           ]}
         />
 

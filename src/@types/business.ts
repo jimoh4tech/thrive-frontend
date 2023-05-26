@@ -7,7 +7,7 @@ export type IUserBusiness = {
   country: string | null;
   address: string;
   state: string;
-  industry: string | null;
+  industry: IIndustry | null;
   designation: string;
   bio: string | null;
   cac: string;
@@ -21,4 +21,9 @@ export type IUserBusiness = {
 
   createdAt: string;
   updatedAt: string;
+};
+
+export type IIndustry = {
+  name: string;
+  id: number;
 };

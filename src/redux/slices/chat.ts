@@ -17,7 +17,7 @@ const initialState: IChatState = {
   recipients: [],
 };
 
-const slice = createSlice({
+export const slice = createSlice({
   name: 'chat',
   initialState,
   reducers: {

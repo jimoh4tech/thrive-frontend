@@ -47,20 +47,20 @@ export default function BlogNewPostPage() {
   return (
     <>
       <Head>
-        <title> Business Box | ICSS Thrive</title>
+        <title> Health and Wellbeing | ICSS Thrive</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading="Add New Media"
+          heading="Add New Health Provider"
           links={[
             {
               name: 'Admin',
               href: PATH_ADMIN.root,
             },
             {
-              name: 'Business Box',
-              href: PATH_ADMIN.businessMedia.library,
+              name: 'Health and Wellbeing',
+              href: PATH_ADMIN.health.root,
             },
             {
               name: 'Add New Media',

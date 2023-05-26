@@ -314,6 +314,7 @@ export default function BusinessProfile() {
         open={openPaymentPopup}
         onClose={() => setOpenPaymentPopup(false)}
         cb={setPaymentRef}
+        split_code="SPL_MWELhgBJTA"
         items={[
           { name: 'Registration', amount: 500 },
           { name: 'Subscription', amount: 2000, label: 'Basic' },

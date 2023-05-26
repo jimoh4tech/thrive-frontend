@@ -34,6 +34,12 @@ export const PATH_PAGE = {
   about: '/about-us',
   contact: '/contact-us',
 
+  privacy: '/privacy-policy',
+  refund: '/refund-policy',
+  abuse: '/abuse-policy',
+  termsCondition: '/terms-conditions',
+  dataProtect: '/data-protection',
+
   faqs: '/faqs',
   page403: '/403',
   page404: '/404',

@@ -1,13 +1,10 @@
 // @mui
 import { Box, Button, Paper, Typography } from '@mui/material';
 // layouts
+import { ArrowRight } from '@mui/icons-material';
 import { Container, Stack } from '@mui/system';
 import Image from 'src/components/image/Image';
-import { section1, section2 } from 'src/constants/tfc';
 import { consortiums, enterpriseHub } from 'src/constants/consortiums';
-import Iconify from 'src/components/iconify/Iconify';
-import { ArrowRight } from '@mui/icons-material';
-import { ehub } from 'src/assets/images';
 import MainLayout from '../layouts/main';
 // components
 

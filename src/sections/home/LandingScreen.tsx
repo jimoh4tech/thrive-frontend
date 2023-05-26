@@ -7,6 +7,7 @@ import Carousel, { CarouselDots } from 'src/components/carousel';
 import { banner1, banner2, banner3, banner4 } from 'src/assets/images';
 import Iconify from 'src/components/iconify/Iconify';
 import Link from 'next/link';
+import { PATH_AUTH } from 'src/routes/paths';
 import Image from '../../components/image';
 
 const LandingScreen = () => {
@@ -53,6 +54,7 @@ const LandingScreen = () => {
               size="large"
               startIcon={<Iconify icon="fa:send-o" />}
               variant="contained"
+              href={PATH_AUTH.register}
             >
               Get Started
             </Button>
@@ -60,7 +62,7 @@ const LandingScreen = () => {
           <Box>
             <Typography variant="h6">Registered User</Typography>
             <Stack direction="row" spacing={1} mt={1}>
-              {'345'.split('').map((_, i) => (
+              {'000'.split('').map((_, i) => (
                 <Box
                   key={i}
                   sx={{

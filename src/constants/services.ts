@@ -2,7 +2,7 @@ const services = [
   {
     title: 'Web Address',
     icon: 'gis:poi-map-o',
-    text: '<p>The platform provides a mini website extension i.e. (thrivebiz.ng/bolajitailors) that is searchable with pre-formatted template pages which can be edited by the MSME beneficiaries to fit their company brand and theme.</p> <p>You will have the option to upgrade to a standalone website and still maintain a presence on the platform.</p>',
+    text: '<p>The platform provides a mini website extension i.e. (thrivebizng.com/bolajitailors) that is searchable with pre-formatted template pages which can be edited by the MSME beneficiaries to fit their company brand and theme.</p> <p>You will have the option to upgrade to a standalone website and still maintain a presence on the platform.</p>',
   },
   {
     title: 'Virtual Office',

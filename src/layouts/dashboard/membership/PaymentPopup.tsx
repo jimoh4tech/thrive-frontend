@@ -21,10 +21,12 @@ const PaymentPopup = ({
   onClose,
   cb,
   items,
+  split_code,
 }: {
   open: boolean;
   onClose?: VoidFunction;
   items: PaymentProps['items'];
+  split_code?: string;
   cb?: (ref: string, txnId?: number) => void;
 }) => {
   const { user } = useAuthContext();
@@ -46,7 +48,7 @@ const PaymentPopup = ({
         (() => {
           let total = 0;
           for (let i = 0; i < items.length; i += 1) total += items[i].amount;
-          return total;
+          return { amount: total, split_code };
         })()
       );
 

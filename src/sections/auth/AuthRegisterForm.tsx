@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 // @mui
 import { LoadingButton } from '@mui/lab';
-import { Alert, IconButton, InputAdornment, Stack } from '@mui/material';
+import { Alert, IconButton, InputAdornment, Stack, Typography } from '@mui/material';
 import { requestVerifyEmail } from 'src/actions/authAction';
 import { phoneRegExp } from 'src/utils/regexp';
 import { useSnackbar } from 'notistack';
@@ -189,6 +189,14 @@ export default function AuthRegisterForm() {
               ),
             }}
           />
+
+          <Typography
+            component="div"
+            sx={{ color: 'text.secondary', mt: 3, typography: 'caption', textAlign: 'center' }}
+          >
+            Please DO NOT include any sensitive information that you do not want to share with
+            others on this web application.
+          </Typography>
 
           <LoadingButton
             fullWidth

@@ -3,8 +3,11 @@ import NextLink from 'next/link';
 // @mui
 import { Box, Container, Divider, Grid, IconButton, Link, Stack, Typography } from '@mui/material';
 // routes
-import { m } from 'framer-motion';
+import { LogoFull } from 'src/components/logo/Logo';
+import { fDate } from 'src/utils/formatTime';
 import moment from 'moment';
+import { m } from 'framer-motion';
+import { varFade } from 'src/components/animate';
 import {
   capstone,
   dofoll,
@@ -23,11 +26,8 @@ import {
   viisaus,
   weboh,
 } from 'src/assets/images';
-import { varFade } from 'src/components/animate';
-import { LogoFull } from 'src/components/logo/Logo';
 // import Image from 'src/components/image/Image';
 import Image from 'next/image';
-import { consortiums } from 'src/constants/consortiums';
 import { PATH_PAGE } from '../../routes/paths';
 // components
 import Iconify from '../../components/iconify';
@@ -38,9 +38,8 @@ const LINKS = [
   {
     headline: 'Contact Us',
     children: [
-      { name: 'frontoffice@thrivebizng.com', href: 'mailto:frontoffice@thrivebizng.com' },
-      { name: '09066189699', href: 'tel:+2349066189699' },
-      { name: '09067325337', href: 'tel:+2349067325337' },
+      { name: 'frontoffice@thrivebiz.ng', href: 'mailto:frontoffice@thrivebiz.ng' },
+      { name: '+2349066189699 +2349060009685 +2348095862293', href: '#' },
       {
         name: 'Enterprise Hubs Trinity Avenue by Landmark, Off Ligali Ayorinde, Victoria.',
         href: PATH_PAGE.faqs,
@@ -50,11 +49,8 @@ const LINKS = [
   {
     headline: 'Legal',
     children: [
-      { name: 'Terms and Condition', href: PATH_PAGE.termsCondition },
-      { name: 'Privacy Policy', href: PATH_PAGE.privacy },
-      { name: 'Refund Policy', href: PATH_PAGE.refund },
-      { name: 'Data Protection Policy', href: PATH_PAGE.dataProtect },
-      { name: 'Abuse Policy', href: PATH_PAGE.abuse },
+      { name: 'Terms and Condition', href: '#' },
+      { name: 'Privacy Policy', href: '#' },
     ],
   },
 ];
@@ -65,28 +61,28 @@ export const _socials = [
     name: 'FaceBook',
     icon: 'eva:facebook-fill',
     color: '#1877F2',
-    path: 'https://www.facebook.com/thrivebizng',
+    path: 'https://www.facebook.com/caitlyn.kerluke',
   },
   {
     value: 'instagram',
     name: 'Instagram',
     icon: 'ant-design:instagram-filled',
     color: '#E02D69',
-    path: 'https://www.instagram.com/icss_thrive',
+    path: 'https://www.instagram.com/caitlyn.kerluke',
   },
   {
     value: 'linkedin',
     name: 'Linkedin',
     icon: 'eva:linkedin-fill',
     color: '#007EBB',
-    path: 'https://www.linkedin.com/thrivebizng',
+    path: 'https://www.linkedin.com/caitlyn.kerluke',
   },
   {
     value: 'twitter',
     name: 'Twitter',
     icon: 'eva:twitter-fill',
     color: '#00AAEC',
-    path: 'https://www.twitter.com/thrivebizng',
+    path: 'https://www.twitter.com/caitlyn.kerluke',
   },
 ];
 
@@ -136,16 +132,13 @@ export default function Footer() {
             businesses because it is supported by
           </Typography>
           <Stack direction="row" spacing={10} justifyContent="space-between">
-            {[giz, gopa].map((_, i) => (
-              <Image
-                key={i}
-                alt="Logo"
-                style={{ objectFit: 'contain', maxWidth: i === 0 ? '50%' : '25%' }}
-                height={i === 0 ? 120 : 80}
-                width={500}
-                src={_.src}
-              />
-            ))}
+            <Image
+              alt="Logo"
+              style={{ objectFit: 'contain', maxWidth: '100%' }}
+              height={gopa.height}
+              width={gopa.width}
+              src={gopa.src}
+            />
           </Stack>
         </Stack>
       </Container>
@@ -159,19 +152,9 @@ export default function Footer() {
             </Typography>
           </m.div>
 
-          <Stack direction="row" spacing={3} justifyContent="center" alignItems="center" mt={2}>
-            <Typography variant="h3">Brought to you by</Typography>
-            <Image
-              alt="Logo"
-              style={{ objectFit: 'contain', width: 'auto' }}
-              height={150}
-              width={400}
-              src={ehub.src}
-            />
-          </Stack>
-
-          <Grid container spacing={10} justifyContent="center" gridTemplateColumns={10}>
+          <Grid container spacing={10} justifyContent="center" mt={2}>
             {[
+              ehub,
               valucon,
               weboh,
               hbf,
@@ -186,16 +169,22 @@ export default function Footer() {
               kb,
               leverage,
             ].map((_, i) => (
-              <Grid key={_.src} item xl={2} xs={5}>
-                <Link href={consortiums.find((c) => c.logo === _)?.link}>
-                  <Image
-                    alt="Logo"
-                    style={{ objectFit: 'contain', width: 'auto' }}
-                    height={100}
-                    width={400}
-                    src={_.src}
-                  />
-                </Link>
+              <Grid
+                key={_.src}
+                item
+                xl={i === 0 ? 3 : 2}
+                md={i === 0 ? 4 : 3}
+                sm={i === 0 ? 6 : 4}
+                xs={6}
+              >
+                {i === 0 && <Typography variant="h5">Brought to you by</Typography>}
+                <Image
+                  alt="Logo"
+                  style={{ objectFit: 'contain', width: 'auto' }}
+                  height={i === 0 ? 150 : 100}
+                  width={400}
+                  src={_.src}
+                />
               </Grid>
             ))}
           </Grid>

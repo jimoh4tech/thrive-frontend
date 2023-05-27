@@ -102,7 +102,7 @@ export default function PaymentSummary({
       <Stack alignItems="center" spacing={1}>
         <Stack direction="row" alignItems="center" spacing={1}>
           <Iconify icon="eva:shield-fill" sx={{ color: 'primary.main' }} />
-          <Typography variant="subtitle2">Secure credit card payment</Typography>
+          <Typography variant="subtitle2">Secure card payment</Typography>
         </Stack>
 
         <Typography variant="caption" sx={{ color: 'text.secondary', textAlign: 'center' }}>

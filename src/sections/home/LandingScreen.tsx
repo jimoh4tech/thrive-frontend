@@ -8,10 +8,14 @@ import { banner1, banner2, banner3, banner4 } from 'src/assets/images';
 import Iconify from 'src/components/iconify/Iconify';
 import Link from 'next/link';
 import { PATH_AUTH } from 'src/routes/paths';
+import { useCallback, useEffect, useState } from 'react';
+import { loader } from 'src/actions';
+import { useSnackbar } from 'notistack';
 import Image from '../../components/image';
 
 const LandingScreen = () => {
   const theme = useTheme();
+  const { enqueueSnackbar } = useSnackbar();
 
   const carouselSettings = {
     speed: 1500,
@@ -31,6 +35,20 @@ const LandingScreen = () => {
       },
     }),
   };
+
+  const [totalUsers, setTotalUsers] = useState();
+  const getUsersCount = useCallback(async () => {
+    try {
+      const { count } = await loader('countUsers');
+      setTotalUsers(count);
+    } catch (error) {
+      enqueueSnackbar(error.message || error, { variant: 'error' });
+    }
+  }, [enqueueSnackbar]);
+
+  useEffect(() => {
+    getUsersCount();
+  }, [getUsersCount]);
 
   return (
     <Grid container justifyContent="center" alignItems="center" pt={{ md: 16 }} spacing={4}>
@@ -62,21 +80,24 @@ const LandingScreen = () => {
           <Box>
             <Typography variant="h6">Registered User</Typography>
             <Stack direction="row" spacing={1} mt={1}>
-              {'000'.split('').map((_, i) => (
-                <Box
-                  key={i}
-                  sx={{
-                    border: 1,
-                    borderRadius: 1,
-                    borderColor: 'primary.main',
-                    px: 2,
-                    py: 1,
-                    bgcolor: '#ffffffa2',
-                  }}
-                >
-                  <Typography variant="h3">{_}</Typography>
-                </Box>
-              ))}
+              {`000${totalUsers}`
+                .substr(-3)
+                .split('')
+                .map((_, i) => (
+                  <Box
+                    key={i}
+                    sx={{
+                      border: 1,
+                      borderRadius: 1,
+                      borderColor: 'primary.main',
+                      px: 2,
+                      py: 1,
+                      bgcolor: '#ffffffa2',
+                    }}
+                  >
+                    <Typography variant="h3">{_}</Typography>
+                  </Box>
+                ))}
             </Stack>
           </Box>
         </Stack>

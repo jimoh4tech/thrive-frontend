@@ -41,7 +41,7 @@ export default function UserTableRow({
   onApprove,
   onDecline,
 }: Props) {
-  const { fullName, avatarUrl, email, icssId, dob, createdAt, status } = row;
+  const { fullName, avatarUrl, email, icssId, createdAt, status, ngo } = row;
 
   const [openConfirm, setOpenConfirm] = useState(false);
   const [openDecline, setOpenDecline] = useState(false);
@@ -93,7 +93,7 @@ export default function UserTableRow({
         </TableCell>
 
         <TableCell align="left" sx={{ textTransform: 'capitalize' }}>
-          {dob}
+          {ngo.name}
         </TableCell>
         <TableCell align="left" sx={{ textTransform: 'capitalize' }}>
           {fDate(createdAt)}

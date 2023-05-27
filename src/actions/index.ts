@@ -12,6 +12,8 @@ const endpoints = {
   resetpassword: '/users/reset-password',
   changepassword: '/users/change-password',
 
+  countUsers: '/members/count',
+
   media: '/business-media',
   mediaCats: '/business-media/categories',
   template: '/business-template',

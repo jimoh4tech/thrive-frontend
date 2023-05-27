@@ -54,7 +54,7 @@ const TABLE_HEAD = [
   { id: 'name', label: 'Name', align: 'left' },
   { id: 'email', label: 'Email', align: 'left' },
   { id: 'icssId', label: 'ICSS ID', align: 'left' },
-  { id: 'role', label: 'Date of Birth', align: 'left' },
+  { id: 'role', label: 'Consortium', align: 'left' },
   { id: 'role', label: 'Reg Date', align: 'left' },
   // { id: 'isVerified', label: 'Verified', align: 'center' },
   { id: 'status', label: 'Status', align: 'left' },

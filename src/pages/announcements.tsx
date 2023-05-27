@@ -35,7 +35,6 @@ export default function HomePage() {
           onClearFilter={() => {}}
           searching={false}
           withDateFilter={false}
-          filterOptions={[{ label: 'All Industries', name: 'industries', options: [] }]}
           onChangeOption={(name, value) => {}}
         />
 

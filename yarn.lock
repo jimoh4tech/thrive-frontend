@@ -2517,6 +2517,11 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@paystack/inline-js@^2.12.6":
+  version "2.12.6"
+  resolved "https://registry.npmjs.org/@paystack/inline-js/-/inline-js-2.12.6.tgz"
+  integrity sha512-OGr4o3v1iDnmikWfdeGiTl+q4nbAK1ffvrp7wBcKLSg65nWe+Eus90Mn72OQ/mo/zJdHm3IY2RZX3FtgIzrEsw==
+
 "@pkgr/utils@^2.3.1":
   version "2.3.1"
   resolved "https://registry.npmjs.org/@pkgr/utils/-/utils-2.3.1.tgz"

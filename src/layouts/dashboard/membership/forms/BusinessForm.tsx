@@ -108,7 +108,6 @@ export default function BusinessProfile() {
 
   const [openPaymentPopup, setOpenPaymentPopup] = useState(false);
   const [submitting, setIsSubmitting] = useState(false);
-  const [paymentRef, setPaymentRef] = useState<string | null>(null);
 
   const [business, setBusiness] = useState<FormValuesProps | any>(null);
 
@@ -123,60 +122,57 @@ export default function BusinessProfile() {
     try {
       setIsSubmitting(true);
       setBusiness(data);
+      const txnRef = localStorage.getItem(`payment-successfull`) || '';
+      if (txnRef) {
+        await onSubmit(txnRef);
+        return;
+      }
       setOpenPaymentPopup(true);
     } catch (error) {
-      console.error(error);
+      enqueueSnackbar(error.message || error);
     }
   };
 
-  const onSubmit = useCallback(async () => {
-    if (!submitting || !paymentRef) return;
-    const { txnId } = JSON.parse(localStorage.getItem(`${paymentRef}-payment`) || '{}');
-    localStorage.removeItem(`${paymentRef}-payment`);
+  const onSubmit = useCallback(
+    async (ref: string) => {
+      if (!submitting || !ref) return;
 
-    if (!txnId) {
-      // localStorage.setItem('business', JSON.stringify(business));
-      return;
-    }
+      try {
+        setOpenPaymentPopup(false);
+        const { logo, cac, ...rest } = business;
 
-    try {
-      // const _data = new FormData();
+        if (cac) {
+          const {
+            data: { public_id },
+          } = await uploadSingle(cac, 'cac');
 
-      // const keys = Object.keys(business!);
+          rest.cac = public_id;
+        }
 
-      // for (let i = 0; i < keys.length; i += 1) {
-      //   _data.append(keys[i], business[keys[i]]);
-      // }
-      setOpenPaymentPopup(false);
-      const { logo, cac, ...rest } = business;
+        if (logo) {
+          const {
+            data: { public_id },
+          } = await uploadSingle(logo, 'logo');
 
-      if (cac) {
-        const {
-          data: { public_id },
-        } = await uploadSingle(cac, 'cac');
+          rest.logo = public_id;
+        }
 
-        rest.cac = public_id;
+        rest.reference = ref;
+
+        const res = await createBusiness(rest);
+        localStorage.removeItem(`payment-successfull`);
+
+        enqueueSnackbar(res.data.message);
+        reset();
+        revalidateUser!();
+      } catch (err) {
+        reset(business!, { keepValues: true });
+        console.error(err);
+        enqueueSnackbar(err?.message || err, { variant: 'error' });
       }
-
-      if (logo) {
-        const {
-          data: { public_id },
-        } = await uploadSingle(logo, 'logo');
-
-        rest.logo = public_id;
-      }
-
-      const res = await createBusiness(rest);
-
-      enqueueSnackbar(res.data.message);
-      reset();
-      revalidateUser!();
-    } catch (err) {
-      reset(business!, { keepValues: true });
-      console.error(err);
-      enqueueSnackbar(err?.message || err, { variant: 'error' });
-    }
-  }, [business, enqueueSnackbar, paymentRef, reset, revalidateUser, submitting]);
+    },
+    [business, enqueueSnackbar, reset, revalidateUser, submitting]
+  );
 
   const handleDrop = useCallback(
     (acceptedFiles: File[], field: keyof typeof defaultValues) => {
@@ -192,13 +188,6 @@ export default function BusinessProfile() {
     },
     [setValue]
   );
-  useEffect(() => {
-    window.addEventListener('storage', onSubmit);
-
-    return () => {
-      window.removeEventListener('storage', onSubmit);
-    };
-  }, [onSubmit, user]);
 
   const [industries, setIndustries] = useState([]);
 
@@ -279,7 +268,7 @@ export default function BusinessProfile() {
                 <RHFTextField name="bio" multiline rows={4} label="Business Description" />
                 <Box>
                   <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-                    Upload CAC Document
+                    Upload Business registration Document
                   </Typography>
                   <RHFUpload
                     name="logo"
@@ -313,11 +302,10 @@ export default function BusinessProfile() {
       <PaymentPopup
         open={openPaymentPopup}
         onClose={() => setOpenPaymentPopup(false)}
-        cb={setPaymentRef}
-        split_code="SPL_MWELhgBJTA"
+        cb={onSubmit}
         items={[
           { name: 'Registration', amount: 500 },
-          { name: 'Subscription', amount: 2000, label: 'Basic' },
+          { name: 'Subscription', amount: 2000, label: 'Premium' },
         ]}
       />
     </>

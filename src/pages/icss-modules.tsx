@@ -34,13 +34,10 @@ export default function HomePage() {
       {Object.keys(modules).map((key: keyof typeof modules, i) => {
         const module = modules[key];
         const isOdd = (i + 1) % 2;
-        let bgColor;
-        if (i === 0 || i === 3) bgColor = '#f7f7f7';
-        if (i === 2) bgColor = '#333';
 
         return (
           // @ts-ignore
-          <Box bgcolor={bgColor} key={i} py={6}>
+          <Box bgcolor={isOdd ? '#f7f7f7' : undefined} key={i} py={6}>
             <Container>
               <Grid
                 direction={!isOdd ? 'row-reverse' : 'row'}
@@ -51,7 +48,7 @@ export default function HomePage() {
                 <Grid item md={6}>
                   <Image src={module.image} />
                 </Grid>
-                <Grid item md={6} color={i === 2 ? 'white' : undefined}>
+                <Grid item md={6}>
                   <Typography variant="caption">MODULE {i + 1}</Typography>
                   <Typography variant="h2" sx={{ textTransform: 'uppercase' }}>
                     {key}

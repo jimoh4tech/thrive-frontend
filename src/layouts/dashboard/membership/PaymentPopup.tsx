@@ -4,16 +4,12 @@ import { Button, Dialog, DialogContent, Typography } from '@mui/material';
 // layouts
 // routes
 import { Box, Container, Stack } from '@mui/system';
-import { useSnackbar } from 'notistack';
-import { useState } from 'react';
-import { initiatePayment } from 'src/actions/paymentAction';
 import { useAuthContext } from 'src/auth/useAuthContext';
 // components
 import Iconify from '../../../components/iconify';
 // sections
 // assets
 import { PlanPremiumIcon } from '../../../assets/icons';
-import PaymentAddress from './forms/PaymentAddress';
 import PaymentSummary, { PaymentProps } from './forms/PaymentSummary';
 
 const PaymentPopup = ({
@@ -21,47 +17,23 @@ const PaymentPopup = ({
   onClose,
   cb,
   items,
-  split_code,
 }: {
   open: boolean;
   onClose?: VoidFunction;
   items: PaymentProps['items'];
-  split_code?: string;
   cb?: (ref: string, txnId?: number) => void;
 }) => {
   const { user } = useAuthContext();
 
-  const [data, setData] = useState({
+  const data = {
     fullName: user?.fullName || '',
     email: user?.email || '',
     phoneNumber: user?.phone || '',
     address: user?.address || '',
-  });
-
-  const { enqueueSnackbar } = useSnackbar();
-
-  const initPayment = async () => {
-    try {
-      const {
-        data: { authorizationUrl: url, reference },
-      } = await initiatePayment(
-        (() => {
-          let total = 0;
-          for (let i = 0; i < items.length; i += 1) total += items[i].amount;
-          return { amount: total, split_code };
-        })()
-      );
-
-      await cb!(reference);
-
-      window.open(url, '_blank', 'noreferrer');
-    } catch (error) {
-      enqueueSnackbar(error.message || error, { variant: 'error' });
-    }
   };
 
   return (
-    <Dialog fullWidth maxWidth="lg" open={open}>
+    <Dialog fullWidth maxWidth="sm" open={open}>
       <DialogContent
         sx={{ py: 10, textAlign: 'center', justifyContent: 'center', alignItems: 'center' }}
       >
@@ -77,23 +49,11 @@ const PaymentPopup = ({
               </Typography>
             </Box>
 
-            <Box
-              rowGap={3}
-              columnGap={2}
-              display="grid"
-              gridTemplateColumns={{
-                xs: 'repeat(1, 1fr)',
-                sm: 'repeat(2, 1fr)',
-              }}
-            >
-              <Box>
+            {/* <Box>
                 <PaymentAddress onInput={(name, value) => setData({ ...data, fullName: value })} />
-              </Box>
+              </Box> */}
 
-              <Box>
-                <PaymentSummary data={data} onSubmit={initPayment} items={items} />
-              </Box>
-            </Box>
+            <PaymentSummary data={data} onSuccess={cb!} items={items} />
           </Stack>
           <Button
             color="inherit"

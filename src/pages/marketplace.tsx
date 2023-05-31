@@ -16,7 +16,7 @@ import MainLayout from '../layouts/main';
 // ----------------------------------------------------------------------
 
 HomePage.getLayout = (page: React.ReactElement) => (
-  <MainLayout metaTitle="ICSS Trainers, Facilitator, Coaches (TFC)">{page}</MainLayout>
+  <MainLayout metaTitle="MSME Market">{page}</MainLayout>
 );
 
 // ----------------------------------------------------------------------

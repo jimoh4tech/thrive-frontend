@@ -80,8 +80,8 @@ export default function BusinessUpdateForm() {
       .matches(/^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/, 'Invalid slug')
       .required('Business Industry is required'),
     bio: Yup.string()
-      .required('Business description is required')
-      .min(500, 'Business description must be above 150 characters'),
+      .min(30, 'Business description must be above 30 characters')
+      .max(300, 'Business description must be less than 300 characters'),
     facebookLink: Yup.string().url('Invalid URL'),
     twitterLink: Yup.string().url('Invalid URL'),
     instagramLink: Yup.string().url('Invalid URL'),

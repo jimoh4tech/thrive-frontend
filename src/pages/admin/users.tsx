@@ -66,16 +66,7 @@ UserListPage.getLayout = (page: React.ReactElement) => <DashboardLayout>{page}</
 // ----------------------------------------------------------------------
 
 export default function UserListPage() {
-  const {
-    page,
-    order,
-    orderBy,
-    rowsPerPage,
-    setPage,
-    //
-    //
-    onSort,
-  } = useTable();
+  const { order, orderBy, setPage, onSort } = useTable();
 
   const { themeStretch } = useSettingsContext();
 
@@ -247,7 +238,7 @@ export default function UserListPage() {
                   orderBy={orderBy}
                   headLabel={TABLE_HEAD}
                   rowCount={totalItems}
-                  onSort={onSort}
+                  onSort={(_) => console.log(_)}
                   // onSelectAllRows={(checked) =>
                   //   onSelectAllRows(
                   //     checked,
@@ -257,18 +248,16 @@ export default function UserListPage() {
                 />
 
                 <TableBody>
-                  {records
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row: any) => (
-                      <UserTableRow
-                        key={row.id}
-                        row={row}
-                        // onSelectRow={() => onSelectRow(row.id)}
-                        onApprove={(icssId) => onApproveUser(row.id, icssId)}
-                        onDecline={onDeclineUser}
-                        // onEditRow={() => handleEditRow(row.name)}
-                      />
-                    ))}
+                  {records.map((row: any) => (
+                    <UserTableRow
+                      key={row.id}
+                      row={row}
+                      // onSelectRow={() => onSelectRow(row.id)}
+                      onApprove={(icssId) => onApproveUser(row.id, icssId)}
+                      onDecline={onDeclineUser}
+                      // onEditRow={() => handleEditRow(row.name)}
+                    />
+                  ))}
 
                   {/* <TableEmptyRows
                     height={denseHeight}

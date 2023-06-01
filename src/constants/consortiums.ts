@@ -37,7 +37,7 @@ export const consortiums = [
     title: 'Hope Builders International Consult Ltd.',
     logo: hbf,
     text: '<p>Hope Builders International Consult Ltd. is organized exclusively for educational, scientific, community empowerment, and consulting purposes. We are convinced that the challenges that confront youths and women in Africa are multi-dimensional and complex and thus require an integration of responses that address their intellectual, economic, social, emotional, and spiritual empowerment needs.</p><p>Accordingly, our integral youth development program is made up of vocational skills training in market-related technical and commercial trades, small enterprise development services, life skills education, inspirational talks, academic coaching, and the promotion of talents in the arts.</p>',
-    link: 'https://hopebuildersconsult.org/',
+    link: 'https://hbf-empowerment.org.ng/',
   },
   {
     title: 'LAPO Microfinance Bank',

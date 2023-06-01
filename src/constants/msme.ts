@@ -17,7 +17,6 @@ const msme = {
         <li>Support Services</li>
         <li>Marketing</li>
         <li>Finance</li>
-        <li></li>
     </ul> `,
   },
   body2: {

@@ -115,7 +115,7 @@ const PaystackPay = ({
     publicKey: process.env.NEXT_PUBLIC_PAYSTACK_KEY!,
     // split_code: process.env.NEXT_PUBLIC_PAYSTACK_SPLIT_CODE!,
     email,
-    amount: amount * 1,
+    amount: amount * 100,
   };
   const initializePayment = usePaystackPayment(config);
   const [isSubmitting, setIsSubmitting] = useState(false);

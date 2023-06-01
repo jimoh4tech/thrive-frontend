@@ -50,7 +50,11 @@ export default function FileManagerPage() {
   const getBusinesses = useCallback(async () => {
     try {
       setFetching(true);
-      const data = await customLoader('workspace', query);
+      const data = await customLoader('workspace', {
+        sortBy: 'createdAt',
+        order: 'DESC',
+        ...query,
+      });
 
       setWorkspaces(data);
 

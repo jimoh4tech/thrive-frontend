@@ -39,7 +39,7 @@ const navConfig = [
   {
     subheader: '',
     items: [
-      { title: 'Overview', path: PATH_ADMIN.root, icon: ICONS.dashboard },
+      // { title: 'Overview', path: PATH_ADMIN.root, icon: ICONS.dashboard },
       { title: 'Users', path: PATH_ADMIN.users, icon: ICONS.user },
       // Business Box
       {

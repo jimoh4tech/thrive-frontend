@@ -55,6 +55,7 @@ export default function NewMediaForm({ categories }: { categories: any[] }) {
     reset,
     setValue,
     handleSubmit,
+    getValues,
     formState: { isSubmitting },
   } = methods;
 
@@ -121,22 +122,18 @@ export default function NewMediaForm({ categories }: { categories: any[] }) {
                 </Typography>
 
                 <RHFUpload
-                  accept={{
-                    'image/*': [],
-                    'audio/*': [],
-                    'video/*': [],
-                    'text/*': ['.csv', '.txt', ''],
-                    'application/*': [
-                      '.doc',
-                      '.xls',
-                      '.xlsx',
-                      '.docx',
-                      '.gz',
-                      '.pdf',
-                      '.rar',
-                      '.zip',
-                    ],
-                  }}
+                  multiple
+                  accept={{}}
+                  files={[
+                    ...(getValues('mediaUrl')
+                      ? [
+                          Object.assign(getValues('mediaUrl'), {
+                            preview: URL.createObjectURL(getValues('mediaUrl')),
+                          }),
+                        ]
+                      : []),
+                  ]}
+                  onRemove={handleRemoveFile}
                   name="mediaUrl"
                   maxSize={3145728000}
                   onDrop={handleDrop}

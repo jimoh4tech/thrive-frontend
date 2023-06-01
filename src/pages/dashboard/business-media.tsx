@@ -51,7 +51,7 @@ export default function FileManagerPage() {
   const getMedia = useCallback(async () => {
     try {
       setFetching(true);
-      const data = await loader('mediaLibrary', query);
+      const data = await loader('mediaLibrary', { sortBy: 'createdAt', order: 'DESC', ...query });
 
       setMedia(data);
 

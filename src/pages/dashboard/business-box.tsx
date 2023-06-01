@@ -99,7 +99,11 @@ export default function FileManagerPage() {
   const getMedia = useCallback(async () => {
     try {
       setFetching(true);
-      const data: IResDataMany<IMedia> = await loader('templateLibrary', query);
+      const data: IResDataMany<IMedia> = await loader('templateLibrary', {
+        sortBy: 'createdAt',
+        order: 'DESC',
+        ...query,
+      });
 
       setMedia(data);
 

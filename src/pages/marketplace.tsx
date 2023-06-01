@@ -43,7 +43,7 @@ export default function HomePage() {
   const getEvents = useCallback(async () => {
     try {
       setFetching(true);
-      const data = await loader('businesses', query);
+      const data = await loader('businesses', { sortBy: 'createdAt', order: 'DESC', ...query });
 
       setBusineses(data);
 

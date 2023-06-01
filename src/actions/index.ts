@@ -1,8 +1,12 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import { IQuery } from 'src/@types/query';
 import axiosInstance from 'src/utils/axios';
 
 const endpoints = {
+  users: '/admin/users',
+
+  userDecline: `/admin/users/decline`,
+
   user: '/users',
   userBusiness: '/users/business',
 
@@ -44,8 +48,8 @@ export const fetcher = async (url: string) => (await axiosInstance.get(url)).dat
 export const loader = async (model: IEndpoints, params: IQuery = {}) =>
   (await axiosInstance.get(endpoints[model], { params })).data;
 
-export const updater = async (model: IEndpoints, data: any) =>
-  (await axiosInstance.put(endpoints[model], data)).data;
+export const updater = async (model: IEndpoints, data: any, config?: AxiosRequestConfig<any>) =>
+  (await axiosInstance.put(endpoints[model], data, config)).data;
 
 export const creator = async (model: IEndpoints, data: any) =>
   (await axiosInstance.post(endpoints[model], data)).data;

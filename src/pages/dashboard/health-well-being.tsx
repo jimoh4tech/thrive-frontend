@@ -51,7 +51,7 @@ export default function FileManagerPage() {
   const getEvents = useCallback(async () => {
     try {
       setFetching(true);
-      const data = await loader('health', query);
+      const data = await loader('health', { sortBy: 'createdAt', order: 'DESC', ...query });
 
       setEvents(data);
 

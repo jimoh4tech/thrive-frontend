@@ -1,7 +1,7 @@
 // next
 import NextLink from 'next/link';
 // @mui
-import { Link, Stack, Typography } from '@mui/material';
+import { Link, Stack, Typography, useTheme } from '@mui/material';
 // layouts
 import LoginLayout from '../../layouts/login';
 // routes
@@ -12,6 +12,8 @@ import AuthRegisterForm from './AuthRegisterForm';
 // ----------------------------------------------------------------------
 
 export default function Register() {
+  // const [shouldRegister, setShouldRegister] = useState(false);
+  // const theme = useTheme();
   return (
     <LoginLayout title="Access all the tools you need to boost your business">
       <Stack spacing={2} sx={{ mb: 5, position: 'relative' }}>
@@ -25,6 +27,45 @@ export default function Register() {
           </Link>
         </Stack>
       </Stack>
+
+      {/* <Card>
+        <CardHeader
+          title="Are your ICSS Certified?"
+          subheader="Confirm your membership"
+          sx={{
+            '& .MuiCardHeader-action': { alignSelf: 'center' },
+          }}
+        />
+        Hello
+        <Stack
+          spacing={2}
+          direction="row"
+          alignItems="flex-end"
+          sx={{
+            p: theme.spacing(0, 3, 3, 3),
+          }}
+        >
+          <Button
+            fullWidth
+            color="success"
+            variant="contained"
+            startIcon={<Iconify icon="eva:checkmark-circle-2-fill" />}
+            onClick={() => console.log('ACCEPT')}
+          >
+            Accept
+          </Button>
+
+          <Button
+            fullWidth
+            color="error"
+            variant="contained"
+            startIcon={<Iconify icon="eva:close-circle-fill" />}
+            onClick={() => console.log('REJECT')}
+          >
+            Reject
+          </Button>
+        </Stack>
+      </Card> */}
 
       <AuthRegisterForm />
 

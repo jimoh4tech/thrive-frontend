@@ -8,6 +8,7 @@ export interface IQuery {
   sortBy?: string;
   order?: 'ASC' | 'DESC';
   filterBy?: string;
+  filter?: string;
   startDate?: Date;
   endDate?: Date;
 }

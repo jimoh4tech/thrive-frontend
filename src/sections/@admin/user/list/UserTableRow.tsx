@@ -30,7 +30,7 @@ type Props = {
   // onSelectRow?: VoidFunction;
   // onDeleteRow?: VoidFunction;
   onApprove: (icssId: string) => void;
-  onDecline: VoidFunction;
+  onDecline: (id: number) => void;
 };
 
 export default function UserTableRow({
@@ -41,7 +41,7 @@ export default function UserTableRow({
   onApprove,
   onDecline,
 }: Props) {
-  const { fullName, avatarUrl, email, icssId, createdAt, status, ngo } = row;
+  const { fullName, avatarUrl, email, icssId, createdAt, status, ngo, isApproved } = row;
 
   const [openConfirm, setOpenConfirm] = useState(false);
   const [openDecline, setOpenDecline] = useState(false);
@@ -114,7 +114,7 @@ export default function UserTableRow({
         <TableCell align="left">
           <Label
             variant="soft"
-            color={(status === 'banned' && 'error') || 'success'}
+            color={(isApproved && 'success') || (status === 'pending' && 'warning') || 'error'}
             sx={{ textTransform: 'capitalize' }}
           >
             {status}
@@ -128,22 +128,26 @@ export default function UserTableRow({
         </TableCell>
       </TableRow>
 
-      <MenuPopover
-        open={openPopover}
-        onClose={handleClosePopover}
-        arrow="right-top"
-        sx={{ width: 140 }}
-      >
-        <MenuItem onClick={() => handlePopoverClick(setOpenConfirm)} sx={{ color: 'success.main' }}>
-          <Iconify icon="mdi:approve" />
-          Approve
-        </MenuItem>
-
-        <MenuItem onClick={() => handlePopoverClick(setOpenDecline)} sx={{ color: 'error.main' }}>
-          <Iconify icon="mdi:cancel" />
-          Decline
-        </MenuItem>
-      </MenuPopover>
+      {!isApproved && (
+        <MenuPopover
+          open={openPopover}
+          onClose={handleClosePopover}
+          arrow="right-top"
+          sx={{ width: 140 }}
+        >
+          <MenuItem
+            onClick={() => handlePopoverClick(setOpenConfirm)}
+            sx={{ color: 'success.main' }}
+          >
+            <Iconify icon="mdi:approve" />
+            Approve
+          </MenuItem>
+          <MenuItem onClick={() => handlePopoverClick(setOpenDecline)} sx={{ color: 'error.main' }}>
+            <Iconify icon="mdi:cancel" />
+            Decline
+          </MenuItem>
+        </MenuPopover>
+      )}
 
       <RenderApproveDialog
         onApprove={handleApprove}
@@ -153,10 +157,9 @@ export default function UserTableRow({
       <ConfirmDialog
         open={openDecline}
         onClose={() => setOpenDecline(false)}
-        title="Delete"
-        content="Enter ICSS ID to proceed"
+        title="Confirn Action"
         action={
-          <Button variant="contained" color="error" onClick={onDecline}>
+          <Button variant="contained" color="error" onClick={() => onDecline(row.id)}>
             Decline
           </Button>
         }

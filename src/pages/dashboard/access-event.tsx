@@ -51,7 +51,7 @@ export default function FileManagerPage() {
   const getEvents = useCallback(async () => {
     try {
       setFetching(true);
-      const data = await loader('events', query);
+      const data = await loader('events', { sortBy: 'createdAt', order: 'DESC', ...query });
 
       setEvents(data);
 

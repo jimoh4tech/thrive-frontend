@@ -129,7 +129,7 @@ export default function FileCard({ file, sx, ...other }: Props) {
         <MenuItem
           onClick={() => {
             handleClosePopover();
-            saveAs(file.mediaUrl);
+            saveAs(file.mediaUrl, file.name);
           }}
         >
           <Iconify icon="eva:arrow-circle-down-fill" color="primary.light" />

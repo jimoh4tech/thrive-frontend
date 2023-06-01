@@ -14,10 +14,11 @@ import {
 } from '@mui/material';
 // routes
 import { useSnackbar } from 'notistack';
-import { fetcher, loader } from 'src/actions';
-import { approveUser } from 'src/actions/admin/usersAction';
+import { IQuery, IResDataMany } from 'src/@types/query';
+import { loader, updater } from 'src/actions';
+import { approveUser, declineUser } from 'src/actions/admin/usersAction';
 import Loading from 'src/components/loading';
-import useSWR from 'swr';
+import Pagination from 'src/components/pagination';
 import { PATH_ADMIN } from '../../routes/paths';
 // @types
 import { IUserAccountGeneral } from '../../@types/user';
@@ -32,7 +33,6 @@ import {
   TableHeadCustom,
   TableNoData,
   TablePaginationCustom,
-  getComparator,
   useTable,
 } from '../../components/table';
 // sections
@@ -44,11 +44,9 @@ const STATUS_OPTIONS = [
   { label: 'All', value: 'all' },
   { label: 'Pending Approval', value: 'pending' },
   { label: 'Approved', value: 'approved' },
-  { label: 'Declined', value: 'declined' },
-  { label: 'Banned', value: 'banned' },
+  // { label: 'Declined', value: 'declined' },
+  // { label: 'Banned', value: 'banned' },
 ];
-
-const ROLE = ['all', 'member', 'partner', 'admin'];
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Name', align: 'left' },
@@ -68,15 +66,6 @@ UserListPage.getLayout = (page: React.ReactElement) => <DashboardLayout>{page}</
 // ----------------------------------------------------------------------
 
 export default function UserListPage() {
-  const [searchVal, setSearchVal] = useState('');
-
-  const {
-    data: { records = [], totalItems } = { records: [], totalItems: 0 },
-
-    isLoading,
-    mutate,
-  } = useSWR(`/admin/users${searchVal ? `?q=${searchVal}` : ''}`, fetcher);
-
   const {
     page,
     order,
@@ -86,76 +75,80 @@ export default function UserListPage() {
     //
     //
     onSort,
-    onChangePage,
-    onChangeRowsPerPage,
   } = useTable();
 
   const { themeStretch } = useSettingsContext();
 
-  const [filterRole, setFilterRole] = useState('all');
-
   const [filterStatus, setFilterStatus] = useState('all');
-
-  const dataFiltered = applyFilter({
-    inputData: records,
-    comparator: getComparator(order, orderBy),
-    searchVal,
-    filterRole,
-    filterStatus,
+  const [{ records, totalItems, totalPages, currentPage }, setUsers] = useState<
+    IResDataMany<IUserAccountGeneral>
+  >({
+    totalItems: 0,
+    totalPages: 0,
+    records: [],
+    currentPage: 0,
   });
 
   // const denseHeight = dense ? 52 : 72;
 
-  const isFiltered = searchVal !== '' || filterRole !== 'all' || filterStatus !== 'all';
-
-  const isNotFound =
-    (!dataFiltered.length && !!searchVal) ||
-    (!dataFiltered.length && !!filterRole) ||
-    (!dataFiltered.length && !!filterStatus);
-
-  const handleFilterStatus = (event: React.SyntheticEvent<Element, Event>, newValue: string) => {
+  const handleFilterStatus = (_: any, newValue: string) => {
     setPage(0);
+    if (newValue !== 'all') setQuery({ ...query, filterBy: 'status', filter: newValue });
+    else setQuery({});
     setFilterStatus(newValue);
   };
 
-  const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPage(0);
-    setSearchVal(e.target.value);
-    mutate();
-  };
-
-  const handleFilterRole = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPage(0);
-    setFilterRole(event.target.value);
-  };
-
   const handleResetFilter = () => {
-    setSearchVal('');
-    setFilterRole('all');
     setFilterStatus('all');
+    setQuery({});
   };
 
   const { enqueueSnackbar } = useSnackbar();
 
+  /* ----- States ------ */
+  const [ngos, setNgos] = useState([]);
+  const [fetching, setFetching] = useState(false);
+  const [query, setQuery] = useState<IQuery>({});
   const onApproveUser = async (id: number, icssId: string) => {
     try {
+      setFetching(true);
       const res = await approveUser({ icssId, id });
-      await mutate({
-        records: records.map((_: IUserAccountGeneral) => ({ ..._, icssId })),
-        totalItems,
-      });
+      await getUsers();
       enqueueSnackbar(res.data.message);
     } catch (err) {
       enqueueSnackbar(err.message || err, { color: 'error.main' });
     }
+    setFetching(false);
+  };
+  const onDeclineUser = async (id: number) => {
+    try {
+      setFetching(true);
+      const res = await declineUser(id);
+      await getUsers();
+      enqueueSnackbar(res.data.message);
+    } catch (err) {
+      enqueueSnackbar(err.message || err, { color: 'error.main' });
+    }
+    setFetching(false);
   };
 
-  const [ngos, setNgos] = useState([]);
-  const [industries, setIndustries] = useState([]);
+  const getUsers = useCallback(async () => {
+    try {
+      setFetching(true);
+      const data = await loader('users', { size: 20, ...query });
+
+      setUsers(data);
+    } catch (error) {
+      enqueueSnackbar(error.message || error, { variant: 'error' });
+    }
+    setFetching(false);
+  }, [enqueueSnackbar, query]);
+
+  const handleQuery = (_query: IQuery) => setQuery({ ...query, ..._query });
 
   const getNgos = useCallback(async () => {
     try {
-      const _ngos = await loader('ngos');
+      const _ngos = await loader('ngos', { sortBy: 'name', order: 'ASC' });
 
       setNgos(_ngos);
     } catch (error) {
@@ -163,22 +156,16 @@ export default function UserListPage() {
     }
   }, [enqueueSnackbar]);
 
-  const getIndustries = useCallback(async () => {
-    try {
-      const _ = await loader('industries');
-
-      setIndustries(_);
-    } catch (error) {
-      enqueueSnackbar(error.message || 'Could not fetch Industries', { variant: 'error' });
-    }
-  }, [enqueueSnackbar]);
-
   useEffect(() => {
     getNgos();
-    getIndustries();
+    return () => {};
+  }, [getNgos]);
+
+  useEffect(() => {
+    getUsers();
 
     return () => {};
-  }, [getNgos, getIndustries]);
+  }, [getUsers, query]);
 
   return (
     <>
@@ -196,7 +183,7 @@ export default function UserListPage() {
           ]}
           actions={[
             { title: 'Ngo', endpoint: 'ngos', cb: getNgos },
-            { title: 'Industry', endpoint: 'industries', cb: getIndustries },
+            { title: 'Industry', endpoint: 'industries', cb: () => {} },
           ]}
         />
 
@@ -217,13 +204,19 @@ export default function UserListPage() {
           <Divider />
 
           <UserTableToolbar
-            isFiltered={isFiltered}
-            filterName={searchVal}
-            filterRole={filterRole}
-            optionsRole={ROLE}
-            onFilterName={onSearch}
-            onFilterRole={handleFilterRole}
-            onResetFilter={handleResetFilter}
+            withDateFilter={false}
+            // @ts-ignore
+            onChange={handleQuery}
+            onClearFilter={handleResetFilter}
+            searching={fetching}
+            filterOptions={[
+              {
+                name: 'ngoId',
+                options: ngos.map((_: any) => ({ label: _.name, value: _.id })),
+                label: "Partner Org'",
+              },
+            ]}
+            onChangeOption={(name, value) => setQuery({ filterBy: name, filter: value })}
           />
 
           <TableContainer sx={{ position: 'relative', overflow: 'unset' }}>
@@ -247,7 +240,7 @@ export default function UserListPage() {
             /> */}
 
             <Scrollbar>
-              <Loading open={isLoading} />
+              <Loading open={fetching} />
               <Table size="small" sx={{ minWidth: 800 }}>
                 <TableHeadCustom
                   order={order}
@@ -264,15 +257,15 @@ export default function UserListPage() {
                 />
 
                 <TableBody>
-                  {dataFiltered
+                  {records
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row) => (
+                    .map((row: any) => (
                       <UserTableRow
                         key={row.id}
                         row={row}
                         // onSelectRow={() => onSelectRow(row.id)}
                         onApprove={(icssId) => onApproveUser(row.id, icssId)}
-                        onDecline={() => {}}
+                        onDecline={onDeclineUser}
                         // onEditRow={() => handleEditRow(row.name)}
                       />
                     ))}
@@ -282,62 +275,21 @@ export default function UserListPage() {
                     emptyRows={emptyRows(page, rowsPerPage, tableData.length)}
                   /> */}
 
-                  <TableNoData isNotFound={isNotFound} />
+                  <TableNoData isNotFound={totalItems === 0} />
                 </TableBody>
               </Table>
             </Scrollbar>
           </TableContainer>
 
-          <TablePaginationCustom
-            count={dataFiltered.length}
-            page={page}
-            rowsPerPage={rowsPerPage}
-            onPageChange={onChangePage}
-            onRowsPerPageChange={onChangeRowsPerPage}
-            //
-            // dense={dense}
-            // onChangeDense={onChangeDense}
+          <Pagination
+            withDivider
+            sx={{ justifyContent: 'end' }}
+            totalPages={totalPages}
+            onChange={(num) => handleQuery({ page: num })}
+            currentPage={currentPage}
           />
         </Card>
       </Container>
     </>
   );
-}
-
-// ----------------------------------------------------------------------
-
-function applyFilter({
-  inputData,
-  comparator,
-  searchVal,
-  filterStatus,
-  filterRole,
-}: {
-  inputData: IUserAccountGeneral[];
-  comparator: (a: any, b: any) => number;
-  searchVal: string;
-  filterStatus: string;
-  filterRole: string;
-}) {
-  const stabilizedThis = inputData.map((el, index) => [el, index] as const);
-
-  stabilizedThis.sort((a, b) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) return order;
-    return a[1] - b[1];
-  });
-
-  inputData = stabilizedThis.map((el) => el[0]);
-
-  if (searchVal) {
-    inputData = inputData.filter(
-      (user) => user.fullName.toLowerCase().indexOf(searchVal.toLowerCase()) !== -1
-    );
-  }
-
-  if (filterStatus !== 'all') {
-    inputData = inputData.filter((user) => user.status === filterStatus);
-  }
-
-  return inputData;
 }

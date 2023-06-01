@@ -64,10 +64,10 @@ export default function FileManagerPage() {
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const getEvents = useCallback(async () => {
+  const getBusinesses = useCallback(async () => {
     try {
       setFetching(true);
-      const data = await loader('businesses', query);
+      const data = await loader('businesses', { sortBy: 'createdAt', order: 'DESC', ...query });
 
       setBusineses(data);
 
@@ -78,10 +78,10 @@ export default function FileManagerPage() {
   }, [enqueueSnackbar, query]);
 
   useEffect(() => {
-    getEvents();
+    getBusinesses();
 
     return () => {};
-  }, [getEvents, query]);
+  }, [getBusinesses, query]);
 
   return (
     <>

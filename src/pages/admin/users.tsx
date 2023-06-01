@@ -143,7 +143,7 @@ export default function UserListPage() {
 
       setNgos(_ngos);
     } catch (error) {
-      enqueueSnackbar(error.message || 'Could not fetch media Ngos', { variant: 'error' });
+      enqueueSnackbar(error.message || 'Could not fetch Ngos', { variant: 'error' });
     }
   }, [enqueueSnackbar]);
 

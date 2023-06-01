@@ -3,17 +3,13 @@ import NextLink from 'next/link';
 // @mui
 import { Box, Container, Divider, Grid, IconButton, Link, Stack, Typography } from '@mui/material';
 // routes
-import { LogoFull } from 'src/components/logo/Logo';
-import { fDate } from 'src/utils/formatTime';
-import moment from 'moment';
 import { m } from 'framer-motion';
-import { varFade } from 'src/components/animate';
+import moment from 'moment';
 import {
   capstone,
   dofoll,
   ehub,
   giniushub,
-  giz,
   gopa,
   hbf,
   kalros,
@@ -26,6 +22,8 @@ import {
   viisaus,
   weboh,
 } from 'src/assets/images';
+import { varFade } from 'src/components/animate';
+import { LogoFull } from 'src/components/logo/Logo';
 // import Image from 'src/components/image/Image';
 import Image from 'next/image';
 import { PATH_PAGE } from '../../routes/paths';
@@ -39,7 +37,8 @@ const LINKS = [
     headline: 'Contact Us',
     children: [
       { name: 'frontoffice@thrivebiz.ng', href: 'mailto:frontoffice@thrivebiz.ng' },
-      { name: '+2349066189699 +2349060009685 +2348095862293', href: '#' },
+      { name: '+2349066189699', href: 'tel:+2349066189699' },
+      { name: '+2349067325337', href: 'tel:+2349067325337' },
       {
         name: 'Enterprise Hubs Trinity Avenue by Landmark, Off Ligali Ayorinde, Victoria.',
         href: PATH_PAGE.faqs,
@@ -49,8 +48,11 @@ const LINKS = [
   {
     headline: 'Legal',
     children: [
-      { name: 'Terms and Condition', href: '#' },
-      { name: 'Privacy Policy', href: '#' },
+      { name: 'Terms and Condition', href: PATH_PAGE.termsCondition },
+      { name: 'Privacy Policy', href: PATH_PAGE.privacy },
+      { name: 'Refund Policy', href: PATH_PAGE.refund },
+      { name: 'Data Protection Policy', href: PATH_PAGE.dataProtect },
+      { name: 'Abuse Policy', href: PATH_PAGE.abuse },
     ],
   },
 ];
@@ -61,28 +63,28 @@ export const _socials = [
     name: 'FaceBook',
     icon: 'eva:facebook-fill',
     color: '#1877F2',
-    path: 'https://www.facebook.com/caitlyn.kerluke',
+    path: 'https://www.facebook.com/thrivebizsoutions',
   },
   {
     value: 'instagram',
     name: 'Instagram',
     icon: 'ant-design:instagram-filled',
     color: '#E02D69',
-    path: 'https://www.instagram.com/caitlyn.kerluke',
+    path: 'https://instagram.com/icss_thrive',
   },
   {
     value: 'linkedin',
     name: 'Linkedin',
     icon: 'eva:linkedin-fill',
     color: '#007EBB',
-    path: 'https://www.linkedin.com/caitlyn.kerluke',
+    path: 'https://www.linkedin.com/company/thrivebizng',
   },
   {
     value: 'twitter',
     name: 'Twitter',
     icon: 'eva:twitter-fill',
     color: '#00AAEC',
-    path: 'https://www.twitter.com/caitlyn.kerluke',
+    path: 'https://twitter.com/thrivebizng',
   },
 ];
 

@@ -53,6 +53,23 @@ export default function HomePage() {
     }
   }, [enqueueSnackbar, query]);
 
+  const [industries, setIndustries] = useState([]);
+
+  const getIndustries = useCallback(async () => {
+    try {
+      const _industries = await loader('industries', { sortBy: 'name', order: 'ASC' });
+
+      setIndustries(_industries);
+    } catch (error) {
+      enqueueSnackbar(error.message || 'Could not fetch media Industries', { variant: 'error' });
+    }
+  }, [enqueueSnackbar]);
+
+  useEffect(() => {
+    getIndustries();
+    return () => {};
+  }, [getIndustries]);
+
   useEffect(() => {
     getEvents();
 
@@ -72,6 +89,14 @@ export default function HomePage() {
           onChange={handleQuery}
           onClearFilter={handleClearAll}
           searching={fetching}
+          filterOptions={[
+            {
+              name: 'industryId',
+              options: industries.map((_: any) => ({ label: _.name, value: _.id })),
+              label: "Industries'",
+            },
+          ]}
+          onChangeOption={(name, value) => setQuery({ filterBy: name, filter: value })}
         />
 
         <Box

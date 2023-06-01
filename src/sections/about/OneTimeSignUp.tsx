@@ -6,7 +6,7 @@ import Iconify from 'src/components/iconify/Iconify';
 import Image from 'src/components/image/Image';
 import { otsu } from 'src/constants/about';
 
-const OneTimeSignUp = () => (
+const OneTimeSignUp = ({ withCTA = false }: { withCTA?: boolean }) => (
   <Grid
     container
     direction={{ md: 'row' }}
@@ -31,16 +31,18 @@ const OneTimeSignUp = () => (
 
         <Typography component="div" dangerouslySetInnerHTML={{ __html: otsu.desc }} />
 
-        <Box>
-          <Button
-            LinkComponent={Link}
-            href="/about-us"
-            variant="contained"
-            startIcon={<Iconify icon="mdi:tick-circle-outline" />}
-          >
-            Learn More
-          </Button>
-        </Box>
+        {withCTA && (
+          <Box>
+            <Button
+              LinkComponent={Link}
+              href="/about-us"
+              variant="contained"
+              startIcon={<Iconify icon="mdi:tick-circle-outline" />}
+            >
+              Learn More
+            </Button>
+          </Box>
+        )}
       </Stack>
     </Grid>
   </Grid>

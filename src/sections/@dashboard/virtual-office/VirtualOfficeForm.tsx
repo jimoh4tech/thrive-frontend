@@ -37,7 +37,7 @@ export default function VirtualOfficeFirm() {
     name: Yup.string().required('Business Name is required'),
     designation: Yup.string().required('Your Designation is required'),
     address: Yup.string().required('Address is required'),
-    taxId: Yup.string().required('Business Tax ID is required'),
+    taxId: Yup.string(),
     cac: Yup.mixed().required('CAC document is required'),
     validId: Yup.mixed().optional(),
   });

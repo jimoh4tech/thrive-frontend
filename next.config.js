@@ -11,7 +11,8 @@ module.exports = {
         ? process.env.NEXT_PUBLIC_API_PROD
         : process.env.NEXT_PUBLIC_API,
     // MAPBOX
-    MAPBOX_API: '',
+    MAPBOX_API:
+      'pk.eyJ1IjoiaWNzc3Rocml2ZTAxIiwiYSI6ImNsaHo3dnE2eDFiNWUzY213NnB6d2Z3Y2YifQ.iv-Oay5yXkitnE6OVM5Slw',
     // FIREBASE
     FIREBASE_API_KEY: '',
     FIREBASE_AUTH_DOMAIN: '',

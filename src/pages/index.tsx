@@ -68,7 +68,7 @@ export default function HomePage() {
         </Box>
 
         {/* -------------- One-time Sign-up -------------- */}
-        <OneTimeSignUp />
+        <OneTimeSignUp withCTA />
 
         {/* -------------- Advert -------------- */}
         <Stack

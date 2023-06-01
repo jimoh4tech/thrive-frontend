@@ -89,13 +89,13 @@ export default function FileManagerPage() {
   return (
     <>
       <Head>
-        <title> Directory Listing | ICSS Thrive</title>
+        <title> Workplace Booking | ICSS Thrive</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>
         <CustomBreadcrumbs
-          heading="Directory Listing"
-          links={[{ name: 'Dashboard', href: PATH_DASHBOARD.root }, { name: 'Directory Listing' }]}
+          heading="Workplace Booking"
+          links={[{ name: 'Dashboard', href: PATH_DASHBOARD.root }, { name: 'Workplace Booking' }]}
         />
 
         <Stack

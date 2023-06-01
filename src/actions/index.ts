@@ -18,6 +18,8 @@ const endpoints = {
 
   countUsers: '/members/count',
 
+  sendMessage: '/guest/send',
+
   media: '/business-media',
   mediaCats: '/business-media/categories',
   template: '/business-template',

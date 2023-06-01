@@ -1,44 +1,107 @@
 import { m } from 'framer-motion';
 // @mui
-import { Button, Typography, TextField, Stack } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 // components
+
+// ----------------------------------------------------------------------
+
+import * as Yup from 'yup';
+// form
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
+// @mui
+import { LoadingButton } from '@mui/lab';
+// auth
+import { creator } from 'src/actions';
+// utils
+// assets
+// components
+import { SendSharp } from '@mui/icons-material';
 import { MotionViewport, varFade } from '../../components/animate';
+import FormProvider, { RHFTextField } from '../../components/hook-form';
+import { useSnackbar } from '../../components/snackbar';
 
 // ----------------------------------------------------------------------
 
 export default function ContactForm() {
+  const defaultValues = {
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  };
+
+  const { enqueueSnackbar } = useSnackbar();
+
+  const ContactSchema = Yup.object().shape({
+    name: Yup.string().required('Name is required'),
+    email: Yup.string().required('Email is required').email('Email must be a valid email address'),
+    subject: Yup.string().required('Subject is required'),
+    message: Yup.string().min(10, 'Message too short'),
+  });
+
+  const methods = useForm<FormValuesProps>({
+    resolver: yupResolver(ContactSchema),
+    // @ts-ignore
+    defaultValues,
+  });
+
+  const {
+    handleSubmit,
+    formState: { isSubmitting },
+    reset,
+  } = methods;
+
+  const onSubmit = async (data: FormValuesProps) => {
+    try {
+      const { message } = await creator('sendMessage', data);
+      enqueueSnackbar(message);
+      reset();
+    } catch (err) {
+      enqueueSnackbar(err.message || err, { variant: 'error' });
+    }
+  };
+
   return (
-    <Stack component={MotionViewport} spacing={5}>
-      <m.div variants={varFade().inUp}>
-        <Typography variant="h3">
-          Feel free to contact us. <br />
-          Leave us a message.
-        </Typography>
-      </m.div>
-
-      <Stack spacing={3}>
+    <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+      <Stack component={MotionViewport} spacing={5}>
         <m.div variants={varFade().inUp}>
-          <TextField fullWidth label="Name" />
+          <Typography variant="h3">
+            Feel free to contact us. <br />
+            Leave us a message.
+          </Typography>
         </m.div>
+        <Stack spacing={3}>
+          <m.div variants={varFade().inUp}>
+            <RHFTextField name="name" label=" Name" />
+          </m.div>
 
-        <m.div variants={varFade().inUp}>
-          <TextField fullWidth label="Email" />
-        </m.div>
+          <m.div variants={varFade().inUp}>
+            <RHFTextField name="email" label="Email" />
+          </m.div>
 
-        <m.div variants={varFade().inUp}>
-          <TextField fullWidth label="Subject" />
-        </m.div>
+          <m.div variants={varFade().inUp}>
+            <RHFTextField name="subject" label="Subject" />
+          </m.div>
 
-        <m.div variants={varFade().inUp}>
-          <TextField fullWidth label="Enter your message here." multiline rows={4} />
-        </m.div>
+          <m.div variants={varFade().inUp}>
+            <RHFTextField name="message" multiline rows={4} label="Message" />
+          </m.div>
+
+          <m.div variants={varFade().inUp}>
+            <LoadingButton size="large" type="submit" variant="contained" loading={isSubmitting}>
+              SEND MESSAGE <SendSharp sx={{ ml: 2 }} />
+            </LoadingButton>
+          </m.div>
+        </Stack>
       </Stack>
-
-      <m.div variants={varFade().inUp}>
-        <Button size="large" variant="contained">
-          Submit Now
-        </Button>
-      </m.div>
-    </Stack>
+    </FormProvider>
   );
 }
+
+type FormValuesProps = {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+};

@@ -1,17 +1,17 @@
 import orderBy from 'lodash/orderBy';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 // form
-import { useForm } from 'react-hook-form';
 // next
 import Head from 'next/head';
-import useSWR from 'swr';
 // @mui
 import { Container, Stack } from '@mui/material';
 // redux
-import { fetcher } from 'src/actions';
+import { loader } from 'src/actions';
 // routes
+import { useSnackbar } from 'notistack';
 import { IFinance, IFinanceFilter } from 'src/@types/finance';
-import EventSearch from 'src/sections/@dashboard/event/EventSearch';
+import { IQuery, IResDataMany } from 'src/@types/query';
+import SearchBar from 'src/components/search-bar';
 import FinanceList from 'src/sections/@dashboard/finance/FinanceList';
 import { PATH_DASHBOARD } from '../../routes/paths';
 // @types
@@ -19,47 +19,80 @@ import { PATH_DASHBOARD } from '../../routes/paths';
 import DashboardLayout from '../../layouts/dashboard';
 // components
 import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
-import FormProvider from '../../components/hook-form';
 // sections
 
 // ----------------------------------------------------------------------
 
-EcommerceShopPage.getLayout = (page: React.ReactElement) => (
-  <DashboardLayout>{page}</DashboardLayout>
-);
+AccessFinance.getLayout = (page: React.ReactElement) => <DashboardLayout>{page}</DashboardLayout>;
 
 // ----------------------------------------------------------------------
 
-export default function EcommerceShopPage() {
-  const defaultValues = {
-    gender: [],
-    category: 'All',
-    colors: [],
-    priceRange: [0, 200],
-    rating: '',
-    sortBy: 'featured',
-  };
-
-  const methods = useForm<IFinanceFilter>({
-    defaultValues,
+export default function AccessFinance() {
+  const [services, setServices] = useState<IResDataMany<any>>({
+    totalItems: 0,
+    totalPages: 0,
+    records: [],
+    currentPage: 0,
   });
 
-  const [searchVal, setSearchVal] = useState('');
+  const [fetching, setFetching] = useState(false);
+  const [query, setQuery] = useState<IQuery>({});
 
-  const {
-    data: { records: events = [] } = { records: [], totalItems: 0 },
+  const handleQuery = (_query: IQuery) => setQuery({ ...query, ..._query });
 
-    isLoading,
-  } = useSWR(`/finance/services${searchVal ? `?q=${searchVal}` : ''}`, fetcher);
-  const onSearch = (val: string) => {
-    setSearchVal(val);
+  const handleClearAll = () => {
+    setQuery({});
   };
 
-  const { watch } = methods;
+  const { enqueueSnackbar } = useSnackbar();
 
-  const values = watch();
+  const getServices = useCallback(async () => {
+    try {
+      setFetching(true);
+      const data = await loader('finance', { sortBy: 'createdAt', order: 'DESC', ...query });
 
-  const dataFiltered = applyFilter(events, values);
+      setServices(data);
+
+      setFetching(false);
+    } catch (error) {
+      enqueueSnackbar(error.message || error, { variant: 'error' });
+    }
+  }, [enqueueSnackbar, query]);
+
+  const [institutions, setInstitutions] = useState([]);
+  const [categories, setCategories] = useState([]);
+
+  const getInstitutions = useCallback(async () => {
+    try {
+      const _institutions = await loader('financeInstitutions', { sortBy: 'name', order: 'ASC' });
+
+      setInstitutions(_institutions);
+    } catch (error) {
+      enqueueSnackbar(error.message || 'Could not fetch Institutions', { variant: 'error' });
+    }
+  }, [enqueueSnackbar]);
+
+  const getCategories = useCallback(async () => {
+    try {
+      const _categories = await loader('financeCats', { sortBy: 'name', order: 'ASC' });
+
+      setCategories(_categories);
+    } catch (error) {
+      enqueueSnackbar(error.message || 'Could not fetch Categories', { variant: 'error' });
+    }
+  }, [enqueueSnackbar]);
+
+  useEffect(() => {
+    getInstitutions();
+    getCategories();
+    return () => {};
+  }, [getInstitutions, getCategories]);
+
+  useEffect(() => {
+    getServices();
+
+    return () => {};
+  }, [getServices, query]);
 
   return (
     <>
@@ -68,38 +101,40 @@ export default function EcommerceShopPage() {
       </Head>
 
       <Container maxWidth="xl">
-        <FormProvider methods={methods}>
-          <CustomBreadcrumbs
-            heading="Access To Finance"
-            links={[
-              { name: 'Dashboard', href: PATH_DASHBOARD.root },
-              { name: 'Access To Finance' },
+        <CustomBreadcrumbs
+          heading="Access To Finance"
+          links={[{ name: 'Dashboard', href: PATH_DASHBOARD.root }, { name: 'Access To Finance' }]}
+        />
+
+        <Stack
+          spacing={2}
+          direction={{ xs: 'column', sm: 'row' }}
+          alignItems={{ sm: 'center' }}
+          justifyContent="space-between"
+          sx={{ mb: 2 }}
+        >
+          <SearchBar
+            withDateFilter={false}
+            onChange={handleQuery}
+            onClearFilter={handleClearAll}
+            searching={fetching}
+            filterOptions={[
+              {
+                name: 'institutionId',
+                options: institutions.map((_: any) => ({ label: _.name, value: _.id })),
+                label: "Institutions'",
+              },
+              {
+                name: 'categoryId',
+                options: categories.map((_: any) => ({ label: _.name, value: _.id })),
+                label: "Categories'",
+              },
             ]}
+            onChangeOption={(name, value) => setQuery({ ...query, filterBy: name, filter: value })}
           />
+        </Stack>
 
-          <Stack
-            spacing={2}
-            direction={{ xs: 'column', sm: 'row' }}
-            alignItems={{ sm: 'center' }}
-            justifyContent="space-between"
-            sx={{ mb: 2 }}
-          >
-            <EventSearch onInputChange={onSearch} onViewEvent={() => {}} searchResults={[]} />
-
-            {/* <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-              <ShopFilterDrawer
-                open={openFilter}
-                onOpen={handleOpenFilter}
-                onClose={handleCloseFilter}
-                onResetFilter={handleResetFilter}
-              />
-
-              <Shopeventsort />
-            </Stack>
-            */}
-          </Stack>
-
-          {/* <Stack sx={{ mb: 3 }}>
+        {/* <Stack sx={{ mb: 3 }}>
             {!isDefault && (
               <Typography variant="body2" gutterBottom>
                 <strong>{dataFiltered.length}</strong>
@@ -108,8 +143,7 @@ export default function EcommerceShopPage() {
             )}
           </Stack>  */}
 
-          <FinanceList events={dataFiltered} loading={isLoading} />
-        </FormProvider>
+        <FinanceList events={services.records} loading={fetching} />
       </Container>
     </>
   );

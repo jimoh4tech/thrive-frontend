@@ -23,11 +23,11 @@ import { useSettingsContext } from '../../components/settings';
 
 // ----------------------------------------------------------------------
 
-FileManagerPage.getLayout = (page: React.ReactElement) => <DashboardLayout>{page}</DashboardLayout>;
+AccessEvent.getLayout = (page: React.ReactElement) => <DashboardLayout>{page}</DashboardLayout>;
 
 // ----------------------------------------------------------------------
 
-export default function FileManagerPage() {
+export default function AccessEvent() {
   const { themeStretch } = useSettingsContext();
 
   const [events, setEvents] = useState<IResDataMany<IEvent>>({
@@ -61,6 +61,35 @@ export default function FileManagerPage() {
     }
   }, [enqueueSnackbar, query]);
 
+  const [organizers, setOrganizers] = useState([]);
+  const [categories, setCategories] = useState([]);
+
+  const getOrganizers = useCallback(async () => {
+    try {
+      const _organizers = await loader('eventsOrganizers', { sortBy: 'name', order: 'ASC' });
+
+      setOrganizers(_organizers);
+    } catch (error) {
+      enqueueSnackbar(error.message || 'Could not fetch Organizers', { variant: 'error' });
+    }
+  }, [enqueueSnackbar]);
+
+  const getCategories = useCallback(async () => {
+    try {
+      const _categories = await loader('eventsCats', { sortBy: 'name', order: 'ASC' });
+
+      setCategories(_categories);
+    } catch (error) {
+      enqueueSnackbar(error.message || 'Could not fetch Categories', { variant: 'error' });
+    }
+  }, [enqueueSnackbar]);
+
+  useEffect(() => {
+    getOrganizers();
+    getCategories();
+    return () => {};
+  }, [getOrganizers, getCategories]);
+
   useEffect(() => {
     getEvents();
 
@@ -92,7 +121,24 @@ export default function FileManagerPage() {
           justifyContent="space-between"
           sx={{ mb: 5 }}
         >
-          <SearchBar onChange={handleQuery} onClearFilter={handleClearAll} searching={fetching} />
+          <SearchBar
+            onChange={handleQuery}
+            onClearFilter={handleClearAll}
+            searching={fetching}
+            filterOptions={[
+              {
+                name: 'organizerId',
+                options: organizers.map((_: any) => ({ label: _.name, value: _.id })),
+                label: "Organizers'",
+              },
+              {
+                name: 'categoryId',
+                options: categories.map((_: any) => ({ label: _.name, value: _.id })),
+                label: "Categories'",
+              },
+            ]}
+            onChangeOption={(name, value) => setQuery({ ...query, filterBy: name, filter: value })}
+          />
 
           {/* <FileChangeViewButton value={view} onChange={handleChangeView} /> */}
         </Stack>

@@ -83,7 +83,8 @@ type PostContentProps = {
 export function PostContent({ title, comment, like, createdAt, index }: PostContentProps) {
   const isDesktop = useResponsive('up', 'md');
 
-  const linkTo = 'PATH_DASHBOARD.blog.view(paramCase(title))';
+  // const linkTo = 'PATH_DASHBOARD.blog.view(paramCase(title))';
+  const linkTo = '#';
 
   const latestPostLarge = index === 0;
 
@@ -123,15 +124,11 @@ export function PostContent({ title, comment, like, createdAt, index }: PostCont
         {fDate(createdAt)}
       </Typography>
 
-      <Link component={NextLink} href={linkTo} color="inherit">
-        <TextMaxLine
-          variant={isDesktop && latestPostLarge ? 'h5' : 'subtitle2'}
-          line={2}
-          persistent
-        >
-          {title}
-        </TextMaxLine>
-      </Link>
+      {/* <Link component={NextLink} href={linkTo} color="inherit"> */}
+      <TextMaxLine variant={isDesktop && latestPostLarge ? 'h5' : 'subtitle2'} line={2} persistent>
+        {title}
+      </TextMaxLine>
+      {/* </Link> */}
 
       <Stack
         flexWrap="wrap"

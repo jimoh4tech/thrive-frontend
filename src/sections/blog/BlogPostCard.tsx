@@ -1,7 +1,6 @@
 // next
-import NextLink from 'next/link';
 // @mui
-import { Box, Card, CardContent, Link, Stack, Typography } from '@mui/material';
+import { Box, Card, CardContent, Stack, Typography } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
 // routes
 // hooks

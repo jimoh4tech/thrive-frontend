@@ -175,7 +175,7 @@ export default function AccountGeneral() {
                   )}
                 />
 
-                <RHFSelect native name="gender" label="Gender" disabled={!!user.gender || false}>
+                <RHFSelect native name="gender" label="Gender">
                   <option value="" />
                   {['Male', 'Female'].map((val) => (
                     <option key={val} value={val}>

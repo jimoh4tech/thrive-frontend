@@ -1,5 +1,5 @@
 // @mui
-import { ChatBubble, ViewTimeline, Visibility } from '@mui/icons-material';
+import { Call, ChatBubble, ViewTimeline, Visibility } from '@mui/icons-material';
 import { Avatar, Box, Button, Card, IconButton, Stack, Typography } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
 import Link from 'next/link';
@@ -33,7 +33,7 @@ type Props = {
 export default function BusinesCard({ business }: Props) {
   const { user } = useAuthContext();
 
-  const { name, cover, industry, logo, slug } = business;
+  const { name, cover, industry, logo, slug, phone } = business;
 
   return (
     <Card sx={{ textAlign: 'center' }}>
@@ -81,8 +81,14 @@ export default function BusinesCard({ business }: Props) {
         {industry?.name}
       </Typography>
 
-      <Stack direction="row" alignItems="center" justifyContent="center" sx={{ mt: 1, mb: 3 }}>
-        {user && user.isApproved ? (
+      <Stack
+        direction="row"
+        spacing={1}
+        alignItems="center"
+        justifyContent="center"
+        sx={{ mt: 1, mb: 3 }}
+      >
+        {/* {user && user.isApproved ? (
           <Button
             LinkComponent={Link}
             href="/dashbaord/networking-marketplace/chat"
@@ -95,7 +101,25 @@ export default function BusinesCard({ business }: Props) {
           <Button LinkComponent={Link} href={slug} startIcon={<Visibility />} variant="outlined">
             View Profile
           </Button>
-        )}
+        )} */}
+        <Button
+          LinkComponent={Link}
+          target="_blank"
+          href={slug}
+          startIcon={<Visibility />}
+          variant="outlined"
+        >
+          View Profile
+        </Button>
+        <Button
+          LinkComponent={Link}
+          href={`tel:${phone}`}
+          sx={{ px: 0, minWidth: 40 }}
+          variant="contained"
+          color="success"
+        >
+          <Call />
+        </Button>
       </Stack>
     </Card>
   );

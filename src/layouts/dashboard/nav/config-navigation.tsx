@@ -74,12 +74,12 @@ const navConfig = [
             // roles: ['admin'],
             path: PATH_DASHBOARD.networkingMarketplace.businesses,
           },
-          {
-            title: 'Community',
-            // roles: ['admin'],
-            path: PATH_DASHBOARD.networkingMarketplace.community,
-          },
-          { title: 'Chat', path: PATH_DASHBOARD.networkingMarketplace.chat },
+          // {
+          //   title: 'Community',
+          //   // roles: ['admin'],
+          //   path: PATH_DASHBOARD.networkingMarketplace.community,
+          // },
+          // { title: 'Chat', path: PATH_DASHBOARD.networkingMarketplace.chat },
         ],
       },
       {

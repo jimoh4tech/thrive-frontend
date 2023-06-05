@@ -17,6 +17,7 @@ import { creator } from 'src/actions';
 // assets
 // components
 import { SendSharp } from '@mui/icons-material';
+import { useAuthContext } from 'src/auth/useAuthContext';
 import { MotionViewport, varFade } from '../../components/animate';
 import FormProvider, { RHFTextField } from '../../components/hook-form';
 import { useSnackbar } from '../../components/snackbar';
@@ -24,9 +25,11 @@ import { useSnackbar } from '../../components/snackbar';
 // ----------------------------------------------------------------------
 
 export default function ContactForm() {
+  const { user } = useAuthContext();
+
   const defaultValues = {
-    name: '',
-    email: '',
+    name: user?.fullName,
+    email: user?.email,
     subject: '',
     message: '',
   };
@@ -66,19 +69,28 @@ export default function ContactForm() {
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Stack component={MotionViewport} spacing={5}>
         <m.div variants={varFade().inUp}>
-          <Typography variant="h3">
-            Feel free to contact us. <br />
-            Leave us a message.
-          </Typography>
+          <Typography
+            component="div"
+            dangerouslySetInnerHTML={{
+              __html: user
+                ? `Hello ${user.firstName}, </br> How can I help you today`
+                : '  Feel free to contact us. <br />  Leave us a message.  ',
+            }}
+            variant="h3"
+          />
         </m.div>
         <Stack spacing={3}>
-          <m.div variants={varFade().inUp}>
-            <RHFTextField name="name" label=" Name" />
-          </m.div>
+          {!user && (
+            <>
+              <m.div variants={varFade().inUp}>
+                <RHFTextField name="name" label=" Name" />
+              </m.div>
 
-          <m.div variants={varFade().inUp}>
-            <RHFTextField name="email" label="Email" />
-          </m.div>
+              <m.div variants={varFade().inUp}>
+                <RHFTextField name="email" label="Email" />
+              </m.div>
+            </>
+          )}
 
           <m.div variants={varFade().inUp}>
             <RHFTextField name="subject" label="Subject" />

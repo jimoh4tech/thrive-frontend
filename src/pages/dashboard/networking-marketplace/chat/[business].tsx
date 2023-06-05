@@ -5,13 +5,12 @@ import { useRouter } from 'next/router';
 import { Card, Container, Stack } from '@mui/material';
 // redux
 import { doc, onSnapshot } from 'firebase/firestore';
-import { useAuthContext } from 'src/auth/useAuthContext';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import Head from 'next/head';
 import { IUserBusiness } from 'src/@types/business';
-import axiosInstance from 'src/utils/axios';
+import { useAuthContext } from 'src/auth/useAuthContext';
 import CompactLayout from 'src/layouts/compact/CompactLayout';
 import Page404 from 'src/pages/404';
-import Head from 'next/head';
 import {
   addRecipients,
   getContacts,
@@ -22,24 +21,27 @@ import {
   resetActiveConversation,
   sendMessage,
   slice,
-} from '../../../redux/slices/chat';
-import { useDispatch, useSelector } from '../../../redux/store';
+} from 'src/redux/slices/chat';
+import { useDispatch, useSelector } from 'src/redux/store';
+import axiosInstance from 'src/utils/axios';
 // routes
-import { PATH_DASHBOARD } from '../../../routes/paths';
+import { PATH_DASHBOARD } from 'src/routes/paths';
 // components
-import CustomBreadcrumbs from '../../../components/custom-breadcrumbs';
-import { useSettingsContext } from '../../../components/settings';
+import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
+import { useSettingsContext } from 'src/components/settings';
 // @types
-import { IChatParticipant, IChatSendMessage } from '../../../@types/chat';
+import { IChatParticipant, IChatSendMessage } from 'src/@types/chat';
 // sections
-import ChatHeaderCompose from './header/ChatHeaderCompose';
-import ChatHeaderDetail from './header/ChatHeaderDetail';
-import ChatMessageInput from './message/ChatMessageInput';
-import ChatMessageList from './message/ChatMessageList';
-import ChatNav from './nav/ChatNav';
-import ChatRoom from './room/ChatRoom';
 
-import { firestore } from '../../../../firebase-config';
+import { firestore } from 'src/../firebase-config';
+import {
+  ChatHeaderCompose,
+  ChatHeaderDetail,
+  ChatMessageInput,
+  ChatMessageList,
+  ChatNav,
+  ChatRoom,
+} from 'src/sections/@dashboard/chat';
 
 // ----------------------------------------------------------------------
 

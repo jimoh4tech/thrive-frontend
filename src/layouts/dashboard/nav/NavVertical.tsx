@@ -16,6 +16,7 @@ import Scrollbar from '../../../components/scrollbar';
 import NavAccount from './NavAccount';
 import NavToggleButton from './NavToggleButton';
 import navConfig from './config-navigation';
+import NavDocs from './NavDocs';
 
 // ----------------------------------------------------------------------
 
@@ -64,19 +65,7 @@ export default function NavVertical({ openNav, onCloseNav }: Props) {
       <NavSectionVertical data={navConfig} />
 
       <Box sx={{ flexGrow: 1 }} />
-      <Stack
-        spacing={3}
-        sx={{
-          px: 5,
-          pb: 5,
-          mt: 10,
-          width: 1,
-          display: 'block',
-          textAlign: 'center',
-        }}
-      >
-        <Box component="img" src="/assets/illustrations/illustration_docs.svg" />
-      </Stack>
+      <NavDocs />
     </Scrollbar>
   );
 

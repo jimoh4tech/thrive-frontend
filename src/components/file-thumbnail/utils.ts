@@ -6,6 +6,7 @@ import { ExtendFile } from './types';
 // Define more types here
 const FORMAT_PDF = ['pdf'];
 const FORMAT_TEXT = ['txt'];
+const FORMAT_RTF = ['rtf'];
 const FORMAT_PHOTOSHOP = ['psd'];
 const FORMAT_WORD = ['doc', 'docx'];
 const FORMAT_EXCEL = ['xls', 'xlsx'];
@@ -26,6 +27,9 @@ export function fileFormat(fileUrl: string | undefined) {
   switch (fileUrl?.includes(fileTypeByUrl(fileUrl))) {
     case FORMAT_TEXT.includes(fileTypeByUrl(fileUrl)):
       format = 'txt';
+      break;
+    case FORMAT_RTF.includes(fileTypeByUrl(fileUrl)):
+      format = 'rtf';
       break;
     case FORMAT_ZIP.includes(fileTypeByUrl(fileUrl)):
       format = 'zip';
@@ -96,6 +100,9 @@ export function fileThumb(fileUrl: string) {
       break;
     case 'pdf':
       thumb = iconUrl('ic_pdf');
+      break;
+    case 'rtf':
+      thumb = iconUrl('ic_txt');
       break;
     case 'photoshop':
       thumb = iconUrl('ic_pts');

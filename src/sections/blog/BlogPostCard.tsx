@@ -54,7 +54,7 @@ export default function BlogPostCard({ post, index }: Props) {
 
         <StyledOverlay />
 
-        <Image alt="cover" src={image} sx={{ height: 360 }} />
+        <Image alt="cover" src={image} sx={{ height: 360, width: '100%', objectFit: 'contain' }} />
       </Card>
     );
   }

@@ -8,7 +8,9 @@ import { Box, Card, Grid, InputAdornment, Stack } from '@mui/material';
 // auth
 import { createBusiness } from 'src/actions/businessActions';
 import Iconify from 'src/components/iconify/Iconify';
-import { updater } from 'src/actions';
+import { loader, updater } from 'src/actions';
+import { useCallback, useEffect, useState } from 'react';
+import { IIndustry } from 'src/@types/business';
 import { useAuthContext } from '../../../../auth/useAuthContext';
 // utils
 // assets
@@ -98,7 +100,7 @@ export default function BusinessUpdateForm() {
     country: busi.country,
     address: busi.address,
     state: busi.state,
-    industry: busi.industry?.id,
+    industry: busi.industryId,
     bio: busi.bio,
     slug: urlArr[urlArr.length - 1],
     designation: busi.designation,
@@ -128,6 +130,23 @@ export default function BusinessUpdateForm() {
     }
   };
 
+  const [industries, setIndustries] = useState<IIndustry[]>([]);
+
+  const getIndustries = useCallback(async () => {
+    try {
+      const _industries = await loader('industries');
+
+      setIndustries(_industries);
+    } catch (error) {
+      enqueueSnackbar(error.message || 'Could not fetch Industries', { variant: 'error' });
+    }
+  }, [enqueueSnackbar]);
+
+  useEffect(() => {
+    getIndustries();
+
+    return () => {};
+  }, [getIndustries]);
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Grid container justifyContent="center" alignItems="center">
@@ -163,11 +182,11 @@ export default function BusinessUpdateForm() {
 
               <RHFTextField name="state" label="State/Region" />
 
-              <RHFSelect native name="industry" label="Industry" placeholder="Industry">
+              <RHFSelect native name="industryId" label="Industry" placeholder="Industry">
                 <option value="" />
-                {['Fashion', 'Entertainment', 'Information Technology'].map((_, i) => (
-                  <option key={i} value={_}>
-                    {_}
+                {industries.map((_, i) => (
+                  <option selected={busi.industryId === _.id} key={i} value={_.id}>
+                    {_.name}
                   </option>
                 ))}
               </RHFSelect>

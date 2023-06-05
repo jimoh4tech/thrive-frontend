@@ -4,6 +4,7 @@ import { Box, BoxProps } from '@mui/material';
 // components
 import { useState } from 'react';
 import { IFinance } from 'src/@types/finance';
+import { useSnackbar } from 'notistack';
 import { SkeletonProductItem } from '../../../components/skeleton';
 import FinanceDrawerDrawer from './FinanceDrawerDrawer';
 import FianceCard from './FianceCard';
@@ -19,6 +20,7 @@ interface Props extends BoxProps {
 export default function FinanceList({ events, loading, ...other }: Props) {
   const [event, setEvent] = useState<IFinance | null>(null);
   const [open, setOpen] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
 
   return (
     <Box
@@ -53,7 +55,7 @@ export default function FinanceList({ events, loading, ...other }: Props) {
           open={open}
           event={event}
           onClose={() => setOpen(false)}
-          onApply={() => {}}
+          onApply={() => enqueueSnackbar('Platinum Access Only', { variant: 'warning' })}
         />
       )}
     </Box>

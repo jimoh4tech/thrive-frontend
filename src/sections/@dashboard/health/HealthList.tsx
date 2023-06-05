@@ -2,8 +2,8 @@
 import { Box, BoxProps } from '@mui/material';
 // @type
 // components
+import { useSnackbar } from 'notistack';
 import { useState } from 'react';
-import { IMedia } from 'src/@types/media';
 import { IHealth } from 'src/@types/health';
 import { SkeletonProductItem } from '../../../components/skeleton';
 import HealthCard from './HealthCard';
@@ -20,6 +20,7 @@ interface Props extends BoxProps {
 export default function HealthList({ institutions, loading, ...other }: Props) {
   const [institution, setIntitution] = useState<IHealth | null>(null);
   const [open, setOpen] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
 
   return (
     <Box
@@ -54,7 +55,7 @@ export default function HealthList({ institutions, loading, ...other }: Props) {
           open={open}
           institution={institution}
           onClose={() => setOpen(false)}
-          onApply={() => {}}
+          onApply={() => enqueueSnackbar('Platinum Access Only', { variant: 'warning' })}
         />
       )}
     </Box>

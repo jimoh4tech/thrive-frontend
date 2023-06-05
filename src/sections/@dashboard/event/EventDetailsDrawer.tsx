@@ -115,7 +115,7 @@ export default function EventDetailsDrawer({
 
             {url && (
               <Button href={url} size="small" variant="outlined">
-                Vist Website
+                Visit Website
               </Button>
             )}
           </Stack>

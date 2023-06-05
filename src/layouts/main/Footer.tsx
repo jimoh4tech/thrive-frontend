@@ -229,10 +229,12 @@ export default function Footer() {
                 mb: { xs: 5, md: 0 },
               }}
             >
-              {_socials.map((social: any) => (
-                <IconButton key={social.name}>
-                  <Iconify color="primary.main" icon={social.icon} />
-                </IconButton>
+              {_socials.map((social) => (
+                <Link href={social.path}>
+                  <IconButton key={social.name}>
+                    <Iconify color="primary.main" icon={social.icon} />
+                  </IconButton>
+                </Link>
               ))}
             </Stack>
           </Grid>

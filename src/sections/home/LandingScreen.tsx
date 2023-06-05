@@ -36,7 +36,7 @@ const LandingScreen = () => {
     }),
   };
 
-  const [totalUsers, setTotalUsers] = useState();
+  const [totalUsers, setTotalUsers] = useState(0);
   const getUsersCount = useCallback(async () => {
     try {
       const { count } = await loader('countUsers');

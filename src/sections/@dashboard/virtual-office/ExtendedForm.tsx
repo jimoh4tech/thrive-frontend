@@ -118,7 +118,7 @@ export default function ExtendedForm() {
           />
           <RHFTextField
             disabled
-            name="vistorHosting"
+            name="VisitorHosting"
             placeholder="Visitor Hosting"
             // onChange={(event) =>
             //   setValue('price', Number(event.target.value), { shouldValidate: true })

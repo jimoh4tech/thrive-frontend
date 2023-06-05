@@ -4,6 +4,7 @@ import { Box, BoxProps } from '@mui/material';
 import { IEvent } from 'src/@types/events';
 // components
 import { useState } from 'react';
+import { useSnackbar } from 'notistack';
 import { SkeletonProductItem } from '../../../components/skeleton';
 import EventCard from './EventCard';
 import EventDetailsDrawer from './EventDetailsDrawer';
@@ -19,6 +20,7 @@ interface Props extends BoxProps {
 export default function EventList({ events, loading, ...other }: Props) {
   const [event, setEvent] = useState<IEvent | null>(null);
   const [open, setOpen] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
 
   return (
     <Box
@@ -53,7 +55,7 @@ export default function EventList({ events, loading, ...other }: Props) {
           open={open}
           event={event}
           onClose={() => setOpen(false)}
-          onApply={() => {}}
+          onApply={() => enqueueSnackbar('Platinum Access Only', { variant: 'warning' })}
         />
       )}
     </Box>

@@ -144,8 +144,8 @@ export default function FileManagerPage() {
                 <TableHeadCustom headLabel={TABLE_HEAD} rowCount={businesses.totalItems} />
 
                 <TableBody>
-                  {businesses.records.map((row) => (
-                    <DirectoryTableRow key={row.id} row={row} />
+                  {businesses.records.map((row, i) => (
+                    <DirectoryTableRow key={i} row={row} />
                   ))}
 
                   {/* <TableEmptyRows

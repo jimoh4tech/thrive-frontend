@@ -7,6 +7,7 @@ export type IUserBusiness = {
   country: string | null;
   address: string;
   state: string;
+  industryId: number;
   industry: IIndustry | null;
   designation: string;
   bio: string | null;

@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import Head from 'next/head';
 // @mui
 import {
+  Badge,
   Card,
   Container,
   Divider,
@@ -11,14 +12,16 @@ import {
   TableBody,
   TableContainer,
   Tabs,
+  Typography,
 } from '@mui/material';
 // routes
 import { useSnackbar } from 'notistack';
 import { IQuery, IResDataMany } from 'src/@types/query';
-import { loader, updater } from 'src/actions';
+import { loader } from 'src/actions';
 import { approveUser, declineUser } from 'src/actions/admin/usersAction';
 import Loading from 'src/components/loading';
 import Pagination from 'src/components/pagination';
+import Label from 'src/components/label/Label';
 import { PATH_ADMIN } from '../../routes/paths';
 // @types
 import { IUserAccountGeneral } from '../../@types/user';
@@ -29,12 +32,7 @@ import DashboardLayout from '../../layouts/admin';
 import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
 import Scrollbar from '../../components/scrollbar';
 import { useSettingsContext } from '../../components/settings';
-import {
-  TableHeadCustom,
-  TableNoData,
-  TablePaginationCustom,
-  useTable,
-} from '../../components/table';
+import { TableHeadCustom, TableNoData, useTable } from '../../components/table';
 // sections
 import { UserTableRow, UserTableToolbar } from '../../sections/@admin/user/list';
 
@@ -44,7 +42,8 @@ const STATUS_OPTIONS = [
   { label: 'All', value: 'all' },
   { label: 'Pending Approval', value: 'pending' },
   { label: 'Approved', value: 'approved' },
-  // { label: 'Declined', value: 'declined' },
+  { label: 'Declined', value: 'declined' },
+  { label: 'Premium Users', value: 'hasPremiumSub' },
   // { label: 'Banned', value: 'banned' },
 ];
 
@@ -188,7 +187,18 @@ export default function UserListPage() {
             }}
           >
             {STATUS_OPTIONS.map((_) => (
-              <Tab label={_.label} value={_.value} />
+              <Tab
+                key={_.value}
+                label={
+                  <Typography>
+                    {_.label}{' '}
+                    {filterStatus === _.value && !fetching && (
+                      <Label color="primary">{totalItems}</Label>
+                    )}
+                  </Typography>
+                }
+                value={_.value}
+              />
             ))}
           </Tabs>
 

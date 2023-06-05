@@ -8,7 +8,6 @@ import { useSnackbar } from 'notistack';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { IEndpoints, creator } from 'src/actions';
-import { useAuthContext } from 'src/auth/useAuthContext';
 import * as Yup from 'yup';
 import ConfirmDialog from '../confirm-dialog/ConfirmDialog';
 import { RHFTextField } from '../hook-form';
@@ -34,8 +33,6 @@ export default function CustomBreadcrumbs({
   actions = [],
   ...other
 }: CustomBreadcrumbsProps & { actions?: IAction[] }) {
-  const { user } = useAuthContext();
-
   const [action_, setAction] = useState<IAction | null>(null);
 
   const lastLink = links[links.length - 1].name;

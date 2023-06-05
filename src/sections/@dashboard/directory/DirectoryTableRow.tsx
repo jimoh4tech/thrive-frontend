@@ -1,5 +1,6 @@
 // @mui
 import { Button, Stack, TableCell, TableRow, Typography } from '@mui/material';
+import Link from 'next/link';
 // @types
 import { IUserBusiness } from 'src/@types/business';
 import { CustomAvatar } from 'src/components/custom-avatar';
@@ -56,12 +57,7 @@ export default function DirectoryTableRow({ row }: Props) {
         </TableCell> */}
 
       <TableCell align="right">
-        <Button
-          variant="soft"
-          onClick={() => {
-            window.location.href = slug;
-          }}
-        >
+        <Button LinkComponent={Link} target="_blank" href={slug} variant="soft">
           VIEW
         </Button>
       </TableCell>

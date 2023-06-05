@@ -243,7 +243,7 @@ export default function BusinessProfile() {
 
                 <RHFTextField name="state" label="State/Region" />
 
-                <RHFSelect native name="industry" label="Industry" placeholder="Industry">
+                <RHFSelect native name="industryId" label="Industry" placeholder="Industry">
                   <option value="" />
                   {industries.map((_: { name: string; id: number }) => (
                     <option key={_.id} value={_.id}>

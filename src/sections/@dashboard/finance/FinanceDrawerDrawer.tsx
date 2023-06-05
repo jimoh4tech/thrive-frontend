@@ -102,7 +102,7 @@ export default function FinanceDrawerDrawer({
 
             {url && (
               <Button href={url} size="small" variant="outlined">
-                Vist Website
+                Visit Website
               </Button>
             )}
           </Stack>

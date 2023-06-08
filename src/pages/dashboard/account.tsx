@@ -4,7 +4,6 @@ import Head from 'next/head';
 // @mui
 import { Box, Container, Tab, Tabs } from '@mui/material';
 // routes
-import BusinessProfile from 'src/layouts/dashboard/membership/forms/BusinessForm';
 import BusinessUpdateForm from 'src/layouts/dashboard/membership/forms/BusinessUpdateForm';
 import { PATH_DASHBOARD } from '../../routes/paths';
 // layouts
@@ -14,11 +13,7 @@ import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
 import Iconify from '../../components/iconify';
 import { useSettingsContext } from '../../components/settings';
 // sections
-import {
-  AccountChangePassword,
-  AccountGeneral,
-  AccountNotifications,
-} from '../../sections/@dashboard/user/account';
+import { AccountChangePassword, AccountGeneral } from '../../sections/@dashboard/user/account';
 
 // ----------------------------------------------------------------------
 
@@ -42,7 +37,7 @@ export default function UserAccountPage() {
       value: 'business',
       label: 'Business',
       icon: <Iconify icon="ion:business" />,
-      component: <BusinessUpdateForm />,
+      component: <BusinessUpdateForm cb={() => setCurrentTab('business')} />,
     },
     // {
     //   value: 'billing',

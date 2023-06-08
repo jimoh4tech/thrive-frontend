@@ -1,10 +1,10 @@
-import { Button, Container } from '@mui/material';
+import { Button, Container, Dialog, DialogContent } from '@mui/material';
 import { Stack } from '@mui/system';
 import Head from 'next/head';
 import { useState } from 'react';
+import YouTube, { YouTubeProps } from 'react-youtube';
 import { SeoIllustration } from 'src/assets/illustrations';
 import { useAuthContext } from 'src/auth/useAuthContext';
-import Lightbox from 'src/components/lightbox/Lightbox';
 import { useSettingsContext } from 'src/components/settings';
 import { AppWelcome } from 'src/sections/@dashboard/general/app';
 
@@ -14,6 +14,24 @@ export default function UserPending() {
   const [watch, setWatch] = useState(false);
 
   const { themeStretch } = useSettingsContext();
+
+  const onPlayerReady: YouTubeProps['onReady'] = (event) => {
+    // access to player in all event handlers via event.target
+    event.target.playVideo();
+  };
+
+  const opts: YouTubeProps['opts'] = {
+    // height: '390',
+    // width: '640',
+    playerVars: {
+      // https://developers.google.com/youtube/player_parameters
+      autoplay: 1,
+    },
+  };
+
+  const hanldeClose = () => {
+    setWatch(false);
+  };
   return (
     <>
       <Head>
@@ -31,11 +49,12 @@ export default function UserPending() {
                 p: 3,
                 width: 360,
                 margin: { xs: 'auto', md: 'inherit' },
+                display: { md: 'block', xs: 'none' },
               }}
             />
           }
           action={
-            <Stack direction="row" spacing={1.5}>
+            <Stack direction={{ sm: 'row', xs: 'column' }} spacing={1.5}>
               <Button variant="contained" onClick={() => setWatch(true)}>
                 Take A Video Tour
               </Button>
@@ -46,29 +65,11 @@ export default function UserPending() {
         />
       </Container>
 
-      <Lightbox
-        index={0}
-        slides={[
-          {
-            type: 'video',
-            width: 1280,
-            height: 720,
-            sources: [
-              {
-                src: 'https://static.videezy.com/system/resources/previews/000/012/314/original/Venice_2.mp4',
-                type: 'video/mp4',
-              },
-            ],
-          },
-          // ...
-        ]}
-        open={watch}
-        close={() => setWatch(false)}
-        disabledFullscreen
-        disabledSlideshow
-        disabledTotal
-        disabledThumbnails
-      />
+      <Dialog open={watch} onClose={hanldeClose} maxWidth="lg">
+        <DialogContent sx={{ pt: 2 }}>
+          <YouTube videoId="wwOiPAL7PUQ" opts={opts} onReady={onPlayerReady} />,
+        </DialogContent>
+      </Dialog>
     </>
   );
 }

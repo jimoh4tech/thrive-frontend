@@ -9,6 +9,9 @@ const endpoints = {
 
   user: '/users',
   userBusiness: '/users/business',
+  userTransaction: '/users/transaction',
+  userPremuimTxn: '/users/transaction/premium',
+  userActivePremiumSuccessTxn: '/users/transaction/premium/success',
 
   ngos: '/users/ngos',
   industries: '/users/industries',
@@ -53,8 +56,8 @@ export const loader = async (model: IEndpoints, params: IQuery = {}) =>
 export const updater = async (model: IEndpoints, data: any, config?: AxiosRequestConfig<any>) =>
   (await axiosInstance.put(endpoints[model], data, config)).data;
 
-export const creator = async (model: IEndpoints, data: any) =>
-  (await axiosInstance.post(endpoints[model], data)).data;
+export const creator = async (model: IEndpoints, data: any, config?: AxiosRequestConfig<any>) =>
+  (await axiosInstance.post(endpoints[model], data, config)).data;
 
 export const download = async (fileUrl: string) =>
   axiosInstance.get(fileUrl, {

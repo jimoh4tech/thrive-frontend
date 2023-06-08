@@ -7,10 +7,10 @@ import { LoadingButton } from '@mui/lab';
 import { Box, Card, Grid, InputAdornment, Stack, Typography } from '@mui/material';
 // auth
 import { useCallback, useEffect, useState } from 'react';
+import { creator, loader } from 'src/actions';
 import { createBusiness } from 'src/actions/businessActions';
 import Iconify from 'src/components/iconify/Iconify';
 import { uploadSingle } from 'src/utils/cloudinary';
-import { loader } from 'src/actions';
 import { useAuthContext } from '../../../../auth/useAuthContext';
 // utils
 // assets
@@ -25,23 +25,27 @@ import PaymentPopup from '../PaymentPopup';
 
 const SOCIAL_LINKS = [
   {
+    hint: 'https://www.facebook.com/thrivebizsoutions',
     value: 'facebookLink',
-    label: 'facebook',
+    label: 'facebook url',
     icon: <Iconify icon="eva:facebook-fill" width={24} />,
   },
   {
+    hint: 'https://instagram.com/icss_thrive',
     value: 'instagramLink',
-    label: 'instagram',
+    label: 'instagram url',
     icon: <Iconify icon="ant-design:instagram-filled" width={24} />,
   },
   {
+    hint: 'https://www.linkedin.com/company/thrivebizng',
     value: 'linkedinLink',
-    label: 'linkedin',
+    label: 'linkedin url',
     icon: <Iconify icon="eva:linkedin-fill" width={24} />,
   },
   {
+    hint: 'https://twitter.com/thrivebizng',
     value: 'twitterLink',
-    label: 'twitter',
+    label: 'twitter url',
     icon: <Iconify icon="eva:twitter-fill" width={24} />,
   },
 ] as const;
@@ -58,18 +62,20 @@ type FormValuesProps = {
   logo: (File & { preview: string }) | string;
 
   whatsappNumber: string;
-  industry: string;
+  industryId?: number;
   bio: string;
+  facebookLink?: string;
+  twitterLink?: string;
+  instagramLink?: string;
+  linkedinLink?: string;
 };
 
 export default function BusinessProfile() {
-  const { revalidateUser } = useAuthContext();
+  const { revalidateUser, user } = useAuthContext();
 
   // revalidateUser!();
 
   const { enqueueSnackbar } = useSnackbar();
-
-  const { user } = useAuthContext();
 
   const UpdateUserSchema = Yup.object().shape({
     name: Yup.string().required('Business Name is required'),
@@ -79,12 +85,16 @@ export default function BusinessProfile() {
     country: Yup.string().required('Country is required'),
     address: Yup.string().required('Address is required'),
     state: Yup.string().required('State is required'),
-    industry: Yup.string().required('Business Industry is required'),
+    industryId: Yup.number().required('Business Industry is required'),
     bio: Yup.string()
       .min(30, 'Business description must be above 30 characters')
-      .max(300, 'Business description must be less than 300 characters'),
+      .max(1000, 'Business description must be less than 300 characters'),
     cac: Yup.mixed().optional(),
     logo: Yup.mixed().optional(),
+    facebookLink: Yup.string().optional(),
+    twitterLink: Yup.string().optional(),
+    instagramLink: Yup.string().optional(),
+    linkedinLink: Yup.string().optional(),
   });
 
   const defaultValues = {
@@ -95,10 +105,14 @@ export default function BusinessProfile() {
     country: 'Nigeria',
     address: '',
     state: '',
-    industry: '',
+    industryId: undefined,
     bio: '',
     cac: '',
     logo: '',
+    facebookLink: '',
+    twitterLink: '',
+    instagramLink: '',
+    linkedinLink: '',
   };
 
   const methods = useForm<FormValuesProps>({
@@ -108,7 +122,8 @@ export default function BusinessProfile() {
 
   const [openPaymentPopup, setOpenPaymentPopup] = useState(false);
   const [submitting, setIsSubmitting] = useState(false);
-
+  const [paymentRef, setPaymentRef] = useState('');
+  const [successRef, setSuccessRef] = useState('');
   const [business, setBusiness] = useState<FormValuesProps | any>(null);
 
   const {
@@ -118,28 +133,50 @@ export default function BusinessProfile() {
     formState: { isSubmitting },
   } = methods;
 
+  const items = [
+    { name: 'Registration', amount: parseInt(process.env.NEXT_PUBLIC_REG_FEE || '0', 10) },
+    {
+      name: 'Subscription',
+      amount: parseInt(process.env.NEXT_PUBLIC_PREMIUM_FEE || '0', 10),
+      label: 'Premium',
+    },
+  ];
+
   const onInitializePayment = async (data: FormValuesProps) => {
     try {
       setIsSubmitting(true);
       setBusiness(data);
       const txnRef = localStorage.getItem(`payment-successfull`) || '';
-      if (txnRef) {
-        await onSubmit(txnRef);
+      if (successRef || txnRef) {
+        await onSubmit(txnRef, data);
         return;
       }
+
+      const { reference } = await creator('userPremuimTxn', {
+        amount: (() => {
+          let _total = 0;
+          for (let i = 0; i < items.length; i += 1) _total += items[i].amount;
+          return _total;
+        })(),
+        split_code: process.env.NEXT_PUBLIC_PAYSTACK_SPLIT_CODE,
+      });
+
+      setPaymentRef(reference);
+
       setOpenPaymentPopup(true);
     } catch (error) {
-      enqueueSnackbar(error.message || error);
+      enqueueSnackbar(error.message || error, { variant: 'error' });
     }
   };
 
   const onSubmit = useCallback(
-    async (ref: string) => {
-      if (!submitting || !ref) return;
+    async (ref: string, data?: FormValuesProps) => {
+      if (!ref && !successRef) return;
+      setIsSubmitting(true);
 
       try {
         setOpenPaymentPopup(false);
-        const { logo, cac, ...rest } = business;
+        const { logo, cac, ...rest } = data || business;
 
         if (cac) {
           const {
@@ -157,7 +194,7 @@ export default function BusinessProfile() {
           rest.logo = public_id;
         }
 
-        rest.reference = ref;
+        rest.reference = ref || successRef;
 
         const res = await createBusiness(rest);
         localStorage.removeItem(`payment-successfull`);
@@ -170,8 +207,10 @@ export default function BusinessProfile() {
         console.error(err);
         enqueueSnackbar(err?.message || err, { variant: 'error' });
       }
+
+      setIsSubmitting(false);
     },
-    [business, enqueueSnackbar, reset, revalidateUser, submitting]
+    [business, enqueueSnackbar, reset, revalidateUser, successRef]
   );
 
   const handleDrop = useCallback(
@@ -201,8 +240,18 @@ export default function BusinessProfile() {
     }
   }, [enqueueSnackbar]);
 
+  const getTransaction = async () => {
+    try {
+      const { reference } = await loader('userActivePremiumSuccessTxn');
+      setSuccessRef(reference);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getIndustries();
+    getTransaction();
 
     return () => {};
   }, [getIndustries]);
@@ -260,6 +309,7 @@ export default function BusinessProfile() {
                     InputProps={{
                       startAdornment: <InputAdornment position="start">{link.icon}</InputAdornment>,
                     }}
+                    helperText={`hint: ${link.hint}`}
                   />
                 ))}
               </Box>
@@ -299,15 +349,15 @@ export default function BusinessProfile() {
           </Grid>
         </Grid>
       </FormProvider>
-      <PaymentPopup
-        open={openPaymentPopup}
-        onClose={() => setOpenPaymentPopup(false)}
-        cb={onSubmit}
-        items={[
-          { name: 'Registration', amount: 500 },
-          { name: 'Subscription', amount: 2000, label: 'Premium' },
-        ]}
-      />
+      {paymentRef && (
+        <PaymentPopup
+          open={openPaymentPopup}
+          onClose={() => setOpenPaymentPopup(false)}
+          cb={(ref) => onSubmit(ref)}
+          items={items}
+          reference={paymentRef}
+        />
+      )}
     </>
   );
 }

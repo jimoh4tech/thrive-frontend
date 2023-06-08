@@ -1,14 +1,28 @@
 // next
 import Head from 'next/head';
 // @mui
-import { Container } from '@mui/material';
+import { Container, Stack } from '@mui/material';
 // routes
-import { PATH_ADMIN } from '../../../routes/paths';
+import { PATH_ADMIN } from 'src/routes/paths';
 // layouts
-import DashboardLayout from '../../../layouts/admin';
+import DashboardLayout from 'src/layouts/admin';
 // components
-import CustomBreadcrumbs from '../../../components/custom-breadcrumbs';
-import { useSettingsContext } from '../../../components/settings';
+import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
+// sections
+import { useCallback, useEffect, useState } from 'react';
+
+// routes
+import { useSnackbar } from 'notistack';
+import { IMedia } from 'src/@types/media';
+import { IQuery, IResDataMany } from 'src/@types/query';
+import { loader } from 'src/actions';
+import Pagination from 'src/components/pagination';
+import SearchBar from 'src/components/search-bar';
+import { FileGridView } from 'src/sections/@dashboard/file';
+// utils
+// layouts
+// @types
+// components
 // sections
 
 // ----------------------------------------------------------------------
@@ -18,30 +32,85 @@ BusinessBox.getLayout = (page: React.ReactElement) => <DashboardLayout>{page}</D
 // ----------------------------------------------------------------------
 
 export default function BusinessBox() {
-  const { themeStretch } = useSettingsContext();
+  const [media, setMedia] = useState<IResDataMany<IMedia>>({
+    totalItems: 0,
+    totalPages: 0,
+    records: [],
+    currentPage: 0,
+  });
+
+  const [fetching, setFetching] = useState(false);
+  const [query, setQuery] = useState<IQuery>({});
+
+  const handleQuery = (_query: IQuery) => setQuery({ ...query, ..._query });
+
+  const handleClearAll = () => {
+    setQuery({});
+  };
+
+  const { enqueueSnackbar } = useSnackbar();
+
+  const getMedia = useCallback(async () => {
+    try {
+      setFetching(true);
+      const data = await loader('mediaLibrary', { sortBy: 'createdAt', order: 'DESC', ...query });
+
+      setMedia(data);
+
+      setFetching(false);
+    } catch (error) {
+      enqueueSnackbar(error.message || error, { variant: 'error' });
+    }
+  }, [enqueueSnackbar, query]);
+
+  useEffect(() => {
+    getMedia();
+
+    return () => {};
+  }, [getMedia, query]);
 
   return (
     <>
       <Head>
-        <title> Business Box | ICSS Thrive</title>
+        <title> Business Media | ICSS Thrive</title>
       </Head>
 
-      <Container maxWidth={themeStretch ? false : 'lg'}>
+      <Container>
         <CustomBreadcrumbs
-          heading="Business Box"
+          heading="Business Media"
           links={[
             {
               name: 'Admin',
               href: PATH_ADMIN.root,
             },
             {
-              name: 'Business Box',
+              name: 'Business Media',
               href: PATH_ADMIN.businessMedia.library,
             },
             {
               name: 'List',
             },
           ]}
+        />
+
+        <Stack
+          spacing={2.5}
+          direction={{ xs: 'column', md: 'row' }}
+          alignItems={{ xs: 'flex-end', md: 'center' }}
+          justifyContent="space-between"
+          sx={{ mb: 5 }}
+        >
+          <SearchBar onChange={handleQuery} onClearFilter={handleClearAll} searching={fetching} />
+
+          {/* <FileChangeViewButton value={view} onChange={handleChangeView} /> */}
+        </Stack>
+
+        <FileGridView data={media.records} dataFiltered={media.records} />
+
+        <Pagination
+          totalPages={media.totalPages}
+          onChange={(num) => handleQuery({ page: num })}
+          currentPage={media.currentPage}
         />
       </Container>
     </>

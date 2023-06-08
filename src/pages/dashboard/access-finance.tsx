@@ -1,4 +1,3 @@
-import orderBy from 'lodash/orderBy';
 import { useCallback, useEffect, useState } from 'react';
 // form
 // next
@@ -9,7 +8,6 @@ import { Container, Stack } from '@mui/material';
 import { loader } from 'src/actions';
 // routes
 import { useSnackbar } from 'notistack';
-import { IFinance, IFinanceFilter } from 'src/@types/finance';
 import { IQuery, IResDataMany } from 'src/@types/query';
 import SearchBar from 'src/components/search-bar';
 import FinanceList from 'src/sections/@dashboard/finance/FinanceList';
@@ -147,45 +145,4 @@ export default function AccessFinance() {
       </Container>
     </>
   );
-}
-
-// ----------------------------------------------------------------------
-
-function applyFilter(events: IFinance[], filters: IFinanceFilter) {
-  const { category, sortBy } = filters;
-
-  // SORT BY
-  if (sortBy === 'featured') {
-    events = orderBy(events, ['sold'], ['desc']);
-  }
-
-  if (sortBy === 'newest') {
-    events = orderBy(events, ['createdAt'], ['desc']);
-  }
-
-  if (sortBy === 'priceDesc') {
-    events = orderBy(events, ['price'], ['desc']);
-  }
-
-  if (sortBy === 'priceAsc') {
-    events = orderBy(events, ['price'], ['asc']);
-  }
-
-  if (category !== 'All') {
-    events = events.filter((product) => product.category === category);
-  }
-
-  // if (rating) {
-  //   events = events.filter((product) => {
-  //     const convertRating = (value: string) => {
-  //       if (value === 'up4Star') return 4;
-  //       if (value === 'up3Star') return 3;
-  //       if (value === 'up2Star') return 2;
-  //       return 1;
-  //     };
-  //     return product.totalRating > convertRating(rating);
-  //   });
-  // }
-
-  return events;
 }

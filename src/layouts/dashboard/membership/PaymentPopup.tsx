@@ -17,10 +17,12 @@ const PaymentPopup = ({
   onClose,
   cb,
   items,
+  reference,
 }: {
   open: boolean;
   onClose?: VoidFunction;
   items: PaymentProps['items'];
+  reference: string;
   cb?: (ref: string, txnId?: number) => void;
 }) => {
   const { user } = useAuthContext();
@@ -37,39 +39,35 @@ const PaymentPopup = ({
       <DialogContent
         sx={{ py: 10, textAlign: 'center', justifyContent: 'center', alignItems: 'center' }}
       >
-        <Container>
-          <PlanPremiumIcon sx={{ mb: 5, height: 96 }} />
-          <Stack sx={{ mt: 5 }} spacing={2}>
-            <Box textAlign="center">
-              <Typography variant="h4" gutterBottom>
-                Complete Your Subscription
-              </Typography>
-              <Typography>
-                To finish powering you up, please make a subscription payment.
-              </Typography>
-            </Box>
+        <PlanPremiumIcon sx={{ mb: 5, height: 96 }} />
+        <Stack sx={{ mt: 5 }} spacing={2}>
+          <Box textAlign="center">
+            <Typography variant="h4" gutterBottom>
+              Complete Your Subscription
+            </Typography>
+            <Typography>To finish powering you up, please make a subscription payment.</Typography>
+          </Box>
 
-            {/* <Box>
+          {/* <Box>
                 <PaymentAddress onInput={(name, value) => setData({ ...data, fullName: value })} />
               </Box> */}
 
-            <PaymentSummary data={data} onSuccess={cb!} items={items} />
-          </Stack>
-          <Button
-            color="inherit"
-            variant="text"
-            onClick={onClose}
-            sx={{
-              mt: 8,
-              mx: 'auto',
-              alignItems: 'center',
-              display: 'inline-flex',
-            }}
-          >
-            <Iconify icon="eva:chevron-left-fill" width={16} />
-            Return
-          </Button>
-        </Container>
+          <PaymentSummary reference={reference} data={data} onSuccess={cb!} items={items} />
+        </Stack>
+        <Button
+          color="inherit"
+          variant="text"
+          onClick={onClose}
+          sx={{
+            mt: 8,
+            mx: 'auto',
+            alignItems: 'center',
+            display: 'inline-flex',
+          }}
+        >
+          <Iconify icon="eva:chevron-left-fill" width={16} />
+          Return
+        </Button>
       </DialogContent>
     </Dialog>
   );

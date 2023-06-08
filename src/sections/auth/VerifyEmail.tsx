@@ -40,7 +40,7 @@ const VerifyEmail = ({
 
       cb!(res.emailVerifiedToken);
     } catch (error) {
-      enqueueSnackbar(error.message || error);
+      enqueueSnackbar(error.message || error, { variant: 'error' });
     }
   };
 

@@ -6,11 +6,10 @@ import { useForm } from 'react-hook-form';
 import { LoadingButton } from '@mui/lab';
 import { Box, Card, Grid, InputAdornment, Stack } from '@mui/material';
 // auth
-import { createBusiness } from 'src/actions/businessActions';
-import Iconify from 'src/components/iconify/Iconify';
-import { loader, updater } from 'src/actions';
 import { useCallback, useEffect, useState } from 'react';
 import { IIndustry } from 'src/@types/business';
+import { loader, updater } from 'src/actions';
+import Iconify from 'src/components/iconify/Iconify';
 import { useAuthContext } from '../../../../auth/useAuthContext';
 // utils
 // assets
@@ -24,21 +23,25 @@ import { CustomFile } from '../../../../components/upload';
 
 const SOCIAL_LINKS = [
   {
+    hint: 'https://www.facebook.com/thrivebizsoutions',
     value: 'facebookLink',
     label: 'facebook url',
     icon: <Iconify icon="eva:facebook-fill" width={24} />,
   },
   {
+    hint: 'https://instagram.com/icss_thrive',
     value: 'instagramLink',
     label: 'instagram url',
     icon: <Iconify icon="ant-design:instagram-filled" width={24} />,
   },
   {
+    hint: 'https://www.linkedin.com/company/thrivebizng',
     value: 'linkedinLink',
     label: 'linkedin url',
     icon: <Iconify icon="eva:linkedin-fill" width={24} />,
   },
   {
+    hint: 'https://twitter.com/thrivebizng',
     value: 'twitterLink',
     label: 'twitter url',
     icon: <Iconify icon="eva:twitter-fill" width={24} />,
@@ -49,19 +52,24 @@ type FormValuesProps = {
   name: string;
   email: string;
   avatarUrl: CustomFile | string | null;
-  phone: string | null;
-  country: string | null;
-  address: string | null;
-  state: string | null;
+  phone: string;
+  country: string;
+  address: string;
+  state: string;
 
   whatsappNumber: string;
-  industry: string;
+  industryId: number;
   bio: string;
+  facebookLink?: string;
+  twitterLink?: string;
+  instagramLink?: string;
+  linkedinLink?: string;
 };
 
-export default function BusinessUpdateForm() {
+export default function BusinessUpdateForm({ cb }: { cb?: VoidFunction }) {
   const {
     user: { business: busi },
+    revalidateUser,
   } = useAuthContext();
 
   // revalidateUser!();
@@ -76,18 +84,16 @@ export default function BusinessUpdateForm() {
     country: Yup.string().required('Country is required'),
     address: Yup.string().required('Address is required'),
     state: Yup.string().required('State is required'),
-    industry: Yup.string().required('Business Industry is required'),
+    industryId: Yup.string().required('Business Industry is required'),
     slug: Yup.string()
       .trim()
       .matches(/^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/, 'Invalid slug')
       .required('Business Industry is required'),
-    bio: Yup.string()
-      .min(30, 'Business description must be above 30 characters')
-      .max(300, 'Business description must be less than 300 characters'),
-    facebookLink: Yup.string().url('Invalid URL'),
-    twitterLink: Yup.string().url('Invalid URL'),
-    instagramLink: Yup.string().url('Invalid URL'),
-    linkedinLink: Yup.string().url('Invalid URL'),
+    bio: Yup.string().min(30, 'Business description must be above 30 characters'),
+    facebookLink: Yup.string().optional(),
+    twitterLink: Yup.string().optional(),
+    instagramLink: Yup.string().optional(),
+    linkedinLink: Yup.string().optional(),
   });
 
   const urlArr = busi.slug.split('/');
@@ -100,7 +106,7 @@ export default function BusinessUpdateForm() {
     country: busi.country,
     address: busi.address,
     state: busi.state,
-    industry: busi.industryId,
+    industryId: busi.industryId,
     bio: busi.bio,
     slug: urlArr[urlArr.length - 1],
     designation: busi.designation,
@@ -125,6 +131,8 @@ export default function BusinessUpdateForm() {
     try {
       const { message } = await updater('userBusiness', data);
       enqueueSnackbar(message);
+      revalidateUser!();
+      cb!();
     } catch (err) {
       enqueueSnackbar(err.message || err, { variant: 'error' });
     }
@@ -203,6 +211,7 @@ export default function BusinessUpdateForm() {
                   InputProps={{
                     startAdornment: <InputAdornment position="start">{link.icon}</InputAdornment>,
                   }}
+                  helperText={`hint: ${link.hint}`}
                 />
               ))}
             </Box>

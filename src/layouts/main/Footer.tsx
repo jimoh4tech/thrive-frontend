@@ -46,6 +46,13 @@ const LINKS = [
     ],
   },
   {
+    headline: 'Other Pages',
+    children: [
+      { name: 'FAQs', href: PATH_PAGE.faqs },
+      { name: 'Announcements', href: PATH_PAGE.announcement },
+    ],
+  },
+  {
     headline: 'Legal',
     children: [
       { name: 'Terms and Condition', href: PATH_PAGE.termsCondition },
@@ -210,8 +217,9 @@ export default function Footer() {
               md: 'left',
             },
           }}
+          spacing={2}
         >
-          <Grid item xs={12} md={3}>
+          <Grid item xs={6} md={3}>
             <Box>
               <LogoFull sx={{ maxWidth: 150, mx: { xs: 'auto', md: 'inherit' } }} />
               <Typography variant="body2" sx={{ pr: { md: 5 } }}>
@@ -239,25 +247,21 @@ export default function Footer() {
             </Stack>
           </Grid>
 
-          <Grid item xs={12} md={7}>
-            <Grid container spacing={5} justifyContent="space-between">
-              {LINKS.map((list, i) => (
-                <Grid item xs={6} key={i} textAlign="left">
-                  <Typography color="primary.main" component="div" variant="overline">
-                    {list.headline}
-                  </Typography>
+          {LINKS.map((list, i) => (
+            <Grid item xs={6} md={3} key={i} textAlign="left">
+              <Typography color="primary.main" component="div" variant="overline">
+                {list.headline}
+              </Typography>
 
-                  {list.children.map((link, _i) => (
-                    <Box key={_i}>
-                      <Link component={NextLink} href={link.href} color="inherit" variant="body2">
-                        {link.name}
-                      </Link>
-                    </Box>
-                  ))}
-                </Grid>
+              {list.children.map((link, _i) => (
+                <Box key={_i}>
+                  <Link component={NextLink} href={link.href} color="inherit" variant="body2">
+                    {link.name}
+                  </Link>
+                </Box>
               ))}
             </Grid>
-          </Grid>
+          ))}
         </Grid>
 
         <Typography

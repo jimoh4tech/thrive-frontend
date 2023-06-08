@@ -19,12 +19,14 @@ export interface PaymentProps {
   items: { name: string; label?: string; amount: number }[];
   data: PFormValuesProps;
   onSuccess: (ref: string) => void;
+  reference?: string;
 }
 
 export default function PaymentSummary({
   sx,
   items,
   data,
+  reference,
   onSuccess,
   ...other
 }: PaymentProps & BoxProps) {
@@ -37,7 +39,7 @@ export default function PaymentSummary({
   return (
     <Box
       sx={{
-        p: 5,
+        p: { sm: 5, xs: 3 },
         borderRadius: 2,
         bgcolor: 'background.neutral',
         ...sx,
@@ -52,7 +54,7 @@ export default function PaymentSummary({
         {items.map(({ name, label, amount }) => (
           <>
             <Stack direction="row" justifyContent="space-between">
-              <Stack direction="row" spacing={2}>
+              <Stack direction={{ sm: 'row' }} spacing={2}>
                 <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                   {name}
                 </Typography>
@@ -84,7 +86,13 @@ export default function PaymentSummary({
         * Subscription valid till 31 Dec. {fDate(null, 'year')}
       </Typography>
 
-      <PaystackPay onClose={() => {}} onSuccess={onSuccess!} amount={total} email={data.email} />
+      <PaystackPay
+        reference={reference}
+        onClose={() => {}}
+        onSuccess={onSuccess!}
+        amount={total}
+        email={data.email}
+      />
 
       <Stack alignItems="center" spacing={1}>
         <Stack direction="row" alignItems="center" spacing={1}>
@@ -104,19 +112,24 @@ const PaystackPay = ({
   amount,
   onClose,
   onSuccess,
+  reference,
 }: {
   email: string;
   amount: number;
   onSuccess: (ref: string) => void;
   onClose: VoidFunction;
+  reference?: string;
 }) => {
   const config: PaystackProps = {
-    reference: new Date().getTime().toString(),
+    reference: reference || new Date().getTime().toString(),
     publicKey: process.env.NEXT_PUBLIC_PAYSTACK_KEY!,
-    // split_code: process.env.NEXT_PUBLIC_PAYSTACK_SPLIT_CODE!,
     email,
     amount: amount * 100,
   };
+
+  if (process.env.NEXT_PUBLIC_PAYSTACK_SPLIT_CODE)
+    config.split_code = process.env.NEXT_PUBLIC_PAYSTACK_SPLIT_CODE;
+
   const initializePayment = usePaystackPayment(config);
   const [isSubmitting, setIsSubmitting] = useState(false);
   function handleSuccess(): void {

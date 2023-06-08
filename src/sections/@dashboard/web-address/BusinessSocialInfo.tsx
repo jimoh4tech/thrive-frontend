@@ -1,5 +1,5 @@
 // @mui
-import { Card, CardHeader, Link, Stack } from '@mui/material';
+import { Button, Card, CardHeader, Stack } from '@mui/material';
 // @types
 import { IUserSocialLink } from 'src/@types/user';
 // components
@@ -43,8 +43,6 @@ const _socials = [
 ];
 
 export default function BusinessSocialInfo({ socialLinks }: Props) {
-  const { facebookLink, instagramLink, linkedinLink, twitterLink } = socialLinks;
-
   console.log(socialLinks);
 
   return (
@@ -53,7 +51,13 @@ export default function BusinessSocialInfo({ socialLinks }: Props) {
 
       <Stack spacing={2} sx={{ p: 3 }}>
         {_socials.map((link: any) => (
-          <Stack key={link.name} direction="row" sx={{ wordBreak: 'break-all' }}>
+          <Stack
+            key={link.name}
+            direction="row"
+            // justifyContent="center"
+            alignItems="center"
+            sx={{ wordBreak: 'break-all' }}
+          >
             <Iconify
               icon={link.icon}
               sx={{
@@ -62,13 +66,14 @@ export default function BusinessSocialInfo({ socialLinks }: Props) {
                 color: link.color,
               }}
             />
-            <Link component="span" variant="body2" color="text.primary">
-              {(link.value === 'facebook' && (facebookLink || 'Not Available')) ||
-                (link.value === 'instagram' && (instagramLink || 'Not Available')) ||
-                (link.value === 'linkedin' && (linkedinLink || 'Not Available')) ||
-                twitterLink ||
+            {/* @ts-ignore */}
+            <Button href={socialLinks[`${link.value}Link`] || ''} target="_blank">
+              {(link.value === 'facebook' && ('Visit Page' || 'Not Available')) ||
+                (link.value === 'instagram' && ('Visit Page' || 'Not Available')) ||
+                (link.value === 'linkedin' && ('Visit Page' || 'Not Available')) ||
+                (link.value === 'twitter' && ('VIEW PAGE' || 'Not Available')) ||
                 'Not Available'}
-            </Link>
+            </Button>
           </Stack>
         ))}
       </Stack>

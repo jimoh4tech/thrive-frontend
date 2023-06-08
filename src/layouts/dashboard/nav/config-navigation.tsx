@@ -116,7 +116,9 @@ const navConfig = [
   {
     subheader: 'HELP',
     // roles: ['admin'],
-    items: [{ title: 'Contact Support', path: PATH_DASHBOARD.contactSupport, icon: ICONS.chat }],
+    items: [
+      { title: 'Contact Support & FAQs', path: PATH_DASHBOARD.contactSupport, icon: ICONS.chat },
+    ],
   },
   // MANAGEMENT
   // // ----------------------------------------------------------------------

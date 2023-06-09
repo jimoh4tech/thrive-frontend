@@ -341,7 +341,12 @@ export default function BusinessProfile() {
               </Stack>
 
               <Stack spacing={3} alignItems="flex-end" sx={{ mt: 3 }}>
-                <LoadingButton fullWidth type="submit" variant="contained" loading={isSubmitting}>
+                <LoadingButton
+                  fullWidth
+                  type="submit"
+                  variant="contained"
+                  loading={isSubmitting || submitting}
+                >
                   Next <Iconify icon="zondicons:cheveron-right" />
                 </LoadingButton>
               </Stack>

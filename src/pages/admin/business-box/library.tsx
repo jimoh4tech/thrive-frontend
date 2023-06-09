@@ -9,7 +9,6 @@ import DashboardLayout from 'src/layouts/admin';
 // components
 import ReactLoading from 'react-loading';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
-import { useSettingsContext } from 'src/components/settings';
 import { useTable } from 'src/components/table';
 // sections
 import { useCallback, useEffect, useState } from 'react';
@@ -48,8 +47,6 @@ export default function BusinessBox() {
     isError,
     shortLabel,
   } = useDateRangePicker(null, null);
-
-  const { themeStretch } = useSettingsContext();
 
   const [filterName, setFilterName] = useState('');
 

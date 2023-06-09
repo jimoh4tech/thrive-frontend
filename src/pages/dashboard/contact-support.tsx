@@ -1,12 +1,12 @@
-import { Box, Container, Stack } from '@mui/system';
-import ContactForm from 'src/sections/contact/ContactForm';
-import { PATH_DASHBOARD } from 'src/routes/paths';
-import CustomBreadcrumbs from 'src/components/custom-breadcrumbs/CustomBreadcrumbs';
-import Head from 'next/head';
 import { Accordion, AccordionDetails, AccordionSummary, Grid, Typography } from '@mui/material';
+import { Container } from '@mui/system';
+import Head from 'next/head';
+import { SyntheticEvent, useState } from 'react';
+import CustomBreadcrumbs from 'src/components/custom-breadcrumbs/CustomBreadcrumbs';
 import Iconify from 'src/components/iconify/Iconify';
 import { faq } from 'src/constants/faq';
-import { SyntheticEvent, useState } from 'react';
+import { PATH_DASHBOARD } from 'src/routes/paths';
+import ContactForm from 'src/sections/contact/ContactForm';
 import DashboardLayout from '../../layouts/dashboard';
 // @types
 // components

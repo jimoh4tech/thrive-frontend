@@ -3,7 +3,7 @@
 import { Button, Dialog, DialogContent, Typography } from '@mui/material';
 // layouts
 // routes
-import { Box, Container, Stack } from '@mui/system';
+import { Box, Stack } from '@mui/system';
 import { useAuthContext } from 'src/auth/useAuthContext';
 // components
 import Iconify from '../../../components/iconify';

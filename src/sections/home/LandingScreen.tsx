@@ -11,11 +11,14 @@ import { PATH_AUTH } from 'src/routes/paths';
 import { useCallback, useEffect, useState } from 'react';
 import { loader } from 'src/actions';
 import { useSnackbar } from 'notistack';
+import { Tour } from '@mui/icons-material';
+import TourVideo from 'src/components/TourVideo';
 import Image from '../../components/image';
 
 const LandingScreen = () => {
   const theme = useTheme();
   const { enqueueSnackbar } = useSnackbar();
+  const [watch, setWatch] = useState(false);
 
   const carouselSettings = {
     speed: 1500,
@@ -66,7 +69,7 @@ const LandingScreen = () => {
             A one-stop digital support center for growing businesses with ICSS entrepreneurship
             development program certificate in Nigeria. One-time sign-up. Easy sign-ins.
           </Typography>
-          <Box>
+          <Stack direction="row" spacing={2}>
             <Button
               LinkComponent={Link}
               size="large"
@@ -76,7 +79,16 @@ const LandingScreen = () => {
             >
               Get Started
             </Button>
-          </Box>
+            <Button
+              LinkComponent={Link}
+              size="large"
+              startIcon={<Tour />}
+              variant="contained"
+              onClick={() => setWatch(true)}
+            >
+              Take A Tour
+            </Button>
+          </Stack>
           <Box>
             <Typography variant="h6">Registered User</Typography>
             <Stack direction="row" spacing={1} mt={1}>
@@ -111,6 +123,7 @@ const LandingScreen = () => {
           ))}
         </Carousel>
       </Grid>
+      <TourVideo open={watch} onClose={() => setWatch(false)} />
     </Grid>
   );
 };

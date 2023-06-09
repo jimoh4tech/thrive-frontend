@@ -1,10 +1,10 @@
-import { Button, Container, Dialog, DialogContent } from '@mui/material';
+import { Button, Container } from '@mui/material';
 import { Stack } from '@mui/system';
 import Head from 'next/head';
 import { useState } from 'react';
-import YouTube, { YouTubeProps } from 'react-youtube';
 import { SeoIllustration } from 'src/assets/illustrations';
 import { useAuthContext } from 'src/auth/useAuthContext';
+import TourVideo from 'src/components/TourVideo';
 import { useSettingsContext } from 'src/components/settings';
 import { AppWelcome } from 'src/sections/@dashboard/general/app';
 
@@ -14,20 +14,6 @@ export default function UserPending() {
   const [watch, setWatch] = useState(false);
 
   const { themeStretch } = useSettingsContext();
-
-  const onPlayerReady: YouTubeProps['onReady'] = (event) => {
-    // access to player in all event handlers via event.target
-    event.target.playVideo();
-  };
-
-  const opts: YouTubeProps['opts'] = {
-    // height: '390',
-    // width: '640',
-    playerVars: {
-      // https://developers.google.com/youtube/player_parameters
-      autoplay: 1,
-    },
-  };
 
   const hanldeClose = () => {
     setWatch(false);
@@ -65,11 +51,7 @@ export default function UserPending() {
         />
       </Container>
 
-      <Dialog open={watch} onClose={hanldeClose} maxWidth="lg">
-        <DialogContent sx={{ pt: 2 }}>
-          <YouTube videoId="wwOiPAL7PUQ" opts={opts} onReady={onPlayerReady} />,
-        </DialogContent>
-      </Dialog>
+      <TourVideo open={watch} onClose={hanldeClose} />
     </>
   );
 }

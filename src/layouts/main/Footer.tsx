@@ -1,7 +1,17 @@
 // next
 import NextLink from 'next/link';
 // @mui
-import { Box, Container, Divider, Grid, IconButton, Link, Stack, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Container,
+  Divider,
+  Grid,
+  IconButton,
+  Link,
+  Stack,
+  Typography,
+} from '@mui/material';
 // routes
 import { m } from 'framer-motion';
 import moment from 'moment';
@@ -26,6 +36,8 @@ import { varFade } from 'src/components/animate';
 import { LogoFull } from 'src/components/logo/Logo';
 // import Image from 'src/components/image/Image';
 import Image from 'next/image';
+import { useState } from 'react';
+import TourVideo from 'src/components/TourVideo';
 import { PATH_PAGE } from '../../routes/paths';
 // components
 import Iconify from '../../components/iconify';
@@ -48,8 +60,9 @@ const LINKS = [
   {
     headline: 'Other Pages',
     children: [
-      { name: 'FAQs', href: PATH_PAGE.faqs },
+      { name: 'Frequently Asked Questions', href: PATH_PAGE.faqs },
       { name: 'Announcements', href: PATH_PAGE.announcement },
+      { name: 'Take a Tour', action: (cb: VoidFunction) => cb },
     ],
   },
   {
@@ -98,27 +111,9 @@ export const _socials = [
 // ----------------------------------------------------------------------
 
 export default function Footer() {
-  // const simpleFooter = (
-  //   <Box
-  //     component="footer"
-  //     sx={{
-  //       py: 5,
-  //       textAlign: 'center',
-  //       position: 'relative',
-  //       bgcolor: 'background.default',
-  //     }}
-  //   >
-  //     <Container>
-  //       <Logo sx={{ mb: 1, mx: 'auto' }} />
-
-  //       <Typography variant="caption" component="div">
-  //         © All rights reserved
-  //         <br /> made by &nbsp;
-  //         <Link href="https://minimals.cc/"> minimals.cc </Link>
-  //       </Typography>
-  //     </Container>
-  //   </Box>
   // );
+
+  const [watch, setWatch] = useState(false);
 
   const mainFooter = (
     <Box
@@ -255,9 +250,22 @@ export default function Footer() {
 
               {list.children.map((link, _i) => (
                 <Box key={_i}>
-                  <Link component={NextLink} href={link.href} color="inherit" variant="body2">
-                    {link.name}
-                  </Link>
+                  {link.action ? (
+                    <>
+                      <TourVideo open={watch} onClose={() => setWatch(false)} />
+                      <Button
+                        sx={{ mt: 3 }}
+                        variant="contained"
+                        onClick={link.action(() => setWatch(true))}
+                      >
+                        {link.name}
+                      </Button>
+                    </>
+                  ) : (
+                    <Link component={NextLink} href={link.href} color="inherit" variant="body2">
+                      {link.name}
+                    </Link>
+                  )}
                 </Box>
               ))}
             </Grid>

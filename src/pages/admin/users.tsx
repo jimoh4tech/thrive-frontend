@@ -65,7 +65,7 @@ UserListPage.getLayout = (page: React.ReactElement) => <DashboardLayout>{page}</
 // ----------------------------------------------------------------------
 
 export default function UserListPage() {
-  const { order, orderBy, setPage, onSort } = useTable();
+  const { order, orderBy } = useTable();
 
   const { themeStretch } = useSettingsContext();
 
@@ -82,7 +82,6 @@ export default function UserListPage() {
   // const denseHeight = dense ? 52 : 72;
 
   const handleFilterStatus = (_: any, newValue: string) => {
-    setPage(0);
     if (newValue !== 'all') setQuery({ ...query, filterBy: 'status', filter: newValue });
     else setQuery({});
     setFilterStatus(newValue);
@@ -214,10 +213,13 @@ export default function UserListPage() {
               {
                 name: 'ngoId',
                 options: ngos.map((_: any) => ({ label: _.name, value: _.id })),
-                label: "Partner Org'",
+                label: "Filter by Partner Org'",
               },
             ]}
-            onChangeOption={(name, value) => setQuery({ filterBy: name, filter: value })}
+            onChangeOption={(name, value) => {
+              setFilterStatus('all');
+              setQuery({ ...query, filterBy: name, filter: value });
+            }}
           />
 
           <TableContainer sx={{ position: 'relative', overflow: 'unset' }}>

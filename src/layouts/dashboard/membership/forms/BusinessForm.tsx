@@ -146,7 +146,7 @@ export default function BusinessProfile() {
     try {
       setIsSubmitting(true);
       setBusiness(data);
-      const txnRef = localStorage.getItem(`payment-successfull`) || '';
+      const txnRef = localStorage.getItem(`${user.email}-successfull`) || '';
       if (successRef || txnRef) {
         await onSubmit(txnRef, data);
         return;
@@ -197,7 +197,7 @@ export default function BusinessProfile() {
         rest.reference = ref || successRef;
 
         const res = await createBusiness(rest);
-        localStorage.removeItem(`payment-successfull`);
+        localStorage.removeItem(`${user.email}-successfull`);
 
         enqueueSnackbar(res.data.message);
         reset();
@@ -210,7 +210,7 @@ export default function BusinessProfile() {
 
       setIsSubmitting(false);
     },
-    [business, enqueueSnackbar, reset, revalidateUser, successRef]
+    [business, enqueueSnackbar, reset, revalidateUser, successRef, user.email]
   );
 
   const handleDrop = useCallback(

@@ -1,16 +1,14 @@
 // @mui
 import { LoadingButton } from '@mui/lab';
 import { Box, BoxProps, Divider, Stack, Typography } from '@mui/material';
-import { useForm } from 'react-hook-form';
-import FormProvider from 'src/components/hook-form/FormProvider';
+import { useState } from 'react';
+import { usePaystackPayment } from 'react-paystack';
+import { PaystackProps } from 'react-paystack/dist/types';
 import Iconify from 'src/components/iconify/Iconify';
 import Label from 'src/components/label/Label';
 import { fCurrency } from 'src/utils/formatNumber';
 import { fDate } from 'src/utils/formatTime';
-import { usePaystackPayment } from 'react-paystack';
 import { useAuthContext } from 'src/auth/useAuthContext';
-import { useState } from 'react';
-import { PaystackProps } from 'react-paystack/dist/types';
 import { PFormValuesProps } from './PaymentAddress';
 // components
 
@@ -130,11 +128,12 @@ const PaystackPay = ({
   if (process.env.NEXT_PUBLIC_PAYSTACK_SPLIT_CODE)
     config.split_code = process.env.NEXT_PUBLIC_PAYSTACK_SPLIT_CODE;
 
+  const { user } = useAuthContext();
   const initializePayment = usePaystackPayment(config);
   const [isSubmitting, setIsSubmitting] = useState(false);
   function handleSuccess(): void {
     setIsSubmitting(false);
-    localStorage.setItem('payment-successfull', config.reference!);
+    localStorage.setItem(`${user.email}-successfull`, config.reference!);
     onSuccess(config.reference!);
   }
   function handleClose(): void {

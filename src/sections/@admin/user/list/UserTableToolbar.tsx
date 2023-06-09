@@ -120,6 +120,18 @@ export default function UserTableToolbar({
                 textTransform: 'capitalize',
               }}
             >
+              <MenuItem
+                value=""
+                sx={{
+                  mx: 1,
+                  borderRadius: 0.75,
+                  typography: 'body2',
+                  textTransform: 'capitalize',
+                }}
+              >
+                All
+              </MenuItem>
+
               {data.options.map((opt) => (
                 <MenuItem
                   key={opt.value}

@@ -70,7 +70,7 @@ export default function FileManagerPage() {
   return (
     <>
       <Head>
-        <title> Health & Wellbeing | ICSS Thrive</title>
+        <title> Health & Wellbeing | Thrive</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>

@@ -95,7 +95,7 @@ export default function AccessFinance() {
   return (
     <>
       <Head>
-        <title> Access To Finance | ICSS Thrive</title>
+        <title> Access To Finance | Thrive</title>
       </Head>
 
       <Container maxWidth="xl">

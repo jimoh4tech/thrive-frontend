@@ -103,7 +103,7 @@ export default function FileManagerPage() {
   return (
     <>
       <Head>
-        <title> Directory Listing | ICSS Thrive</title>
+        <title> Directory Listing | Thrive</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>

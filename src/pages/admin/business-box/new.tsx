@@ -46,7 +46,7 @@ export default function BlogNewPostPage() {
   return (
     <>
       <Head>
-        <title> Business Box | ICSS Thrive</title>
+        <title> Business Box | Thrive</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>

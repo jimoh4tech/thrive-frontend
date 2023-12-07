@@ -186,9 +186,9 @@ function RenderApproveDialog({ openConfirm, setOpenConfirm, onApprove }: RProps)
       title="Approve This User"
       content={
         <FormProvider methods={methods}>
-          <Typography sx={{ my: 2 }}>Enter ICSS ID to proceed</Typography>
+          <Typography sx={{ my: 2 }}>EnterThriveID to proceed</Typography>
 
-          <RHFTextField name="icssId" label="ICSS ID" />
+          <RHFTextField name="icssId" label="ThriveID" />
         </FormProvider>
       }
       action={

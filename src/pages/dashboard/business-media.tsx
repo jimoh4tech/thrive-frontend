@@ -70,7 +70,7 @@ export default function FileManagerPage() {
   return (
     <>
       <Head>
-        <title> Business Media Library | ICSS Thrive</title>
+        <title> Business Media Library | Thrive</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>

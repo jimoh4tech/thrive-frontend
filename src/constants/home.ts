@@ -1,4 +1,4 @@
-import { logo2 } from 'src/assets/images';
+import { logo2, sa_2 } from 'src/assets/images';
 
 const lorem = `<strong>Lorem Ipsum is simply dummy text of the
    printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </strong>
@@ -21,7 +21,7 @@ export const sa = {
   posts: [
     {
       id: 1,
-      title: 'Welcome to ICSS THRIVE',
+      title: 'Welcome to Thrive',
       body: lorem,
       image: logo2.src,
       comment: 5,
@@ -31,9 +31,9 @@ export const sa = {
     },
     {
       id: 2,
-      title: 'ICSS THRIVE Consortiums meets in Benin',
+      title: 'Thrive Consortiums meets in Benin',
       body: lorem,
-      image: 'https://res.cloudinary.com/thrive-biz/image/upload/v1684508627/sa_2.png',
+      image: sa_2.src,
       comment: 5,
       like: 12,
       tags: ['business', 'startup', 'msme', 'event'],
@@ -41,7 +41,7 @@ export const sa = {
     },
     {
       id: 3,
-      title: 'ICSS THRIVE beneficiary displays a new business line',
+      title: 'Thrive beneficiary displays a new business line',
       body: lorem,
       image: 'https://res.cloudinary.com/thrive-biz/image/upload/v1684509080/su_3.png',
       comment: 5,
@@ -51,7 +51,7 @@ export const sa = {
     },
     // {
     //   id: 4,
-    //   title: 'ICSS THRIVE beneficiary attends export fair',
+    //   title: 'Thrive beneficiary attends export fair',
     //   body: lorem,
     //   image: 'https://res.cloudinary.com/thrive-biz/image/upload/v1684509079/su_4.png',
     //   comment: 5,
@@ -61,7 +61,7 @@ export const sa = {
     // },
     // {
     //   id: 5,
-    //   title: 'ICSS THRIVE beneficiary attends export fair',
+    //   title: 'Thrive beneficiary attends export fair',
     //   body: lorem,
     //   image: 'https://res.cloudinary.com/thrive-biz/image/upload/v1684508627/sa_2.png',
     //   comment: 5,
@@ -71,7 +71,7 @@ export const sa = {
     // },
     // {
     //   id: 6,
-    //   title: 'ICSS THRIVE beneficiary attends export fair',
+    //   title: 'Thrive beneficiary attends export fair',
     //   body: lorem,
     //   image: 'https://res.cloudinary.com/thrive-biz/image/upload/v1684508627/sa_2.png',
     //   comment: 5,
@@ -81,7 +81,7 @@ export const sa = {
     // },
     // {
     //   id: 7,
-    //   title: 'ICSS THRIVE beneficiary attends export fair',
+    //   title: 'Thrive beneficiary attends export fair',
     //   body: lorem,
     //   image: 'https://res.cloudinary.com/thrive-biz/image/upload/v1684509079/su_4.png',
     //   comment: 5,

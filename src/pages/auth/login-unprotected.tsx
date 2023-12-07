@@ -9,7 +9,7 @@ export default function LoginUnprotectedPage() {
   return (
     <>
       <Head>
-        <title> Login Unprotected | ICSS Thrive</title>
+        <title> Login Unprotected | Thrive</title>
       </Head>
 
       <Login />

@@ -30,7 +30,7 @@ export default function Register() {
 
       {/* <Card>
         <CardHeader
-          title="Are your ICSS Certified?"
+          title="Are yourThriveCertified?"
           subheader="Confirm your membership"
           sx={{
             '& .MuiCardHeader-action': { alignSelf: 'center' },

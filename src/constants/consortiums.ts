@@ -78,7 +78,7 @@ export const consortiums = [
   {
     title: 'Kairos Youth Empowerment Initiative',
     logo: kalros,
-    text: '<p>SKairos Youth Empowerment Initiative is an indigenous non-profit NGO founded in 2013 with a mission to improve the lives of vulnerable women, youth, and children in Nigeria. Through developmental programs in socio-economic development, entrepreneurship, migration, health education and environmental sustainability, Kairos is empowering young people to build a brighter future.</p><p>Registered with the Cooperative Affairs Commission in 2015, Kairos is proudly driving business and entrepreneurship development in rural areas through ICSS program in Auchi and Uromi communities.</p><p>Come and be part of the movement that is changing lives and shaping the future of Nigeria!</p>',
+    text: '<p>SKairos Youth Empowerment Initiative is an indigenous non-profit NGO founded in 2013 with a mission to improve the lives of vulnerable women, youth, and children in Nigeria. Through developmental programs in socio-economic development, entrepreneurship, migration, health education and environmental sustainability, Kairos is empowering young people to build a brighter future.</p><p>Registered with the Cooperative Affairs Commission in 2015, Kairos is proudly driving business and entrepreneurship development in rural areas throughThriveprogram in Auchi and Uromi communities.</p><p>Come and be part of the movement that is changing lives and shaping the future of Nigeria!</p>',
     link: 'https://www.facebook.com/profile.php?id=100069677469665',
   },
 ];

@@ -47,7 +47,7 @@ export default function BlogNewPostPage() {
   return (
     <>
       <Head>
-        <title> Health and Wellbeing | ICSS Thrive</title>
+        <title> Health and Wellbeing | Thrive</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>

@@ -10,13 +10,13 @@ import MainLayout from '../layouts/main';
 
 // ----------------------------------------------------------------------
 
-ICSSAgencies.getLayout = (page: React.ReactElement) => (
-  <MainLayout metaTitle="ICSS THRIVE Consortium">{page}</MainLayout>
+ThriveAgencies.getLayout = (page: React.ReactElement) => (
+  <MainLayout metaTitle="Thrive Consortium">{page}</MainLayout>
 );
 
 // ----------------------------------------------------------------------
 
-export default function ICSSAgencies() {
+export default function ThriveAgencies() {
   return (
     <Box
       sx={{

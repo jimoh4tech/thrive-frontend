@@ -7,7 +7,7 @@ type ReturnType = {
   isExternalLink: boolean;
 };
 
-export default function useActiveLink(path: string, deep = true): ReturnType {
+export default function useActiveLink(path: string = '/', deep = true): ReturnType {
   const { pathname, asPath } = useRouter();
 
   const checkPath = path.startsWith('#');

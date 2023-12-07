@@ -20,7 +20,7 @@ export default function PaymentSuccessful() {
   return (
     <Box textAlign="center" sx={{ marginTop: 12, mx: 'auto', maxWidth: 400 }}>
       <Head>
-        <title> Payment Successfull | ICSS Thrive</title>
+        <title> Payment Successfull | Thrive</title>
       </Head>
 
       <SentIcon sx={{ mb: 5, height: 96 }} />
@@ -30,8 +30,7 @@ export default function PaymentSuccessful() {
       </Typography>
 
       <Typography sx={{ color: 'text.secondary', mb: 5 }}>
-        Your subscription to ICSS Thrive platform was successful. You can now return to your
-        dashboard .
+        Your subscription to Thrive platform was successful. You can now return to your dashboard .
       </Typography>
 
       <Button

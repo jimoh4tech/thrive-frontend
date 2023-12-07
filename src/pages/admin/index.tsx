@@ -48,7 +48,7 @@ export default function IndexPage() {
   return (
     <>
       <Head>
-        <title> General: App | ICSS Thrive</title>
+        <title> General: App | Thrive</title>
       </Head>
       <Container maxWidth={themeStretch ? false : 'xl'}>
         <Grid container spacing={3}>
@@ -162,7 +162,7 @@ export default function IndexPage() {
               tableLabels={[
                 { id: 'id', label: 'Name' },
                 { id: 'category', label: 'Email' },
-                { id: 'price', label: 'ICSS No' },
+                { id: 'price', label: 'ThriveNo' },
                 { id: 'status', label: 'Status' },
                 { id: '' },
               ]}

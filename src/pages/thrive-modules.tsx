@@ -10,7 +10,7 @@ import MainLayout from '../layouts/main';
 // ----------------------------------------------------------------------
 
 HomePage.getLayout = (page: React.ReactElement) => (
-  <MainLayout metaTitle="ICSS Modules">{page}</MainLayout>
+  <MainLayout metaTitle="ThriveModules">{page}</MainLayout>
 );
 
 // ----------------------------------------------------------------------

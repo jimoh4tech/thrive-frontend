@@ -25,6 +25,7 @@ type FormValuesProps = {
   confirmPassword: string;
   firstName: string;
   lastName: string;
+  ngoId: number | null;
   afterSubmit?: string;
 };
 
@@ -40,6 +41,7 @@ export default function AuthRegisterForm() {
   const RegisterSchema = Yup.object().shape({
     firstName: Yup.string().required('First name required'),
     lastName: Yup.string().required('Last name required'),
+    ngoId: Yup.string().required('Partner Organization is required'),
     email: Yup.string().required('Email is required').email('Email must be a valid email address'),
     phone: Yup.string().matches(phoneRegExp, 'Phone number is not valid'),
     password: Yup.string()
@@ -58,6 +60,7 @@ export default function AuthRegisterForm() {
     password: '',
     phomne: '',
     confirmPassword: '',
+    ngoId: null,
   };
 
   const methods = useForm<FormValuesProps>({

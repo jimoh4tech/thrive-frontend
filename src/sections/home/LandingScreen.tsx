@@ -66,7 +66,7 @@ const LandingScreen = () => {
             </Typography>
           </Box>
           <Typography>
-            A one-stop digital support center for growing businesses with ICSS entrepreneurship
+            A one-stop digital support center for growing businesses withThriveentrepreneurship
             development program certificate in Nigeria. One-time sign-up. Easy sign-ins.
           </Typography>
           <Stack direction="row" spacing={2}>
@@ -116,7 +116,7 @@ const LandingScreen = () => {
       </Grid>
       <Grid item xs={12} lg={7}>
         <Carousel {...carouselSettings}>
-          {[banner1, banner2, banner3, banner4].map((item, i) => (
+          {[banner3, banner1, banner2, banner4].map((item, i) => (
             <Box key={i} sx={{ position: 'relative', borderRadius: 1, overflow: 'hidden' }}>
               <Image alt="ICSS" src={item.src} />
             </Box>

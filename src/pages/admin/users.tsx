@@ -50,7 +50,7 @@ const STATUS_OPTIONS = [
 const TABLE_HEAD = [
   { id: 'name', label: 'Name', align: 'left' },
   { id: 'email', label: 'Email', align: 'left' },
-  { id: 'icssId', label: 'ICSS ID', align: 'left' },
+  { id: 'icssId', label: 'ThriveID', align: 'left' },
   { id: 'role', label: 'Consortium', align: 'left' },
   { id: 'role', label: 'Reg Date', align: 'left' },
   // { id: 'isVerified', label: 'Verified', align: 'center' },
@@ -159,7 +159,7 @@ export default function UserListPage() {
   return (
     <>
       <Head>
-        <title> User: List | ICSS Thrive</title>
+        <title> User: List | Thrive</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>

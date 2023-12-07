@@ -12,7 +12,7 @@ ChatPage.getLayout = (page: React.ReactElement) => <DashboardLayout>{page}</Dash
 export default function ChatPage() {
   return (
     <Head>
-      <title> Chat | ICSS Thrive</title>
+      <title> Chat | Thrive</title>
     </Head>
   );
 }

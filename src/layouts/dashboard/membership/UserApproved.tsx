@@ -14,7 +14,7 @@ export default function UserApproved() {
   return (
     <>
       <Head>
-        <title> Account Approved | ICSS Thrive</title>
+        <title> Account Approved | Thrive</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>

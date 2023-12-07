@@ -58,7 +58,7 @@ export default function BlogNewPostPage() {
   return (
     <>
       <Head>
-        <title> New Event | ICSS Thrive</title>
+        <title> New Event | Thrive</title>
       </Head>
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs

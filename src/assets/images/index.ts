@@ -15,17 +15,18 @@ export { default as tfc3 } from './tfc/tfc3.jpg';
 // About Page
 export { default as aboutBg } from './aboutBg.png';
 
-// ICSS Modules Page
+// Thrive Modules Page
 export { default as inspire } from './modules/inspire.jpg';
 export { default as create } from './modules/create.jpg';
 export { default as start } from './modules/start.jpg';
 export { default as scale } from './modules/scale.jpg';
 
 // Landing Page Images
-export { default as banner1 } from './landing/banner1.png';
-export { default as banner2 } from './landing/banner2.png';
-export { default as banner3 } from './landing/banner3.png';
-export { default as banner4 } from './landing/banner4.png';
+export { default as banner1 } from './landing/banner1.jpg';
+export { default as banner2 } from './landing/banner2.jpg';
+export { default as banner3 } from './landing/banner3.jpg';
+export { default as banner4 } from './landing/banner4.jpg';
+export { default as sa_2 } from './sa_2.jpg';
 export { default as redLady } from './landing/3d700b6b0f22b83e8a4cff36631875fd.jpg';
 export { default as ijabLady } from './landing/03f49be7a585a3f588ac5e33ae1cf2d5.jpg';
 export { default as couple } from './landing/illustration_seo.svg';

@@ -27,12 +27,12 @@ const services = [
   {
     title: 'Directory Listing',
     icon: 'iconoir:page-search',
-    text: '<p>The ICSS THRIVE Business directory is a crucial tool for MSMEs to  reach more people and be searchable online.</p> <p>As an ICSS beneficiary who have registered businesses on the site, Consumers can communicate with you by finding your contact information, address, business hours, and other pertinent information quickly on the business listing page. This makes it simpler for customers to interact with you as a business owner.</p>',
+    text: '<p>The Thrive Business directory is a crucial tool for MSMEs to  reach more people and be searchable online.</p> <p>As anThrivebeneficiary who have registered businesses on the site, Consumers can communicate with you by finding your contact information, address, business hours, and other pertinent information quickly on the business listing page. This makes it simpler for customers to interact with you as a business owner.</p>',
   },
   {
     title: 'Collaboration Tools',
     icon: 'fluent:people-team-32-regular',
-    text: '<p>ICSS THRIVE have made it possible for users to conveniently schedule Zoom meetings directly from the ICSS THRIVE application and conduct meetings with clients and partners while on the move.</p> <p>This innovation offers significant cost savings to the user, amounting to thousands of Naira in zoom license expenses.</p>',
+    text: '<p>Thrive have made it possible for users to conveniently schedule Zoom meetings directly from the Thrive application and conduct meetings with clients and partners while on the move.</p> <p>This innovation offers significant cost savings to the user, amounting to thousands of Naira in zoom license expenses.</p>',
   },
   {
     title: 'Networking and Marketplace',
@@ -47,7 +47,7 @@ const services = [
   {
     title: 'Access to Finance',
     icon: 'guidance:bank',
-    text: '<p>Access to finance is crucial for the growth and sustainability of MSMEs, ICSS THRIVE Business solution provides MSMEs with avenues to access financial programs organized by Microfinance banks (MFB) and Money deposit banks (MDB) that are offering subsidized interest rates, collateral-free loans, subsidized equipment leasing and other benefits.</p> <p>ICSS THRIVE will provide registered users with information and opportunities in various state-level organizations and assistance in accessing these schemes.</p>',
+    text: '<p>Access to finance is crucial for the growth and sustainability of MSMEs, Thrive Business solution provides MSMEs with avenues to access financial programs organized by Microfinance banks (MFB) and Money deposit banks (MDB) that are offering subsidized interest rates, collateral-free loans, subsidized equipment leasing and other benefits.</p> <p>Thrive will provide registered users with information and opportunities in various state-level organizations and assistance in accessing these schemes.</p>',
   },
   {
     title: 'Health and Wellbeing',

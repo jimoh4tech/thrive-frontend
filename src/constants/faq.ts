@@ -1,6 +1,6 @@
 export const faq = [
   {
-    titile: 'What is ICSS THRIVE, and what services does it offer to businesses?',
+    titile: 'What is Thrive, and what services does it offer to businesses?',
     ans: `Thrive is a one-stop digital support center for growing businesses in Nigeria.
 
 We support micro, small, and medium businesses with the resources they need to grow and thrive in a challenging environment.
@@ -82,8 +82,8 @@ Click on the user account settings by the top right corner to update your user p
 `,
   },
   {
-    titile: 'Why do I have to wait 24 hours for ICSS THRIVE to verify my data?',
-    ans: `As an ICSS beneficiary who has gone through the ICSS modules, it's mandatory for ICSS THRIVE to carry out due diligence on the data provided and match it up with our database. 
+    titile: 'Why do I have to wait 24 hours for Thrive to verify my data?',
+    ans: `As anThrivebeneficiary who has gone through theThrivemodules, it's mandatory for Thrive to carry out due diligence on the data provided and match it up with our database. 
 As soon as we carry out this verification process on the data provided, you will get an email notice after 24 hours that your account has been approved and you can now start using the platform. We strongly recommend that you keep a tab on your email for the notification.
 `,
   },
@@ -104,7 +104,7 @@ As soon as we carry out this verification process on the data provided, you will
   },
   {
     titile: 'Can I use the web application on my mobile device?',
-    ans: `ICSS THRIVE is a mobile-first web application designed to be responsive and accessible on mobile devices. You can access them through the web browser on your mobile phone or tablet.
+    ans: `Thrive is a mobile-first web application designed to be responsive and accessible on mobile devices. You can access them through the web browser on your mobile phone or tablet.
 `,
   },
   {

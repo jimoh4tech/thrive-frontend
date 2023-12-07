@@ -132,17 +132,17 @@ export default function Footer() {
             </Typography>
           </m.div>
           <Typography textAlign="center">
-            ICSS THRIVE is able to offer world-class digital support to thousands of growing
-            businesses because it is supported by
+            Thrive is able to offer world-class digital support to thousands of growing businesses
+            because it is supported by
           </Typography>
           <Stack direction="row" spacing={10} justifyContent="space-between">
-            <Image
+            {/* <Image
               alt="Logo"
               style={{ objectFit: 'contain', maxWidth: '100%' }}
               height={gopa.height}
               width={gopa.width}
               src={gopa.src}
-            />
+            /> */}
           </Stack>
         </Stack>
       </Container>
@@ -159,19 +159,19 @@ export default function Footer() {
           <Grid container spacing={10} justifyContent="center" mt={2}>
             {[
               ehub,
-              valucon,
-              weboh,
-              hbf,
-              dofoll,
-              kalros,
-              lapo,
-              sabi,
-              viisaus,
-              giniushub,
-              seyp,
-              capstone,
-              kb,
-              leverage,
+              // valucon,
+              // weboh,
+              // hbf,
+              // dofoll,
+              // kalros,
+              // lapo,
+              // sabi,
+              // viisaus,
+              // giniushub,
+              // seyp,
+              // capstone,
+              // kb,
+              // leverage,
             ].map((_, i) => (
               <Grid
                 key={_.src}

@@ -60,7 +60,7 @@ export default function Page({
   return (
     <>
       <Head>
-        <title> {name} | ICSS Thrive</title>
+        <title> {name} | Thrive</title>
       </Head>
 
       <Box

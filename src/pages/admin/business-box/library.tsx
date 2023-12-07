@@ -122,7 +122,7 @@ export default function BusinessBox() {
   return (
     <>
       <Head>
-        <title> Business Box | ICSS Thrive</title>
+        <title> Business Box | Thrive</title>
       </Head>
 
       <Container>

@@ -25,7 +25,7 @@ const msme = {
   },
   body3: {
     image: MSME3.src,
-    title: 'ICSS and MSME DEVELOPMENT ECO-SYSTEM',
+    title: 'Thriveand MSME DEVELOPMENT ECO-SYSTEM',
   },
 };
 

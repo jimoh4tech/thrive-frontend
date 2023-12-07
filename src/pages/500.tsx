@@ -21,7 +21,7 @@ export default function Page500() {
   return (
     <>
       <Head>
-        <title> 500 Internal Server Error | ICSS Thrive</title>
+        <title> 500 Internal Server Error | Thrive</title>
       </Head>
 
       <MotionContainer>

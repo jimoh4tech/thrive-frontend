@@ -13,7 +13,7 @@ export default function UserSubscribe() {
   return (
     <>
       <Head>
-        <title> Complete Subscription | ICSS Thrive</title>
+        <title> Complete Subscription | Thrive</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>

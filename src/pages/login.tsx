@@ -12,7 +12,7 @@ export default function LoginPage() {
   return (
     <>
       <Head>
-        <title> Login | ICSS Thrive</title>
+        <title> Login | Thrive</title>
       </Head>
 
       <GuestGuard>

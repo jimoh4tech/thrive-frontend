@@ -21,7 +21,7 @@ export default function UserPending() {
   return (
     <>
       <Head>
-        <title> Pending Approval | ICSS Thrive</title>
+        <title> Pending Approval | Thrive</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>

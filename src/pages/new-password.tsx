@@ -24,7 +24,7 @@ export default function NewPasswordPage() {
   return (
     <>
       <Head>
-        <title> New Password | ICSS Thrive</title>
+        <title> New Password | Thrive</title>
       </Head>
 
       <SentIcon sx={{ mb: 5, height: 96 }} />

@@ -9,7 +9,7 @@ export default function RegisterUnprotectedPage() {
   return (
     <>
       <Head>
-        <title> Register Unprotected | ICSS Thrive</title>
+        <title> Register Unprotected | Thrive</title>
       </Head>
 
       <Register />

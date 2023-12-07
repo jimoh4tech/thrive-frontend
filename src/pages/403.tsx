@@ -21,7 +21,7 @@ export default function Page403() {
   return (
     <>
       <Head>
-        <title> 403 Forbidden | ICSS Thrive</title>
+        <title> 403 Forbidden | Thrive</title>
       </Head>
 
       <MotionContainer>

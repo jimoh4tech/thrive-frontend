@@ -11,7 +11,7 @@ export default function RegisterPage() {
   return (
     <>
       <Head>
-        <title> Register | ICSS Thrive</title>
+        <title> Register | Thrive</title>
       </Head>
 
       <GuestGuard>

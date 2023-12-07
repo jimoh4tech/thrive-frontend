@@ -89,7 +89,7 @@ export default function FileManagerPage() {
   return (
     <>
       <Head>
-        <title> Workplace Booking | ICSS Thrive</title>
+        <title> Workplace Booking | Thrive</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>

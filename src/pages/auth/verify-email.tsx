@@ -23,7 +23,7 @@ export default function VerifyCodePage() {
   return (
     <>
       <Head>
-        <title> Verify Email Code | ICSS Thrive</title>
+        <title> Verify Email Code | Thrive</title>
       </Head>
 
       <EmailInboxIcon sx={{ mb: 5, height: 96 }} />

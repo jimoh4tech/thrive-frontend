@@ -72,7 +72,7 @@ export default function BusinessBox() {
   return (
     <>
       <Head>
-        <title> Business Media | ICSS Thrive</title>
+        <title> Business Media | Thrive</title>
       </Head>
 
       <Container>

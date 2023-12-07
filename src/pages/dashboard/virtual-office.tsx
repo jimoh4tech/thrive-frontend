@@ -53,7 +53,7 @@ export default function UserProfilePage() {
   return (
     <>
       <Head>
-        <title> Virtual Office | ICSS Thrive</title>
+        <title> Virtual Office | Thrive</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>

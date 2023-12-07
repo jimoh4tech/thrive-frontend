@@ -28,7 +28,7 @@ export default function GeneralAppPage() {
   return (
     <>
       <Head>
-        <title> General App | ICSS Thrive</title>
+        <title> General App | Thrive</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>
@@ -143,7 +143,7 @@ export default function GeneralAppPage() {
               tableLabels={[
                 { id: 'id', label: 'Name' },
                 { id: 'category', label: 'Email' },
-                { id: 'price', label: 'ICSS No' },
+                { id: 'price', label: 'ThriveNo' },
                 { id: 'status', label: 'Status' },
                 { id: '' },
               ]}

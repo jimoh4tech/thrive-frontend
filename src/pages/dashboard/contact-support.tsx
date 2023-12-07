@@ -28,7 +28,7 @@ export default function Support() {
   return (
     <>
       <Head>
-        <title> Contact Support | ICSS Thrive</title>
+        <title> Contact Support | Thrive</title>
       </Head>
 
       <Container maxWidth="xl">

@@ -7,7 +7,7 @@ import MainLayout from '../layouts/main';
 // ----------------------------------------------------------------------
 
 HomePage.getLayout = (page: React.ReactElement) => (
-  <MainLayout metaTitle="ICSS THRIVE Consortium">{page}</MainLayout>
+  <MainLayout metaTitle="Thrive Consortium">{page}</MainLayout>
 );
 
 // ----------------------------------------------------------------------
@@ -21,7 +21,7 @@ export default function HomePage() {
         bgcolor: 'background.default',
       }}
     >
-      ICSS THRIVE Consortium
+      Thrive Consortium
     </Box>
   );
 }

@@ -21,7 +21,7 @@ export default function Page404() {
   return (
     <>
       <Head>
-        <title> 404 Page Not Found | ICSS Thrive</title>
+        <title> 404 Page Not Found | Thrive</title>
       </Head>
 
       <MotionContainer>

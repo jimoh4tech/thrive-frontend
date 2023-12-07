@@ -24,7 +24,7 @@ export default function ResetPasswordPage() {
   return (
     <>
       <Head>
-        <title> Reset Password | ICSS Thrive</title>
+        <title> Reset Password | Thrive</title>
       </Head>
 
       <PasswordIcon sx={{ mb: 5, height: 96 }} />

@@ -46,7 +46,7 @@ export default function BlogNewPostPage() {
   return (
     <>
       <Head>
-        <title> Business Media Library | ICSS Thrive</title>
+        <title> Business Media Library | Thrive</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>

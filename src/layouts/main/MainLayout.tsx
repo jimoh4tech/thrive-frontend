@@ -21,7 +21,7 @@ export default function MainLayout({ children, title = '', metaTitle = '' }: Pro
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', height: 1 }}>
       <Head>
-        <title> {metaTitle} | ICSS Thrive</title>
+        <title> {metaTitle} | Thrive</title>
       </Head>
       <Header />
 

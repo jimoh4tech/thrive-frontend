@@ -177,7 +177,7 @@ export default function Chat({
   return (
     <>
       <Head>
-        <title> Chat | ICSS Thrive</title>
+        <title> Chat | Thrive</title>
       </Head>
       <Container maxWidth={themeStretch ? false : 'xl'}>
         <CustomBreadcrumbs

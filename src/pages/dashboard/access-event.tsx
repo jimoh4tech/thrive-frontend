@@ -99,7 +99,7 @@ export default function AccessEvent() {
   return (
     <>
       <Head>
-        <title> Access to Events | ICSS Thrive</title>
+        <title> Access to Events | Thrive</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>

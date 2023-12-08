@@ -14,10 +14,10 @@ const navConfig = [
     title: 'About',
     path: PATH_PAGE.about,
   },
-  {
-    title: 'Thrive Modules',
-    path: PATH_PAGE.thriveModules,
-  },
+  // {
+  //   title: 'Thrive Modules',
+  //   path: PATH_PAGE.thriveModules,
+  // },
   {
     title: 'Ecosystem',
     path: PATH_PAGE.ecosystem,
@@ -27,7 +27,7 @@ const navConfig = [
         items: [
           { title: 'MSME Development', path: PATH_PAGE.ecosystem },
           { title: 'ThriveTFC', path: PATH_PAGE.thriveTfc },
-          { title: 'Thrive Consortium', path: PATH_PAGE.thriveConsortiums },
+          // { title: 'Thrive Consortium', path: PATH_PAGE.thriveConsortiums },
           { title: 'Announcements', path: PATH_PAGE.announcement },
           { title: 'MSME Market', path: PATH_PAGE.marketplace },
         ],

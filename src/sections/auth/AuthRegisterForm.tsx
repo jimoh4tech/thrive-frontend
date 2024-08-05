@@ -121,7 +121,7 @@ export default function AuthRegisterForm() {
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const [ngos, setNgos] = useState([]);
+  const [ngos, setNgos] = useState([{id: '1', name: 'Alani'}]);
 
   const getNgos = useCallback(async () => {
     try {

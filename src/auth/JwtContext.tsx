@@ -125,6 +125,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
           const response = await axios.get(url);
 
           const user = response.data;
+          console.log({response})
 
           // @ts-ignore
           dispatch({

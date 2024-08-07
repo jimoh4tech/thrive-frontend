@@ -40,13 +40,13 @@ export default function AuthGuard({ children }: AuthGuardProps) {
     return <Login />;
   }
 
-  if (user?.role?.id > 2 && (pathname || '').split('/').includes('dashboard')) {
+  if (user?.role?.id > 2 && (pathname || '').split('/').includes('dashboard')) { //change from 2 to 1
     push('/admin/users');
 
     return <LoadingScreen />;
   }
 
-  if (user?.role?.id < 3 && (pathname || '').split('/').includes('admin')) {
+  if (user?.role?.id < 3 && (pathname || '').split('/').includes('admin')) { //change from 2 to 1
     push('/dashboard');
 
     return <LoadingScreen />;

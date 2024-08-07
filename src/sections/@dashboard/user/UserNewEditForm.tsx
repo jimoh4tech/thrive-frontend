@@ -51,7 +51,7 @@ export default function UserNewEditForm({ isEdit = false, currentUser }: Props) 
     state: Yup.string().required('State is required'),
     city: Yup.string().required('City is required'),
     role: Yup.string().required('Role is required'),
-    avatarUrl: Yup.mixed().required('Avatar is required'),
+    // avatarUrl: Yup.mixed().required('Avatar is required'),
   });
 
   const defaultValues = useMemo(

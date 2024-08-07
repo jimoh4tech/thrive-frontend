@@ -2200,11 +2200,6 @@
   resolved "https://registry.npmjs.org/@next/env/-/env-13.4.3.tgz"
   integrity sha512-pa1ErjyFensznttAk3EIv77vFbfSYT6cLzVRK5jx4uiRuCQo+m2wCFAREaHKIy63dlgvOyMlzh6R8Inu8H3KrQ==
 
-"@next/font@^13.1.6":
-  version "13.1.6"
-  resolved "https://registry.npmjs.org/@next/font/-/font-13.1.6.tgz"
-  integrity sha512-AITjmeb1RgX1HKMCiA39ztx2mxeAyxl4ljv2UoSBUGAbFFMg8MO7YAvjHCgFhD39hL7YTbFjol04e/BPBH5RzQ==
-
 "@next/swc-darwin-arm64@13.4.3":
   version "13.4.3"
   resolved "https://registry.npmjs.org/@next/swc-darwin-arm64/-/swc-darwin-arm64-13.4.3.tgz"

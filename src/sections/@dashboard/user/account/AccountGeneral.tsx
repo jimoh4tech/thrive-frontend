@@ -45,10 +45,11 @@ export default function AccountGeneral() {
   const UpdateUserSchema = Yup.object().shape({
     firstName: Yup.string().required('Firstname is required'),
     lastName: Yup.string().required('Lastname is required'),
-    avatarUrl: Yup.mixed().required('Avatar is required'),
+    // avatarUrl: Yup.mixed().required('Avatar is required'),
     phone: Yup.string().required('Phone number is required'),
     bio: Yup.string(),
     gender: Yup.string(),
+    dob: Yup.date()
   });
 
   const defaultValues = {
@@ -59,6 +60,7 @@ export default function AccountGeneral() {
     isApproved: user?.isApproved || false,
     gender: user?.gender || '',
     bio: user?.bio || '',
+    dob: user?.dob || '',
   };
 
   const methods = useForm<FormValuesProps>({
@@ -79,6 +81,7 @@ export default function AccountGeneral() {
 
   const updateProfile = async ({ avatarUrl, ...data }: FormValuesProps) => {
     try {
+      console.log({avatarUrl, data})
       await updater('user', data);
       enqueueSnackbar('Profile update success!');
     } catch (error) {
@@ -120,6 +123,7 @@ export default function AccountGeneral() {
               name="avatarUrl"
               // files={[newDP || getValues('avatarUrl') || '']}
               maxSize={3145728}
+              
               onDrop={handleDrop}
               helperText={
                 <Typography
@@ -175,11 +179,10 @@ export default function AccountGeneral() {
                   )}
                 />
 
-                <RHFSelect native name="gender" label="Gender">
-                  <option value="" />
-                  {['Male', 'Female'].map((val) => (
+                <RHFSelect native name="gender" defaultValue={defaultValues.gender} label="Gender">
+                  {['male', 'female'].map((val) => (
                     <option key={val} value={val}>
-                      {val}
+                      {`${val.substring(0, 1).toUpperCase()}${val.substring(1)}`}
                     </option>
                   ))}
                 </RHFSelect>

@@ -6,7 +6,7 @@ export const requestVerifyEmail = async (
   email: string,
   requestType?: 'register' | 'reset-password'
 ): Promise<{ verifyToken: string }> => {
-  const res = await axios.post('/users/request-verify-email-code', {
+    const res = await axios.post('/users/request-verify-email-code', {
     email,
     requestType,
   });
@@ -21,7 +21,6 @@ export const verifyEmail = async (data: {
   verifyToken: string;
 }): Promise<{ emailVerifiedToken: string }> => {
   const res = await axios.post('/users/verify-email-code', data);
-
   return res.data;
 };
 

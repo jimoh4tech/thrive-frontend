@@ -53,6 +53,7 @@ export default function BusinessCover({
 
         try {
           const res = await uploadSingle(newFile, `${fileType}`);
+          console.log({res})
           await updater('userBusiness', { [fileType]: res.data.public_id });
         } catch (err) {
           console.error(err);

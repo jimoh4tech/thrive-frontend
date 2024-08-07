@@ -93,7 +93,7 @@ export default function UserTableRow({
         </TableCell>
 
         <TableCell align="left" sx={{ textTransform: 'capitalize' }}>
-          {ngo.name}
+          {ngo?.name }
         </TableCell>
         <TableCell align="left" sx={{ textTransform: 'capitalize' }}>
           {fDate(createdAt)}

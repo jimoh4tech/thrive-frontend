@@ -50,7 +50,7 @@ export const PATH_PAGE = {
 export const PATH_ADMIN = {
   root: ROOTS_ADMIN,
   users: path(ROOTS_ADMIN, '/users'),
-
+  account: path(ROOTS_ADMIN, '/account'),
   businessMedia: {
     root: path(ROOTS_ADMIN, '/business-media'),
     library: path(ROOTS_ADMIN, '/business-media/library'),

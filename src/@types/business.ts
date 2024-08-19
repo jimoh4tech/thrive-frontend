@@ -14,6 +14,7 @@ export type IUserBusiness = {
   cac: string;
   cover: string;
   logo: string;
+  govId: string;
   slug: string;
   twitterLink: string;
   facebookLink: string;

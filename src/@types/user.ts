@@ -128,6 +128,7 @@ export type IUserAccountGeneral = {
   platinumSub: { id: number }[];
   premuimSub: { id: number }[];
   bio: string;
+  updatedAt?: string;
 };
 
 export type IUserAccountBillingCreditCard = {

@@ -1,47 +1,262 @@
-import { Dialog, DialogContent, Typography } from '@mui/material';
-import { EmailInboxIcon } from 'src/assets/icons';
+import {
+  Box,
+  Button,
+  Card,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  Grid,
+  InputAdornment,
+  Stack,
+  Typography,
+} from '@mui/material';
+import { useForm } from 'react-hook-form';
+import { useCallback, useEffect, useState } from 'react';
+import { IUserAccountGeneral } from 'src/@types/user';
+import { useSnackbar } from 'notistack';
+import { viewUser } from 'src/actions/admin/usersAction';
 import { ViewDialogProps } from './types';
+import FormProvider, { RHFTextField } from '../hook-form';
+import Iconify from '../iconify';
+import Image from '../image';
 
-const ViewDialog = ({ open, user }: ViewDialogProps) => (
-  <Dialog open={open}>
-    <DialogContent sx={{ p: 4, textAlign: 'center' }}>
-      <EmailInboxIcon sx={{ mb: 5, height: 96 }} />
+const ViewDialog = ({ open, id, title, onClose }: ViewDialogProps) => {
+  const [userInfo, setUserInfo] = useState<IUserAccountGeneral | null>(null);
+  const { enqueueSnackbar } = useSnackbar();
 
-      <Typography variant="h3" paragraph>
-        User Info
-      </Typography>
+  const SOCIAL_LINKS = [
+    {
+      href: userInfo?.business.facebookLink,
+      value: 'facebookLink',
+      label: 'facebook url',
+      icon: <Iconify icon="eva:facebook-fill" width={24} />,
+    },
+    {
+      href: userInfo?.business.instagramLink,
+      value: 'instagramLink',
+      label: 'instagram url',
+      icon: <Iconify icon="ant-design:instagram-filled" width={24} />,
+    },
+    {
+      href: userInfo?.business.linkedinLink,
+      value: 'linkedinLink',
+      label: 'linkedin url',
+      icon: <Iconify icon="eva:linkedin-fill" width={24} />,
+    },
+    {
+      href: userInfo?.business.twitterLink,
+      value: 'twitterLink',
+      label: 'twitter url',
+      icon: <Iconify icon="eva:twitter-fill" width={24} />,
+    },
+  ] as const;
 
-      <Typography sx={{ color: 'text.secondary', mb: 5 }}>
-        We have emailed a 6-digit confirmation code to , please enter the code in below box to
-        verify your email.
-      </Typography>
+  type FormValuesProps = {
+    name: string;
+    email: string;
+    avatarUrl: string | null;
+    phone: string | null;
+    country: string | null;
+    address: string | null;
+    state: string | null;
+    cac: (File & { preview: string }) | string;
+    govId: (File & { preview: string }) | string;
+    logo: (File & { preview: string }) | string;
 
-      {/* <AuthVerifyCodeForm onSubmit={onSubmit} /> */}
+    whatsappNumber: string;
+    industryId?: number;
+    bio: string;
+    facebookLink?: string;
+    twitterLink?: string;
+    instagramLink?: string;
+    linkedinLink?: string;
+  };
 
-      {/* <Typography variant="body2" sx={{ my: 3 }}>
-          Don’t have a code? &nbsp;
-          <LoadingButton loading={loading} onClick={handleResend} variant="text">
-            Resend code
-          </LoadingButton>
-        </Typography> */}
+  const defaultValues = {
+    name: '',
+    email: userInfo?.email,
+    phone: userInfo?.phone,
+    whatsappNumber: '',
+    country: 'Nigeria',
+    address: '',
+    state: '',
+    industryId: undefined,
+    bio: '',
+    cac: '',
+    govId: '',
+    logo: userInfo?.business?.logo || '',
+    facebookLink: '',
+    twitterLink: '',
+    instagramLink: '',
+    linkedinLink: '',
+  };
 
-      {/* <Link
-          component={NextLink}
-          href={PATH_AUTH.login}
-          color="inherit"
-          variant="subtitle2"
-          onClick={onClose}
-          sx={{
-            mx: 'auto',
-            alignItems: 'center',
-            display: 'inline-flex',
-          }}
-        >
-          <Iconify icon="eva:chevron-left-fill" width={16} />
-          Return
-        </Link> */}
-    </DialogContent>
-  </Dialog>
-);
+  const methods = useForm<FormValuesProps>({
+    defaultValues,
+  });
+
+  const getUserInfo = useCallback(async () => {
+    try {
+      const _userInfo = await viewUser(id);
+      console.log({ _userInfo });
+
+      setUserInfo(_userInfo.data);
+    } catch (error) {
+      enqueueSnackbar(error.message || 'Could not fetch User info', { variant: 'error' });
+    }
+  }, [enqueueSnackbar, id]);
+
+  useEffect(() => {
+    getUserInfo();
+
+    return () => {};
+  }, [getUserInfo, id]);
+
+  return (
+    <Dialog open={open}>
+      <DialogContent sx={{ p: 1, textAlign: 'center' }}>
+        <Typography variant="h3" paragraph>
+          {title}
+        </Typography>
+        {!userInfo ? (
+          <Stack alignItems="center" justifyContent="center">
+            <Typography>Loading...</Typography>
+          </Stack>
+        ) : (
+          <FormProvider methods={methods}>
+            <Grid item xs={12} md={8}>
+              <Card sx={{ p: 2 }}>
+                <Box
+                  rowGap={3}
+                  columnGap={2}
+                  display="grid"
+                  gridTemplateColumns={{
+                    xs: 'repeat(1, 1fr)',
+                    sm: 'repeat(2, 1fr)',
+                  }}
+                >
+                  <RHFTextField name="fullName" label="Full Name" value={userInfo?.fullName} />
+
+                  <RHFTextField
+                    name="updatedAt"
+                    label="Last Update"
+                    value={new Date(userInfo?.updatedAt || '').toDateString()}
+                  />
+
+                  <RHFTextField name="dob" label="Date Of Birth" value={userInfo?.dob} />
+
+                  <RHFTextField name="status" label="Status" value={userInfo?.status} />
+
+                  <RHFTextField
+                    name="hasSubscription"
+                    label="On Subscription"
+                    value={userInfo?.hasSubscription ? 'Yes' : 'No'}
+                  />
+
+                  <RHFTextField
+                    name="email"
+                    label="Business Email"
+                    value={userInfo?.business?.email}
+                  />
+
+                  <RHFTextField
+                    name="phone"
+                    label="Phone Number"
+                    value={userInfo?.business?.phone}
+                  />
+
+                  <RHFTextField
+                    name="whatsappNumber"
+                    label="WhatsApp Number"
+                    value={userInfo?.business?.whatsappNumber}
+                  />
+
+                  <RHFTextField
+                    name="address"
+                    label="Business Contact Address"
+                    value={userInfo?.business?.address}
+                  />
+
+                  <RHFTextField
+                    name="state"
+                    label="State/Region"
+                    value={userInfo?.business.state}
+                  />
+
+                  <RHFTextField
+                    name="website"
+                    label="Website Url"
+                    value={userInfo?.business.slug}
+                  />
+                  <RHFTextField
+                    name="reg"
+                    label="Business Registration Date"
+                    value={new Date(userInfo?.business.createdAt || '').toDateString()}
+                  />
+
+                  {SOCIAL_LINKS.map((link) => (
+                    <RHFTextField
+                      key={link.value}
+                      name={link.value}
+                      label={link.label}
+                      value={link.href}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">{link.icon}</InputAdornment>
+                        ),
+                      }}
+                    />
+                  ))}
+                </Box>
+
+                <Stack spacing={2} alignItems="center" sx={{ mt: 3 }}>
+                  <RHFTextField name="bio" multiline rows={4} label="Bio" value={userInfo?.bio} />
+                  <RHFTextField
+                    name="bbio"
+                    multiline
+                    rows={4}
+                    label="Business Description"
+                    value={userInfo?.business.bio}
+                  />
+                  <Box>
+                    <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+                      Upload Business registration Document
+                    </Typography>
+                    <Image src={userInfo?.business.cac} alt="business cac" width={6} height={6} />
+                  </Box>
+                  <Box>
+                    <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+                      Upload Government Issued ID
+                    </Typography>
+                    <Image
+                      src={userInfo?.business.govId}
+                      alt="business cover"
+                      width={6}
+                      height={6}
+                    />
+                  </Box>
+                  <Box>
+                    <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+                      Upload Business Logo (Optional)
+                    </Typography>
+                    <Image src={userInfo?.business.logo} alt="business logo" width={6} height={6} />
+                  </Box>
+                </Stack>
+              </Card>
+            </Grid>
+          </FormProvider>
+        )}
+
+        <DialogActions>
+          {/* {action} */}
+
+          <Button variant="outlined" color="primary" onClick={onClose}>
+            Close
+          </Button>
+        </DialogActions>
+      </DialogContent>
+    </Dialog>
+  );
+};
 
 export default ViewDialog;

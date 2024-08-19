@@ -12,6 +12,7 @@ import {
 // @types
 import { CustomAvatar } from 'src/components/custom-avatar';
 import { fDate } from 'src/utils/formatTime';
+import ViewDialog from 'src/components/view-dialog';
 import { IUserAccountGeneral } from '../../../../@types/user';
 // components
 import ConfirmDialog from '../../../../components/confirm-dialog';
@@ -135,7 +136,7 @@ export default function UserTableRow({
         arrow="right-top"
         sx={{ width: 140 }}
       >
-        <MenuItem onClick={() => handlePopoverClick(setOpenConfirm)} sx={{ color: 'info.main' }}>
+        <MenuItem onClick={() => handlePopoverClick(setOpenView)} sx={{ color: 'info.main' }}>
           <Iconify icon="carbon:play" />
           View
         </MenuItem>
@@ -193,6 +194,15 @@ export default function UserTableRow({
           </Button>
         }
       />
+
+      {openView && (
+        <ViewDialog
+          open={openView}
+          onClose={() => setOpenView(false)}
+          title="User Info"
+          id={row.id}
+        />
+      )}
     </>
   );
 }

@@ -1,11 +1,10 @@
 import { DialogProps } from '@mui/material';
-import { IUserAccountGeneral } from 'src/@types/user';
 
-export interface ViewDialogProps extends Omit<DialogProps, 'title'> {
+export interface ViewDialogProps extends Omit<DialogProps, 'title' | 'id'> {
   title: React.ReactNode;
+  id: number;
   content?: React.ReactNode;
-  user: IUserAccountGeneral;
-  action: React.ReactNode;
+  action?: React.ReactNode;
   open: boolean;
   onClose: VoidFunction;
 }

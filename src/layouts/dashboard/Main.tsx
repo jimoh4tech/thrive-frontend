@@ -31,7 +31,7 @@ export default function Main({ children, sx, ...other }: BoxProps) {
   const render = () => {
     if (!user?.isApproved) return <UserPending />;
     if (!user?.business) return <UserApproved />;
-    if (!user?.platinumSub) return <UserSubscribe />;
+    if (!user.hasSubscription && user?.premuimSub?.length === 0) return <UserSubscribe />;
     return children;
   };
 

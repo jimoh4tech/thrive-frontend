@@ -3,7 +3,6 @@ import { useCallback, useEffect, useState } from 'react';
 import Head from 'next/head';
 // @mui
 import {
-  Badge,
   Card,
   Container,
   Divider,
@@ -18,7 +17,7 @@ import {
 import { useSnackbar } from 'notistack';
 import { IQuery, IResDataMany } from 'src/@types/query';
 import { loader } from 'src/actions';
-import { approveUser, declineUser } from 'src/actions/admin/usersAction';
+import { approveUser, declineUser, suspendUser } from 'src/actions/admin/usersAction';
 import Loading from 'src/components/loading';
 import Pagination from 'src/components/pagination';
 import Label from 'src/components/label/Label';
@@ -40,9 +39,9 @@ import { UserTableRow, UserTableToolbar } from '../../sections/@admin/user/list'
 
 const STATUS_OPTIONS = [
   { label: 'All', value: 'all' },
-  { label: 'Pending Approval', value: 'pending' },
   { label: 'Approved', value: 'approved' },
   { label: 'Declined', value: 'declined' },
+  { label: 'Suspended', value: 'pending' },
   { label: 'Premium Users', value: 'hasPremiumSub' },
   // { label: 'Banned', value: 'banned' },
 ];
@@ -50,9 +49,9 @@ const STATUS_OPTIONS = [
 const TABLE_HEAD = [
   { id: 'name', label: 'Name', align: 'left' },
   { id: 'email', label: 'Email', align: 'left' },
-  { id: 'icssId', label: 'ThriveID', align: 'left' },
-  { id: 'role', label: 'Consortium', align: 'left' },
-  { id: 'role', label: 'Reg Date', align: 'left' },
+  { id: 'phone', label: 'Phone', align: 'left' },
+  { id: 'ngo', label: 'Consortium', align: 'left' },
+  { id: 'createdAt', label: 'Reg Date', align: 'left' },
   // { id: 'isVerified', label: 'Verified', align: 'center' },
   { id: 'status', label: 'Status', align: 'left' },
   { id: '' },
@@ -98,10 +97,10 @@ export default function UserListPage() {
   const [ngos, setNgos] = useState([]);
   const [fetching, setFetching] = useState(false);
   const [query, setQuery] = useState<IQuery>({});
-  const onApproveUser = async (id: number, icssId: string) => {
+  const onApproveUser = async (id: number) => {
     try {
       setFetching(true);
-      const res = await approveUser({ icssId, id });
+      const res = await approveUser({ id });
       await getUsers();
       enqueueSnackbar(res.data.message);
     } catch (err) {
@@ -113,6 +112,17 @@ export default function UserListPage() {
     try {
       setFetching(true);
       const res = await declineUser(id);
+      await getUsers();
+      enqueueSnackbar(res.data.message);
+    } catch (err) {
+      enqueueSnackbar(err.message || err, { color: 'error.main' });
+    }
+    setFetching(false);
+  };
+  const onSuspendUser = async (id: number) => {
+    try {
+      setFetching(true);
+      const res = await suspendUser(id);
       await getUsers();
       enqueueSnackbar(res.data.message);
     } catch (err) {
@@ -265,8 +275,9 @@ export default function UserListPage() {
                       key={row.id}
                       row={row}
                       // onSelectRow={() => onSelectRow(row.id)}
-                      onApprove={(icssId) => onApproveUser(row.id, icssId)}
+                      onApprove={onApproveUser}
                       onDecline={onDeclineUser}
+                      onSuspend={onSuspendUser}
                       // onEditRow={() => handleEditRow(row.name)}
                     />
                   ))}

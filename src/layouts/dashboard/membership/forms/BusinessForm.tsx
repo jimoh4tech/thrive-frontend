@@ -59,6 +59,7 @@ type FormValuesProps = {
   address: string | null;
   state: string | null;
   cac: (File & { preview: string }) | string;
+  govId: (File & { preview: string }) | string;
   logo: (File & { preview: string }) | string;
 
   whatsappNumber: string;
@@ -90,6 +91,7 @@ export default function BusinessProfile() {
       .min(30, 'Business description must be above 30 characters')
       .max(1000, 'Business description must be less than 300 characters'),
     cac: Yup.mixed().optional(),
+    govId: Yup.mixed().optional(),
     logo: Yup.mixed().optional(),
     facebookLink: Yup.string().optional(),
     twitterLink: Yup.string().optional(),
@@ -108,6 +110,7 @@ export default function BusinessProfile() {
     industryId: undefined,
     bio: '',
     cac: '',
+    govId: '',
     logo: '',
     facebookLink: '',
     twitterLink: '',
@@ -147,8 +150,9 @@ export default function BusinessProfile() {
       setIsSubmitting(true);
       setBusiness(data);
       const txnRef = localStorage.getItem(`${user.email}-successfull`) || '';
+      console.log({ successRef, txnRef });
       if (successRef || txnRef) {
-        await onSubmit(txnRef, data);
+        await onSubmit(data);
         return;
       }
 
@@ -170,13 +174,13 @@ export default function BusinessProfile() {
   };
 
   const onSubmit = useCallback(
-    async (ref: string, data?: FormValuesProps) => {
-      if (!ref && !successRef) return;
+    async (data?: FormValuesProps) => {
+      // if (!ref && !successRef) return;
       setIsSubmitting(true);
 
       try {
-        setOpenPaymentPopup(false);
-        const { logo, cac, ...rest } = data || business;
+        // setOpenPaymentPopup(false);
+        const { logo, cac, govId, ...rest } = data || business;
 
         if (cac) {
           const {
@@ -194,7 +198,15 @@ export default function BusinessProfile() {
           rest.logo = public_id;
         }
 
-        rest.reference = ref || successRef;
+        if (govId) {
+          const {
+            data: { public_id },
+          } = await uploadSingle(govId, 'govId');
+
+          rest.govId = public_id;
+        }
+        // rest.reference = ref || successRef;
+        console.log({ rest });
 
         const res = await createBusiness(rest);
         localStorage.removeItem(`${user.email}-successfull`);
@@ -210,7 +222,7 @@ export default function BusinessProfile() {
 
       setIsSubmitting(false);
     },
-    [business, enqueueSnackbar, reset, revalidateUser, successRef, user.email]
+    [business, enqueueSnackbar, reset, revalidateUser, user.email]
   );
 
   const handleDrop = useCallback(
@@ -240,25 +252,25 @@ export default function BusinessProfile() {
     }
   }, [enqueueSnackbar]);
 
-  const getTransaction = async () => {
-    try {
-      const { reference } = await loader('userActivePremiumSuccessTxn');
-      setSuccessRef(reference);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const getTransaction = async () => {
+  //   try {
+  //     const { reference } = await loader('userActivePremiumSuccessTxn');
+  //     setSuccessRef(reference);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   useEffect(() => {
     getIndustries();
-    getTransaction();
+    // getTransaction();
 
     return () => {};
   }, [getIndustries]);
 
   return (
     <>
-      <FormProvider methods={methods} onSubmit={handleSubmit(onInitializePayment)}>
+      <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
         <Grid container justifyContent="center" alignItems="center">
           <Grid item xs={12} md={8}>
             <Card sx={{ p: 4 }}>
@@ -329,6 +341,18 @@ export default function BusinessProfile() {
                 </Box>
                 <Box>
                   <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+                    Upload Government Issued ID
+                  </Typography>
+                  <RHFUpload
+                    name="govId"
+                    maxSize={3145728}
+                    onDrop={(_) => handleDrop(_, 'govId')}
+                    onDelete={() => setValue('govId', '', { shouldValidate: true })}
+                    helperText="NIMC, Driver’s License, Permanent Voter’s Card"
+                  />
+                </Box>
+                <Box>
+                  <Typography variant="caption" sx={{ color: 'text.secondary' }}>
                     Upload Business Logo (Optional)
                   </Typography>
                   <RHFUpload
@@ -354,7 +378,7 @@ export default function BusinessProfile() {
           </Grid>
         </Grid>
       </FormProvider>
-      {paymentRef && (
+      {/* {paymentRef && (
         <PaymentPopup
           open={openPaymentPopup}
           onClose={() => setOpenPaymentPopup(false)}
@@ -362,7 +386,7 @@ export default function BusinessProfile() {
           items={items}
           reference={paymentRef}
         />
-      )}
+      )} */}
     </>
   );
 }

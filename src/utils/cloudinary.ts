@@ -8,6 +8,7 @@ export const uploadSingle = async (
   type:
     | 'logo'
     | 'cac'
+    | 'govId'
     | 'ids'
     | 'avatar'
     | 'cover'

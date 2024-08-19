@@ -58,7 +58,7 @@ export default function AuthRegisterForm() {
     lastName: '',
     email: '',
     password: '',
-    dob: new Date('10-01-1960'), // Default date
+    dob: '',
     confirmPassword: '',
     ngoId: null,
   };
@@ -77,7 +77,7 @@ export default function AuthRegisterForm() {
   } = methods;
 
   const onSubmit = async (data: FormValuesProps) => {
-    console.log({data})
+    console.log({ data });
     setUserData(data);
 
     try {
@@ -111,7 +111,7 @@ export default function AuthRegisterForm() {
       }
       reset();
     } catch (error) {
-      console.error(error); 
+      console.error(error);
       setError('afterSubmit', {
         ...error,
         message: error.message || error,
@@ -122,7 +122,7 @@ export default function AuthRegisterForm() {
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const [ngos, setNgos] = useState([{id: '1', name: 'Alani'}]);
+  const [ngos, setNgos] = useState([{ id: '1', name: 'Alani' }]);
 
   const getNgos = useCallback(async () => {
     try {

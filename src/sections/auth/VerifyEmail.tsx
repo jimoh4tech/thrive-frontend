@@ -1,7 +1,7 @@
 // next
 import NextLink from 'next/link';
 // @mui
-import { Button, Dialog, DialogContent, Link, Typography } from '@mui/material';
+import { Dialog, DialogContent, Link, Typography } from '@mui/material';
 // layouts
 import { useSnackbar } from 'notistack';
 // routes

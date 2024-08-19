@@ -1,15 +1,64 @@
-import { Container, Grid, Typography } from '@mui/material';
+import { Button, Container, Grid, Typography } from '@mui/material';
 import { Box, Stack } from '@mui/system';
 import Head from 'next/head';
 import { useSettingsContext } from 'src/components/settings';
 import useResponsive from 'src/hooks/useResponsive';
-import PaymentAddress from './forms/PaymentAddress';
-import PaymentSummary from './forms/PaymentSummary';
+import { AppWelcome } from 'src/sections/@dashboard/general/app';
+import { useAuthContext } from 'src/auth/useAuthContext';
+import { SeoIllustration } from 'src/assets/illustrations';
+import { useState } from 'react';
+import { creator } from 'src/actions';
+import { useSnackbar } from 'notistack';
+import { fCurrency } from 'src/utils/formatNumber';
+import PaymentPopup from './PaymentPopup';
 
 export default function UserSubscribe() {
+  const [paymentRef, setPaymentRef] = useState('');
+  const [openPaymentPopup, setOpenPaymentPopup] = useState(false);
+  const [submitting, setIsSubmitting] = useState(false);
+  const [plan, setPlan] = useState<'month' | 'year'>('month');
+
+  const { user } = useAuthContext();
+
+  const { enqueueSnackbar } = useSnackbar();
+
   const isDesktop = useResponsive('up', 'md');
 
   const { themeStretch } = useSettingsContext();
+
+  const regAmount = parseInt(process.env.NEXT_PUBLIC_REG_FEE || '0', 10);
+  const monthAmount = parseInt(process.env.NEXT_PUBLIC_PREMIUM_FEE || '0', 10);
+  const yearAmount = parseInt(process.env.NEXT_PUBLIC_PREMIUM_YEAR_FEE || '0', 10);
+
+  const items = [
+    { name: 'Registration', amount: regAmount },
+    {
+      name: 'Subscription',
+      amount: plan === 'month' ? monthAmount : yearAmount,
+      label: 'Premium',
+    },
+  ];
+
+  const onInitializePayment = async () => {
+    try {
+      setIsSubmitting(true);
+
+      const { reference } = await creator('userPremuimTxn', {
+        amount: (() => {
+          let _total = 0;
+          for (let i = 0; i < items.length; i += 1) _total += items[i].amount;
+          return _total;
+        })(),
+        split_code: process.env.NEXT_PUBLIC_PAYSTACK_SPLIT_CODE,
+      });
+
+      setPaymentRef(reference);
+
+      setOpenPaymentPopup(true);
+    } catch (error) {
+      enqueueSnackbar(error.message || error, { variant: 'error' });
+    }
+  };
   return (
     <>
       <Head>
@@ -17,6 +66,21 @@ export default function UserSubscribe() {
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>
+        <AppWelcome
+          sx={{ py: 3 }}
+          title={`Hi,  ${user?.fullName}`}
+          description="Your Account subscription has expired. Kindly renew your subscription from the available plans."
+          img={
+            <SeoIllustration
+              sx={{
+                p: 3,
+                width: 360,
+                margin: { xs: 'auto', md: 'inherit' },
+                display: { md: 'block', xs: 'none' },
+              }}
+            />
+          }
+        />
         <Stack sx={{ mt: 5 }} spacing={2}>
           <Box textAlign="center">
             <Typography variant="h4" gutterBottom>
@@ -26,16 +90,45 @@ export default function UserSubscribe() {
           </Box>
 
           <Grid container justifyContent="center" spacing={isDesktop ? 3 : 5}>
-            <Grid item xs={12} md={4}>
+            {/* <Grid item xs={12} md={4}>
               <PaymentAddress onInput={() => {}} />
-            </Grid>
-
-            <Grid item xs={12} md={4}>
-              {/* <PaymentSummary data={{}} items={[]} onInput={()=>{}} /> */}
-            </Grid>
+            </Grid> */}
+            <Stack direction="row" spacing={3} justifyContent="center">
+              <Button
+                // LinkComponent={Link}
+                size="large"
+                // startIcon={<Iconify icon="fa:send-o" />}
+                variant="outlined"
+                // href={PATH_AUTH.register}
+                onClick={onInitializePayment}
+              >
+                {`${fCurrency(regAmount + monthAmount)}/Month`}
+              </Button>
+              <Button
+                // LinkComponent={Link}
+                size="large"
+                // startIcon={<Tour />}
+                variant="contained"
+                onClick={() => {
+                  setPlan('year');
+                  onInitializePayment();
+                }}
+              >
+                {`${fCurrency(regAmount + yearAmount)}/Year`}
+              </Button>
+            </Stack>
           </Grid>
         </Stack>
       </Container>
+      {paymentRef && (
+        <PaymentPopup
+          open={openPaymentPopup}
+          onClose={() => setOpenPaymentPopup(false)}
+          // cb={(ref) => onSubmit(ref)}
+          items={items}
+          reference={paymentRef}
+        />
+      )}
     </>
   );
 }

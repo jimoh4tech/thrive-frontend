@@ -51,7 +51,7 @@ export default function PaymentSummary({
       <Stack spacing={1.5}>
         {items.map(({ name, label, amount }) => (
           <>
-            <Stack direction="row" justifyContent="space-between">
+            <Stack direction="row" justifyContent="space-between" key={name}>
               <Stack direction={{ sm: 'row' }} spacing={2}>
                 <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                   {name}

@@ -119,12 +119,14 @@ export type IUserAccountGeneral = {
   company: string;
   isVerified: boolean;
   isApproved: boolean;
+  hasSubscription: boolean;
   status: string;
   role: { name: string; id: number };
   ngo: { name: string; id: number };
   business: IUserBusiness;
   virtualOffice?: any;
-  platinumSub: [{ id: number }];
+  platinumSub: { id: number }[];
+  premuimSub: { id: number }[];
   bio: string;
 };
 

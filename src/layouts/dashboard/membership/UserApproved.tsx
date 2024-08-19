@@ -14,13 +14,13 @@ export default function UserApproved() {
   return (
     <>
       <Head>
-        <title> Account Approved | Thrive</title>
+        <title> Account Verified | Thrive</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>
         <AppWelcome
           sx={{ bgcolor: 'success.lighter', color: 'grey.800', pt: 2 }}
-          title={`Congrats ${user?.fullName}! \n You have been approved.`}
+          title={`Congrats ${user?.fullName}! \n You have been verified.`}
           description="Please proceed to update your business profile to access the power of the Thrive App."
           img={
             <Avatar sx={{ bgcolor: '#fff', width: 100, height: 100, margin: 4 }}>

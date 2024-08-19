@@ -10,10 +10,7 @@ import {
   Typography,
 } from '@mui/material';
 // @types
-import { useForm } from 'react-hook-form';
 import { CustomAvatar } from 'src/components/custom-avatar';
-import { RHFTextField } from 'src/components/hook-form';
-import FormProvider from 'src/components/hook-form/FormProvider';
 import { fDate } from 'src/utils/formatTime';
 import { IUserAccountGeneral } from '../../../../@types/user';
 // components
@@ -29,8 +26,9 @@ type Props = {
   // onEditRow?: VoidFunction;
   // onSelectRow?: VoidFunction;
   // onDeleteRow?: VoidFunction;
-  onApprove: (icssId: string) => void;
+  onApprove: (id: number) => void;
   onDecline: (id: number) => void;
+  onSuspend: (id: number) => void;
 };
 
 export default function UserTableRow({
@@ -40,11 +38,14 @@ export default function UserTableRow({
   // onDeleteRow,
   onApprove,
   onDecline,
+  onSuspend,
 }: Props) {
-  const { fullName, avatarUrl, email, icssId, createdAt, status, ngo, isApproved } = row;
+  const { fullName, avatarUrl, email, phone, createdAt, status, ngo, isApproved } = row;
 
+  const [openView, setOpenView] = useState(false);
   const [openConfirm, setOpenConfirm] = useState(false);
   const [openDecline, setOpenDecline] = useState(false);
+  const [openSuspend, setOpenSuspend] = useState(false);
 
   const [openPopover, setOpenPopover] = useState<HTMLElement | null>(null);
 
@@ -56,10 +57,10 @@ export default function UserTableRow({
     setOpenPopover(null);
   };
 
-  const handleApprove = (_icssId: string) => {
-    setOpenConfirm(false);
-    onApprove(_icssId);
-  };
+  // const handleApprove = (_id: number) => {
+  //   setOpenConfirm(false);
+  //   onApprove(_id);
+  // };
 
   const handlePopoverClick = (callback: (status: boolean) => void) => {
     callback(true);
@@ -89,11 +90,11 @@ export default function UserTableRow({
         <TableCell align="left">{email}</TableCell>
 
         <TableCell align="left" sx={{ textTransform: 'capitalize' }}>
-          {icssId || 'null'}
+          {phone || 'null'}
         </TableCell>
 
         <TableCell align="left" sx={{ textTransform: 'capitalize' }}>
-          {ngo?.name }
+          {ngo?.name}
         </TableCell>
         <TableCell align="left" sx={{ textTransform: 'capitalize' }}>
           {fDate(createdAt)}
@@ -101,12 +102,12 @@ export default function UserTableRow({
 
         {/* <TableCell align="center">
           <Iconify
-            icon={isVerified ? 'eva:checkmark-circle-fill' : 'eva:clock-outline'}
+            icon={isApproved ? 'eva:checkmark-circle-fill' : 'eva:clock-outline'}
             sx={{
               width: 20,
               height: 20,
               color: 'success.main',
-              ...(!isVerified && { color: 'warning.main' }),
+              ...(!isApproved && { color: 'warning.main' }),
             }}
           />
         </TableCell> */}
@@ -117,7 +118,7 @@ export default function UserTableRow({
             color={(isApproved && 'success') || (status === 'pending' && 'warning') || 'error'}
             sx={{ textTransform: 'capitalize' }}
           >
-            {status}
+            {status !== 'pending' ? status : 'Suspended'}
           </Label>
         </TableCell>
 
@@ -128,39 +129,67 @@ export default function UserTableRow({
         </TableCell>
       </TableRow>
 
-      {!isApproved && (
-        <MenuPopover
-          open={openPopover}
-          onClose={handleClosePopover}
-          arrow="right-top"
-          sx={{ width: 140 }}
-        >
-          <MenuItem
-            onClick={() => handlePopoverClick(setOpenConfirm)}
-            sx={{ color: 'success.main' }}
-          >
-            <Iconify icon="mdi:approve" />
-            Approve
-          </MenuItem>
-          <MenuItem onClick={() => handlePopoverClick(setOpenDecline)} sx={{ color: 'error.main' }}>
-            <Iconify icon="mdi:cancel" />
-            Decline
-          </MenuItem>
-        </MenuPopover>
-      )}
+      <MenuPopover
+        open={openPopover}
+        onClose={handleClosePopover}
+        arrow="right-top"
+        sx={{ width: 140 }}
+      >
+        <MenuItem onClick={() => handlePopoverClick(setOpenConfirm)} sx={{ color: 'info.main' }}>
+          <Iconify icon="carbon:play" />
+          View
+        </MenuItem>
+        <MenuItem onClick={() => handlePopoverClick(setOpenConfirm)} sx={{ color: 'success.main' }}>
+          <Iconify icon="mdi:approve" />
+          Approve
+        </MenuItem>
+        <MenuItem onClick={() => handlePopoverClick(setOpenDecline)} sx={{ color: 'error.main' }}>
+          <Iconify icon="mdi:cancel" />
+          Decline
+        </MenuItem>
+        <MenuItem onClick={() => handlePopoverClick(setOpenSuspend)} sx={{ color: 'warning.main' }}>
+          <Iconify icon="mdi:warning" />
+          Suspend
+        </MenuItem>
+      </MenuPopover>
 
-      <RenderApproveDialog
+      {/* <RenderApproveDialog
         onApprove={handleApprove}
         openConfirm={openConfirm}
         setOpenConfirm={setOpenConfirm}
-      />
+      /> */}
       <ConfirmDialog
         open={openDecline}
         onClose={() => setOpenDecline(false)}
-        title="Confirn Action"
+        title="Decline User"
+        content="Are you sure you want to decline user?"
         action={
           <Button variant="contained" color="error" onClick={() => onDecline(row.id)}>
             Decline
+          </Button>
+        }
+      />
+
+      <ConfirmDialog
+        open={openConfirm}
+        onClose={() => setOpenConfirm(false)}
+        title="Approve User"
+        content="Are you sure you want to approve user?"
+        action={
+          <Button variant="contained" color="success" onClick={() => onApprove(row.id)}>
+            Approve
+          </Button>
+        }
+      />
+
+      <ConfirmDialog
+        open={openSuspend}
+        onClose={() => setOpenSuspend(false)}
+        title="Suspend User"
+        content="Are you sure you want to suspend user?"
+        action={
+          <Button variant="contained" color="warning" onClick={() => onSuspend(row.id)}>
+            Suspend
           </Button>
         }
       />
@@ -168,34 +197,34 @@ export default function UserTableRow({
   );
 }
 
-type RProps = {
-  openConfirm: boolean;
-  setOpenConfirm: (val: boolean) => void;
-  onApprove: Props['onApprove'];
-};
+// type RProps = {
+//   openConfirm: boolean;
+//   setOpenConfirm: (val: boolean) => void;
+//   onApprove: Props['onApprove'];
+// };
 
-function RenderApproveDialog({ openConfirm, setOpenConfirm, onApprove }: RProps) {
-  const methods = useForm({ defaultValues: { icssId: '' } });
+// function RenderApproveDialog({ openConfirm, setOpenConfirm, onApprove }: RProps) {
+//   const methods = useForm({ defaultValues: { icssId: '' } });
 
-  const { getValues } = methods;
+//   const { getValues } = methods;
 
-  return (
-    <ConfirmDialog
-      open={openConfirm}
-      onClose={() => setOpenConfirm(false)}
-      title="Approve This User"
-      content={
-        <FormProvider methods={methods}>
-          <Typography sx={{ my: 2 }}>EnterThriveID to proceed</Typography>
+//   return (
+//     <ConfirmDialog
+//       open={openConfirm}
+//       onClose={() => setOpenConfirm(false)}
+//       title="Approve This User"
+//       content={
+//         <FormProvider methods={methods}>
+//           <Typography sx={{ my: 2 }}>EnterThriveID to proceed</Typography>
 
-          <RHFTextField name="icssId" label="ThriveID" />
-        </FormProvider>
-      }
-      action={
-        <Button variant="contained" color="success" onClick={() => onApprove(getValues('icssId'))}>
-          Approve
-        </Button>
-      }
-    />
-  );
-}
+//           <RHFTextField name="icssId" label="ThriveID" />
+//         </FormProvider>
+//       }
+//       action={
+//         <Button variant="contained" color="success" onClick={() => onApprove(getValues('icssId'))}>
+//           Approve
+//         </Button>
+//       }
+//     />
+//   );
+// }

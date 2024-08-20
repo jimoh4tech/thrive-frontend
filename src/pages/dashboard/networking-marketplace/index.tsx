@@ -84,7 +84,7 @@ export default function FileManagerPage() {
   return (
     <>
       <Head>
-        <title> Networking & Marketplace - Businesses | Minimal UI</title>
+        <title> Networking & Marketplace - Businesses | Thrive</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>

@@ -1,5 +1,6 @@
 // @mui
-import { Button, Card, CardHeader, Link, Stack, Typography } from '@mui/material';
+import { Button, Card, CardHeader, Stack, Typography } from '@mui/material';
+import Link from '@mui/material/Link';
 import { styled } from '@mui/material/styles';
 import { IUserBusiness } from 'src/@types/business';
 import Iconify from 'src/components/iconify/Iconify';
@@ -69,11 +70,18 @@ export default function BusinesseAbout({
         <Stack direction="row">
           <StyledIcon icon="tabler:external-link" />
 
-          <Typography variant="body2">
-            <Link component="span" variant="subtitle2" color="text.primary">
-              {slug}
-            </Link>
-          </Typography>
+          <Link
+            component="button"
+            variant="subtitle2"
+            color="text.primary"
+            target="_blank"
+            rel="noopener"
+            href={slug}
+          >
+            {slug}
+          </Link>
+          {/* <Typography variant="body2">
+          </Typography> */}
         </Stack>
 
         <Stack direction="row">

@@ -58,11 +58,6 @@ export default function UserTableRow({
     setOpenPopover(null);
   };
 
-  // const handleApprove = (_id: number) => {
-  //   setOpenConfirm(false);
-  //   onApprove(_id);
-  // };
-
   const handlePopoverClick = (callback: (status: boolean) => void) => {
     callback(true);
     handleClosePopover();
@@ -74,10 +69,6 @@ export default function UserTableRow({
         hover
         // selected={selected}
       >
-        {/* <TableCell padding="checkbox">
-          <Checkbox checked={selected} onClick={onSelectRow} />
-        </TableCell> */}
-
         <TableCell>
           <Stack direction="row" alignItems="center" spacing={2}>
             <CustomAvatar name={fullName} src={avatarUrl} />
@@ -100,18 +91,6 @@ export default function UserTableRow({
         <TableCell align="left" sx={{ textTransform: 'capitalize' }}>
           {fDate(createdAt)}
         </TableCell>
-
-        {/* <TableCell align="center">
-          <Iconify
-            icon={isApproved ? 'eva:checkmark-circle-fill' : 'eva:clock-outline'}
-            sx={{
-              width: 20,
-              height: 20,
-              color: 'success.main',
-              ...(!isApproved && { color: 'warning.main' }),
-            }}
-          />
-        </TableCell> */}
 
         <TableCell align="left">
           <Label
@@ -154,11 +133,6 @@ export default function UserTableRow({
         </MenuItem>
       </MenuPopover>
 
-      {/* <RenderApproveDialog
-        onApprove={handleApprove}
-        openConfirm={openConfirm}
-        setOpenConfirm={setOpenConfirm}
-      /> */}
       <ConfirmDialog
         open={openDecline}
         onClose={() => setOpenDecline(false)}
@@ -206,35 +180,3 @@ export default function UserTableRow({
     </>
   );
 }
-
-// type RProps = {
-//   openConfirm: boolean;
-//   setOpenConfirm: (val: boolean) => void;
-//   onApprove: Props['onApprove'];
-// };
-
-// function RenderApproveDialog({ openConfirm, setOpenConfirm, onApprove }: RProps) {
-//   const methods = useForm({ defaultValues: { icssId: '' } });
-
-//   const { getValues } = methods;
-
-//   return (
-//     <ConfirmDialog
-//       open={openConfirm}
-//       onClose={() => setOpenConfirm(false)}
-//       title="Approve This User"
-//       content={
-//         <FormProvider methods={methods}>
-//           <Typography sx={{ my: 2 }}>EnterThriveID to proceed</Typography>
-
-//           <RHFTextField name="icssId" label="ThriveID" />
-//         </FormProvider>
-//       }
-//       action={
-//         <Button variant="contained" color="success" onClick={() => onApprove(getValues('icssId'))}>
-//           Approve
-//         </Button>
-//       }
-//     />
-//   );
-// }

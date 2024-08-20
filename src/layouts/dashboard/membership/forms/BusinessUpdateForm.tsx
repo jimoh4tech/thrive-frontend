@@ -29,7 +29,7 @@ const SOCIAL_LINKS = [
     icon: <Iconify icon="eva:facebook-fill" width={24} />,
   },
   {
-    hint: 'https://instagram.com/icss_thrive',
+    hint: 'https://instagram.com/thrive',
     value: 'instagramLink',
     label: 'instagram url',
     icon: <Iconify icon="ant-design:instagram-filled" width={24} />,
@@ -99,21 +99,21 @@ export default function BusinessUpdateForm({ cb }: { cb?: VoidFunction }) {
   const urlArr = busi.slug.split('/');
 
   const defaultValues = {
-    name: busi.name,
-    email: busi.email,
-    phone: busi.phone,
-    whatsappNumber: busi.whatsappNumber,
-    country: busi.country,
-    address: busi.address,
-    state: busi.state,
-    industryId: busi.industryId,
-    bio: busi.bio,
-    slug: urlArr[urlArr.length - 1],
-    designation: busi.designation,
-    facebookLink: busi.facebookLink,
-    twitterLink: busi.twitterLink,
-    instagramLink: busi.instagramLink,
-    linkedinLink: busi.linkedinLink,
+    name: busi.name || '',
+    email: busi.email || '',
+    phone: busi.phone || '',
+    whatsappNumber: busi.whatsappNumber || '',
+    country: busi.country || '',
+    address: busi.address || '',
+    state: busi.state || '',
+    industryId: busi.industryId || '',
+    bio: busi.bio || '',
+    slug: urlArr[urlArr.length - 1] || '',
+    designation: busi.designation || '',
+    facebookLink: busi.facebookLink || '',
+    twitterLink: busi.twitterLink || '',
+    instagramLink: busi.instagramLink || '',
+    linkedinLink: busi.linkedinLink || '',
   };
 
   const methods = useForm<FormValuesProps>({
@@ -190,10 +190,16 @@ export default function BusinessUpdateForm({ cb }: { cb?: VoidFunction }) {
 
               <RHFTextField name="state" label="State/Region" />
 
-              <RHFSelect native name="industryId" label="Industry" placeholder="Industry">
+              <RHFSelect
+                native
+                name="industryId"
+                label="Industry"
+                placeholder="Industry"
+                value={defaultValues.industryId}
+              >
                 <option value="" />
                 {industries.map((_, i) => (
-                  <option selected={busi.industryId === _.id} key={i} value={_.id}>
+                  <option key={i} value={_.id}>
                     {_.name}
                   </option>
                 ))}

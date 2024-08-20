@@ -105,20 +105,20 @@ export default function BusinessBox() {
   return (
     <>
       <Head>
-        <title> Business Box | Thrive</title>
+        <title> Events | Thrive</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading="Business Box"
+          heading="Events"
           links={[
             {
               name: 'Admin',
               href: PATH_ADMIN.root,
             },
             {
-              name: 'Business Box',
-              href: PATH_ADMIN.businessMedia.library,
+              name: 'Events',
+              href: PATH_ADMIN.event.events,
             },
             {
               name: 'List',

@@ -102,7 +102,6 @@ export type IUserCard = {
 export type IUserAccountGeneral = {
   gender: string;
   id: number;
-  icssId: string;
   dob: string;
   createdAt: string;
   avatarUrl: string;

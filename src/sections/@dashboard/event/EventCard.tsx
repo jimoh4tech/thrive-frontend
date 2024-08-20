@@ -69,7 +69,9 @@ export default function EventCard({ event, onViewEvent }: Props) {
         <Typography variant="subtitle2">{category.name}</Typography>
         <Stack direction="row" alignItems="center" spacing={1}>
           <Iconify color="primary.main" icon="ic:outline-access-time" width="12" />
-          <Typography variant="subtitle2">{`${fDate(startDate)} -  ${fDate(endDate)}`}</Typography>
+          <Typography variant="subtitle2">{`${fDate(startDate)}  -   ${fDate(
+            endDate
+          )}`}</Typography>
         </Stack>
         <Stack direction="row" alignItems="center" spacing={1}>
           <Iconify color="primary.main" icon="ic:baseline-location-on" width="12" />

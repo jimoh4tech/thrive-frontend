@@ -49,7 +49,7 @@ export default function AccountGeneral() {
     phone: Yup.string().required('Phone number is required'),
     bio: Yup.string(),
     gender: Yup.string(),
-    dob: Yup.date()
+    dob: Yup.date(),
   });
 
   const defaultValues = {
@@ -81,7 +81,7 @@ export default function AccountGeneral() {
 
   const updateProfile = async ({ avatarUrl, ...data }: FormValuesProps) => {
     try {
-      console.log({avatarUrl, data})
+      console.log({ avatarUrl, data });
       await updater('user', data);
       enqueueSnackbar('Profile update success!');
     } catch (error) {
@@ -123,7 +123,6 @@ export default function AccountGeneral() {
               name="avatarUrl"
               // files={[newDP || getValues('avatarUrl') || '']}
               maxSize={3145728}
-              
               onDrop={handleDrop}
               helperText={
                 <Typography
@@ -179,7 +178,7 @@ export default function AccountGeneral() {
                   )}
                 />
 
-                <RHFSelect native name="gender" defaultValue={defaultValues.gender} label="Gender">
+                <RHFSelect native name="gender" value={defaultValues.gender} label="Gender">
                   {['male', 'female'].map((val) => (
                     <option key={val} value={val}>
                       {`${val.substring(0, 1).toUpperCase()}${val.substring(1)}`}

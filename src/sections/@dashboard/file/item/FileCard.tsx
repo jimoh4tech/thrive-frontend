@@ -1,11 +1,13 @@
 import { useState } from 'react';
 // @mui
-import { Box, Card, CardProps, IconButton, MenuItem, Stack } from '@mui/material';
+import { Box, Button, Card, CardProps, IconButton, MenuItem, Stack } from '@mui/material';
 // @ts-ignore
 import { saveAs } from 'file-saver';
 // hooks
 import { IMedia } from 'src/@types/media';
 import { fDateTime } from 'src/utils/formatTime';
+import ConfirmDialog from 'src/components/confirm-dialog';
+import { useAuthContext } from 'src/auth/useAuthContext';
 import useCopyToClipboard from '../../../../hooks/useCopyToClipboard';
 // utils
 import { fData } from '../../../../utils/formatNumber';
@@ -23,9 +25,12 @@ import FileDetailsDrawer from '../portal/FileDetailsDrawer';
 
 interface Props extends CardProps {
   file: IMedia;
+  onDelete: (id: number) => void;
 }
 
-export default function FileCard({ file, sx, ...other }: Props) {
+export default function FileCard({ file, sx, onDelete, ...other }: Props) {
+  const { user } = useAuthContext();
+
   const { enqueueSnackbar } = useSnackbar();
 
   const { copy } = useCopyToClipboard();
@@ -33,6 +38,8 @@ export default function FileCard({ file, sx, ...other }: Props) {
   const [showCheckbox, setShowCheckbox] = useState(false);
 
   const [openDetails, setOpenDetails] = useState(false);
+
+  const [openConfirm, setOpenConfirm] = useState(false);
 
   const [openPopover, setOpenPopover] = useState<HTMLElement | null>(null);
 
@@ -42,6 +49,13 @@ export default function FileCard({ file, sx, ...other }: Props) {
 
   const handleHideCheckbox = () => {
     setShowCheckbox(false);
+  };
+  const handleOpenConfirm = () => {
+    setOpenConfirm(true);
+  };
+
+  const handleCloseConfirm = () => {
+    setOpenConfirm(false);
   };
 
   const handleOpenDetails = () => {
@@ -135,6 +149,19 @@ export default function FileCard({ file, sx, ...other }: Props) {
           <Iconify icon="eva:arrow-circle-down-fill" color="primary.light" />
           Download
         </MenuItem>
+
+        {user.role.id === 3 && (
+          <MenuItem
+            onClick={() => {
+              handleOpenConfirm();
+              handleClosePopover();
+            }}
+            sx={{ color: 'error.main' }}
+          >
+            <Iconify icon="eva:trash-2-outline" />
+            Delete
+          </MenuItem>
+        )}
       </MenuPopover>
 
       <FileDetailsDrawer
@@ -142,6 +169,18 @@ export default function FileCard({ file, sx, ...other }: Props) {
         onCopyLink={handleCopy}
         open={openDetails}
         onClose={handleCloseDetails}
+      />
+
+      <ConfirmDialog
+        open={openConfirm}
+        onClose={handleCloseConfirm}
+        title="Delete"
+        content="Are you sure want to delete?"
+        action={
+          <Button variant="contained" color="error" onClick={() => onDelete(file.id)}>
+            Delete
+          </Button>
+        }
       />
     </>
   );

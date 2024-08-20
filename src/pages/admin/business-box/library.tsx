@@ -24,6 +24,7 @@ import { DateRangePicker } from '@mui/lab';
 import { useDateRangePicker } from 'src/components/date-range-picker';
 import Iconify from 'src/components/iconify/Iconify';
 import { FileFilterButton, FileFilterName, FileGridView } from 'src/sections/@dashboard/file';
+import { deleteBusinessBox } from 'src/actions/admin/usersAction';
 
 // ----------------------------------------------------------------------
 
@@ -94,6 +95,18 @@ export default function BusinessBox() {
     setQuery({});
   };
 
+  const handleDelete = async (id: number) => {
+    try {
+      setFetching(true);
+      const res = await deleteBusinessBox(id);
+      await getMedia();
+      enqueueSnackbar(res.data.message);
+    } catch (err) {
+      enqueueSnackbar(err.message || err, { color: 'error.main' });
+    }
+    setFetching(false);
+  };
+
   const { enqueueSnackbar } = useSnackbar();
 
   const getMedia = useCallback(async () => {
@@ -104,7 +117,7 @@ export default function BusinessBox() {
         order: 'DESC',
         ...query,
       });
-
+      console.log({ data });
       setMedia(data);
 
       setFetching(false);
@@ -197,7 +210,7 @@ export default function BusinessBox() {
           {/* <FileChangeViewButton value={view} onChange={handleChangeView} /> */}
         </Stack>
 
-        <FileGridView data={media.records} dataFiltered={media.records} />
+        <FileGridView onDelete={handleDelete} dataFiltered={media.records} />
 
         <Stack direction="row" justifyContent="center" mt={4}>
           <Pagination

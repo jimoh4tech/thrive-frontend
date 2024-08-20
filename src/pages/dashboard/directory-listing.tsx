@@ -27,7 +27,7 @@ import { TableHeadCustom, TableNoData } from '../../components/table';
 
 // ----------------------------------------------------------------------
 
-const ROLE = ['all', 'member', 'partner', 'admin'];
+// const ROLE = ['all', 'member', 'partner', 'admin'];
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Business Name', align: 'left' },

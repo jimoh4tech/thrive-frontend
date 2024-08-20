@@ -90,7 +90,7 @@ export const _socials = [
     name: 'Instagram',
     icon: 'ant-design:instagram-filled',
     color: '#E02D69',
-    path: 'https://instagram.com/icss_thrive',
+    path: 'https://instagram.com/thrive',
   },
   {
     value: 'linkedin',

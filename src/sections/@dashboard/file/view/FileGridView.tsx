@@ -11,14 +11,15 @@ import FileCard from '../item/FileCard';
 // ----------------------------------------------------------------------
 
 type Props = {
-  data: IMedia[];
+  // data: IMedia[];
   dataFiltered: IMedia[];
+  onDelete: (id: number) => void;
 };
 
-export default function FileGridView({ data, dataFiltered }: Props) {
+export default function FileGridView({ onDelete, dataFiltered }: Props) {
   const containerRef = useRef(null);
 
-  const [collapseFiles, setCollapseFiles] = useState(false);
+  const [collapseFiles] = useState(false);
 
   return (
     <Box ref={containerRef}>
@@ -38,7 +39,7 @@ export default function FileGridView({ data, dataFiltered }: Props) {
           {dataFiltered
             .filter((i) => i.format !== 'folder')
             .map((file) => (
-              <FileCard key={file.id} file={file} sx={{ maxWidth: 'auto' }} />
+              <FileCard key={file.id} file={file} sx={{ maxWidth: 'auto' }} onDelete={onDelete} />
             ))}
         </Box>
       </Collapse>

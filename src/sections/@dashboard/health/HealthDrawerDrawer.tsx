@@ -98,7 +98,7 @@ export default function HealthDrawerDrawer({
             {name}
           </Typography>
           <Stack direction="row" justifyContent="space-between" alignItems="center">
-            <Typography variant="caption" children={category.name} />
+            <Typography variant="caption" children={category?.name} />
 
             {url && (
               <Button href={url} size="small" variant="outlined">

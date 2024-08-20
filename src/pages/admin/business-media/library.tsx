@@ -19,6 +19,7 @@ import { loader } from 'src/actions';
 import Pagination from 'src/components/pagination';
 import SearchBar from 'src/components/search-bar';
 import { FileGridView } from 'src/sections/@dashboard/file';
+import { deleteBusinessMedia } from 'src/actions/admin/usersAction';
 // utils
 // layouts
 // @types
@@ -49,6 +50,18 @@ export default function BusinessBox() {
   };
 
   const { enqueueSnackbar } = useSnackbar();
+
+  const handleDelete = async (id: number) => {
+    try {
+      setFetching(true);
+      const res = await deleteBusinessMedia(id);
+      await getMedia();
+      enqueueSnackbar(res.data.message);
+    } catch (err) {
+      enqueueSnackbar(err.message || err, { color: 'error.main' });
+    }
+    setFetching(false);
+  };
 
   const getMedia = useCallback(async () => {
     try {
@@ -105,7 +118,7 @@ export default function BusinessBox() {
           {/* <FileChangeViewButton value={view} onChange={handleChangeView} /> */}
         </Stack>
 
-        <FileGridView data={media.records} dataFiltered={media.records} />
+        <FileGridView onDelete={handleDelete} dataFiltered={media.records} />
 
         <Pagination
           totalPages={media.totalPages}

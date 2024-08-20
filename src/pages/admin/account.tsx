@@ -7,7 +7,7 @@ import { Box, Container, Tab, Tabs } from '@mui/material';
 import BusinessUpdateForm from 'src/layouts/dashboard/membership/forms/BusinessUpdateForm';
 import { PATH_DASHBOARD } from '../../routes/paths';
 // layouts
-import DashboardLayout from '../../layouts/dashboard';
+import DashboardLayout from '../../layouts/admin';
 // components
 import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
 import Iconify from '../../components/iconify';
@@ -17,11 +17,13 @@ import { AccountChangePassword, AccountGeneral } from '../../sections/@dashboard
 
 // ----------------------------------------------------------------------
 
-UserAccountPage.getLayout = (page: React.ReactElement) => <DashboardLayout>{page}</DashboardLayout>;
+AdminAccountPage.getLayout = (page: React.ReactElement) => (
+  <DashboardLayout>{page}</DashboardLayout>
+);
 
 // ----------------------------------------------------------------------
 
-export default function UserAccountPage() {
+export default function AdminAccountPage() {
   const { themeStretch } = useSettingsContext();
 
   const [currentTab, setCurrentTab] = useState('profile');
@@ -74,7 +76,7 @@ export default function UserAccountPage() {
   return (
     <>
       <Head>
-        <title> User: Account Settings | Minimal UI</title>
+        <title> Admin: Account Settings | Thrive</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>

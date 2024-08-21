@@ -1,15 +1,15 @@
-import { Button, Container, Grid, Typography } from '@mui/material';
+import { Avatar, Button, Container, Grid, Typography } from '@mui/material';
 import { Box, Stack } from '@mui/system';
 import Head from 'next/head';
 import { useSettingsContext } from 'src/components/settings';
 import useResponsive from 'src/hooks/useResponsive';
 import { AppWelcome } from 'src/sections/@dashboard/general/app';
 import { useAuthContext } from 'src/auth/useAuthContext';
-import { SeoIllustration } from 'src/assets/illustrations';
 import { useState } from 'react';
 import { creator } from 'src/actions';
 import { useSnackbar } from 'notistack';
 import { fCurrency } from 'src/utils/formatNumber';
+import Iconify from 'src/components/iconify';
 import PaymentPopup from './PaymentPopup';
 
 export default function UserSubscribe() {
@@ -67,18 +67,13 @@ export default function UserSubscribe() {
 
       <Container maxWidth={themeStretch ? false : 'xl'}>
         <AppWelcome
-          sx={{ py: 3 }}
+          sx={{ bgcolor: 'info.lighter', color: 'grey.800', py: 3 }}
           title={`Hi,  ${user?.fullName}`}
           description="Your Account subscription has expired. Kindly renew your subscription from the available plans."
           img={
-            <SeoIllustration
-              sx={{
-                p: 3,
-                width: 360,
-                margin: { xs: 'auto', md: 'inherit' },
-                display: { md: 'block', xs: 'none' },
-              }}
-            />
+            <Avatar sx={{ bgcolor: '#fff', width: 100, height: 100, margin: 4 }}>
+              <Iconify icon="mdi:info" sx={{ width: '80%', height: '80%', color: 'info.main' }} />
+            </Avatar>
           }
         />
         <Stack sx={{ mt: 5 }} spacing={2}>

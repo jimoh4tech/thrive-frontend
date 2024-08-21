@@ -9,8 +9,8 @@ import { HEADER, NAV } from '../../config-global';
 // components
 import { useSettingsContext } from '../../components/settings';
 import UserApproved from './membership/UserApproved';
-import UserPending from './membership/UserPending';
 import UserSubscribe from './membership/UserSubscribe';
+import UserSuspended from './membership/UserSuspended';
 
 // ----------------------------------------------------------------------
 
@@ -29,7 +29,7 @@ export default function Main({ children, sx, ...other }: BoxProps) {
   const isDesktop = useResponsive('up', 'lg');
 
   const render = () => {
-    if (!user?.isApproved) return <UserPending />;
+    if (!user?.isApproved) return <UserSuspended />;
     if (!user?.business) return <UserApproved />;
     if (!user.hasSubscription && user?.premuimSub?.length === 0) return <UserSubscribe />;
     return children;

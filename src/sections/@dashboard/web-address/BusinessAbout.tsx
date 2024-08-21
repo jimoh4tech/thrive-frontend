@@ -1,11 +1,11 @@
 // @mui
-import { Button, Card, CardHeader, Stack, Typography } from '@mui/material';
-import Link from '@mui/material/Link';
+import { Button, Card, CardHeader, Link, Stack, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { IUserBusiness } from 'src/@types/business';
 import Iconify from 'src/components/iconify/Iconify';
 // @ts-ignore
 import { RWebShare } from 'react-web-share';
+import NLink from 'next/link';
 // @types
 // components
 
@@ -70,18 +70,9 @@ export default function BusinesseAbout({
         <Stack direction="row">
           <StyledIcon icon="tabler:external-link" />
 
-          <Link
-            component="button"
-            variant="subtitle2"
-            color="text.primary"
-            target="_blank"
-            rel="noopener"
-            href={slug}
-          >
+          <NLink color="black" target="_blank" rel="noopener" href={slug}>
             {slug}
-          </Link>
-          {/* <Typography variant="body2">
-          </Typography> */}
+          </NLink>
         </Stack>
 
         <Stack direction="row">

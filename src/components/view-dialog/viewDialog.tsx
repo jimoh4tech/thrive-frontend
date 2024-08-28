@@ -26,25 +26,25 @@ const ViewDialog = ({ open, id, title, onClose }: ViewDialogProps) => {
 
   const SOCIAL_LINKS = [
     {
-      href: userInfo?.business.facebookLink,
+      href: userInfo?.business?.facebookLink,
       value: 'facebookLink',
       label: 'facebook url',
       icon: <Iconify icon="eva:facebook-fill" width={24} />,
     },
     {
-      href: userInfo?.business.instagramLink,
+      href: userInfo?.business?.instagramLink,
       value: 'instagramLink',
       label: 'instagram url',
       icon: <Iconify icon="ant-design:instagram-filled" width={24} />,
     },
     {
-      href: userInfo?.business.linkedinLink,
+      href: userInfo?.business?.linkedinLink,
       value: 'linkedinLink',
       label: 'linkedin url',
       icon: <Iconify icon="eva:linkedin-fill" width={24} />,
     },
     {
-      href: userInfo?.business.twitterLink,
+      href: userInfo?.business?.twitterLink,
       value: 'twitterLink',
       label: 'twitter url',
       icon: <Iconify icon="eva:twitter-fill" width={24} />,
@@ -180,18 +180,18 @@ const ViewDialog = ({ open, id, title, onClose }: ViewDialogProps) => {
                   <RHFTextField
                     name="state"
                     label="State/Region"
-                    value={userInfo?.business.state}
+                    value={userInfo?.business?.state}
                   />
 
                   <RHFTextField
                     name="website"
                     label="Website Url"
-                    value={userInfo?.business.slug}
+                    value={userInfo?.business?.slug}
                   />
                   <RHFTextField
                     name="reg"
                     label="Business Registration Date"
-                    value={new Date(userInfo?.business.createdAt || '').toDateString()}
+                    value={new Date(userInfo?.business?.createdAt || '').toDateString()}
                   />
 
                   {SOCIAL_LINKS.map((link) => (
@@ -216,20 +216,20 @@ const ViewDialog = ({ open, id, title, onClose }: ViewDialogProps) => {
                     multiline
                     rows={4}
                     label="Business Description"
-                    value={userInfo?.business.bio}
+                    value={userInfo?.business?.bio}
                   />
                   <Box>
                     <Typography variant="caption" sx={{ color: 'text.secondary' }}>
                       Upload Business registration Document
                     </Typography>
-                    <Image src={userInfo?.business.cac} alt="business cac" width={6} height={6} />
+                    <Image src={userInfo?.business?.cac} alt="business cac" width={6} height={6} />
                   </Box>
                   <Box>
                     <Typography variant="caption" sx={{ color: 'text.secondary' }}>
                       Upload Government Issued ID
                     </Typography>
                     <Image
-                      src={userInfo?.business.govId}
+                      src={userInfo?.business?.govId}
                       alt="business cover"
                       width={6}
                       height={6}
@@ -239,7 +239,12 @@ const ViewDialog = ({ open, id, title, onClose }: ViewDialogProps) => {
                     <Typography variant="caption" sx={{ color: 'text.secondary' }}>
                       Upload Business Logo (Optional)
                     </Typography>
-                    <Image src={userInfo?.business.logo} alt="business logo" width={6} height={6} />
+                    <Image
+                      src={userInfo?.business?.logo}
+                      alt="business logo"
+                      width={6}
+                      height={6}
+                    />
                   </Box>
                 </Stack>
               </Card>

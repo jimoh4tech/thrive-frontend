@@ -31,7 +31,7 @@ type FormValuesProps = {
   lastName: string;
   gender: string;
   dob: string;
-
+  bio?: string;
   avatarUrl: CustomFile | string | null;
   isApproved: boolean;
   afterSubmit?: string;
@@ -77,12 +77,20 @@ export default function AccountGeneral() {
     formState: { errors, isSubmitting },
   } = methods;
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [loading, setLoading] = useState(false);
 
-  const updateProfile = async ({ avatarUrl, ...data }: FormValuesProps) => {
+  const updateProfile = async ({ avatarUrl, bio, ...data }: FormValuesProps) => {
     try {
-      console.log({ avatarUrl, data });
-      await updater('user', data);
+      console.log({
+        avatarUrl,
+        data,
+        bio: bio?.replace(/(\r\n|\n|\r)/g, '\\n').replace(/"/g, '\\"'),
+      });
+      await updater('user', {
+        ...data,
+        bio: bio?.replace(/(\r\n|\n|\r)/g, '\\n').replace(/"/g, '\\"'),
+      });
       enqueueSnackbar('Profile update success!');
     } catch (error) {
       console.error(error);

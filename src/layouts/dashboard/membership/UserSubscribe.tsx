@@ -29,13 +29,16 @@ export default function UserSubscribe() {
   const regAmount = parseInt(process.env.NEXT_PUBLIC_REG_FEE || '0', 10);
   const monthAmount = parseInt(process.env.NEXT_PUBLIC_PREMIUM_FEE || '0', 10);
   const yearAmount = parseInt(process.env.NEXT_PUBLIC_PREMIUM_YEAR_FEE || '0', 10);
+  const planCode =
+    plan === 'month'
+      ? process.env.NEXT_PUBLIC_PAYSTACK_MONTHLY_PLAN_CODE
+      : process.env.NEXT_PUBLIC_PAYSTACK_MONTHLY_PLAN_CODE;
 
   const items = [
-    { name: 'Registration', amount: regAmount },
     {
       name: 'Subscription',
       amount: plan === 'month' ? monthAmount : yearAmount,
-      label: 'Premium',
+      label: plan === 'month' ? 'Premium' : '20% off',
     },
   ];
 
@@ -49,7 +52,7 @@ export default function UserSubscribe() {
           for (let i = 0; i < items.length; i += 1) _total += items[i].amount;
           return _total;
         })(),
-        split_code: process.env.NEXT_PUBLIC_PAYSTACK_SPLIT_CODE,
+        plan: planCode,
       });
 
       setPaymentRef(reference);
@@ -122,6 +125,7 @@ export default function UserSubscribe() {
           // cb={(ref) => onSubmit(ref)}
           items={items}
           reference={paymentRef}
+          plan={planCode}
         />
       )}
     </>

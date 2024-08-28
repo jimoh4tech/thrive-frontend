@@ -96,24 +96,24 @@ export default function BusinessUpdateForm({ cb }: { cb?: VoidFunction }) {
     linkedinLink: Yup.string().optional(),
   });
 
-  const urlArr = busi.slug.split('/');
+  const urlArr = busi?.slug?.split('/');
 
   const defaultValues = {
-    name: busi.name || '',
-    email: busi.email || '',
-    phone: busi.phone || '',
-    whatsappNumber: busi.whatsappNumber || '',
-    country: busi.country || '',
-    address: busi.address || '',
-    state: busi.state || '',
-    industryId: busi.industryId || '',
-    bio: busi.bio || '',
-    slug: urlArr[urlArr.length - 1] || '',
-    designation: busi.designation || '',
-    facebookLink: busi.facebookLink || '',
-    twitterLink: busi.twitterLink || '',
-    instagramLink: busi.instagramLink || '',
-    linkedinLink: busi.linkedinLink || '',
+    name: busi?.name || '',
+    email: busi?.email || '',
+    phone: busi?.phone || '',
+    whatsappNumber: busi?.whatsappNumber || '',
+    country: busi?.country || '',
+    address: busi?.address || '',
+    state: busi?.state || '',
+    industryId: busi?.industryId || '',
+    bio: busi?.bio || '',
+    slug: urlArr ? urlArr[urlArr.length - 1] : '',
+    designation: busi?.designation || '',
+    facebookLink: busi?.facebookLink || '',
+    twitterLink: busi?.twitterLink || '',
+    instagramLink: busi?.instagramLink || '',
+    linkedinLink: busi?.linkedinLink || '',
   };
 
   const methods = useForm<FormValuesProps>({
@@ -129,7 +129,10 @@ export default function BusinessUpdateForm({ cb }: { cb?: VoidFunction }) {
 
   const onSubmit = async (data: FormValuesProps) => {
     try {
-      const { message } = await updater('userBusiness', data);
+      const { message } = await updater('userBusiness', {
+        ...data,
+        bio: data?.bio?.replace(/(\r\n|\n|\r)/g, '\\n').replace(/"/g, '\\"'),
+      });
       enqueueSnackbar(message);
       revalidateUser!();
       cb!();

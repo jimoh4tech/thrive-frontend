@@ -68,7 +68,7 @@ export default function UserNewEditForm({ isEdit = false, currentUser }: Props) 
       isVerified: currentUser?.isVerified || true,
       status: currentUser?.status,
       company: currentUser?.company || '',
-      role: currentUser?.role.name || '',
+      role: currentUser?.role?.name || '',
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [currentUser]

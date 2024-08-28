@@ -123,10 +123,7 @@ export default function BusinessProfile() {
     defaultValues,
   });
 
-  const [openPaymentPopup, setOpenPaymentPopup] = useState(false);
   const [submitting, setIsSubmitting] = useState(false);
-  const [paymentRef, setPaymentRef] = useState('');
-  const [successRef, setSuccessRef] = useState('');
   const [business, setBusiness] = useState<FormValuesProps | any>(null);
 
   const {
@@ -136,42 +133,33 @@ export default function BusinessProfile() {
     formState: { isSubmitting },
   } = methods;
 
-  const items = [
-    { name: 'Registration', amount: parseInt(process.env.NEXT_PUBLIC_REG_FEE || '0', 10) },
-    {
-      name: 'Subscription',
-      amount: parseInt(process.env.NEXT_PUBLIC_PREMIUM_FEE || '0', 10),
-      label: 'Premium',
-    },
-  ];
+  // const onInitializePayment = async (data: FormValuesProps) => {
+  //   try {
+  //     setIsSubmitting(true);
+  //     setBusiness(data);
+  //     const txnRef = localStorage.getItem(`${user.email}-successfull`) || '';
+  //     console.log({ successRef, txnRef });
+  //     if (successRef || txnRef) {
+  //       await onSubmit(data);
+  //       return;
+  //     }
 
-  const onInitializePayment = async (data: FormValuesProps) => {
-    try {
-      setIsSubmitting(true);
-      setBusiness(data);
-      const txnRef = localStorage.getItem(`${user.email}-successfull`) || '';
-      console.log({ successRef, txnRef });
-      if (successRef || txnRef) {
-        await onSubmit(data);
-        return;
-      }
+  //     const { reference } = await creator('userPremuimTxn', {
+  //       amount: (() => {
+  //         let _total = 0;
+  //         for (let i = 0; i < items.length; i += 1) _total += items[i].amount;
+  //         return _total;
+  //       })(),
+  //       split_code: process.env.NEXT_PUBLIC_PAYSTACK_SPLIT_CODE,
+  //     });
 
-      const { reference } = await creator('userPremuimTxn', {
-        amount: (() => {
-          let _total = 0;
-          for (let i = 0; i < items.length; i += 1) _total += items[i].amount;
-          return _total;
-        })(),
-        split_code: process.env.NEXT_PUBLIC_PAYSTACK_SPLIT_CODE,
-      });
+  //     setPaymentRef(reference);
 
-      setPaymentRef(reference);
-
-      setOpenPaymentPopup(true);
-    } catch (error) {
-      enqueueSnackbar(error.message || error, { variant: 'error' });
-    }
-  };
+  //     setOpenPaymentPopup(true);
+  //   } catch (error) {
+  //     enqueueSnackbar(error.message || error, { variant: 'error' });
+  //   }
+  // };
 
   const onSubmit = useCallback(
     async (data?: FormValuesProps) => {
@@ -180,7 +168,7 @@ export default function BusinessProfile() {
 
       try {
         // setOpenPaymentPopup(false);
-        const { logo, cac, govId, ...rest } = data || business;
+        const { logo, cac, govId, bio, ...rest } = data || business;
 
         if (cac) {
           const {
@@ -206,9 +194,12 @@ export default function BusinessProfile() {
           rest.govId = public_id;
         }
         // rest.reference = ref || successRef;
-        console.log({ rest });
+        console.log({ ...rest, bio: bio?.replace(/(\r\n|\n|\r)/g, '\\n').replace(/"/g, '\\"') });
 
-        const res = await createBusiness(rest);
+        const res = await createBusiness({
+          ...rest,
+          bio: bio?.replace(/(\r\n|\n|\r)/g, '\\n').replace(/"/g, '\\"'),
+        });
         localStorage.removeItem(`${user.email}-successfull`);
 
         enqueueSnackbar(res.data.message);

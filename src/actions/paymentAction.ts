@@ -1,7 +1,7 @@
 import axios from 'src/utils/axios';
 
-export const initiatePayment = ({ amount, split_code }: { amount: number; split_code?: string }) =>
-  axios.post('/users/transaction', { amount, split_code });
+export const initiatePayment = ({ amount, plan }: { amount: number; plan?: string }) =>
+  axios.post('/users/transaction', { amount, plan });
 
 export const verifyPayment = (
   url: string

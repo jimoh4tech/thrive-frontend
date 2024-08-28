@@ -18,6 +18,7 @@ export interface PaymentProps {
   data: PFormValuesProps;
   onSuccess: (ref: string) => void;
   reference?: string;
+  plan?: string;
 }
 
 export default function PaymentSummary({
@@ -26,6 +27,7 @@ export default function PaymentSummary({
   data,
   reference,
   onSuccess,
+  plan,
   ...other
 }: PaymentProps & BoxProps) {
   const total = (() => {
@@ -50,7 +52,7 @@ export default function PaymentSummary({
 
       <Stack spacing={1.5}>
         {items.map(({ name, label, amount }) => (
-          <>
+          <div key={name}>
             <Stack direction="row" justifyContent="space-between" key={name}>
               <Stack direction={{ sm: 'row' }} spacing={2}>
                 <Typography variant="body2" sx={{ color: 'text.secondary' }}>
@@ -68,7 +70,7 @@ export default function PaymentSummary({
             </Stack>
 
             <Divider sx={{ borderStyle: 'dashed' }} />
-          </>
+          </div>
         ))}
 
         <Stack direction="row" alignItems="center" justifyContent="space-between">
@@ -90,6 +92,7 @@ export default function PaymentSummary({
         onSuccess={onSuccess!}
         amount={total}
         email={data.email}
+        plan={plan}
       />
 
       <Stack alignItems="center" spacing={1}>
@@ -111,22 +114,25 @@ const PaystackPay = ({
   onClose,
   onSuccess,
   reference,
+  plan,
 }: {
   email: string;
   amount: number;
   onSuccess: (ref: string) => void;
   onClose: VoidFunction;
   reference?: string;
+  plan?: string;
 }) => {
   const config: PaystackProps = {
     reference: reference || new Date().getTime().toString(),
     publicKey: process.env.NEXT_PUBLIC_PAYSTACK_KEY!,
     email,
     amount: amount * 100,
+    plan,
   };
 
-  if (process.env.NEXT_PUBLIC_PAYSTACK_SPLIT_CODE)
-    config.split_code = process.env.NEXT_PUBLIC_PAYSTACK_SPLIT_CODE;
+  // if (process.env.NEXT_PUBLIC_PAYSTACK_SPLIT_CODE)
+  //   config.split_code = process.env.NEXT_PUBLIC_PAYSTACK_SPLIT_CODE;
 
   const { user } = useAuthContext();
   const initializePayment = usePaystackPayment(config);

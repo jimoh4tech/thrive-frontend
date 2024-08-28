@@ -18,12 +18,14 @@ const PaymentPopup = ({
   cb,
   items,
   reference,
+  plan,
 }: {
   open: boolean;
   onClose?: VoidFunction;
   items: PaymentProps['items'];
   reference: string;
   cb?: (ref: string, txnId?: number) => void;
+  plan?: string;
 }) => {
   const { user } = useAuthContext();
 
@@ -52,7 +54,13 @@ const PaymentPopup = ({
                 <PaymentAddress onInput={(name, value) => setData({ ...data, fullName: value })} />
               </Box> */}
 
-          <PaymentSummary reference={reference} data={data} onSuccess={cb!} items={items} />
+          <PaymentSummary
+            reference={reference}
+            data={data}
+            onSuccess={cb!}
+            items={items}
+            plan={plan}
+          />
         </Stack>
         <Button
           color="inherit"

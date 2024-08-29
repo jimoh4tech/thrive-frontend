@@ -11,6 +11,7 @@ import Pagination from 'src/components/pagination';
 import SearchBar from 'src/components/search-bar';
 import { FileGridView } from 'src/sections/@dashboard/file';
 import { IMedia } from 'src/@types/media';
+import { deleteBusinessMedia } from 'src/actions/admin/usersAction';
 import { PATH_DASHBOARD } from '../../routes/paths';
 // utils
 // layouts
@@ -45,7 +46,17 @@ export default function FileManagerPage() {
   const handleClearAll = () => {
     setQuery({});
   };
-
+  const handleDelete = async (id: number) => {
+    try {
+      setFetching(true);
+      const res = await deleteBusinessMedia(id);
+      await getMedia();
+      enqueueSnackbar(res.data.message);
+    } catch (err) {
+      enqueueSnackbar(err.message || err, { color: 'error.main' });
+    }
+    setFetching(false);
+  };
   const { enqueueSnackbar } = useSnackbar();
 
   const getMedia = useCallback(async () => {
@@ -97,7 +108,7 @@ export default function FileManagerPage() {
           {/* <FileChangeViewButton value={view} onChange={handleChangeView} /> */}
         </Stack>
 
-        <FileGridView data={media.records} dataFiltered={media.records} />
+        <FileGridView onDelete={handleDelete} dataFiltered={media?.records} />
 
         <Pagination
           totalPages={media.totalPages}

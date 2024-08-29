@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback } from 'react';
 import * as Yup from 'yup';
 // next
 // form
@@ -9,7 +9,7 @@ import { LoadingButton } from '@mui/lab';
 import { Card, Grid, Stack, Typography } from '@mui/material';
 // routes
 import { IHealth } from 'src/@types/health';
-import { creator, loader } from 'src/actions';
+import { creator } from 'src/actions';
 import { uploadSingle } from 'src/utils/cloudinary';
 // @types
 // components

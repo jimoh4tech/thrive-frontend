@@ -1,6 +1,5 @@
 import { Divider, Pagination as Pag } from '@mui/material';
-import { OverridableComponent } from '@mui/material/OverridableComponent';
-import { Stack, StackTypeMap, SxProps, Theme } from '@mui/system';
+import { Stack, SxProps, Theme } from '@mui/system';
 import React from 'react';
 import ReactLoading from 'react-loading';
 

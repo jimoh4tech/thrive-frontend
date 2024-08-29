@@ -13,7 +13,7 @@ type Props = {
 };
 
 export default function DirectoryTableRow({ row }: Props) {
-  const { name, logo, email, address, slug, industry, id } = row;
+  const { name, logo, email, address, slug, industry } = row;
 
   return (
     <TableRow

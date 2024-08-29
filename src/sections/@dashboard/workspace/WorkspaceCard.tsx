@@ -7,7 +7,6 @@ import { Box, Button, Card, Rating, Stack, Typography } from '@mui/material';
 // @types
 // components
 import { IWorkspace } from 'src/@types/workspace';
-import Iconify from '../../../components/iconify';
 import Image from '../../../components/image';
 
 // ----------------------------------------------------------------------
@@ -21,7 +20,7 @@ export default function WorkspaceCard({ workspace }: Props) {
     images: { header: cover },
     title: name,
     id,
-    avg_rating,
+    // avg_rating,
     booking_duration,
     rating,
   } = workspace;

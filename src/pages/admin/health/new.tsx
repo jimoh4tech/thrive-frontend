@@ -3,7 +3,6 @@ import Head from 'next/head';
 // @mui
 import { Container } from '@mui/material';
 // routes
-import NewTemplateForm from 'src/sections/@admin/template/NewTemplateForm';
 import NewHealthForm from 'src/sections/@admin/health/NewHealthForm';
 import { useSnackbar } from 'notistack';
 import { useCallback, useEffect, useState } from 'react';

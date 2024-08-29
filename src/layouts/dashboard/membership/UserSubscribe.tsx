@@ -15,6 +15,7 @@ import PaymentPopup from './PaymentPopup';
 export default function UserSubscribe() {
   const [paymentRef, setPaymentRef] = useState('');
   const [openPaymentPopup, setOpenPaymentPopup] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [submitting, setIsSubmitting] = useState(false);
   const [plan, setPlan] = useState<'month' | 'year'>('month');
 

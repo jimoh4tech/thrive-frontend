@@ -60,6 +60,7 @@ export default function ThriveAgencies() {
               const _a = a.title.toUpperCase();
               const _b = b.title.toUpperCase();
               // @ts-ignore
+              // eslint-disable-next-line no-nested-ternary
               return _a < _b ? -1 : _a > _b ? 1 : 0;
             })
             .map((_, i) => (

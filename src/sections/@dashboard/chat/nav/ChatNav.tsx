@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 // next
-import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 // @mui
 import { useTheme, styled } from '@mui/material/styles';

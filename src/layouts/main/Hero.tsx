@@ -4,7 +4,7 @@ import { styled } from '@mui/material/styles';
 // components
 import { bgGeneral, bgImage } from 'src/assets/images';
 import { useRouter } from 'next/router';
-import { MotionContainer, TextAnimate, varFade } from '../../components/animate';
+import { MotionContainer } from '../../components/animate';
 
 // ----------------------------------------------------------------------
 

@@ -43,7 +43,7 @@ export default function FileDetailsDrawer({
   const {
     name,
     metadata: { bytes: size },
-    mediaUrl: url,
+    // mediaUrl: url,
     format: type,
     description,
     category,

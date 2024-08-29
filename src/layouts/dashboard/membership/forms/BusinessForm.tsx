@@ -123,7 +123,7 @@ export default function BusinessProfile() {
   });
 
   const [submitting, setIsSubmitting] = useState(false);
-  const [business, setBusiness] = useState<FormValuesProps | any>(null);
+  const [business] = useState<FormValuesProps | any>(null);
 
   const {
     setValue,

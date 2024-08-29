@@ -15,23 +15,7 @@ import {
 // routes
 import { m } from 'framer-motion';
 import moment from 'moment';
-import {
-  capstone,
-  dofoll,
-  ehub,
-  giniushub,
-  gopa,
-  hbf,
-  kalros,
-  kb,
-  lapo,
-  leverage,
-  sabi,
-  seyp,
-  valucon,
-  viisaus,
-  weboh,
-} from 'src/assets/images';
+import { ehub } from 'src/assets/images';
 import { varFade } from 'src/components/animate';
 import { LogoFull } from 'src/components/logo/Logo';
 // import Image from 'src/components/image/Image';

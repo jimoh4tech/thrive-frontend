@@ -83,7 +83,6 @@ export function PostContent({ title, comment, like, createdAt, index }: PostCont
   const isDesktop = useResponsive('up', 'md');
 
   // const linkTo = 'PATH_DASHBOARD.blog.view(paramCase(title))';
-  const linkTo = '#';
 
   const latestPostLarge = index === 0;
 

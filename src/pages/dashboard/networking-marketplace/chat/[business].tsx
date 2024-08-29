@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 // next
 import { useRouter } from 'next/router';
 // @mui
@@ -76,8 +76,6 @@ export default function Chat({
   const { user } = useAuthContext();
 
   const { themeStretch } = useSettingsContext();
-
-  const [messages, setMessages] = useState([]);
 
   const dispatch = useDispatch();
 

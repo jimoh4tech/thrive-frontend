@@ -1,10 +1,9 @@
 // @mui
-import { Call, ChatBubble, ViewTimeline, Visibility } from '@mui/icons-material';
-import { Avatar, Box, Button, Card, IconButton, Stack, Typography } from '@mui/material';
+import { Call, Visibility } from '@mui/icons-material';
+import { Avatar, Box, Button, Card, Stack, Typography } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
 import Link from 'next/link';
 import { IUserBusiness } from 'src/@types/business';
-import { useAuthContext } from 'src/auth/useAuthContext';
 import Image from 'src/components/image/Image';
 import SvgColor from 'src/components/svg-color/SvgColor';
 // utils
@@ -31,8 +30,6 @@ type Props = {
 };
 
 export default function BusinesCard({ business }: Props) {
-  const { user } = useAuthContext();
-
   const { name, cover, industry, logo, slug, phone } = business;
 
   return (

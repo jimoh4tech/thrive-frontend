@@ -1,6 +1,5 @@
 // @mui
 import { Box, Button, Typography } from '@mui/material';
-import { styled } from '@mui/material/styles';
 // @types
 import { Container, Stack, useTheme } from '@mui/system';
 import { useSnackbar } from 'notistack';
@@ -53,7 +52,7 @@ export default function BusinessCover({
 
         try {
           const res = await uploadSingle(newFile, `${fileType}`);
-          console.log({res})
+          console.log({ res });
           await updater('userBusiness', { [fileType]: res.data.public_id });
         } catch (err) {
           console.error(err);

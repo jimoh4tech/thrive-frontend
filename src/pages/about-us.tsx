@@ -7,7 +7,6 @@ import { aboutBg, logoIconLg } from 'src/assets/images';
 import Iconify from 'src/components/iconify/Iconify';
 import { LogoFull } from 'src/components/logo/Logo';
 import { intro, lone, missVis, objectives } from 'src/constants/about';
-import OneTimeSignUp from 'src/sections/about/OneTimeSignUp';
 import MainLayout from '../layouts/main';
 // components
 

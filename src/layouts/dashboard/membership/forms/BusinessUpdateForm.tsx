@@ -131,7 +131,7 @@ export default function BusinessUpdateForm({ cb }: { cb?: VoidFunction }) {
     try {
       const { message } = await updater('userBusiness', {
         ...data,
-        bio: data?.bio?.replace(/(\r\n|\n|\r)/g, '\\n').replace(/"/g, '\\"'),
+        // bio: data?.bio?.replace(/(\r\n|\n|\r)/g, '\\n').replace(/"/g, '\\"'),
       });
       enqueueSnackbar(message);
       revalidateUser!();

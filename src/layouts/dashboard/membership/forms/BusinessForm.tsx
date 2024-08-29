@@ -7,7 +7,7 @@ import { LoadingButton } from '@mui/lab';
 import { Box, Card, Grid, InputAdornment, Stack, Typography } from '@mui/material';
 // auth
 import { useCallback, useEffect, useState } from 'react';
-import { creator, loader } from 'src/actions';
+import { loader } from 'src/actions';
 import { createBusiness } from 'src/actions/businessActions';
 import Iconify from 'src/components/iconify/Iconify';
 import { uploadSingle } from 'src/utils/cloudinary';
@@ -19,7 +19,6 @@ import { countries } from '../../../../assets/data';
 import FormProvider, { RHFSelect, RHFTextField, RHFUpload } from '../../../../components/hook-form';
 import { useSnackbar } from '../../../../components/snackbar';
 import { CustomFile } from '../../../../components/upload';
-import PaymentPopup from '../PaymentPopup';
 
 // ----------------------------------------------------------------------
 
@@ -168,7 +167,7 @@ export default function BusinessProfile() {
 
       try {
         // setOpenPaymentPopup(false);
-        const { logo, cac, govId, bio, ...rest } = data || business;
+        const { logo, cac, govId, ...rest } = data || business;
 
         if (cac) {
           const {
@@ -194,12 +193,8 @@ export default function BusinessProfile() {
           rest.govId = public_id;
         }
         // rest.reference = ref || successRef;
-        console.log({ ...rest, bio: bio?.replace(/(\r\n|\n|\r)/g, '\\n').replace(/"/g, '\\"') });
 
-        const res = await createBusiness({
-          ...rest,
-          bio: bio?.replace(/(\r\n|\n|\r)/g, '\\n').replace(/"/g, '\\"'),
-        });
+        const res = await createBusiness(rest);
         localStorage.removeItem(`${user.email}-successfull`);
 
         enqueueSnackbar(res.data.message);

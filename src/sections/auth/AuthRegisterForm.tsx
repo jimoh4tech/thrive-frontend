@@ -77,7 +77,6 @@ export default function AuthRegisterForm() {
   } = methods;
 
   const onSubmit = async (data: FormValuesProps) => {
-    console.log({ data });
     setUserData(data);
 
     try {
@@ -157,7 +156,7 @@ export default function AuthRegisterForm() {
 
           <RHFSelect native name="ngoId" label="Partner Organization">
             <option value="" />
-            {ngos.map(({ id, name }) => (
+            {ngos?.map(({ id, name }) => (
               <option key={id} value={id}>
                 {name}
               </option>

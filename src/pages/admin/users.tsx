@@ -84,7 +84,6 @@ export default function UserListPage() {
     if (newValue !== 'all') setQuery({ ...query, filterBy: 'status', filter: newValue });
     else setQuery({});
     setFilterStatus(newValue);
-    console.log({ newValue });
   };
 
   const handleResetFilter = () => {
@@ -136,7 +135,6 @@ export default function UserListPage() {
     try {
       setFetching(true);
       const data = await loader('users', { size: 20, ...query });
-      // const processed = typeof data === 'string' ? JSON.parse(data) : data;
       console.log({ data, ...query });
       setUsers(data);
     } catch (error) {

@@ -26,13 +26,12 @@ export default function UserSubscribe() {
 
   const { themeStretch } = useSettingsContext();
 
-  const regAmount = parseInt(process.env.NEXT_PUBLIC_REG_FEE || '0', 10);
   const monthAmount = parseInt(process.env.NEXT_PUBLIC_PREMIUM_FEE || '0', 10);
   const yearAmount = parseInt(process.env.NEXT_PUBLIC_PREMIUM_YEAR_FEE || '0', 10);
   const planCode =
     plan === 'month'
       ? process.env.NEXT_PUBLIC_PAYSTACK_MONTHLY_PLAN_CODE
-      : process.env.NEXT_PUBLIC_PAYSTACK_MONTHLY_PLAN_CODE;
+      : process.env.NEXT_PUBLIC_PAYSTACK_YEARLY_PLAN_CODE;
 
   const items = [
     {
@@ -98,9 +97,12 @@ export default function UserSubscribe() {
                 // startIcon={<Iconify icon="fa:send-o" />}
                 variant="outlined"
                 // href={PATH_AUTH.register}
-                onClick={onInitializePayment}
+                onClick={() => {
+                  setPlan('month');
+                  onInitializePayment();
+                }}
               >
-                {`${fCurrency(regAmount + monthAmount)}/Month`}
+                {`${fCurrency(monthAmount)}/Month`}
               </Button>
               <Button
                 // LinkComponent={Link}
@@ -112,7 +114,7 @@ export default function UserSubscribe() {
                   onInitializePayment();
                 }}
               >
-                {`${fCurrency(regAmount + yearAmount)}/Year`}
+                {`${fCurrency(yearAmount)}/Year`}
               </Button>
             </Stack>
           </Grid>
@@ -126,6 +128,7 @@ export default function UserSubscribe() {
           items={items}
           reference={paymentRef}
           plan={planCode}
+          closeModal={setOpenPaymentPopup}
         />
       )}
     </>

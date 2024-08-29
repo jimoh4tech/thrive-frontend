@@ -1,7 +1,7 @@
 // next
 import NextLink from 'next/link';
 // @mui
-import { Link, Stack, Typography, useTheme } from '@mui/material';
+import { Link, Stack, Typography } from '@mui/material';
 // layouts
 import LoginLayout from '../../layouts/login';
 // routes

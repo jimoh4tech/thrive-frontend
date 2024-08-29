@@ -9,7 +9,7 @@ const Paystack = () => {
   } = useRouter();
 
   const verifyTxn = useCallback(async () => {
-    console.log(reference);
+    // console.log(reference);
     if (!reference) {
       console.log('no ref');
       return;

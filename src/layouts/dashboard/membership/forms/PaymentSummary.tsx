@@ -7,7 +7,6 @@ import { PaystackProps } from 'react-paystack/dist/types';
 import Iconify from 'src/components/iconify/Iconify';
 import Label from 'src/components/label/Label';
 import { fCurrency } from 'src/utils/formatNumber';
-import { fDate } from 'src/utils/formatTime';
 import { useAuthContext } from 'src/auth/useAuthContext';
 import { PFormValuesProps } from './PaymentAddress';
 // components
@@ -19,6 +18,8 @@ export interface PaymentProps {
   onSuccess: (ref: string) => void;
   reference?: string;
   plan?: string;
+  closeModal: (val: boolean) => void;
+  onClose: VoidFunction;
 }
 
 export default function PaymentSummary({
@@ -27,6 +28,8 @@ export default function PaymentSummary({
   data,
   reference,
   onSuccess,
+  onClose,
+  closeModal,
   plan,
   ...other
 }: PaymentProps & BoxProps) {
@@ -51,7 +54,7 @@ export default function PaymentSummary({
       </Typography>
 
       <Stack spacing={1.5}>
-        {items.map(({ name, label, amount }) => (
+        {items?.map(({ name, label, amount }) => (
           <div key={name}>
             <Stack direction="row" justifyContent="space-between" key={name}>
               <Stack direction={{ sm: 'row' }} spacing={2}>
@@ -82,17 +85,17 @@ export default function PaymentSummary({
         <Divider sx={{ borderStyle: 'dashed' }} />
       </Stack>
 
-      <Typography component="div" variant="caption" sx={{ color: 'text.secondary', mt: 1 }}>
+      {/* <Typography component="div" variant="caption" sx={{ color: 'text.secondary', mt: 1 }}>
         * Subscription valid till 31 Dec. {fDate(null, 'year')}
-      </Typography>
+      </Typography> */}
 
       <PaystackPay
         reference={reference}
-        onClose={() => {}}
         onSuccess={onSuccess!}
         amount={total}
         email={data.email}
         plan={plan}
+        closeModal={closeModal}
       />
 
       <Stack alignItems="center" spacing={1}>
@@ -111,7 +114,7 @@ export default function PaymentSummary({
 const PaystackPay = ({
   email,
   amount,
-  onClose,
+  closeModal,
   onSuccess,
   reference,
   plan,
@@ -119,7 +122,7 @@ const PaystackPay = ({
   email: string;
   amount: number;
   onSuccess: (ref: string) => void;
-  onClose: VoidFunction;
+  closeModal: (val: boolean) => void;
   reference?: string;
   plan?: string;
 }) => {
@@ -138,13 +141,13 @@ const PaystackPay = ({
   const initializePayment = usePaystackPayment(config);
   const [isSubmitting, setIsSubmitting] = useState(false);
   function handleSuccess(): void {
+    closeModal(false);
     setIsSubmitting(false);
     localStorage.setItem(`${user.email}-successfull`, config.reference!);
     onSuccess(config.reference!);
   }
   function handleClose(): void {
     setIsSubmitting(false);
-    onClose();
   }
 
   const onInit = () => {

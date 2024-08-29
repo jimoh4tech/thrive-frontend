@@ -19,12 +19,14 @@ const PaymentPopup = ({
   items,
   reference,
   plan,
+  closeModal,
 }: {
   open: boolean;
-  onClose?: VoidFunction;
+  onClose: VoidFunction;
   items: PaymentProps['items'];
   reference: string;
   cb?: (ref: string, txnId?: number) => void;
+  closeModal: (val: boolean) => void;
   plan?: string;
 }) => {
   const { user } = useAuthContext();
@@ -60,6 +62,8 @@ const PaymentPopup = ({
             onSuccess={cb!}
             items={items}
             plan={plan}
+            onClose={onClose}
+            closeModal={closeModal}
           />
         </Stack>
         <Button

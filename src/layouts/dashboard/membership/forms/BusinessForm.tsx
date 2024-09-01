@@ -269,17 +269,17 @@ export default function BusinessProfile() {
                   sm: 'repeat(2, 1fr)',
                 }}
               >
-                <RHFTextField name="name" label="Business Name" />
+                <RHFTextField name="name" label="Business Name" required />
 
-                <RHFTextField name="email" label="Business Email" />
+                <RHFTextField name="email" label="Business Email" required />
 
-                <RHFTextField name="phone" label="Phone Number" />
+                <RHFTextField name="phone" label="Phone Number" required />
 
                 <RHFTextField name="whatsappNumber" label="WhatsApp Number" />
 
-                <RHFTextField name="address" label="Business Contact Address" />
+                <RHFTextField name="address" label="Business Contact Address" required />
 
-                <RHFSelect native name="country" label="Country" placeholder="Country">
+                <RHFSelect native name="country" label="Country" placeholder="Country" required>
                   <option value="" />
                   {countries.map((country) => (
                     <option key={country.code} value={country.label}>
@@ -288,9 +288,15 @@ export default function BusinessProfile() {
                   ))}
                 </RHFSelect>
 
-                <RHFTextField name="state" label="State/Region" />
+                <RHFTextField name="state" label="State/Region" required />
 
-                <RHFSelect native name="industryId" label="Industry" placeholder="Industry">
+                <RHFSelect
+                  native
+                  name="industryId"
+                  label="Industry"
+                  placeholder="Industry"
+                  required
+                >
                   <option value="" />
                   {industries.map((_: { name: string; id: number }) => (
                     <option key={_.id} value={_.id}>
@@ -313,7 +319,7 @@ export default function BusinessProfile() {
               </Box>
 
               <Stack spacing={2} alignItems="flex-end" sx={{ mt: 3 }}>
-                <RHFTextField name="bio" multiline rows={4} label="Business Description" />
+                <RHFTextField name="bio" multiline rows={4} label="Business Description" required />
                 <Box>
                   <Typography variant="caption" sx={{ color: 'text.secondary' }}>
                     Upload Business registration Document

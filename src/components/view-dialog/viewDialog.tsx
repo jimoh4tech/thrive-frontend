@@ -19,6 +19,7 @@ import { ViewDialogProps } from './types';
 import FormProvider, { RHFTextField } from '../hook-form';
 import Iconify from '../iconify';
 import Image from '../image';
+import Loading from '../loading';
 
 const ViewDialog = ({ open, id, title, onClose }: ViewDialogProps) => {
   const [userInfo, setUserInfo] = useState<IUserAccountGeneral | null>(null);
@@ -119,8 +120,16 @@ const ViewDialog = ({ open, id, title, onClose }: ViewDialogProps) => {
           {title}
         </Typography>
         {!userInfo ? (
-          <Stack alignItems="center" justifyContent="center">
-            <Typography>Loading...</Typography>
+          <Stack
+            sx={{
+              height: 300,
+              width: 400,
+              justifyContent: 'center',
+              alignItems: 'center',
+              my: 6,
+            }}
+          >
+            <Loading open={!userInfo} />
           </Stack>
         ) : (
           <FormProvider methods={methods}>

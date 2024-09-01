@@ -1,19 +1,19 @@
-import { useCallback, useEffect, useState } from 'react';
+// import { useCallback, useEffect, useState } from 'react';
 // next
 import Head from 'next/head';
 // @mui
-import { Container, Stack } from '@mui/material';
+import { Container, Stack, Typography } from '@mui/material';
 // routes
-import { useSnackbar } from 'notistack';
-import { customLoader } from 'src/actions';
-import SearchBar from 'src/components/search-bar';
+// import { useSnackbar } from 'notistack';
+// import { customLoader } from 'src/actions';
+// import SearchBar from 'src/components/search-bar';
 // routes
-import { Box } from '@mui/system';
-import { IWorkspace, IWorkspaceQuery, IWorkspaceResData } from 'src/@types/workspace';
-import { SkeletonProductItem } from 'src/components/skeleton';
+// import { Box } from '@mui/system';
+// import { IWorkspace, IWorkspaceQuery, IWorkspaceResData } from 'src/@types/workspace';
+// import { SkeletonProductItem } from 'src/components/skeleton';
 import DashboardLayout from 'src/layouts/dashboard/DashboardLayout';
-import WorkspaceCard from 'src/sections/@dashboard/workspace/WorkspaceCard';
-import Pagination from 'src/components/pagination';
+// import WorkspaceCard from 'src/sections/@dashboard/workspace/WorkspaceCard';
+// import Pagination from 'src/components/pagination';
 import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
 import { useSettingsContext } from '../../components/settings';
 import { PATH_DASHBOARD } from '../../routes/paths';
@@ -30,61 +30,61 @@ FileManagerPage.getLayout = (page: React.ReactElement) => <DashboardLayout>{page
 export default function FileManagerPage() {
   const { themeStretch } = useSettingsContext();
 
-  const [workspaces, setWorkspaces] = useState<IWorkspaceResData<IWorkspace>>({
-    count: 0,
-    results: [],
-  });
+  // const [workspaces, setWorkspaces] = useState<IWorkspaceResData<IWorkspace>>({
+  //   count: 0,
+  //   results: [],
+  // });
 
-  const [categories, setCategories] = useState([]);
-  const [fetching, setFetching] = useState(false);
-  const [query, setQuery] = useState<IWorkspaceQuery>({});
+  // const [categories, setCategories] = useState([]);
+  // const [fetching, setFetching] = useState(false);
+  // const [query, setQuery] = useState<IWorkspaceQuery>({});
 
-  const handleQuery = (_query: IWorkspaceQuery) => setQuery({ ...query, ..._query });
+  // const handleQuery = (_query: IWorkspaceQuery) => setQuery({ ...query, ..._query });
 
-  const handleClearAll = () => {
-    setQuery({});
-  };
+  // const handleClearAll = () => {
+  //   setQuery({});
+  // };
 
-  const { enqueueSnackbar } = useSnackbar();
+  // const { enqueueSnackbar } = useSnackbar();
 
-  const getBusinesses = useCallback(async () => {
-    try {
-      setFetching(true);
-      const data = await customLoader('workspace', {
-        sortBy: 'createdAt',
-        order: 'DESC',
-        ...query,
-      });
+  // const getBusinesses = useCallback(async () => {
+  //   try {
+  //     setFetching(true);
+  //     const data = await customLoader('workspace', {
+  //       sortBy: 'createdAt',
+  //       order: 'DESC',
+  //       ...query,
+  //     });
 
-      setWorkspaces(data);
+  //     setWorkspaces(data);
 
-      setFetching(false);
-    } catch (error) {
-      enqueueSnackbar(error.message || error, { variant: 'error' });
-    }
-  }, [enqueueSnackbar, query]);
+  //     setFetching(false);
+  //   } catch (error) {
+  //     enqueueSnackbar(error.message || error, { variant: 'error' });
+  //   }
+  // }, [enqueueSnackbar, query]);
 
-  const getCategories = useCallback(async () => {
-    try {
-      const _ = await customLoader('workSpaceCat');
+  // const getCategories = useCallback(async () => {
+  //   try {
+  //     const _ = await customLoader('workSpaceCat');
 
-      setCategories(_);
-    } catch (error) {
-      enqueueSnackbar(error.message || 'Could not fetch event categories', { variant: 'error' });
-    }
-  }, [enqueueSnackbar]);
+  //     setCategories(_);
+  //   } catch (error) {
+  //     enqueueSnackbar(error.message || 'Could not fetch event categories', { variant: 'error' });
+  //   }
+  // }, [enqueueSnackbar]);
 
-  useEffect(() => {
-    getCategories();
+  // useEffect(() => {
+  //   getCategories();
 
-    return () => {};
-  }, [getCategories]);
+  //   return () => {};
+  // }, [getCategories]);
 
-  useEffect(() => {
-    getBusinesses();
+  // useEffect(() => {
+  //   getBusinesses();
 
-    return () => {};
-  }, [getBusinesses, query]);
+  //   return () => {};
+  // }, [getBusinesses, query]);
 
   return (
     <>
@@ -99,6 +99,17 @@ export default function FileManagerPage() {
         />
 
         <Stack
+          sx={{
+            height: 400,
+            justifyContent: 'center',
+            alignItems: 'center',
+            my: 6,
+          }}
+        >
+          <Typography variant="h2"> Coming soon!</Typography>
+        </Stack>
+
+        {/* <Stack
           spacing={2.5}
           direction={{ xs: 'column', md: 'row' }}
           alignItems={{ xs: 'flex-end', md: 'center' }}
@@ -142,7 +153,7 @@ export default function FileManagerPage() {
           onChange={(num) => handleQuery({ page: num })}
           currentPage={query.page || 1}
           loading={fetching}
-        />
+        /> */}
       </Container>
     </>
   );

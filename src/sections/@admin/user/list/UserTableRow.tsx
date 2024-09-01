@@ -41,7 +41,7 @@ export default function UserTableRow({
   onDecline,
   onSuspend,
 }: Props) {
-  const { fullName, avatarUrl, email, phone, createdAt, status, ngo, isApproved } = row;
+  const { fullName, avatarUrl, email, phone, createdAt, status, ngo, isApproved, role } = row;
 
   const [openView, setOpenView] = useState(false);
   const [openConfirm, setOpenConfirm] = useState(false);
@@ -123,11 +123,19 @@ export default function UserTableRow({
           <Iconify icon="mdi:approve" />
           Approve
         </MenuItem>
-        <MenuItem onClick={() => handlePopoverClick(setOpenDecline)} sx={{ color: 'error.main' }}>
+        <MenuItem
+          onClick={() => handlePopoverClick(setOpenDecline)}
+          sx={{ color: 'error.main' }}
+          disabled={role.id === 3}
+        >
           <Iconify icon="mdi:cancel" />
           Decline
         </MenuItem>
-        <MenuItem onClick={() => handlePopoverClick(setOpenSuspend)} sx={{ color: 'warning.main' }}>
+        <MenuItem
+          onClick={() => handlePopoverClick(setOpenSuspend)}
+          sx={{ color: 'warning.main' }}
+          disabled={role.id === 3}
+        >
           <Iconify icon="mdi:warning" />
           Suspend
         </MenuItem>

@@ -1,7 +1,9 @@
 // @mui
-import { AppBar, IconButton, Stack, Toolbar } from '@mui/material';
+import { AppBar, IconButton, Stack, Toolbar, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 // utils
+import { useAuthContext } from 'src/auth/useAuthContext';
+import moment from 'moment';
 import { bgBlur } from '../../../utils/cssStyles';
 // hooks
 import useOffSetTop from '../../../hooks/useOffSetTop';
@@ -23,6 +25,10 @@ type Props = {
 
 export default function Header({ onOpenNav }: Props) {
   const theme = useTheme();
+
+  const { user } = useAuthContext();
+  const hasTrial = moment().diff(user.createdAt, 'days');
+  console.log({ user, hasTrial });
 
   const { themeLayout } = useSettingsContext();
 
@@ -50,12 +56,14 @@ export default function Header({ onOpenNav }: Props) {
         flexGrow={1}
         direction="row"
         alignItems="center"
-        justifyContent="flex-end"
+        justifyContent="space-between"
         spacing={{ xs: 0.5, sm: 1.5 }}
       >
         {/* <LanguagePopover /> */}
 
-        {/* <ContactsPopover /> */}
+        <Typography variant="h6" color="primary.lighter">
+          {hasTrial < 30 && `Trial expires in ${30 - hasTrial} days`}
+        </Typography>
 
         <AccountPopover />
       </Stack>

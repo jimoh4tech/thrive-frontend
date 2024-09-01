@@ -129,12 +129,12 @@ export default function AccessEvent() {
               {
                 name: 'organizerId',
                 options: organizers.map((_: any) => ({ label: _.name, value: _.id })),
-                label: "Organizers'",
+                label: 'Organizers',
               },
               {
                 name: 'categoryId',
                 options: categories.map((_: any) => ({ label: _.name, value: _.id })),
-                label: "Categories'",
+                label: 'Categories',
               },
             ]}
             onChangeOption={(name, value) => setQuery({ ...query, filterBy: name, filter: value })}

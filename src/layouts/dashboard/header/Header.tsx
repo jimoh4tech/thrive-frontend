@@ -61,7 +61,7 @@ export default function Header({ onOpenNav }: Props) {
       >
         {/* <LanguagePopover /> */}
 
-        <Typography variant="h6" color="primary.lighter">
+        <Typography variant="h6" color="primary">
           {hasTrial < 30 && `Trial expires in ${30 - hasTrial} days`}
         </Typography>
 

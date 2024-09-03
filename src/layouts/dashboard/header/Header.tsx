@@ -28,7 +28,6 @@ export default function Header({ onOpenNav }: Props) {
 
   const { user } = useAuthContext();
   const hasTrial = moment().diff(user.createdAt, 'days');
-  console.log({ user, hasTrial });
 
   const { themeLayout } = useSettingsContext();
 

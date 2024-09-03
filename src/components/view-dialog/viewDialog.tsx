@@ -99,7 +99,6 @@ const ViewDialog = ({ open, id, title, onClose }: ViewDialogProps) => {
   const getUserInfo = useCallback(async () => {
     try {
       const _userInfo = await viewUser(id);
-      console.log({ _userInfo });
 
       setUserInfo(_userInfo.data);
     } catch (error) {

@@ -134,9 +134,6 @@ const PaystackPay = ({
     plan,
   };
 
-  // if (process.env.NEXT_PUBLIC_PAYSTACK_SPLIT_CODE)
-  //   config.split_code = process.env.NEXT_PUBLIC_PAYSTACK_SPLIT_CODE;
-
   const { user, revalidateUser } = useAuthContext();
   const initializePayment = usePaystackPayment(config);
   const [isSubmitting, setIsSubmitting] = useState(false);

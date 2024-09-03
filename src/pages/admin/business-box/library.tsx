@@ -117,7 +117,6 @@ export default function BusinessBox() {
         order: 'DESC',
         ...query,
       });
-      console.log({ data });
       setMedia(data);
 
       setFetching(false);

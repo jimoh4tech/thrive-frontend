@@ -137,7 +137,7 @@ const PaystackPay = ({
   // if (process.env.NEXT_PUBLIC_PAYSTACK_SPLIT_CODE)
   //   config.split_code = process.env.NEXT_PUBLIC_PAYSTACK_SPLIT_CODE;
 
-  const { user } = useAuthContext();
+  const { user, revalidateUser } = useAuthContext();
   const initializePayment = usePaystackPayment(config);
   const [isSubmitting, setIsSubmitting] = useState(false);
   function handleSuccess(): void {
@@ -145,6 +145,7 @@ const PaystackPay = ({
     setIsSubmitting(false);
     localStorage.setItem(`${user.email}-successfull`, config.reference!);
     onSuccess(config.reference!);
+    revalidateUser!();
   }
   function handleClose(): void {
     setIsSubmitting(false);

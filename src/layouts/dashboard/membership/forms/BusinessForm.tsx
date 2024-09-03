@@ -89,8 +89,8 @@ export default function BusinessProfile() {
     bio: Yup.string()
       .min(30, 'Business description must be above 30 characters')
       .max(1000, 'Business description must be less than 300 characters'),
-    cac: Yup.mixed().optional(),
-    govId: Yup.mixed().optional(),
+    cac: Yup.mixed().required('CAC document is required'),
+    govId: Yup.mixed().required('Nation ID is required'),
     logo: Yup.mixed().optional(),
     facebookLink: Yup.string().optional(),
     twitterLink: Yup.string().optional(),
@@ -175,6 +175,22 @@ export default function BusinessProfile() {
           } = await uploadSingle(cac, 'cac');
 
           rest.cac = public_id;
+        } else {
+          enqueueSnackbar('Business Registration Document is required');
+          setIsSubmitting(false);
+          return;
+        }
+
+        if (govId) {
+          const {
+            data: { public_id },
+          } = await uploadSingle(govId, 'govId');
+
+          rest.govId = public_id;
+        } else {
+          enqueueSnackbar('Government Issued ID is required');
+          setIsSubmitting(false);
+          return;
         }
 
         if (logo) {
@@ -185,13 +201,6 @@ export default function BusinessProfile() {
           rest.logo = public_id;
         }
 
-        if (govId) {
-          const {
-            data: { public_id },
-          } = await uploadSingle(govId, 'govId');
-
-          rest.govId = public_id;
-        }
         // rest.reference = ref || successRef;
 
         const res = await createBusiness(rest);
@@ -322,13 +331,13 @@ export default function BusinessProfile() {
                 <RHFTextField name="bio" multiline rows={4} label="Business Description" required />
                 <Box>
                   <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-                    Upload Business registration Document
+                    Upload Business Registration Document
                   </Typography>
                   <RHFUpload
-                    name="logo"
+                    name="cac"
                     maxSize={10145728}
-                    onDrop={(_) => handleDrop(_, 'logo')}
-                    onDelete={() => setValue('logo', '', { shouldValidate: true })}
+                    onDrop={(_) => handleDrop(_, 'cac')}
+                    onDelete={() => setValue('cac', '', { shouldValidate: true })}
                   />
                 </Box>
                 <Box>
@@ -348,10 +357,10 @@ export default function BusinessProfile() {
                     Upload Business Logo (Optional)
                   </Typography>
                   <RHFUpload
-                    name="cac"
+                    name="logo"
                     maxSize={10145728}
-                    onDrop={(_) => handleDrop(_, 'cac')}
-                    onDelete={() => setValue('cac', '', { shouldValidate: true })}
+                    onDrop={(_) => handleDrop(_, 'logo')}
+                    onDelete={() => setValue('logo', '', { shouldValidate: true })}
                   />
                 </Box>
               </Stack>

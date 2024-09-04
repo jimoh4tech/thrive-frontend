@@ -103,13 +103,13 @@ export default function FileManagerPage() {
   return (
     <>
       <Head>
-        <title> Directory Listing | Thrive</title>
+        <title> Business Directory | Thrive</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>
         <CustomBreadcrumbs
-          heading="Directory Listing"
-          links={[{ name: 'Dashboard', href: PATH_DASHBOARD.root }, { name: 'Directory Listing' }]}
+          heading="Business Directory"
+          links={[{ name: 'Dashboard', href: PATH_DASHBOARD.root }, { name: 'Business Directory' }]}
         />
 
         <Stack

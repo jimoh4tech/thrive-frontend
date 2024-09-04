@@ -34,7 +34,7 @@ export default class MyDocument extends Document {
           {/* Meta */}
           <meta
             name="description"
-            content="A one-stop digital support center for growing businesses withThriveentrepreneurship development program certificate in Nigeria"
+            content="A one-stop digital support center for growing businesses in Nigeria"
           />
           <meta name="keywords" content="Jimoh4Tech,Thrive,msme,enterpricsehubs" />
           <meta name="author" content="Jimoh4Tech" />

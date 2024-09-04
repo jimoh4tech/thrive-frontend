@@ -19,7 +19,7 @@ const navConfig = [
   //   path: PATH_PAGE.thriveModules,
   // },
   {
-    title: 'Ecosystem',
+    title: 'THRIVE Space',
     path: PATH_PAGE.ecosystem,
     children: [
       {

@@ -37,13 +37,13 @@ export default function UserProfilePage() {
   return (
     <>
       <Head>
-        <title> Web Address | Thrive</title>
+        <title> Digital Address | Thrive</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>
         <CustomBreadcrumbs
-          heading="Web Address"
-          links={[{ name: 'Dashboard', href: PATH_DASHBOARD.root }, { name: 'Web Address' }]}
+          heading="Digital Address"
+          links={[{ name: 'Dashboard', href: PATH_DASHBOARD.root }, { name: 'Digital Address' }]}
           action={
             <Button variant="soft" startIcon={<Iconify icon="material-symbols:add" />}>
               Add New Page

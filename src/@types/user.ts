@@ -125,7 +125,10 @@ export type IUserAccountGeneral = {
   business: IUserBusiness;
   virtualOffice?: any;
   platinumSub: { id: number }[];
-  premuimSub: { id: number }[];
+  premuimSub: {
+    expiresAt: Date;
+    id: number;
+  }[];
   bio: string;
   updatedAt?: string;
 };

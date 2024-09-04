@@ -80,7 +80,7 @@ export const PATH_ADMIN = {
 
 export const PATH_DASHBOARD = {
   root: ROOTS_DASHBOARD,
-  webAddress: path(ROOTS_DASHBOARD, '/web-address'),
+  digitalAddress: path(ROOTS_DASHBOARD, '/digital-address'),
   directoryListing: path(ROOTS_DASHBOARD, '/directory-listing'),
   workplaceBooking: path(ROOTS_DASHBOARD, '/workplace-booking'),
   accessToFinance: path(ROOTS_DASHBOARD, '/access-finance'),

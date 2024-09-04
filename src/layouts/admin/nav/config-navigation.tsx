@@ -41,9 +41,9 @@ const navConfig = [
     items: [
       // { title: 'Overview', path: PATH_ADMIN.root, icon: ICONS.dashboard },
       { title: 'Users', path: PATH_ADMIN.users, icon: ICONS.user },
-      // Business Box
+      // Business Toolkits
       {
-        title: 'Business Box',
+        title: 'Business Toolkits',
         path: PATH_ADMIN.businessTemplate.root,
         icon: ICONS.file,
         children: [

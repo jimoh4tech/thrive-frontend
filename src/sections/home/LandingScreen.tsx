@@ -66,8 +66,8 @@ const LandingScreen = () => {
             </Typography>
           </Box>
           <Typography>
-            A one-stop digital support center for growing businesses withThriveentrepreneurship
-            development program certificate in Nigeria. One-time sign-up. Easy sign-ins.
+            A one-stop digital support center for growing businesses in Nigeria. One-time sign-up.
+            Easy sign-ins.
           </Typography>
           <Stack direction="row" spacing={2}>
             <Button

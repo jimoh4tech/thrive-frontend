@@ -40,8 +40,8 @@ const navConfig = [
     subheader: '',
     items: [
       {
-        title: 'Web Address',
-        path: PATH_DASHBOARD.webAddress,
+        title: 'Digital Address',
+        path: PATH_DASHBOARD.digitalAddress,
         icon: ICONS.external,
       },
       {
@@ -50,7 +50,7 @@ const navConfig = [
         icon: ICONS.banking,
       },
       {
-        title: 'Business Media Library',
+        title: 'Business Library',
         path: PATH_DASHBOARD.businessMediaLibrary,
         icon: ICONS.folder,
       },
@@ -60,12 +60,12 @@ const navConfig = [
       //   icon: ICONS.calendar,
       // },
       {
-        title: 'Business Box ',
+        title: 'Business Toolkits ',
         path: PATH_DASHBOARD.businessTemplateLibrary,
         icon: ICONS.file,
       },
       {
-        title: 'Networking and Marketplace',
+        title: 'Marketplace',
         path: PATH_DASHBOARD.networkingMarketplace.businesses,
         icon: ICONS.ecommerce,
         children: [

@@ -9,9 +9,7 @@ export const otsu = {
   title2: 'Easy Sign-ins.',
   desc: `<p>Your own searchable mini website, virtual office, a marketplace for your business, thousands of ready-to-use templates, and more. A world of business tools.</p>
 
-  <p>All yours for a small monthly subscription - a tiny fraction of the actual cost.</p>
-  
-  <p>Thanks to support from our Co-Sponsors led by GIZ -  SEDIN / GOPA.</p>`,
+  <p>All yours for a small monthly subscription - a tiny fraction of the actual cost.</p>`,
 };
 
 export const missVis = {

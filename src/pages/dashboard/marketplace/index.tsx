@@ -84,7 +84,7 @@ export default function FileManagerPage() {
   return (
     <>
       <Head>
-        <title> Networking & Marketplace - Businesses | Thrive</title>
+        <title>Marketplace - Businesses | Thrive</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>
@@ -92,7 +92,7 @@ export default function FileManagerPage() {
           heading="Businesses"
           links={[
             { name: 'Dashboard', href: PATH_DASHBOARD.root },
-            { name: 'Networking & Marketplace' },
+            { name: 'Marketplace' },
             { name: 'Businesses' },
           ]}
         />

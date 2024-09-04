@@ -46,7 +46,7 @@ export default function BlogNewPostPage() {
   return (
     <>
       <Head>
-        <title> Health and Wellbeing | Thrive</title>
+        <title> Health and Wellness | Thrive</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
@@ -58,7 +58,7 @@ export default function BlogNewPostPage() {
               href: PATH_ADMIN.root,
             },
             {
-              name: 'Health and Wellbeing',
+              name: 'Health and Wellness',
               href: PATH_ADMIN.health.root,
             },
             {

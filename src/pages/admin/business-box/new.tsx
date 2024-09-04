@@ -46,7 +46,7 @@ export default function BlogNewPostPage() {
   return (
     <>
       <Head>
-        <title> Business Box | Thrive</title>
+        <title> Business Toolkits | Thrive</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
@@ -58,7 +58,7 @@ export default function BlogNewPostPage() {
               href: PATH_ADMIN.root,
             },
             {
-              name: 'Business Box',
+              name: 'Business Toolkits',
               href: PATH_ADMIN.businessMedia.library,
             },
             {

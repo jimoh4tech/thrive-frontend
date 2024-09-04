@@ -46,7 +46,7 @@ export default function BlogNewPostPage() {
   return (
     <>
       <Head>
-        <title> Business Media Library | Thrive</title>
+        <title> Business Library | Thrive</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
@@ -58,7 +58,7 @@ export default function BlogNewPostPage() {
               href: PATH_ADMIN.root,
             },
             {
-              name: 'Business Media Library',
+              name: 'Business Library',
               href: PATH_ADMIN.businessMedia.library,
             },
             {

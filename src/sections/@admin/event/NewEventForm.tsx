@@ -51,7 +51,7 @@ export default function NewEventForm({
     amount: Yup.string().optional(),
     discount: Yup.string().optional(),
     discountType: Yup.string().optional(),
-    url: Yup.string().required('Event web address is required'),
+    url: Yup.string().required('Event Digital address is required'),
     location: Yup.string().required('Event location is required'),
   });
 

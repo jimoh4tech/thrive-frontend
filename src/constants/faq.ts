@@ -10,7 +10,7 @@ We are looking to expand the economic contribution of growing businesses by prov
   },
   {
     titile: 'Are there any fees associated with registering as a user on your platform?',
-    ans: `Yes, there is a one-time registration fee of ₦2,500. 
+    ans: `Yes, there is a monthly and annual subscription fee of ₦2,000 and ₦19,200 respectively. 
 
 How can I prevent forgetting my passwords in the future? 
 It is necessary to always write down your password, and it must be kept in a safe place.
@@ -20,17 +20,23 @@ It is necessary to always write down your password, and it must be kept in a saf
     titile: 'What are the key features of the premium services?',
     ans: `The premium services consist of 11 services namely
     <ol>
-      <li> Web address</li>
+      <li> Digital address</li>
       <li> Virtual office </li>
-      <li> Business Box</li>
-      <li> Business Media Library </li>
-      <li> Networking and Marketplace</li>
-      <li> Health and Wellbeing</li>
+      <li> Business Toolkits</li>
+      <li> Business Library </li>
+      <li> Marketplace</li>
+      <li> Health and Wellness</li>
       <li> Workplace Booking</li>
-      <li> Directory Listing</li>
+      <li> Business Directory</li>
       <li> Collaboration Tools </li>
       <li> Access to Finance</li>
       <li> Access to Events</li>
+    </ol>
+    <h4>Coming Soon </h4>
+    <ol>
+      <li> Legal Aid</li>
+      <li> Business Registration </li>
+      <li> Bids & Deals</li>
     </ol>
 `,
   },
@@ -82,14 +88,8 @@ Click on the user account settings by the top right corner to update your user p
 `,
   },
   {
-    titile: 'Why do I have to wait 24 hours for Thrive to verify my data?',
-    ans: `As anThrivebeneficiary who has gone through theThrivemodules, it's mandatory for Thrive to carry out due diligence on the data provided and match it up with our database. 
-As soon as we carry out this verification process on the data provided, you will get an email notice after 24 hours that your account has been approved and you can now start using the platform. We strongly recommend that you keep a tab on your email for the notification.
-`,
-  },
-  {
     titile: 'How do I access the web application?',
-    ans: `To access the web application, open a web browser (such as Google Chrome, Mozilla Firefox, or Safari) and enter the URL (www.thrivebiz.ng).
+    ans: `To access the web application, open a web browser (such as Google Chrome, Mozilla Firefox, or Safari) and enter the URL (www.thrivebizng.com).
 `,
   },
   {

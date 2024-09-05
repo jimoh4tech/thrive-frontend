@@ -37,7 +37,7 @@ export default function PaymentSuccessful() {
         fullWidth
         size="large"
         component={NextLink}
-        href={PATH_DASHBOARD.webAddress}
+        href={PATH_DASHBOARD.digitalAddress}
         variant="contained"
         sx={{
           mx: 'auto',

@@ -21,7 +21,6 @@ export const getServerSideProps: GetServerSideProps<{
 
   try {
     const { data } = await axiosInstance.get(`/web-address/${slug}`);
-    console.log(data, 'I wass here');
     res.business = data;
   } catch (error) {
     console.log(error);
@@ -39,6 +38,7 @@ export default function Page({
   business,
   errorCode,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  console.log({ business });
   if (errorCode || !business)
     return (
       <CompactLayout>

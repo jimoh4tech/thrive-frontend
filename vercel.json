@@ -1,12 +1,6 @@
 {
   "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/api"
-    },
-    {
-      "source": "/static/(.*)",
-      "destination": "/public/static"
-    }
+    { "source": "/:slug/", "destination": "/:slug/" },
+    { "source": "/(.*)", "destination": "/" }
   ]
 }

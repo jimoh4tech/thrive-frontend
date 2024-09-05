@@ -223,7 +223,7 @@ export default function UserListPage() {
               {
                 name: 'ngoId',
                 options: ngos.map((_: any) => ({ label: _.name, value: _.id })),
-                label: "Filter by Partner Org'",
+                label: 'Filter by Partner Org',
               },
             ]}
             onChangeOption={(name, value) => {

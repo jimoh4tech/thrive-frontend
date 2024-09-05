@@ -168,7 +168,9 @@ export default function BusinessProfile() {
       try {
         // setOpenPaymentPopup(false);
         const { logo, cac, govId, ...rest } = data || business;
-
+        console.log({ ...rest });
+        // setIsSubmitting(false);
+        // return;
         if (cac) {
           const {
             data: { public_id },

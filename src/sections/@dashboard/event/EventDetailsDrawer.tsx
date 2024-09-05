@@ -17,6 +17,10 @@ import Label from 'src/components/label/Label';
 import Scrollbar from 'src/components/scrollbar/Scrollbar';
 import { fDateTime } from 'src/utils/formatTime';
 import { fCurrency } from 'src/utils/formatNumber';
+import { applyForEvent, deleteEvent } from 'src/actions/admin/usersAction';
+import { useSnackbar } from 'notistack';
+import { LoadingButton } from '@mui/lab';
+import { useAuthContext } from 'src/auth/useAuthContext';
 import Image from '../../../components/image';
 // utils
 // @types
@@ -28,7 +32,6 @@ import Image from '../../../components/image';
 interface Props extends DrawerProps {
   event: IEvent;
   onClose: VoidFunction;
-  onApply: VoidFunction;
 }
 
 export default function EventDetailsDrawer({
@@ -36,7 +39,6 @@ export default function EventDetailsDrawer({
   open,
   //
   onClose,
-  onApply,
   ...other
 }: Props) {
   const {
@@ -50,12 +52,37 @@ export default function EventDetailsDrawer({
     organizer,
     category,
     isPlatinum,
+    id,
   } = event;
-
+  const { user } = useAuthContext();
   const [toggleProperties, setToggleProperties] = useState(true);
-
+  const [loading, setLoading] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
   const handleToggleProperties = () => {
     setToggleProperties(!toggleProperties);
+  };
+
+  const onApply = async () => {
+    try {
+      setLoading(true);
+      const res = await applyForEvent(id);
+      enqueueSnackbar(res.data.message);
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+      enqueueSnackbar(err.message || err, { color: 'error.main' });
+    }
+  };
+  const onDelete = async () => {
+    try {
+      setLoading(true);
+      const res = await deleteEvent(id);
+      enqueueSnackbar(res.data.message);
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+      enqueueSnackbar(err.message || err, { color: 'error.main' });
+    }
   };
 
   return (
@@ -151,8 +178,8 @@ export default function EventDetailsDrawer({
           )} */}
       </Scrollbar>
 
-      <Box sx={{ p: 2.5 }}>
-        <Button
+      <Box sx={{ p: 2.5 }} gap={2}>
+        {/* <Button
           fullWidth
           variant="soft"
           color="success"
@@ -161,7 +188,31 @@ export default function EventDetailsDrawer({
           onClick={onApply}
         >
           APPLY NOW
-        </Button>
+        </Button> */}
+        <LoadingButton
+          fullWidth
+          variant="soft"
+          color="success"
+          size="large"
+          startIcon={<Iconify icon="eva:trash-2-outline" />}
+          onClick={onApply}
+          loading={loading}
+        >
+          APPLY NOW
+        </LoadingButton>
+        {user.role.id === 3 && (
+          <LoadingButton
+            fullWidth
+            variant="soft"
+            color="error"
+            size="large"
+            startIcon={<Iconify icon="eva:trash-2-outline" />}
+            onClick={onDelete}
+            loading={loading}
+          >
+            DELETE
+          </LoadingButton>
+        )}
       </Box>
     </Drawer>
   );

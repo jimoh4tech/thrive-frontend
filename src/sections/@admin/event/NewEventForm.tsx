@@ -42,7 +42,7 @@ export default function NewEventForm({
   const NewEventSchema = Yup.object().shape({
     name: Yup.string().required('Event name is required'),
     endDate: Yup.date()
-      .min(Yup.ref('startDate'), 'End date must be later than start date')
+      // .min(Yup.ref('startDate'), 'End date must be later than start date')
       .required('End date is required'),
     description: Yup.string().required('Event description is required'),
     cover: Yup.mixed().required('Cover image is required'),

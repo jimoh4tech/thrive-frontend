@@ -20,8 +20,7 @@ import { IQuery, IResDataMany } from 'src/@types/query';
 // actions
 import { loader } from 'src/actions';
 // components
-import { DateRangePicker } from '@mui/lab';
-import { useDateRangePicker } from 'src/components/date-range-picker';
+import DateRangePicker, { useDateRangePicker } from 'src/components/date-range-picker';
 import Iconify from 'src/components/iconify/Iconify';
 import { FileFilterButton, FileFilterName, FileGridView } from 'src/sections/@dashboard/file';
 import { deleteBusinessBox } from 'src/actions/admin/usersAction';

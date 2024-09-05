@@ -38,7 +38,7 @@ export default function NewHealthForm({ categories }: { categories: any[] }) {
     phone: Yup.string().required('Title is required'),
     bio: Yup.string().required('Bio is required'),
     logo: Yup.mixed().optional(),
-    url: Yup.string().url('Invalid url'),
+    url: Yup.string().url('Invalid url! KIndly start with https://'),
     cover: Yup.mixed().required('cover is required'),
     categoryId: Yup.number().required('Pls select a category'),
   });
@@ -125,7 +125,11 @@ export default function NewHealthForm({ categories }: { categories: any[] }) {
 
               <RHFTextField name="phone" label="Provider Phone Number" />
 
-              <RHFTextField name="url" label="Provider Website" />
+              <RHFTextField
+                name="url"
+                label="Provider Website"
+                placeholder="https://thrivebizng.com/"
+              />
 
               <Stack spacing={1}>
                 <Typography variant="subtitle2" sx={{ color: 'text.secondary' }}>

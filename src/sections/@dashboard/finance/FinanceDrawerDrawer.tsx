@@ -15,6 +15,10 @@ import { IFinance } from 'src/@types/finance';
 import Iconify from 'src/components/iconify/Iconify';
 import Label from 'src/components/label/Label';
 import Scrollbar from 'src/components/scrollbar/Scrollbar';
+import { applyForFinance, deleteFinance } from 'src/actions/admin/usersAction';
+import { useSnackbar } from 'notistack';
+import { LoadingButton } from '@mui/lab';
+import { useAuthContext } from 'src/auth/useAuthContext';
 import Image from '../../../components/image';
 // utils
 // @types
@@ -26,7 +30,6 @@ import Image from '../../../components/image';
 interface Props extends DrawerProps {
   event: IFinance;
   onClose: VoidFunction;
-  onApply: VoidFunction;
 }
 
 export default function FinanceDrawerDrawer({
@@ -34,15 +37,39 @@ export default function FinanceDrawerDrawer({
   open,
   //
   onClose,
-  onApply,
   ...other
 }: Props) {
-  const { name, cover, description, url, category, isPlatinum, institution } = event;
+  const { name, cover, description, url, category, isPlatinum, institution, id } = event;
 
   const [toggleProperties, setToggleProperties] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
+  const { user } = useAuthContext();
 
   const handleToggleProperties = () => {
     setToggleProperties(!toggleProperties);
+  };
+  const onApply = async () => {
+    try {
+      setLoading(true);
+      const res = await applyForFinance(id);
+      enqueueSnackbar(res.data.message);
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+      enqueueSnackbar(err.message || err, { color: 'error.main' });
+    }
+  };
+  const onDelete = async () => {
+    try {
+      setLoading(true);
+      const res = await deleteFinance(id);
+      enqueueSnackbar(res.data.message);
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+      enqueueSnackbar(err.message || err, { color: 'error.main' });
+    }
   };
 
   return (
@@ -137,17 +164,31 @@ export default function FinanceDrawerDrawer({
           )} */}
       </Scrollbar>
 
-      <Box sx={{ p: 2.5 }}>
-        <Button
+      <Box sx={{ p: 2.5 }} gap={2}>
+        <LoadingButton
           fullWidth
           variant="soft"
           color="success"
           size="large"
           startIcon={<Iconify icon="eva:trash-2-outline" />}
           onClick={onApply}
+          loading={loading}
         >
           APPLY NOW
-        </Button>
+        </LoadingButton>
+        {user.role.id === 3 && (
+          <LoadingButton
+            fullWidth
+            variant="soft"
+            color="error"
+            size="large"
+            startIcon={<Iconify icon="eva:trash-2-outline" />}
+            onClick={onDelete}
+            loading={loading}
+          >
+            DELETE
+          </LoadingButton>
+        )}
       </Box>
     </Drawer>
   );

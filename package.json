@@ -39,7 +39,7 @@
     "@mui/icons-material": "^5.11.16",
     "@mui/lab": "^5.0.0-alpha.120",
     "@mui/material": "^5.11.10",
-    "@mui/system": "^5.11.9",
+    "@mui/system": "^6.0.2",
     "@mui/x-data-grid": "^5.17.24",
     "@mui/x-date-pickers": "^5.0.19",
     "@paystack/inline-js": "^2.12.6",

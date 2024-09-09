@@ -1,6 +1,9 @@
 {
   "rewrites": [
-    { "source": "/web/:slug", "destination": "/:slug" },
-    { "source": "/(.*)", "destination": "/" }
+    {
+      "source": "/:slug",
+
+      "destination": "/pages/:slug"
+    }
   ]
 }

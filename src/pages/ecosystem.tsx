@@ -16,7 +16,7 @@ HomePage.getLayout = (page: React.ReactElement) => (
 // ----------------------------------------------------------------------
 
 export default function HomePage() {
-  const { title, intro, body1, body2, body3 } = msme;
+  const { title, intro, body1, body2 } = msme;
   return (
     <Box
       sx={{
@@ -75,17 +75,6 @@ export default function HomePage() {
                 </Grid>
               </Grid>
             </Box>
-          </Stack>
-        </Container>
-      </Box>
-
-      <Box>
-        <Container sx={{ py: 6 }}>
-          <Stack spacing={4}>
-            <Typography variant="h2" mx="auto" textAlign="center">
-              {body3.title}
-            </Typography>
-            <Image src={body3.image} />
           </Stack>
         </Container>
       </Box>

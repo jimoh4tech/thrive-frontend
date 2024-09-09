@@ -98,12 +98,12 @@ const navConfig = [
         icon: ICONS.kanban,
       },
       {
-        title: 'Directory List',
+        title: 'Business Directory',
         path: PATH_DASHBOARD.directoryListing,
         icon: ICONS.menuItem,
       },
       {
-        title: 'Health and well-being',
+        title: 'Health and Wellness',
         path: PATH_DASHBOARD.healthWellBeing,
         icon: ICONS.user,
       },

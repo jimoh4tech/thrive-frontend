@@ -1,4 +1,4 @@
-import { MSME1, MSME2, MSME3 } from 'src/assets/images';
+import { MSME1, MSME2 } from 'src/assets/images';
 
 const msme = {
   title: 'MSME in Nigeria',
@@ -23,10 +23,10 @@ const msme = {
     image: MSME2.src,
     text: 'A key objective for this Space to flourish is to ensure MSME development actors collate relevant information and referrals for MSMEs to then have easy access to current, and relevant business development solutions.',
   },
-  body3: {
-    image: MSME3.src,
-    title: 'Thriveand ',
-  },
+  // body3: {
+  //   image: MSME3.src,
+  //   title: 'Thriveand ',
+  // },
 };
 
 export default msme;

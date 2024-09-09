@@ -115,7 +115,7 @@ export default function UserSubscribe() {
                   onInitializePayment();
                 }}
               >
-                {`${fCurrency(yearAmount)}/Year`}
+                {`${fCurrency(yearAmount)}/Year 20%off`}
               </Button>
             </Stack>
           </Grid>

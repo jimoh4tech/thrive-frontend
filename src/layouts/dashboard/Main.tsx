@@ -32,8 +32,6 @@ export default function Main({ children, sx, ...other }: BoxProps) {
     if (!user?.isApproved) return <UserSuspended />;
     if (!user?.business) return <UserApproved />;
     if (!user.hasSubscription && user?.premuimSub?.length === 0) return <UserSubscribe />;
-    // if (user?.premuimSub[user?.premuimSub?.length || 1 - 1]?.expiresAt > new Date())
-    //   return <UserSubscribe />;
     return children;
   };
 

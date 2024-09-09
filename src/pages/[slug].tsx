@@ -121,18 +121,20 @@ const Page = () => {
   const [errorCode, setErrorCode] = useState();
 
   const fetchBusinessData = async () => {
-    try {
-      const { data } = await axiosInstance.get(`/web-address/${slug}`);
-      setBusiness(data);
-    } catch (error) {
-      console.log(error);
-      setErrorCode(error?.statusCode);
+    if (slug) {
+      try {
+        const { data } = await axiosInstance.get(`/web-address/${slug}`);
+        setBusiness(data);
+      } catch (error) {
+        console.log(error);
+        setErrorCode(error?.statusCode);
+      }
     }
   };
   useEffect(() => {
     fetchBusinessData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [slug]);
 
   if (!business) return <LoadingScreen />;
   if (errorCode)

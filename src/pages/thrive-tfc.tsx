@@ -10,7 +10,7 @@ import MainLayout from '../layouts/main';
 // ----------------------------------------------------------------------
 
 HomePage.getLayout = (page: React.ReactElement) => (
-  <MainLayout metaTitle="ThriveTrainers, Facilitator, Coaches (TFC)">{page}</MainLayout>
+  <MainLayout metaTitle="Thrive Trainers, Facilitator, Coaches (TFC)">{page}</MainLayout>
 );
 
 // ----------------------------------------------------------------------
@@ -26,7 +26,7 @@ export default function HomePage() {
     >
       <Container sx={{ py: 6 }}>
         <Stack spacing={3}>
-          <Image src={section1.image.src} />
+          {/* <Image src={section1.image.src} /> */}
 
           <Typography component="div" dangerouslySetInnerHTML={{ __html: section1.text }} />
         </Stack>

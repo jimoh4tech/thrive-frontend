@@ -27,7 +27,7 @@ const services = [
   {
     title: 'Business Directory',
     icon: 'iconoir:page-search',
-    text: '<p>The Thrive Business directory is a crucial tool for MSMEs to  reach more people and be searchable online.</p> <p>As anThrivebeneficiary who have registered businesses on the site, Consumers can communicate with you by finding your contact information, address, business hours, and other pertinent information quickly on the business listing page. This makes it simpler for customers to interact with you as a business owner.</p>',
+    text: '<p>The Thrive Business directory is a crucial tool for MSMEs to  reach more people and be searchable online.</p> <p>As a Thrive beneficiary who have registered businesses on the site, Consumers can communicate with you by finding your contact information, address, business hours, and other pertinent information quickly on the business listing page. This makes it simpler for customers to interact with you as a business owner.</p>',
   },
   {
     title: 'Collaboration Tools',

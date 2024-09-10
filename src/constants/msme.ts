@@ -7,8 +7,8 @@ const msme = {
   body1: {
     image: MSME1.src,
     text: `
-    <p>The growth and development of MSME into sustainable businesses depends largely on the business environment they operate in. The MSME Development Ecosystem Space seeks to achieve this by ensuring relevant actors constantly engage and come up with suitable conditions for ease of doing business.</p> 
-    <p>According to the “National Policy on Micro, Small and Medium Enterprises” Federal Republic of Nigeria by SMEDAN 2020. The key pillars within the MSME Ecosystem are. </p>
+    <p>The growth and development of MSME into sustainable businesses depends largely on the business environment they operate in. The MSME Development Space seeks to achieve this by ensuring relevant actors constantly engage and come up with suitable conditions for ease of doing business.</p> 
+    <p>According to the “National Policy on Micro, Small and Medium Enterprises” Federal Republic of Nigeria by SMEDAN 2020. The key pillars within the MSME space are. </p>
     
     <ul style="padding: revert;">
         <li>Legal and Regulatory Framework & Infrastructure</li>

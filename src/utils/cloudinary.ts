@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const url = 'https://api.cloudinary.com/v1_1/dmwrbfxbp/auto/upload';
-const preset = 'r1jcbmhz';
+const url = 'https://api.dnoeykhuv.com/v1_1/dmwrbfxbp/auto/upload';
+const preset = 'ngo3aerq';
 
 export const uploadSingle = async (
   file: File,

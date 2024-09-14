@@ -17,7 +17,7 @@ import Label from 'src/components/label/Label';
 import Scrollbar from 'src/components/scrollbar/Scrollbar';
 import { fDateTime } from 'src/utils/formatTime';
 import { fCurrency } from 'src/utils/formatNumber';
-import { applyForEvent, deleteEvent } from 'src/actions/admin/usersAction';
+import { deleteEvent } from 'src/actions/admin/usersAction';
 import { useSnackbar } from 'notistack';
 import { LoadingButton } from '@mui/lab';
 import { useAuthContext } from 'src/auth/useAuthContext';
@@ -62,17 +62,6 @@ export default function EventDetailsDrawer({
     setToggleProperties(!toggleProperties);
   };
 
-  const onApply = async () => {
-    try {
-      setLoading(true);
-      const res = await applyForEvent(id);
-      enqueueSnackbar(res.data.message);
-      setLoading(false);
-    } catch (err) {
-      setLoading(false);
-      enqueueSnackbar(err.message || err, { color: 'error.main' });
-    }
-  };
   const onDelete = async () => {
     try {
       setLoading(true);
@@ -141,7 +130,7 @@ export default function EventDetailsDrawer({
             <Typography variant="caption" children={category.name} />
 
             {url && (
-              <Button href={url} size="small" variant="outlined">
+              <Button href={url} target="_blank" size="small" variant="outlined">
                 Visit Website
               </Button>
             )}
@@ -179,27 +168,30 @@ export default function EventDetailsDrawer({
       </Scrollbar>
 
       <Box sx={{ p: 2.5 }} gap={2}>
-        {/* <Button
+        <Button
           fullWidth
+          href={url || ''}
+          target="_blank"
+          startIcon={<Iconify icon="eva:trash-2-outline" />}
+          size="large"
           variant="soft"
           color="success"
-          size="large"
-          startIcon={<Iconify icon="eva:trash-2-outline" />}
-          onClick={onApply}
         >
           APPLY NOW
-        </Button> */}
-        <LoadingButton
+        </Button>
+        {/* <Button
+          href={url}
           fullWidth
           variant="soft"
           color="success"
           size="large"
           startIcon={<Iconify icon="eva:trash-2-outline" />}
-          onClick={onApply}
+          target="_blank"
+          // onClick={onApply}
           loading={loading}
         >
           APPLY NOW
-        </LoadingButton>
+        </Button> */}
         {user.role.id === 3 && (
           <LoadingButton
             fullWidth

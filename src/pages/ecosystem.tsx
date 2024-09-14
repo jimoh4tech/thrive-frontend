@@ -10,7 +10,7 @@ import MainLayout from '../layouts/main';
 // ----------------------------------------------------------------------
 
 HomePage.getLayout = (page: React.ReactElement) => (
-  <MainLayout metaTitle="MSME Development Space">{page}</MainLayout>
+  <MainLayout metaTitle="Entrepreneurship Space">{page}</MainLayout>
 );
 
 // ----------------------------------------------------------------------

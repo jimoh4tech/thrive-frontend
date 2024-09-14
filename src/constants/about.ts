@@ -35,7 +35,7 @@ export const lone = `<p>Small and Medium Enterprises (SMEs) are the backbone of 
 export const objectives = {
   title: 'Our Objectives',
   items: [
-    'Provide post-training entrepreneurship development support to micro, small and medium enterprises beginning with theThrivebeneficiaries trained by GIZ- SEDIN/GOPA',
+    'Provide post-training entrepreneurship development support to micro, small and medium enterprises beginning with the Thrive beneficiaries.',
 
     'Offer a plug-and-play framework for corporate and development partners to fulfill their desire to contribute to entrepreneurship development, without the need to create their programs',
     'Bridge the gap of infrastructure, resources, and facilities for entrepreneurs to thrive with digitally enabled and scalable solutions',

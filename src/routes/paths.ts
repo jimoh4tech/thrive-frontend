@@ -94,11 +94,11 @@ export const PATH_DASHBOARD = {
   upgrade: path(ROOTS_DASHBOARD, '/upgrade'),
   account: path(ROOTS_DASHBOARD, '/account'),
   networkingMarketplace: {
-    businesses: path(ROOTS_DASHBOARD, '/networking-marketplace'),
-    community: path(ROOTS_DASHBOARD, '/networking-marketplace/community'),
-    chat: path(ROOTS_DASHBOARD, '/networking-marketplace/chat'),
-    newChat: path(ROOTS_DASHBOARD, '/networking-marketplace/chat/chat/new'),
-    viewChat: (name: string) => path(ROOTS_DASHBOARD, `/networking-marketplace/chat/${name}`),
+    businesses: path(ROOTS_DASHBOARD, '/marketplace'),
+    community: path(ROOTS_DASHBOARD, '/marketplace/community'),
+    chat: path(ROOTS_DASHBOARD, '/marketplace/chat'),
+    newChat: path(ROOTS_DASHBOARD, '/marketplace/chat/chat/new'),
+    viewChat: (name: string) => path(ROOTS_DASHBOARD, `/marketplace/chat/${name}`),
   },
 
   // mail: {

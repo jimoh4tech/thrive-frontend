@@ -16,7 +16,7 @@ import MainLayout from '../layouts/main';
 // ----------------------------------------------------------------------
 
 HomePage.getLayout = (page: React.ReactElement) => (
-  <MainLayout metaTitle="MSME Market">{page}</MainLayout>
+  <MainLayout metaTitle="Marketplace">{page}</MainLayout>
 );
 
 // ----------------------------------------------------------------------

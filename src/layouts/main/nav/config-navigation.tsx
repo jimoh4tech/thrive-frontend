@@ -25,11 +25,11 @@ const navConfig = [
       {
         subheader: 'Other',
         items: [
-          { title: 'MSME Development', path: PATH_PAGE.ecosystem },
-          { title: 'ThriveTFC', path: PATH_PAGE.thriveTfc },
+          { title: 'Entrepreneurship Space', path: PATH_PAGE.ecosystem },
+          // { title: 'ThriveTFC', path: PATH_PAGE.thriveTfc },
           // { title: 'Thrive Consortium', path: PATH_PAGE.thriveConsortiums },
           { title: 'Announcements', path: PATH_PAGE.announcement },
-          { title: 'MSME Market', path: PATH_PAGE.marketplace },
+          { title: 'Marketplace', path: PATH_PAGE.marketplace },
         ],
       },
     ],

@@ -47,6 +47,7 @@ export default function ThriveAgencies() {
             <Typography component="div" dangerouslySetInnerHTML={{ __html: enterpriseHub.text }} />
             <Button
               href={enterpriseHub.link}
+              target="_blank"
               size="large"
               color="inherit"
               variant="outlined"
@@ -85,6 +86,7 @@ export default function ThriveAgencies() {
                 <Typography component="div" dangerouslySetInnerHTML={{ __html: _.text }} />
                 <Button
                   href={_.link}
+                  target="_blank"
                   size="large"
                   color="inherit"
                   variant="outlined"

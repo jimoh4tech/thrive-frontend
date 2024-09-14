@@ -17,7 +17,7 @@ import Scrollbar from 'src/components/scrollbar/Scrollbar';
 import { IHealth } from 'src/@types/health';
 import { useSnackbar } from 'notistack';
 import { useAuthContext } from 'src/auth/useAuthContext';
-import { applyForHealth, deleteHealth } from 'src/actions/admin/usersAction';
+import { deleteHealth } from 'src/actions/admin/usersAction';
 import { LoadingButton } from '@mui/lab';
 import Image from '../../../components/image';
 // utils
@@ -49,17 +49,7 @@ export default function HealthDrawerDrawer({
   const handleToggleProperties = () => {
     setToggleProperties(!toggleProperties);
   };
-  const onApply = async () => {
-    try {
-      setLoading(true);
-      const res = await applyForHealth(id);
-      enqueueSnackbar(res.data.message);
-      setLoading(false);
-    } catch (err) {
-      setLoading(false);
-      enqueueSnackbar(err.message || err, { color: 'error.main' });
-    }
-  };
+
   const onDelete = async () => {
     try {
       setLoading(true);
@@ -128,7 +118,7 @@ export default function HealthDrawerDrawer({
             <Typography variant="caption" children={category?.name} />
 
             {url && (
-              <Button href={url} size="small" variant="outlined">
+              <Button href={url} target="_blank" size="small" variant="outlined">
                 Visit Website
               </Button>
             )}
@@ -165,7 +155,18 @@ export default function HealthDrawerDrawer({
       </Scrollbar>
 
       <Box sx={{ p: 2.5 }} gap={2}>
-        <LoadingButton
+        <Button
+          fullWidth
+          href={url || ''}
+          target="_blank"
+          startIcon={<Iconify icon="eva:trash-2-outline" />}
+          size="large"
+          variant="soft"
+          color="success"
+        >
+          APPLY NOW
+        </Button>
+        {/* <LoadingButton
           fullWidth
           variant="soft"
           color="success"
@@ -175,7 +176,7 @@ export default function HealthDrawerDrawer({
           loading={loading}
         >
           APPLY NOW
-        </LoadingButton>
+        </LoadingButton> */}
         {user.role.id === 3 && (
           <LoadingButton
             fullWidth

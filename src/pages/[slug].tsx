@@ -136,13 +136,13 @@ const Page = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug]);
 
-  if (!business) return <LoadingScreen />;
   if (errorCode)
     return (
       <CompactLayout>
         <Page404 />
       </CompactLayout>
     );
+  if (!business) return <LoadingScreen />;
 
   return (
     <>

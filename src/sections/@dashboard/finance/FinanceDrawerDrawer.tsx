@@ -15,7 +15,7 @@ import { IFinance } from 'src/@types/finance';
 import Iconify from 'src/components/iconify/Iconify';
 import Label from 'src/components/label/Label';
 import Scrollbar from 'src/components/scrollbar/Scrollbar';
-import { applyForFinance, deleteFinance } from 'src/actions/admin/usersAction';
+import { deleteFinance } from 'src/actions/admin/usersAction';
 import { useSnackbar } from 'notistack';
 import { LoadingButton } from '@mui/lab';
 import { useAuthContext } from 'src/auth/useAuthContext';
@@ -49,17 +49,7 @@ export default function FinanceDrawerDrawer({
   const handleToggleProperties = () => {
     setToggleProperties(!toggleProperties);
   };
-  const onApply = async () => {
-    try {
-      setLoading(true);
-      const res = await applyForFinance(id);
-      enqueueSnackbar(res.data.message);
-      setLoading(false);
-    } catch (err) {
-      setLoading(false);
-      enqueueSnackbar(err.message || err, { color: 'error.main' });
-    }
-  };
+
   const onDelete = async () => {
     try {
       setLoading(true);
@@ -128,7 +118,7 @@ export default function FinanceDrawerDrawer({
             <Typography variant="caption" children={category.name} />
 
             {url && (
-              <Button href={url} size="small" variant="outlined">
+              <Button href={url} target="_blank" size="small" variant="outlined">
                 Visit Website
               </Button>
             )}
@@ -163,9 +153,19 @@ export default function FinanceDrawerDrawer({
             </List>
           )} */}
       </Scrollbar>
-
       <Box sx={{ p: 2.5 }} gap={2}>
-        <LoadingButton
+        <Button
+          fullWidth
+          href={url || ''}
+          target="_blank"
+          startIcon={<Iconify icon="eva:trash-2-outline" />}
+          size="large"
+          variant="soft"
+          color="success"
+        >
+          APPLY NOW
+        </Button>
+        {/* <LoadingButton
           fullWidth
           variant="soft"
           color="success"
@@ -175,7 +175,7 @@ export default function FinanceDrawerDrawer({
           loading={loading}
         >
           APPLY NOW
-        </LoadingButton>
+        </LoadingButton> */}
         {user.role.id === 3 && (
           <LoadingButton
             fullWidth

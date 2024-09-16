@@ -15,7 +15,16 @@ import {
 // routes
 import { m } from 'framer-motion';
 import moment from 'moment';
-import { ehub } from 'src/assets/images';
+import {
+  bonny,
+  connect,
+  enterprise,
+  impact,
+  nassarawa,
+  pedestal,
+  smedan,
+  taj,
+} from 'src/assets/images';
 import { varFade } from 'src/components/animate';
 import { LogoFull } from 'src/components/logo/Logo';
 // import Image from 'src/components/image/Image';
@@ -112,51 +121,24 @@ export default function Footer() {
         <Stack spacing={3}>
           <m.div variants={varFade().inDown}>
             <Typography variant="h2" textAlign="center">
-              Supported by
+              Our Project Partners
             </Typography>
           </m.div>
-          <Typography textAlign="center">
+          {/* <Typography textAlign="center">
             Thrive is able to offer world-class digital support to thousands of growing businesses
             because it is supported by
-          </Typography>
-          <Stack direction="row" spacing={10} justifyContent="space-between">
-            {/* <Image
+          </Typography> */}
+          {/* <Stack direction="row" spacing={10} justifyContent="space-between">
+            <Image
               alt="Logo"
               style={{ objectFit: 'contain', maxWidth: '100%' }}
               height={gopa.height}
               width={gopa.width}
               src={gopa.src}
-            /> */}
-          </Stack>
-        </Stack>
-      </Container>
-
-      {/* ------------------ Partners Sections ------------------ */}
-      <Box bgcolor="#f3f3f3" py={10}>
-        <Container>
-          <m.div variants={varFade().inDown}>
-            <Typography variant="h2" textAlign="center">
-              Our Project Partners
-            </Typography>
-          </m.div>
-
+            />
+          </Stack> */}
           <Grid container spacing={10} justifyContent="center" mt={2}>
-            {[
-              ehub,
-              // valucon,
-              // weboh,
-              // hbf,
-              // dofoll,
-              // kalros,
-              // lapo,
-              // sabi,
-              // viisaus,
-              // giniushub,
-              // seyp,
-              // capstone,
-              // kb,
-              // leverage,
-            ].map((_, i) => (
+            {[smedan, connect, enterprise, impact, nassarawa, taj, bonny].map((_, i) => (
               <Grid
                 key={_.src}
                 item
@@ -165,7 +147,7 @@ export default function Footer() {
                 sm={i === 0 ? 6 : 4}
                 xs={6}
               >
-                {i === 0 && <Typography variant="h5">Brought to you by</Typography>}
+                {/* {i === 0 && <Typography variant="h5">Brought to you by</Typography>} */}
                 <Image
                   alt="Logo"
                   style={{ objectFit: 'contain', width: 'auto' }}
@@ -176,6 +158,26 @@ export default function Footer() {
               </Grid>
             ))}
           </Grid>
+        </Stack>
+      </Container>
+
+      {/* ------------------ Partners Sections ------------------ */}
+      <Box bgcolor="#f3f3f3" py={10}>
+        <Container>
+          <m.div variants={varFade().inDown}>
+            <Typography variant="h2" textAlign="center">
+              Brought to you by
+            </Typography>
+          </m.div>
+          <Stack direction="row" spacing={10} justifyContent="space-between">
+            <Image
+              alt="Logo"
+              style={{ objectFit: 'contain', maxWidth: '100%' }}
+              height={pedestal.height}
+              width={pedestal.width}
+              src={pedestal.src}
+            />
+          </Stack>
         </Container>
       </Box>
 

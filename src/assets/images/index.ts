@@ -64,6 +64,16 @@ export { default as kb } from './sponsors/kb.png';
 export { default as gopa } from './sponsors/gopa.png';
 export { default as giz } from './sponsors/giz.png';
 
+// Partner Images
+export { default as smedan } from './sponsors/smedan.jpg';
+export { default as bonny } from './sponsors/bonny.jpg';
+export { default as connect } from './sponsors/connect.png';
+export { default as enterprise } from './sponsors/enterprise.jpg';
+export { default as impact } from './sponsors/impact.png';
+export { default as nassarawa } from './sponsors/nassarawa.png';
+export { default as pedestal } from './sponsors/pedestal.png';
+export { default as taj } from './sponsors/taj.png';
+
 // Login Page Image
 
 // export { default as solution1 } from './solutions/solution1.jpg';

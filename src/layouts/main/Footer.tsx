@@ -151,7 +151,7 @@ export default function Footer() {
                 <Image
                   alt="Logo"
                   style={{ objectFit: 'contain', width: 'auto' }}
-                  height={i === 0 ? 150 : 100}
+                  height={i === 0 ? 200 : 150}
                   width={400}
                   src={_.src}
                 />
@@ -169,10 +169,10 @@ export default function Footer() {
               Brought to you by
             </Typography>
           </m.div>
-          <Stack direction="row" spacing={10} justifyContent="space-between">
+          <Stack direction="row" spacing={10} justifyContent="center">
             <Image
               alt="Logo"
-              style={{ objectFit: 'contain', maxWidth: '100%' }}
+              style={{ objectFit: 'contain', maxWidth: '60%' }}
               height={pedestal.height}
               width={pedestal.width}
               src={pedestal.src}

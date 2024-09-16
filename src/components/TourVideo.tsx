@@ -19,7 +19,7 @@ const TourVideo = ({ open, onClose }: { open: boolean; onClose: VoidFunction }) 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="lg">
       <DialogContent sx={{ pt: 2 }}>
-        <YouTube videoId="oLJRdPlhHZs" opts={opts} onReady={onPlayerReady} />,
+        <YouTube videoId="3x1vBajSq98" opts={opts} onReady={onPlayerReady} />,
       </DialogContent>
     </Dialog>
   );

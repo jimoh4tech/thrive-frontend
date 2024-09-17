@@ -16,10 +16,12 @@ import {
 import { m } from 'framer-motion';
 import moment from 'moment';
 import {
-  bonny,
+  africa,
   connect,
+  curves,
   enterprise,
   impact,
+  naccima,
   nassarawa,
   pedestal,
   smedan,
@@ -68,6 +70,17 @@ const LINKS = [
       { name: 'Abuse Policy', href: PATH_PAGE.abuse },
     ],
   },
+];
+
+const sponsors = [
+  { href: 'https://smedan.gov.ng/', img: smedan },
+  { href: 'https://connectnigeria.com/', img: connect },
+  { href: 'https://www.impactpointe.com/', img: impact },
+  { href: 'https://nasmfbank.com/', img: nassarawa },
+  { href: 'https://tajbank.com/', img: taj },
+  { href: 'https://africafranchise.org/', img: africa },
+  { href: 'https://curvesng.com/', img: curves },
+  { href: 'https://naccima.com/', img: naccima },
 ];
 
 export const _socials = [
@@ -121,43 +134,22 @@ export default function Footer() {
         <Stack spacing={3}>
           <m.div variants={varFade().inDown}>
             <Typography variant="h2" textAlign="center">
-              Our Project Partners
+              Supported By
             </Typography>
           </m.div>
-          {/* <Typography textAlign="center">
+          <Typography textAlign="center">
             Thrive is able to offer world-class digital support to thousands of growing businesses
             because it is supported by
-          </Typography> */}
-          {/* <Stack direction="row" spacing={10} justifyContent="space-between">
+          </Typography>
+          <Stack direction="row" spacing={10} justifyContent="center">
             <Image
               alt="Logo"
-              style={{ objectFit: 'contain', maxWidth: '100%' }}
-              height={gopa.height}
-              width={gopa.width}
-              src={gopa.src}
+              style={{ objectFit: 'contain', width: 'auto' }}
+              height={150}
+              width={250}
+              src={pedestal}
             />
-          </Stack> */}
-          <Grid container spacing={10} justifyContent="center" mt={2}>
-            {[smedan, connect, enterprise, impact, nassarawa, taj, bonny].map((_, i) => (
-              <Grid
-                key={_.src}
-                item
-                xl={i === 0 ? 3 : 2}
-                md={i === 0 ? 4 : 3}
-                sm={i === 0 ? 6 : 4}
-                xs={6}
-              >
-                {/* {i === 0 && <Typography variant="h5">Brought to you by</Typography>} */}
-                <Image
-                  alt="Logo"
-                  style={{ objectFit: 'contain', width: 'auto' }}
-                  height={i === 0 ? 200 : 150}
-                  width={400}
-                  src={_.src}
-                />
-              </Grid>
-            ))}
-          </Grid>
+          </Stack>
         </Stack>
       </Container>
 
@@ -166,16 +158,42 @@ export default function Footer() {
         <Container>
           <m.div variants={varFade().inDown}>
             <Typography variant="h2" textAlign="center">
-              Brought to you by
+              Our Project Partners
             </Typography>
           </m.div>
+          <Grid container spacing={4} justifyContent="center">
+            {sponsors.map((_, i) => (
+              <Grid
+                key={_.href}
+                item
+                xl={i === 0 ? 3 : 2}
+                md={i === 0 ? 4 : 3}
+                sm={i === 0 ? 6 : 4}
+                xs={6}
+              >
+                <Link href={_.href} target="_blank">
+                  <Image
+                    alt="Logo"
+                    style={{ objectFit: 'contain', width: 'auto' }}
+                    height={250}
+                    width={500}
+                    src={_.img.src}
+                  />
+                </Link>
+              </Grid>
+            ))}
+          </Grid>
+          <Typography variant="h4" textAlign="center" my={4}>
+            Brought to you by
+          </Typography>
+
           <Stack direction="row" spacing={10} justifyContent="center">
             <Image
               alt="Logo"
-              style={{ objectFit: 'contain', maxWidth: '60%' }}
-              height={pedestal.height}
-              width={pedestal.width}
-              src={pedestal.src}
+              style={{ objectFit: 'contain', width: 'auto' }}
+              height={200}
+              width={400}
+              src={enterprise}
             />
           </Stack>
         </Container>

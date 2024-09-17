@@ -88,7 +88,7 @@ export default function UserProfilePage() {
                         endIcon={<Iconify icon="material-symbols:content-copy-outline-rounded" />}
                         variant="outlined"
                       >
-                        Thrive Hub, 229 Ozone Street, Victoria Island Lagos.
+                        Enterprise Hub, 16a Trinity Avenue, Victoria Island Lagos.
                       </Button>
                     </CopyToClipboard>
                   </Grid>

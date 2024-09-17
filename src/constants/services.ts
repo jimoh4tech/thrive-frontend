@@ -20,7 +20,7 @@ const services = [
     text: '<p>We have integrated these service tools to help MSMEs save money by giving them access to high-quality, up-to-date resources like business journals, training materials, webinars, marketing strategies, financial planning, management techniques, legal compliance, etc.</p> <p>You need continuous improvement and learning while starting your business, which is why we believe that you should never stop learning and improving.</p>',
   },
   {
-    title: 'Business Toolkits',
+    title: 'Business Toolkit',
     icon: 'streamline:interface-content-chart-product-data-analysis-analytics-graph-line-business-board-chart',
     text: '<p>The Templates library saves you a lot of time by providing you with pre-designed templates for various tasks such as business plans, financial projections, contracts, proposals, and marketing materials.</p> <p>You can quickly and easily produce papers with a professional appearance with this application without having to start from zero. Also, you can ensure consistency in your operations and procedures by employing the same templates across many departments or locations.</p>',
   },

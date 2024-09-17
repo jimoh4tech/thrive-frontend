@@ -133,19 +133,19 @@ export default function BusinessBox() {
   return (
     <>
       <Head>
-        <title> Business Toolkits | Thrive</title>
+        <title> Business Toolkit | Thrive</title>
       </Head>
 
       <Container>
         <CustomBreadcrumbs
-          heading="Business Toolkits"
+          heading="Business Toolkit"
           links={[
             {
               name: 'Admin',
               href: PATH_ADMIN.root,
             },
             {
-              name: 'Business Toolkits',
+              name: 'Business Toolkit',
               href: PATH_ADMIN.businessMedia.library,
             },
             {

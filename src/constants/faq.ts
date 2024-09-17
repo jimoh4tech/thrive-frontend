@@ -22,7 +22,7 @@ It is necessary to always write down your password, and it must be kept in a saf
     <ol>
       <li> Digital address</li>
       <li> Virtual office </li>
-      <li> Business Toolkits</li>
+      <li> Business Toolkit</li>
       <li> Business Library </li>
       <li> Marketplace</li>
       <li> Health and Wellness</li>

@@ -66,13 +66,16 @@ export { default as giz } from './sponsors/giz.png';
 
 // Partner Images
 export { default as smedan } from './sponsors/smedan.jpg';
-export { default as bonny } from './sponsors/bonny.jpg';
 export { default as connect } from './sponsors/connect.png';
 export { default as enterprise } from './sponsors/enterprise.jpg';
 export { default as impact } from './sponsors/impact.png';
 export { default as nassarawa } from './sponsors/nassarawa.png';
 export { default as pedestal } from './sponsors/pedestal.png';
 export { default as taj } from './sponsors/taj.png';
+export { default as africa } from './sponsors/africa.png';
+export { default as curves } from './sponsors/curves.png';
+export { default as naccima } from './sponsors/naccima.png';
+export { default as ads } from './ads.jpg';
 
 // Login Page Image
 

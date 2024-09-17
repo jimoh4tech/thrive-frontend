@@ -133,18 +133,18 @@ export default function FileManagerPage() {
   return (
     <>
       <Head>
-        <title> Business Toolkits | Thrive</title>
+        <title> Business Toolkit | Thrive</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>
         <CustomBreadcrumbs
-          heading="Business Toolkits"
+          heading="Business Toolkit"
           links={[
             {
               name: 'Dashboard',
               href: PATH_DASHBOARD.root,
             },
-            { name: 'Business Toolkits' },
+            { name: 'Business Toolkit' },
           ]}
         />
 

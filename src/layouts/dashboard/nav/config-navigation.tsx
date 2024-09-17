@@ -60,7 +60,7 @@ const navConfig = [
       //   icon: ICONS.calendar,
       // },
       {
-        title: 'Business Toolkits ',
+        title: 'Business Toolkit ',
         path: PATH_DASHBOARD.businessTemplateLibrary,
         icon: ICONS.file,
       },

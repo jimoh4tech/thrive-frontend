@@ -9,6 +9,8 @@ import OneTimeSignUp from 'src/sections/about/OneTimeSignUp';
 import Announcement from 'src/sections/home/Announcement';
 import LandingScreen from 'src/sections/home/LandingScreen';
 import Link from 'next/link';
+import Image from 'next/image';
+import { ads } from 'src/assets/images';
 import MainLayout from '../layouts/main';
 
 // ----------------------------------------------------------------------
@@ -73,16 +75,20 @@ export default function HomePage() {
         {/* -------------- Advert -------------- */}
         <Stack
           sx={{
-            height: 400,
-            border: 5,
-            borderColor: 'primary.main',
+            height: 600,
+            // border: 5,
+            // borderColor: 'primary.main',
             justifyContent: 'center',
             alignItems: 'center',
             my: 6,
           }}
         >
-          <Typography variant="h2">YOUR ADVERT APPEARS HERE</Typography>
+          {/* <Typography variant="h2">YOUR ADVERT APPEARS HERE</Typography> */}
+          <Image alt="Advertisment" height={600} src={ads} />
         </Stack>
+        {/* <Grid item md={6}>
+          <Image alt="Advertisment" src={ads} />
+        </Grid> */}
       </Container>
 
       {/* -------------- Announcements -------------- */}

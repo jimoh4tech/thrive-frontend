@@ -67,10 +67,10 @@ export { default as giz } from './sponsors/giz.png';
 // Partner Images
 export { default as smedan } from './sponsors/smedan.jpg';
 export { default as connect } from './sponsors/connect.png';
-export { default as enterprise } from './sponsors/enterprise.jpg';
+export { default as enterprise } from './sponsors/enterprise.webp';
 export { default as impact } from './sponsors/impact.png';
 export { default as nassarawa } from './sponsors/nassarawa.png';
-export { default as pedestal } from './sponsors/pedestal.png';
+export { default as pedestal } from './sponsors/pedestal.jpg';
 export { default as taj } from './sponsors/taj.png';
 export { default as africa } from './sponsors/africa.png';
 export { default as curves } from './sponsors/curves.png';

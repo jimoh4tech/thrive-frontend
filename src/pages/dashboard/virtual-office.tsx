@@ -81,7 +81,7 @@ export default function UserProfilePage() {
 
                   <Grid>
                     <CopyToClipboard
-                      text="Thrive Hub, 229 Ozone Street, Victoria Island Lagos"
+                      text="Enterprise Hub, 16a Trinity Avenue, Victoria Island Lagos"
                       onCopy={() => enqueueSnackbar('Office Address Copied')}
                     >
                       <Button

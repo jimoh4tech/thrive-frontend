@@ -75,7 +75,7 @@ export default function HomePage() {
         {/* -------------- Advert -------------- */}
         <Stack
           sx={{
-            height: 600,
+            height: 500,
             // border: 5,
             // borderColor: 'primary.main',
             justifyContent: 'center',
@@ -84,7 +84,7 @@ export default function HomePage() {
           }}
         >
           {/* <Typography variant="h2">YOUR ADVERT APPEARS HERE</Typography> */}
-          <Image alt="Advertisment" height={600} src={ads} />
+          <Image alt="Advertisment" height={500} src={ads} />
         </Stack>
         {/* <Grid item md={6}>
           <Image alt="Advertisment" src={ads} />

@@ -142,13 +142,15 @@ export default function Footer() {
             because it is supported by
           </Typography>
           <Stack direction="row" spacing={10} justifyContent="center">
-            <Image
-              alt="Logo"
-              style={{ objectFit: 'contain', width: 'auto' }}
-              height={150}
-              width={250}
-              src={pedestal}
-            />
+            <Link href="https://pedestalafrica.com/" target="_blank">
+              <Image
+                alt="Logo"
+                style={{ objectFit: 'contain', width: 'auto' }}
+                height={100}
+                width={300}
+                src={pedestal}
+              />
+            </Link>
           </Stack>
         </Stack>
       </Container>
@@ -188,13 +190,15 @@ export default function Footer() {
           </Typography>
 
           <Stack direction="row" spacing={10} justifyContent="center">
-            <Image
-              alt="Logo"
-              style={{ objectFit: 'contain', width: 'auto' }}
-              height={200}
-              width={400}
-              src={enterprise}
-            />
+            <Link href="https://www.enterprisehubs.com/homepage/" target="_blank">
+              <Image
+                alt="Logo"
+                style={{ objectFit: 'contain', width: 'auto' }}
+                height={200}
+                width={400}
+                src={enterprise}
+              />
+            </Link>
           </Stack>
         </Container>
       </Box>

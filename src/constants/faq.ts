@@ -3,7 +3,7 @@ export const faq = [
     titile: 'What is Thrive, and what services does it offer to businesses?',
     ans: `Thrive is a one-stop digital support center for growing businesses in Nigeria.
 
-We support micro, small, and medium businesses with the resources they need to grow and thrive in a challenging environment.
+We support micro, small, and medium businesses with the resources they need to grow and Thrive in a challenging environment.
 
 We are looking to expand the economic contribution of growing businesses by providing best-in-class sustainable, scalable entrepreneurship support solutions on a digital platform.
 `,

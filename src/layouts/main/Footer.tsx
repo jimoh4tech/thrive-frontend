@@ -79,8 +79,8 @@ const sponsors = [
   { href: 'https://nasmfbank.com/', img: nassarawa },
   { href: 'https://tajbank.com/', img: taj },
   { href: 'https://africafranchise.org/', img: africa },
-  { href: 'https://curvesng.com/', img: curves },
   { href: 'https://naccima.com/', img: naccima },
+  { href: 'https://curvesng.com/', img: curves },
 ];
 
 export const _socials = [

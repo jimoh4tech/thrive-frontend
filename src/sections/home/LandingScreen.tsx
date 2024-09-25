@@ -61,8 +61,8 @@ const LandingScreen = () => {
             <Typography fontWeight={300} variant="h2">
               A World of
             </Typography>
-            <Typography variant="h1" color="primary.main">
-              Business Tools
+            <Typography variant="h2" color="primary.main">
+              Business Solutions
             </Typography>
           </Box>
           <Typography>

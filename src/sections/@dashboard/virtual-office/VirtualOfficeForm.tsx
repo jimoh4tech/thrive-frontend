@@ -125,7 +125,7 @@ export default function VirtualOfficeFirm() {
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Grid container justifyContent="center" alignItems="center">
         <Grid item xs={12} md={8}>
-          <Card sx={{ p: 4 }}>
+          <Card sx={{ p: 1 }}>
             <Stack spacing={2} alignItems="flex-end" sx={{ mt: 3 }}>
               <RHFTextField name="name" label="Contact Name" />
 

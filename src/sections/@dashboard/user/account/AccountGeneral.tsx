@@ -58,7 +58,7 @@ export default function AccountGeneral() {
     avatarUrl: user?.avatarUrl || null,
     phone: user?.phone || '',
     isApproved: user?.isApproved || false,
-    gender: user?.gender || '',
+    gender: user?.gender || 'Male',
     bio: user?.bio || '',
     dob: user?.dob || '',
   };

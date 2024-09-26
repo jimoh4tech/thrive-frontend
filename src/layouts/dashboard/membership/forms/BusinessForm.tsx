@@ -270,7 +270,7 @@ export default function BusinessProfile() {
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
         <Grid container justifyContent="center" alignItems="center">
           <Grid item xs={12} md={8}>
-            <Card sx={{ p: 4 }}>
+            <Card sx={{ p: 1 }}>
               <Box
                 rowGap={3}
                 columnGap={2}

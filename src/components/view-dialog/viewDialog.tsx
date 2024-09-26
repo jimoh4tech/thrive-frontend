@@ -90,6 +90,7 @@ const ViewDialog = ({ open, id, title, onClose }: ViewDialogProps) => {
     twitterLink: '',
     instagramLink: '',
     linkedinLink: '',
+    contactName: '',
   };
 
   const methods = useForm<FormValuesProps>({
@@ -99,7 +100,7 @@ const ViewDialog = ({ open, id, title, onClose }: ViewDialogProps) => {
   const getUserInfo = useCallback(async () => {
     try {
       const _userInfo = await viewUser(id);
-
+      console.log(_userInfo);
       setUserInfo(_userInfo.data);
     } catch (error) {
       enqueueSnackbar(error.message || 'Could not fetch User info', { variant: 'error' });
@@ -250,6 +251,26 @@ const ViewDialog = ({ open, id, title, onClose }: ViewDialogProps) => {
                     <Image
                       src={userInfo?.business?.logo}
                       alt="business logo"
+                      width={6}
+                      height={6}
+                    />
+                  </Box>
+                </Stack>
+                <Stack spacing={2} alignItems="center" sx={{ mt: 5 }}>
+                  <Typography variant="h5">Virtual office contact details</Typography>
+                  <RHFTextField
+                    name="contactName"
+                    label="Contact Name"
+                    value={userInfo?.virtualOffice?.name}
+                  />
+
+                  <Box>
+                    <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+                      Contact Government Issued ID Card
+                    </Typography>
+                    <Image
+                      src={userInfo?.virtualOffice?.validId}
+                      alt="business cover"
                       width={6}
                       height={6}
                     />

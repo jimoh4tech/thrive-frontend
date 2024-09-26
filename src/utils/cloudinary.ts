@@ -16,7 +16,8 @@ export const uploadSingle = async (
     | 'template'
     | 'event'
     | 'health'
-    | 'finance',
+    | 'finance'
+    | 'validId',
   public_id?: string
 ) => {
   const data = new FormData();

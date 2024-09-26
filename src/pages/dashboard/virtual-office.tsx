@@ -67,7 +67,7 @@ export default function UserProfilePage() {
           }
         />
 
-        {user?.business ? (
+        {user?.virtualOffice ? (
           <Card sx={{ p: 4 }}>
             <Grid container spacing={3}>
               <Grid item md={8} sx={{ mb: 3 }}>

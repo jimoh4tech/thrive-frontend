@@ -1,7 +1,7 @@
 // next
 import * as Yup from 'yup';
 // @mui
-import { Box, Card, Grid, Typography } from '@mui/material';
+import { Box, Card, Checkbox, Grid, Typography } from '@mui/material';
 // routes
 import { yupResolver } from '@hookform/resolvers/yup';
 import { LoadingButton } from '@mui/lab';
@@ -11,43 +11,46 @@ import { useForm } from 'react-hook-form';
 import { virtualOfficeApply } from 'src/actions/virtualOfficeAction';
 import FormProvider, { RHFTextField, RHFUpload } from 'src/components/hook-form';
 // auth
+import { useCallback, useState } from 'react';
+import VirtualModal from 'src/components/virtual-modal';
+import { uploadSingle } from 'src/utils/cloudinary';
 import { useAuthContext } from '../../../auth/useAuthContext';
 // components
 import Iconify from '../../../components/iconify';
 
 type FormValuesProps = {
   name: string;
-  designation: string;
-  address: string;
-  taxId: string;
-  cac: (File & { preview: string }) | null;
-  validId: (File & { preview: string }) | null;
+  designation?: string;
+  address?: string;
+  taxId?: string;
+  // cac?: (File & { preview: string }) | null;
+  validId?: (File & { preview: string }) | null;
 };
 
 export default function VirtualOfficeFirm() {
-  const { revalidateUser } = useAuthContext();
+  const { revalidateUser, user } = useAuthContext();
 
   // revalidateUser!();
 
   const { enqueueSnackbar } = useSnackbar();
-
-  const { user } = useAuthContext();
+  const [isCheck, setCheck] = useState(false);
+  const [submitting, setIsSubmitting] = useState(false);
 
   const UpdateUserSchema = Yup.object().shape({
-    name: Yup.string().required('Business Name is required'),
-    designation: Yup.string().required('Your Designation is required'),
-    address: Yup.string().required('Address is required'),
-    taxId: Yup.string(),
-    cac: Yup.mixed().required('CAC document is required'),
+    name: Yup.string().required('Contact Name is required'),
+    designation: Yup.string().optional(),
+    address: Yup.string().optional(),
+    taxId: Yup.string().optional(),
+    // cac: Yup.mixed().optional(),
     validId: Yup.mixed().optional(),
   });
 
   const defaultValues = {
-    name: user?.business.name,
-    designation: '',
-    address: user?.business.address,
-    taxId: '',
-    cac: null,
+    name: '',
+    designation: 'des',
+    address: 'address',
+    taxId: 'tax',
+    // cac: null,
     validId: null,
   };
 
@@ -63,27 +66,48 @@ export default function VirtualOfficeFirm() {
     formState: { isSubmitting },
   } = methods;
 
-  const onSubmit = async (data: FormValuesProps) => {
-    try {
-      // const _data = new FormData();
+  const onSubmit = useCallback(
+    async (data: FormValuesProps) => {
+      setIsSubmitting(true);
 
-      // const keys = Object.keys(business!);
+      if (user.hasSubscription) {
+        enqueueSnackbar(
+          'This offer is only available for regular subscribers! Kindly refer to terms of service',
+          { variant: 'info' }
+        );
+        setIsSubmitting(false);
+        return;
+      }
+      try {
+        console.log('I was clicked');
+        const { validId } = data;
 
-      // for (let i = 0; i < keys.length; i += 1) {
-      //   _data.append(keys[i], business[keys[i]]);
-      // }
+        if (validId) {
+          const {
+            data: { public_id },
+          } = await uploadSingle(validId, 'validId');
 
-      const res = await virtualOfficeApply(data);
+          data.validId = public_id;
+        } else {
+          enqueueSnackbar('Government Issued ID is required');
+          setIsSubmitting(false);
+          return;
+        }
+        console.log(data);
+        const res = await virtualOfficeApply(data);
 
-      enqueueSnackbar(res.data.message);
-      reset();
-      revalidateUser!();
-    } catch (err) {
-      reset(data, { keepValues: true });
-      console.error(err);
-      enqueueSnackbar(err?.message || err, { variant: 'error' });
-    }
-  };
+        enqueueSnackbar(res.data.message);
+        reset();
+        revalidateUser!();
+      } catch (err) {
+        setIsSubmitting(false);
+        reset(data, { keepValues: true });
+        console.error(err);
+        enqueueSnackbar(err?.message || err, { variant: 'error' });
+      }
+    },
+    [enqueueSnackbar, reset, revalidateUser, user.hasSubscription]
+  );
 
   const handleDrop = (acceptedFiles: File[], field: keyof typeof defaultValues) => {
     const file = acceptedFiles[0];
@@ -96,21 +120,22 @@ export default function VirtualOfficeFirm() {
       setValue(field, newFile, { shouldValidate: true });
     }
   };
+
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Grid container justifyContent="center" alignItems="center">
         <Grid item xs={12} md={8}>
           <Card sx={{ p: 4 }}>
             <Stack spacing={2} alignItems="flex-end" sx={{ mt: 3 }}>
-              <RHFTextField name="name" label="Business Name" />
+              <RHFTextField name="name" label="Contact Name" />
 
-              <RHFTextField name="designation" label="Business Email" />
+              {/* <RHFTextField name="designation" label="Business Email" /> */}
 
-              <RHFTextField name="address" label="Business Contact Address" />
+              {/* <RHFTextField name="address" label="Business Contact Address" /> */}
 
-              <RHFTextField name="taxId" label="Tax ID (Optional)" />
+              {/* <RHFTextField name="taxId" label="Tax ID (Optional)" /> */}
 
-              <Box>
+              {/* <Box>
                 <Typography variant="caption" sx={{ color: 'text.secondary' }}>
                   Upload CAC Document
                 </Typography>
@@ -120,7 +145,7 @@ export default function VirtualOfficeFirm() {
                   onDrop={(_) => handleDrop(_, 'cac')}
                   onDelete={() => setValue('cac', null, { shouldValidate: true })}
                 />
-              </Box>
+              </Box> */}
               <Box>
                 <Typography variant="caption" sx={{ color: 'text.secondary' }}>
                   Upload Government Issued ID
@@ -133,10 +158,20 @@ export default function VirtualOfficeFirm() {
                   helperText="NIMC, Driver’s License, Permanent Voter’s Card"
                 />
               </Box>
+              <Stack direction="row">
+                <Checkbox checked={isCheck} onChange={() => setCheck(!isCheck)} />
+                <VirtualModal setCheck={setCheck} />
+              </Stack>
             </Stack>
 
             <Stack spacing={3} alignItems="flex-end" sx={{ mt: 3 }}>
-              <LoadingButton fullWidth type="submit" variant="contained" loading={isSubmitting}>
+              <LoadingButton
+                fullWidth
+                type="submit"
+                variant="contained"
+                loading={isSubmitting || submitting}
+                disabled={!isCheck}
+              >
                 Next <Iconify icon="zondicons:cheveron-right" />
               </LoadingButton>
             </Stack>

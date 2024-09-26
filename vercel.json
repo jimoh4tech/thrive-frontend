@@ -5,5 +5,12 @@
 
       "destination": "/pages/:slug"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "https://www.thrivebizng.com/$1",
+      "permanent": true
+    }
   ]
 }

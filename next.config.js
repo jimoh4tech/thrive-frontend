@@ -6,10 +6,7 @@ module.exports = {
   },
   env: {
     // HOST
-    HOST_API_KEY:
-      process.env.NODE_ENV == 'production'
-        ? process.env.NEXT_PUBLIC_API_PROD
-        : process.env.NEXT_PUBLIC_API,
+    HOST_API_KEY: process.env.NEXT_PUBLIC_API,
     // MAPBOX
     MAPBOX_API:
       'pk.eyJ1IjoiaWNzc3Rocml2ZTAxIiwiYSI6ImNsaHo3dnE2eDFiNWUzY213NnB6d2Z3Y2YifQ.iv-Oay5yXkitnE6OVM5Slw',

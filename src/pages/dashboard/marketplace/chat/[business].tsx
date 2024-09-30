@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 // next
 import { useRouter } from 'next/router';
 // @mui
@@ -177,7 +177,7 @@ export default function Chat({
   return (
     <>
       <Head>
-        <title> Chat | Thrive</title>
+        <title> Chat | THRIVE</title>
       </Head>
       <Container maxWidth={themeStretch ? false : 'xl'}>
         <CustomBreadcrumbs

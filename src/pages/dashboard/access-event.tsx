@@ -99,7 +99,7 @@ export default function AccessEvent() {
   return (
     <>
       <Head>
-        <title> Access to Events | Thrive</title>
+        <title> Access to Events | THRIVE</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>

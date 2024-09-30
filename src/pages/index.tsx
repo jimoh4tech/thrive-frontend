@@ -80,11 +80,11 @@ export default function HomePage() {
             // borderColor: 'primary.main',
             justifyContent: 'center',
             alignItems: 'center',
-            my: 6,
+            my: 4,
           }}
         >
           {/* <Typography variant="h2">YOUR ADVERT APPEARS HERE</Typography> */}
-          <Image alt="Advertisment" src={ads} />
+          <Image alt="Advertisment" src={ads} width={800} height={250} />
         </Stack>
         {/* <Grid item md={6}>
           <Image alt="Advertisment" src={ads} />

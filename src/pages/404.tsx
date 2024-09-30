@@ -5,6 +5,7 @@ import NextLink from 'next/link';
 // @mui
 import { Button, Typography } from '@mui/material';
 // layouts
+import React from 'react';
 import CompactLayout from '../layouts/compact';
 // components
 import { MotionContainer, varBounce } from '../components/animate';
@@ -21,7 +22,7 @@ export default function Page404() {
   return (
     <>
       <Head>
-        <title> 404 Page Not Found | Thrive</title>
+        <title> 404 Page Not Found | THRIVE</title>
       </Head>
 
       <MotionContainer>

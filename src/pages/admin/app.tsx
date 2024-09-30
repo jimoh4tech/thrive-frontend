@@ -8,6 +8,7 @@ import { AppNewInvoice, AppWidgetSummary } from 'src/sections/@admin/app';
 import { AnalyticsOrderTimeline } from 'src/sections/@dashboard/general/analytics';
 import { BankingWidgetSummary } from 'src/sections/@dashboard/general/banking';
 // layouts
+import React from 'react';
 import AdminDashboardLayout from '../../layouts/admin';
 // components
 import { useSettingsContext } from '../../components/settings';
@@ -28,7 +29,7 @@ export default function GeneralAppPage() {
   return (
     <>
       <Head>
-        <title> General App | Thrive</title>
+        <title> General App | THRIVE</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>
@@ -143,7 +144,7 @@ export default function GeneralAppPage() {
               tableLabels={[
                 { id: 'id', label: 'Name' },
                 { id: 'category', label: 'Email' },
-                { id: 'price', label: 'ThriveNo' },
+                { id: 'price', label: 'THRIVE No' },
                 { id: 'status', label: 'Status' },
                 { id: '' },
               ]}

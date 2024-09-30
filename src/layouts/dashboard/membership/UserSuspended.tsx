@@ -1,6 +1,6 @@
 import { Avatar, Container } from '@mui/material';
 import Head from 'next/head';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useAuthContext } from 'src/auth/useAuthContext';
 import TourVideo from 'src/components/TourVideo';
 import Iconify from 'src/components/iconify';
@@ -20,14 +20,14 @@ export default function UserSuspended() {
   return (
     <>
       <Head>
-        <title> Account Suspended | Thrive</title>
+        <title> Account Suspended | THRIVE</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>
         <AppWelcome
           sx={{ bgcolor: 'warning.lighter', color: 'grey.800', pt: 2 }}
           title={`Hi, ${user?.fullName}`}
-          description="Your Account has been suspended. Kindly reach out to our support team via frontdesk@thrivebizng.com for more info."
+          description="Your Account has been suspended. Kindly reach out to our support team via support@thrivebizng.com for more info."
           img={
             <Avatar sx={{ bgcolor: '#fff', width: 100, height: 100, margin: 4 }}>
               <Iconify

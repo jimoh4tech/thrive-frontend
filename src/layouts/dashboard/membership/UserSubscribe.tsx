@@ -5,7 +5,7 @@ import { useSettingsContext } from 'src/components/settings';
 import useResponsive from 'src/hooks/useResponsive';
 import { AppWelcome } from 'src/sections/@dashboard/general/app';
 import { useAuthContext } from 'src/auth/useAuthContext';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { creator } from 'src/actions';
 import { useSnackbar } from 'notistack';
 import { fCurrency } from 'src/utils/formatNumber';
@@ -38,7 +38,7 @@ export default function UserSubscribe() {
     {
       name: 'Subscription',
       amount: plan === 'month' ? monthAmount : yearAmount,
-      label: plan === 'month' ? 'Premium' : '20% off',
+      label: plan === 'month' ? 'Premium' : '30% off',
     },
   ];
 
@@ -65,7 +65,7 @@ export default function UserSubscribe() {
   return (
     <>
       <Head>
-        <title> Complete Subscription | Thrive</title>
+        <title> Complete Subscription | THRIVE</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>
@@ -115,7 +115,7 @@ export default function UserSubscribe() {
                   onInitializePayment();
                 }}
               >
-                {`${fCurrency(yearAmount)}/Year 20%off`}
+                {`${fCurrency(yearAmount)}/Year 30% off`}
               </Button>
             </Stack>
           </Grid>

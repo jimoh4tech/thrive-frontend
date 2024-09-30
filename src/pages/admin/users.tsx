@@ -169,7 +169,7 @@ export default function UserListPage() {
   return (
     <>
       <Head>
-        <title> User: List | Thrive</title>
+        <title> User: List | THRIVE</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>

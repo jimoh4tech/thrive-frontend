@@ -19,7 +19,7 @@ const Logo = forwardRef<HTMLDivElement, LogoProps>(
       <Box
         component="img"
         src={ThriveLogo.src}
-        alt=' alt="Thrive Logo'
+        alt=' alt="THRIVE Logo'
         sx={{ width: 40, height: 40, cursor: 'pointer', ...sx }}
       />
     );
@@ -36,7 +36,7 @@ const Logo = forwardRef<HTMLDivElement, LogoProps>(
     //     }}
     //     {...other}
     //   >
-    //     <Image width={60} height={40} src={ThriveLogo} alt="Thrive Logo" />
+    //     <Image width={60} height={40} src={ThriveLogo} alt="THRIVE Logo" />
     //   </Box>
     // );
 
@@ -60,7 +60,7 @@ export const LogoFull = forwardRef<HTMLDivElement, LogoProps>(
       <Box
         component="img"
         src={logo2.src}
-        alt=' alt="Thrive Logo'
+        alt=' alt="THRIVE Logo'
         sx={{ cursor: 'pointer', ...sx }}
       />
     );

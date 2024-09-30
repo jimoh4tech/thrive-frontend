@@ -15,7 +15,7 @@ export { default as tfc3 } from './tfc/tfc3.jpg';
 // About Page
 export { default as aboutBg } from './aboutBg.png';
 
-// Thrive Modules Page
+// THRIVE Modules Page
 export { default as inspire } from './modules/inspire.jpg';
 export { default as create } from './modules/create.jpg';
 export { default as start } from './modules/start.jpg';

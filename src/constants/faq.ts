@@ -1,9 +1,9 @@
 export const faq = [
   {
-    titile: 'What is Thrive, and what services does it offer to businesses?',
-    ans: `Thrive is a one-stop digital support center for growing businesses in Nigeria.
+    titile: 'What is THRIVE, and what services does it offer to businesses?',
+    ans: `THRIVE is a one-stop digital support center for growing businesses in Nigeria.
 
-We support micro, small, and medium businesses with the resources they need to grow and Thrive in a challenging environment.
+We support micro, small, and medium businesses with the resources they need to grow and THRIVE in a challenging environment.
 
 We are looking to expand the economic contribution of growing businesses by providing best-in-class sustainable, scalable entrepreneurship support solutions on a digital platform.
 `,
@@ -89,7 +89,7 @@ Click on the user account settings by the top right corner to update your user p
   },
   {
     titile: 'How do I access the web application?',
-    ans: `To access the web application, open a web browser (such as Google Chrome, Mozilla Firefox, or Safari) and enter the URL (www.thrivebizng.com).
+    ans: `To access the web application, open a web browser (such as Google Chrome, Mozilla Firefox, or Safari) and enter the URL (www.THRIVEbizng.com).
 `,
   },
   {
@@ -104,7 +104,7 @@ Click on the user account settings by the top right corner to update your user p
   },
   {
     titile: 'Can I use the web application on my mobile device?',
-    ans: `Thrive is a mobile-first web application designed to be responsive and accessible on mobile devices. You can access them through the web browser on your mobile phone or tablet.
+    ans: `THRIVE is a mobile-first web application designed to be responsive and accessible on mobile devices. You can access them through the web browser on your mobile phone or tablet.
 `,
   },
   {

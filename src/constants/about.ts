@@ -1,7 +1,7 @@
 import { vision } from 'src/assets/images';
 
 export const intro =
-  ' <p>Thrive is a one-stop digital support center for growing businesses in Nigeria. </p>  <p>We support micro, small and medium businesses with the resources they need to grow and Thrive in a challenging environment.</p>';
+  ' <p>THRIVE is a one-stop digital support center for growing businesses in Nigeria. </p>  <p>We support micro, small and medium businesses with the resources they need to grow and THRIVE in a challenging environment.</p>';
 
 export const otsu = {
   image: vision.src,
@@ -27,18 +27,18 @@ export const missVis = {
 
 export const lone = `<p>Small and Medium Enterprises (SMEs) are the backbone of many economies around the world, providing employment opportunities, contributing to economic growth, and fostering innovation. However, these businesses often face a variety of challenges, such as access to funding, marketing, and technological resources.</p>
 
-<p>In response to these challenges, the development of an online MSME resource center has become increasingly popular, which is why <strong style="color: #F35D2A;">Thrive</strong>  - a one-stop digital support for entrepreneurs is bridging the gap by providing a sustainable platform that allows growing businesses to access business support services.</p>
+<p>In response to these challenges, the development of an online MSME resource center has become increasingly popular, which is why <strong style="color: #F35D2A;">THRIVE</strong>  - a one-stop digital support for entrepreneurs is bridging the gap by providing a sustainable platform that allows growing businesses to access business support services.</p>
 
-<p>By subscribing to these resources, entrepreneurs can grow their businesses and Thrive in today's competitive business environment.</p>
+<p>By subscribing to these resources, entrepreneurs can grow their businesses and THRIVE in today's competitive business environment.</p>
 `;
 
 export const objectives = {
   title: 'Our Objectives',
   items: [
-    'Provide post-training entrepreneurship development support to micro, small and medium enterprises beginning with the Thrive beneficiaries.',
+    'Provide post-training entrepreneurship development support to micro, small and medium enterprises beginning with the THRIVE beneficiaries.',
 
     'Offer a plug-and-play framework for corporate and development partners to fulfill their desire to contribute to entrepreneurship development, without the need to create their programs',
-    'Bridge the gap of infrastructure, resources, and facilities for entrepreneurs to Thrive with digitally enabled and scalable solutions',
+    'Bridge the gap of infrastructure, resources, and facilities for entrepreneurs to THRIVE with digitally enabled and scalable solutions',
     'Minimize the cost of access and use of the support services through augmented collaboration',
     'Minimize the socioeconomic vulnerability of dislocated entrepreneurs such as IDPs, migrants, and returnees with programs targeting their most recurrent needs',
   ],

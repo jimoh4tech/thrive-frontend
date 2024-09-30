@@ -103,7 +103,7 @@ export default function FileManagerPage() {
   return (
     <>
       <Head>
-        <title> Business Directory | Thrive</title>
+        <title> Business Directory | THRIVE</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>

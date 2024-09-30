@@ -5,6 +5,7 @@ import NextLink from 'next/link';
 // @mui
 import { Button, Typography } from '@mui/material';
 // layouts
+import React from 'react';
 import CompactLayout from '../layouts/compact';
 // components
 import { MotionContainer, varBounce } from '../components/animate';
@@ -21,7 +22,7 @@ export default function Page403() {
   return (
     <>
       <Head>
-        <title> 403 Forbidden | Thrive</title>
+        <title> 403 Forbidden | THRIVE</title>
       </Head>
 
       <MotionContainer>

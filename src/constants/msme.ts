@@ -25,7 +25,7 @@ const msme = {
   },
   // body3: {
   //   image: MSME3.src,
-  //   title: 'Thriveand ',
+  //   title: 'THRIVE and ',
   // },
 };
 

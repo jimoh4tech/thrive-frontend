@@ -105,7 +105,7 @@ export default function BusinessBox() {
   return (
     <>
       <Head>
-        <title> Events | Thrive</title>
+        <title> Events | THRIVE</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>

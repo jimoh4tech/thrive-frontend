@@ -118,7 +118,7 @@ const LandingScreen = () => {
         <Carousel {...carouselSettings}>
           {[banner3, banner1, banner2, banner4].map((item, i) => (
             <Box key={i} sx={{ position: 'relative', borderRadius: 1, overflow: 'hidden' }}>
-              <Image alt="Thrive" src={item.src} />
+              <Image alt="THRIVE" src={item.src} />
             </Box>
           ))}
         </Carousel>

@@ -74,7 +74,7 @@ export default function BusinessBox() {
   return (
     <>
       <Head>
-        <title> Health Wellbeing | Thrive</title>
+        <title> Health Wellbeing | THRIVE</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>

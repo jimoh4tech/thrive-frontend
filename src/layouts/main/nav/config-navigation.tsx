@@ -15,7 +15,7 @@ const navConfig = [
     path: PATH_PAGE.about,
   },
   // {
-  //   title: 'Thrive Modules',
+  //   title: 'THRIVE Modules',
   //   path: PATH_PAGE.thriveModules,
   // },
   {
@@ -26,8 +26,8 @@ const navConfig = [
         subheader: 'Other',
         items: [
           { title: 'Entrepreneurship Space', path: PATH_PAGE.ecosystem },
-          // { title: 'ThriveTFC', path: PATH_PAGE.thriveTfc },
-          // { title: 'Thrive Consortium', path: PATH_PAGE.thriveConsortiums },
+          // { title: 'THRIVE TFC', path: PATH_PAGE.thriveTfc },
+          // { title: 'THRIVE Consortium', path: PATH_PAGE.thriveConsortiums },
           { title: 'Announcements', path: PATH_PAGE.announcement },
           { title: 'Marketplace', path: PATH_PAGE.marketplace },
         ],

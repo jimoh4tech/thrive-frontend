@@ -1,7 +1,7 @@
 import { Button, Container } from '@mui/material';
 import { Stack } from '@mui/system';
 import Head from 'next/head';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { SeoIllustration } from 'src/assets/illustrations';
 import { useAuthContext } from 'src/auth/useAuthContext';
 import TourVideo from 'src/components/TourVideo';
@@ -21,7 +21,7 @@ export default function UserPending() {
   return (
     <>
       <Head>
-        <title> Pending Approval | Thrive</title>
+        <title> Pending Approval | THRIVE</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>

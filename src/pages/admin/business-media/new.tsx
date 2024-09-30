@@ -46,7 +46,7 @@ export default function BlogNewPostPage() {
   return (
     <>
       <Head>
-        <title> Business Library | Thrive</title>
+        <title> Business Library | THRIVE</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>

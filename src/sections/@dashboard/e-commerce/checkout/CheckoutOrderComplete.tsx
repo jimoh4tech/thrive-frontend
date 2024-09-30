@@ -38,7 +38,7 @@ export default function CheckoutOrderComplete({ open, onReset, onDownloadPDF }: 
         <OrderCompleteIllustration sx={{ height: 260 }} />
 
         <Typography>
-          Your subscription to Thrive platform was successful. You can now return to your dashboard
+          Your subscription to THRIVE platform was successful. You can now return to your dashboard
           .
         </Typography>
 

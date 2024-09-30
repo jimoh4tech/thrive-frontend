@@ -31,7 +31,7 @@ import { varFade } from 'src/components/animate';
 import { LogoFull } from 'src/components/logo/Logo';
 // import Image from 'src/components/image/Image';
 import Image from 'next/image';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import TourVideo from 'src/components/TourVideo';
 import { PATH_PAGE } from '../../routes/paths';
 // components
@@ -43,7 +43,7 @@ const LINKS = [
   {
     headline: 'Contact Us',
     children: [
-      { name: 'frontoffice@thrivebiz.ng', href: 'mailto:frontoffice@thrivebiz.ng' },
+      { name: 'support@thrivebizng.com', href: 'mailto:support@thrivebizng.com' },
       { name: '+2349066189699', href: 'tel:+2349066189699' },
       { name: '+2349067325337', href: 'tel:+2349067325337' },
       {
@@ -138,7 +138,7 @@ export default function Footer() {
             </Typography>
           </m.div>
           <Typography textAlign="center">
-            Thrive is able to offer world-class digital support to thousands of growing businesses
+            THRIVE is able to offer world-class digital support to thousands of growing businesses
             because it is supported by
           </Typography>
           <Stack direction="row" spacing={10} justifyContent="center">

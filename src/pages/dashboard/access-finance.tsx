@@ -95,7 +95,7 @@ export default function AccessFinance() {
   return (
     <>
       <Head>
-        <title> Access To Finance | Thrive</title>
+        <title> Access To Finance | THRIVE</title>
       </Head>
 
       <Container maxWidth="xl">

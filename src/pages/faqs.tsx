@@ -1,7 +1,7 @@
 import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material';
 import { Container } from '@mui/system';
 import Head from 'next/head';
-import { SyntheticEvent, useState } from 'react';
+import React, { SyntheticEvent, useState } from 'react';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs/CustomBreadcrumbs';
 import Iconify from 'src/components/iconify/Iconify';
 import { faq } from 'src/constants/faq';
@@ -27,7 +27,7 @@ export default function Support() {
   return (
     <>
       <Head>
-        <title> Contact Support | Thrive</title>
+        <title> Contact Support | THRIVE</title>
       </Head>
 
       <Container maxWidth="xl">

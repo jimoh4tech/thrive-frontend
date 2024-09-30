@@ -30,7 +30,7 @@ export default function Register() {
 
       {/* <Card>
         <CardHeader
-          title="Are yourThriveCertified?"
+          title="Are your THRIVE Certified?"
           subheader="Confirm your membership"
           sx={{
             '& .MuiCardHeader-action': { alignSelf: 'center' },

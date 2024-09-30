@@ -37,7 +37,7 @@ export default function UserProfilePage() {
   return (
     <>
       <Head>
-        <title> Digital Address | Thrive</title>
+        <title> Digital Address | THRIVE</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>

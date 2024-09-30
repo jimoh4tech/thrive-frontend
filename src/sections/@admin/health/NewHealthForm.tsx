@@ -128,7 +128,7 @@ export default function NewHealthForm({ categories }: { categories: any[] }) {
               <RHFTextField
                 name="url"
                 label="Provider Website"
-                placeholder="https://thrivebizng.com/"
+                placeholder="https://www.thrivebizng.com/"
               />
 
               <Stack spacing={1}>

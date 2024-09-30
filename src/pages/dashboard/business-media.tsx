@@ -81,7 +81,7 @@ export default function FileManagerPage() {
   return (
     <>
       <Head>
-        <title> Business Library | Thrive</title>
+        <title> Business Library | THRIVE</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>

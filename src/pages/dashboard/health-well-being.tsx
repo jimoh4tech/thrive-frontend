@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 // next
 import Head from 'next/head';
 // @mui
@@ -70,7 +70,7 @@ export default function FileManagerPage() {
   return (
     <>
       <Head>
-        <title> Health & Wellbeing | Thrive</title>
+        <title> Health & Wellbeing | THRIVE</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>

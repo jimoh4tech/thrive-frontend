@@ -85,7 +85,7 @@ export default function BusinessBox() {
   return (
     <>
       <Head>
-        <title> Business Media | Thrive</title>
+        <title> Business Media | THRIVE</title>
       </Head>
 
       <Container>

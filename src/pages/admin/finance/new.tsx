@@ -60,7 +60,7 @@ export default function NewFiniancialService() {
   return (
     <>
       <Head>
-        <title> New Financial Service | Thrive</title>
+        <title> New Financial Service | THRIVE</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>

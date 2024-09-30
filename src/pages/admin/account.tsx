@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 // next
 import Head from 'next/head';
 // @mui
@@ -76,7 +76,7 @@ export default function AdminAccountPage() {
   return (
     <>
       <Head>
-        <title> Admin: Account Settings | Thrive</title>
+        <title> Admin: Account Settings | THRIVE</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>

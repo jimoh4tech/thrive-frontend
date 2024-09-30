@@ -21,7 +21,7 @@ export const sa = {
   posts: [
     {
       id: 1,
-      title: 'Welcome to Thrive',
+      title: 'Welcome to THRIVE',
       body: lorem,
       image: logo2.src,
       comment: 5,
@@ -31,7 +31,7 @@ export const sa = {
     },
     {
       id: 2,
-      title: 'Thrive beneficiary displays a new business line',
+      title: 'THRIVE beneficiary displays a new business line',
       body: lorem,
       image: 'https://res.cloudinary.com/thrive-biz/image/upload/v1684509080/su_3.png',
       comment: 5,
@@ -41,7 +41,7 @@ export const sa = {
     },
     // {
     //   id: 3,
-    //   title: 'Thrive Consortiums meets in Benin',
+    //   title: 'THRIVE Consortiums meets in Benin',
     //   body: lorem,
     //   image: sa_2.src,
     //   comment: 5,
@@ -51,7 +51,7 @@ export const sa = {
     // },
     {
       id: 4,
-      title: 'Thrive beneficiary attends export fair',
+      title: 'THRIVE beneficiary attends export fair',
       body: lorem,
       image: 'https://res.cloudinary.com/thrive-biz/image/upload/v1684509079/su_4.png',
       comment: 5,
@@ -61,7 +61,7 @@ export const sa = {
     },
     // {
     //   id: 5,
-    //   title: 'Thrive beneficiary attends export fair',
+    //   title: 'THRIVE beneficiary attends export fair',
     //   body: lorem,
     //   image: 'https://res.cloudinary.com/thrive-biz/image/upload/v1684508627/sa_2.png',
     //   comment: 5,
@@ -71,7 +71,7 @@ export const sa = {
     // },
     // {
     //   id: 6,
-    //   title: 'Thrive beneficiary attends export fair',
+    //   title: 'THRIVE beneficiary attends export fair',
     //   body: lorem,
     //   image: 'https://res.cloudinary.com/thrive-biz/image/upload/v1684508627/sa_2.png',
     //   comment: 5,
@@ -81,7 +81,7 @@ export const sa = {
     // },
     // {
     //   id: 7,
-    //   title: 'Thrive beneficiary attends export fair',
+    //   title: 'THRIVE beneficiary attends export fair',
     //   body: lorem,
     //   image: 'https://res.cloudinary.com/thrive-biz/image/upload/v1684509079/su_4.png',
     //   comment: 5,

@@ -97,7 +97,7 @@ export default function BusinessBox() {
   return (
     <>
       <Head>
-        <title> Business Toolkit | Thrive</title>
+        <title> Business Toolkit | THRIVE</title>
       </Head>
 
       <Container>

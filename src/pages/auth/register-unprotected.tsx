@@ -9,7 +9,7 @@ export default function RegisterUnprotectedPage() {
   return (
     <>
       <Head>
-        <title> Register Unprotected | Thrive</title>
+        <title> Register Unprotected | THRIVE</title>
       </Head>
 
       <Register />

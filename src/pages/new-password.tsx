@@ -4,6 +4,7 @@ import NextLink from 'next/link';
 // @mui
 import { Link, Typography } from '@mui/material';
 // layouts
+import React from 'react';
 import CompactLayout from '../layouts/compact';
 // routes
 import { PATH_AUTH } from '../routes/paths';
@@ -24,7 +25,7 @@ export default function NewPasswordPage() {
   return (
     <>
       <Head>
-        <title> New Password | Thrive</title>
+        <title> New Password | THRIVE</title>
       </Head>
 
       <SentIcon sx={{ mb: 5, height: 96 }} />

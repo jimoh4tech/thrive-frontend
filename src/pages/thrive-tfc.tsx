@@ -10,7 +10,7 @@ import MainLayout from '../layouts/main';
 // ----------------------------------------------------------------------
 
 HomePage.getLayout = (page: React.ReactElement) => (
-  <MainLayout metaTitle="Thrive Trainers, Facilitator, Coaches (TFC)">{page}</MainLayout>
+  <MainLayout metaTitle="THRIVE Trainers, Facilitator, Coaches (TFC)">{page}</MainLayout>
 );
 
 // ----------------------------------------------------------------------

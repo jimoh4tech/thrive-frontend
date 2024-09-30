@@ -58,7 +58,7 @@ export default function BlogNewPostPage() {
   return (
     <>
       <Head>
-        <title> New Event | Thrive</title>
+        <title> New Event | THRIVE</title>
       </Head>
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs

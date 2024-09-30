@@ -19,6 +19,6 @@ const modules = {
   },
 };
 export const intro =
-  'TheThriveEntrepreneurship Development Programme - <strong>"Creating Business Development Opportunities through Entrepreneurship Training, Coaching and linkage Measures.”</strong> The trainings are delivered using the blended learning model of combining online and in-person trainings. The content of the training has been designed to be rolled out using a modular approach that builds from INSPIRE, to CREATE, to START, and ends with the SCALE module.';
+  'The THRIVE Entrepreneurship Development Programme - <strong>"Creating Business Development Opportunities through Entrepreneurship Training, Coaching and linkage Measures.”</strong> The trainings are delivered using the blended learning model of combining online and in-person trainings. The content of the training has been designed to be rolled out using a modular approach that builds from INSPIRE, to CREATE, to START, and ends with the SCALE module.';
 
 export default modules;

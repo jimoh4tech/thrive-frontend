@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 // next
 import Head from 'next/head';
 // @mui
@@ -14,7 +15,6 @@ import {
 } from '@mui/material';
 // routes
 import { Box, Stack } from '@mui/system';
-import { useState } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { SeoIllustration } from 'src/assets/illustrations';
@@ -53,7 +53,7 @@ export default function UserProfilePage() {
   return (
     <>
       <Head>
-        <title> Virtual Office | Thrive</title>
+        <title> Virtual Office | THRIVE</title>
       </Head>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>

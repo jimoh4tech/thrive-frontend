@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 // next
 import { useRouter } from 'next/router';
 // config
@@ -48,7 +48,7 @@ export default function IndexPage() {
   return (
     <>
       <Head>
-        <title> General: App | Thrive</title>
+        <title> General: App | THRIVE</title>
       </Head>
       <Container maxWidth={themeStretch ? false : 'xl'}>
         <Grid container spacing={3}>
@@ -162,7 +162,7 @@ export default function IndexPage() {
               tableLabels={[
                 { id: 'id', label: 'Name' },
                 { id: 'category', label: 'Email' },
-                { id: 'price', label: 'ThriveNo' },
+                { id: 'price', label: 'THRIVE No' },
                 { id: 'status', label: 'Status' },
                 { id: '' },
               ]}

@@ -11,7 +11,7 @@ import MainLayout from '../layouts/main';
 // ----------------------------------------------------------------------
 
 ThriveAgencies.getLayout = (page: React.ReactElement) => (
-  <MainLayout metaTitle="Thrive Consortium">{page}</MainLayout>
+  <MainLayout metaTitle="THRIVE Consortium">{page}</MainLayout>
 );
 
 // ----------------------------------------------------------------------

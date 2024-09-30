@@ -10,7 +10,7 @@ import BusinessCover from 'src/sections/@dashboard/web-address/BusinessCover';
 import BusinessSocialInfo from 'src/sections/@dashboard/web-address/BusinessSocialInfo';
 import axiosInstance from 'src/utils/axios';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import LoadingScreen from 'src/components/loading-screen';
 import Page404 from './404';
 
@@ -62,7 +62,7 @@ import Page404 from './404';
 //   return (
 //     <>
 //       <Head>
-//         <title> {name} | Thrive</title>
+//         <title> {name} | THRIVE</title>
 //       </Head>
 
 //       <Box
@@ -147,7 +147,7 @@ const Page = () => {
   return (
     <>
       <Head>
-        <title> {business?.name} | Thrive</title>
+        <title> {business?.name} | THRIVE</title>
       </Head>
 
       <Box

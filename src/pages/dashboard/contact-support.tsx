@@ -28,7 +28,7 @@ export default function Support() {
   return (
     <>
       <Head>
-        <title> Contact Support | Thrive</title>
+        <title> Contact Support | THRIVE</title>
       </Head>
 
       <Container maxWidth="xl">

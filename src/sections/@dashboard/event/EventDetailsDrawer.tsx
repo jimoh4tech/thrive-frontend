@@ -62,6 +62,7 @@ export default function EventDetailsDrawer({
     setToggleProperties(!toggleProperties);
   };
 
+  console.log(url);
   const onDelete = async () => {
     try {
       setLoading(true);

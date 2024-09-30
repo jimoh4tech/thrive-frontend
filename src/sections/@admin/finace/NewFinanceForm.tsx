@@ -44,7 +44,7 @@ export default function NewFinanceForm({
     cover: Yup.mixed().required('Cover image is required'),
     categoryId: Yup.string().required('Category is required'),
     institutionId: Yup.string().required('Institution is required'),
-    url: Yup.string().required('Finance Digital address is required'),
+    url: Yup.string().url('Invalid url! KIndly start with https://'),
   });
 
   const defaultValues = {

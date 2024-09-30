@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 // next
 import Head from 'next/head';
 // @mui
@@ -58,7 +58,7 @@ export default function BusinessBox() {
     try {
       setFetching(true);
       const data = await loader('events', { sortBy: 'createdAt', order: 'DESC', ...query });
-
+      console.log(data);
       setEvents(data);
 
       setFetching(false);

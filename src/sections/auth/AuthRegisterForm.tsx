@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import * as Yup from 'yup';
 // form
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -121,7 +121,7 @@ export default function AuthRegisterForm() {
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const [ngos, setNgos] = useState([{ id: '1', name: 'Alani' }]);
+  const [ngos, setNgos] = useState([{ id: '1', name: 'Enterprise Hub' }]);
 
   const getNgos = useCallback(async () => {
     try {

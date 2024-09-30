@@ -5,7 +5,7 @@ import { Container } from '@mui/material';
 // routes
 import NewEventForm from 'src/sections/@admin/event/NewEventForm';
 import { useSnackbar } from 'notistack';
-import { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { loader } from 'src/actions';
 import { PATH_ADMIN } from '../../../routes/paths';
 // layouts

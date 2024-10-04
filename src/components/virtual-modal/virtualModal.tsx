@@ -28,7 +28,7 @@ export default function VirtualModal({ setCheck }: { setCheck: (val: boolean) =>
 
   return (
     <>
-      <Link variant="caption" onClick={handleClickOpen}>
+      <Link variant="caption" onClick={handleClickOpen} style={{ cursor: 'pointer' }}>
         By agreeing to these terms, you acknowledge and understand the conditions of using THRIVE’s
         virtual office feature. Misuse of this service may result in the suspension or permanent
         discontinuation of access.

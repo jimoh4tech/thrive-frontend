@@ -127,6 +127,10 @@ export default function VirtualOfficeFirm() {
         <Grid item xs={12} md={8}>
           <Card sx={{ p: 1 }}>
             <Stack spacing={2} alignItems="flex-end" sx={{ mt: 3 }}>
+              <Typography variant="body1" textAlign="center" color="chocolate">
+                This is the details of the individual responsible to interface with our company to
+                drop/pick items
+              </Typography>
               <RHFTextField name="name" label="Contact Name" />
 
               {/* <RHFTextField name="designation" label="Business Email" /> */}

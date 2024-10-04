@@ -166,17 +166,6 @@ export default function HealthDrawerDrawer({
         >
           APPLY NOW
         </Button>
-        {/* <LoadingButton
-          fullWidth
-          variant="soft"
-          color="success"
-          size="large"
-          startIcon={<Iconify icon="eva:trash-2-outline" />}
-          onClick={onApply}
-          loading={loading}
-        >
-          APPLY NOW
-        </LoadingButton> */}
         {user.role.id === 3 && (
           <LoadingButton
             fullWidth

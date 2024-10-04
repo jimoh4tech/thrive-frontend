@@ -159,7 +159,7 @@ export default function HealthDrawerDrawer({
           fullWidth
           href={url || ''}
           target="_blank"
-          startIcon={<Iconify icon="eva:trash-2-outline" />}
+          startIcon={<Iconify icon="eva:arrow-ios-forward-fill" />}
           size="large"
           variant="soft"
           color="success"

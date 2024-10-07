@@ -42,6 +42,8 @@ export default function VirtualModal({ setCheck }: { setCheck: (val: boolean) =>
         <DialogTitle id="alert-dialog-title">Virtual Office Disclaimer and Agreement</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description" variant="caption">
+            Last Updated: October 1, 2024. <br />
+            <br />
             Before using the THRIVE virtual office feature, users are required to agree to the
             following terms and conditions: <br />
             1. The virtual office feature is only available to users with an active subscription to
@@ -56,7 +58,9 @@ export default function VirtualModal({ setCheck }: { setCheck: (val: boolean) =>
             4. Users are required to designate a specific individual as the Contact Person for the
             virtual office service. This individual will be responsible for managing any
             correspondence or inquiries related to the virtual office. <br />
-            5. THRIVE shall not be held liable for any losses, damages, or claims arising from the
+            5. Users are entirely responsible for the business they conduct and are in no way
+            associated with THRIVE. <br />
+            6. THRIVE shall not be held liable for any losses, damages, or claims arising from the
             misuse of the virtual office address or non-compliance with this agreement.
           </DialogContentText>
         </DialogContent>

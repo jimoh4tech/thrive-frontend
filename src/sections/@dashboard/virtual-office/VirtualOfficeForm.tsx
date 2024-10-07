@@ -72,7 +72,7 @@ export default function VirtualOfficeFirm() {
 
       if (user.hasSubscription) {
         enqueueSnackbar(
-          'This offer is only available for regular subscribers! Kindly refer to terms of service',
+          'This offer is only available for regular subscribers! Kindly revisit after your trial period.',
           { variant: 'info' }
         );
         setIsSubmitting(false);
@@ -127,10 +127,6 @@ export default function VirtualOfficeFirm() {
         <Grid item xs={12} md={8}>
           <Card sx={{ p: 1 }}>
             <Stack spacing={2} alignItems="flex-end" sx={{ mt: 3 }}>
-              <Typography variant="body1" color="chocolate">
-                This is the details of the individual responsible to interface with our company to
-                drop/pick items
-              </Typography>
               <RHFTextField name="name" label="Contact Name" />
 
               {/* <RHFTextField name="designation" label="Business Email" /> */}
@@ -159,7 +155,8 @@ export default function VirtualOfficeFirm() {
                   maxSize={3145728}
                   onDrop={(_) => handleDrop(_, 'validId')}
                   onDelete={() => setValue('validId', null, { shouldValidate: true })}
-                  helperText="NIMC, Driver’s License, Permanent Voter’s Card"
+                  helperText={`NIMC, Driver’s License, Permanent Voter’s Card. This is the details of the individual responsible to interface with our company to
+                drop/pick items`}
                 />
               </Box>
               <Stack direction="row">

@@ -9,6 +9,11 @@ We are looking to expand the economic contribution of growing businesses by prov
 `,
   },
   {
+    titile: 'Can I offer my Service on THRIVE?',
+    ans: `Yes, you can provide your own service on THRIVE. Kindly fill this form with the necessary information and we will get back to you. <a href="https://forms.gle/96nrSrPy1Ys1eQNYA" target="_blank">Service Provider Form</a>
+`,
+  },
+  {
     titile: 'Are there any fees associated with registering as a user on your platform?',
     ans: `Yes, there is a monthly and annual subscription fee of ₦2,000 and ₦19,200 respectively. 
 

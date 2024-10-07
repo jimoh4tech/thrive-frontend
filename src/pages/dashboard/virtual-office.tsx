@@ -81,14 +81,14 @@ export default function UserProfilePage() {
 
                   <Grid>
                     <CopyToClipboard
-                      text="Enterprise Hub, 16a Trinity Avenue, Victoria Island Lagos"
+                      text="Enterprise Hubs, 16a Trinity Avenue, Victoria Island Lagos"
                       onCopy={() => enqueueSnackbar('Office Address Copied')}
                     >
                       <Button
                         endIcon={<Iconify icon="material-symbols:content-copy-outline-rounded" />}
                         variant="outlined"
                       >
-                        Enterprise Hub, 16a Trinity Avenue, Victoria Island Lagos.
+                        Enterprise Hubs, 16a Trinity Avenue, Victoria Island Lagos.
                       </Button>
                     </CopyToClipboard>
                   </Grid>

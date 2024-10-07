@@ -47,7 +47,7 @@ const LINKS = [
       { name: '+2349066189699', href: 'tel:+2349066189699' },
       { name: '+2349067325337', href: 'tel:+2349067325337' },
       {
-        name: 'Enterprise Hubs Trinity Avenue by Landmark, Off Ligali Ayorinde, Victoria.',
+        name: 'THRIVE – Enterprise Hubs, 16a Trinity Avenue, Off Ligali Ayorinde, Victoria Island.',
         href: PATH_PAGE.faqs,
       },
     ],

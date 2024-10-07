@@ -50,7 +50,7 @@ const TABLE_HEAD = [
   { id: 'name', label: 'Name', align: 'left' },
   { id: 'email', label: 'Email', align: 'left' },
   { id: 'phone', label: 'Phone', align: 'left' },
-  { id: 'ngo', label: 'Consortium', align: 'left' },
+  { id: 'ngo', label: 'Partners', align: 'left' },
   { id: 'createdAt', label: 'Reg Date', align: 'left' },
   // { id: 'isVerified', label: 'Verified', align: 'center' },
   { id: 'status', label: 'Status', align: 'left' },
@@ -181,7 +181,7 @@ export default function UserListPage() {
             { name: 'List' },
           ]}
           actions={[
-            { title: 'Ngo', endpoint: 'ngos', cb: getNgos },
+            { title: 'Partners', endpoint: 'ngos', cb: getNgos },
             { title: 'Industry', endpoint: 'industries', cb: () => {} },
           ]}
         />

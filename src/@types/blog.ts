@@ -44,4 +44,5 @@ export type IBlogPost = {
   like: number;
   tags: string[];
   createdAt: string;
+  href?: string;
 };

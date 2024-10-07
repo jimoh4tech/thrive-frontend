@@ -42,7 +42,7 @@ export default function HomePage() {
               {
                 latlng: [6.4245331402598085, 3.4537281017776857],
                 address:
-                  'Enterprise Hubs Trinity Avenue by Landmark,Off Ligali Ayorinde, Victoria.',
+                  ': THRIVE – Enterprise Hubs, 16a Trinity Avenue, Off Ligali Ayorinde, Victoria Island.',
                 phoneNumber: '+2349066189699',
               },
             ]}

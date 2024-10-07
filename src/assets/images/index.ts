@@ -74,7 +74,7 @@ export { default as pedestal } from './sponsors/pedestal.jpg';
 export { default as taj } from './sponsors/taj.png';
 export { default as africa } from './sponsors/africa.png';
 export { default as curves } from './sponsors/curves.png';
-export { default as naccima } from './sponsors/naccima.png';
+export { default as naccima } from './sponsors/naccima.jpg';
 export { default as ads } from './ads.jpg';
 
 // Login Page Image

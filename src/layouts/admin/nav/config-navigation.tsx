@@ -63,7 +63,7 @@ const navConfig = [
       },
       // Events
       {
-        title: 'Access To Event',
+        title: 'Access To Events',
         path: PATH_ADMIN.event.root,
         icon: ICONS.booking,
         children: [

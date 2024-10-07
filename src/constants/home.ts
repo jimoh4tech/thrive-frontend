@@ -51,13 +51,14 @@ export const sa = {
     // },
     {
       id: 4,
-      title: 'THRIVE beneficiary attends export fair',
+      title: 'You can now offer your services on THRIVE. Click to get started',
       body: lorem,
       image: 'https://res.cloudinary.com/thrive-biz/image/upload/v1684509079/su_4.png',
       comment: 5,
       like: 12,
       tags: ['business', 'startup', 'msme', 'event'],
       createdAt: '2023-05-07 20:43:47',
+      href: 'https://forms.gle/96nrSrPy1Ys1eQNYA',
     },
     // {
     //   id: 5,

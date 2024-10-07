@@ -4,6 +4,7 @@ import { Box, Card, CardContent, Stack, Typography } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
 // routes
 // hooks
+import Link from 'next/link';
 import useResponsive from '../../hooks/useResponsive';
 // utils
 import { fShortenNumber } from '../../utils/formatNumber';
@@ -36,35 +37,43 @@ type Props = {
 export default function BlogPostCard({ post, index }: Props) {
   const isDesktop = useResponsive('up', 'md');
 
-  const { image, title, like, comment, createdAt } = post;
+  const { image, title, like, comment, createdAt, href } = post;
 
   const latestPost = index === 0 || index === 1 || index === 2;
 
   if (isDesktop && latestPost) {
     return (
       <Card>
-        <PostContent
-          title={title}
-          like={like}
-          comment={comment}
-          createdAt={createdAt}
-          index={index}
-        />
+        <Link href={href || '#'} target="_blank" style={{ textDecoration: 'none', color: 'black' }}>
+          <PostContent
+            title={title}
+            like={like}
+            comment={comment}
+            createdAt={createdAt}
+            index={index}
+          />
 
-        <StyledOverlay />
+          <StyledOverlay />
 
-        <Image alt="cover" src={image} sx={{ height: 360, width: '100%', objectFit: 'contain' }} />
+          <Image
+            alt="cover"
+            src={image}
+            sx={{ height: 360, width: '100%', objectFit: 'contain' }}
+          />
+        </Link>
       </Card>
     );
   }
 
   return (
     <Card>
-      <Box sx={{ position: 'relative' }}>
-        <Image alt="image" src={image} ratio="4/3" />
-      </Box>
+      <Link href={href || '#'} target="_blank" style={{ textDecoration: 'none', color: 'black' }}>
+        <Box sx={{ position: 'relative' }}>
+          <Image alt="image" src={image} ratio="4/3" />
+        </Box>
 
-      <PostContent title={title} comment={comment} like={like} createdAt={createdAt} />
+        <PostContent title={title} comment={comment} like={like} createdAt={createdAt} />
+      </Link>
     </Card>
   );
 }

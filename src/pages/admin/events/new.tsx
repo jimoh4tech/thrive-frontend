@@ -44,7 +44,7 @@ export default function BlogNewPostPage() {
 
       setOrganizers(_categories);
     } catch (error) {
-      enqueueSnackbar(error.message || 'Could not fetch event categories', { variant: 'error' });
+      enqueueSnackbar(error.message || 'Could not fetch events categories', { variant: 'error' });
     }
   }, [enqueueSnackbar]);
 
@@ -69,8 +69,8 @@ export default function BlogNewPostPage() {
               href: PATH_ADMIN.root,
             },
             {
-              name: 'Access To Event',
-              href: PATH_ADMIN.businessMedia.library,
+              name: 'Access To Events',
+              href: PATH_ADMIN.event.root,
             },
             {
               name: 'Add New Event',

@@ -84,7 +84,7 @@ export default function HomePage() {
           }}
         >
           {/* <Typography variant="h2">YOUR ADVERT APPEARS HERE</Typography> */}
-          <Image alt="Advertisment" src={ads} width={800} height={250} />
+          <Image alt="Advertisment" src={ads} width={1000} height={600} />
         </Stack>
         {/* <Grid item md={6}>
           <Image alt="Advertisment" src={ads} />

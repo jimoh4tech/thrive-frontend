@@ -36,7 +36,7 @@ export default class MyDocument extends Document {
             name="description"
             content="A one-stop digital support center for growing businesses in Nigeria"
           />
-          <meta name="keywords" content="Jimoh4Tech,Thrive,msme,enterpricsehubs" />
+          <meta name="keywords" content="Jimoh4Tech,Thrive,Entrepreneurs,enterpricsehubs" />
           <meta name="author" content="Jimoh4Tech" />
         </Head>
 

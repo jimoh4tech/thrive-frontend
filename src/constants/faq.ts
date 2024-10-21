@@ -52,7 +52,7 @@ It is necessary to always write down your password, and it must be kept in a saf
   },
   {
     titile: 'How do I market my product or service?',
-    ans: `Once you are a subscribed user and have updated your business profile, your services and products will be automatically published on the MSME market for visitors to transact with you.
+    ans: `Once you are a subscribed user and have updated your business profile, your services and products will be automatically published on the Entrepreneurs market for visitors to transact with you.
 `,
   },
   {

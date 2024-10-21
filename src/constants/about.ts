@@ -27,7 +27,7 @@ export const missVis = {
 
 export const lone = `<p>Small and Medium Enterprises (SMEs) are the backbone of many economies around the world, providing employment opportunities, contributing to economic growth, and fostering innovation. However, these businesses often face a variety of challenges, such as access to funding, marketing, and technological resources.</p>
 
-<p>In response to these challenges, the development of an online MSME resource center has become increasingly popular, which is why <strong style="color: #F35D2A;">THRIVE</strong>  - a one-stop digital support for entrepreneurs is bridging the gap by providing a sustainable platform that allows growing businesses to access business support services.</p>
+<p>In response to these challenges, the development of an online Entrepreneurs resource center has become increasingly popular, which is why <strong style="color: #F35D2A;">THRIVE</strong>  - a one-stop digital support for entrepreneurs is bridging the gap by providing a sustainable platform that allows growing businesses to access business support services.</p>
 
 <p>By subscribing to these resources, entrepreneurs can grow their businesses and THRIVE in today's competitive business environment.</p>
 `;

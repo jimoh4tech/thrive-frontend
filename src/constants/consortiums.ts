@@ -42,7 +42,7 @@ export const consortiums = [
   {
     title: 'LAPO Microfinance Bank',
     logo: lapo,
-    text: '<p>LAPO Microfinance Bank is an institution that provides a range of financial products and solutions to assist micro, small and medium enterprises, and members of low-income households in 34 of the 36 states in Nigeria, including the Federal Capital Territory, Abuja and boasts of a broad network of over 500 branches.</p><p>LAPO Microfinance Bank has embraced the challenge of serving the Micro, Small and Medium Enterprises (MSMEs) with our responsive, pacesetting and innovative financial products. Our services enable low-income households enhance their productive capacity, build and consolidate their economic base and manage risk.</p>',
+    text: '<p>LAPO Microfinance Bank is an institution that provides a range of financial products and solutions to assist micro, small and medium enterprises, and members of low-income households in 34 of the 36 states in Nigeria, including the Federal Capital Territory, Abuja and boasts of a broad network of over 500 branches.</p><p>LAPO Microfinance Bank has embraced the challenge of serving the Micro, Entrepreneurs with our responsive, pacesetting and innovative financial products. Our services enable low-income households enhance their productive capacity, build and consolidate their economic base and manage risk.</p>',
     link: 'http://lapoinstitute.edu.ng',
   },
   {
@@ -60,7 +60,7 @@ export const consortiums = [
   {
     title: 'Genius Hub',
     logo: giniushub,
-    text: '<p>Genius Hub is a social enterprise that strives to continually improve lives and create value by developing human capacity and promoting socio- economic growth through various programs and interventions. We are actively involved in job creation projects, providing learning labs and coworking spaces, HR services, and jobs/internship placement. Our projects are geared towards spurring ideas and innovations to improve livelihoods and psychosocial well-being. We provide business support services to MSMEs, providing mentorship guidance, access to finance, access to market, and awareness raising on existing livelihood opportunities. We offer training in over 42 skills cutting across filmmaking, vocational, entrepreneurial, employability, and ICT skills, including talent management services.</p>',
+    text: '<p>Genius Hub is a social enterprise that strives to continually improve lives and create value by developing human capacity and promoting socio- economic growth through various programs and interventions. We are actively involved in job creation projects, providing learning labs and coworking spaces, HR services, and jobs/internship placement. Our projects are geared towards spurring ideas and innovations to improve livelihoods and psychosocial well-being. We provide business support services to Entrepreneurs, providing mentorship guidance, access to finance, access to market, and awareness raising on existing livelihood opportunities. We offer training in over 42 skills cutting across filmmaking, vocational, entrepreneurial, employability, and ICT skills, including talent management services.</p>',
     link: 'https://geniushubglobal.com/',
   },
   {

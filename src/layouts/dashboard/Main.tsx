@@ -28,10 +28,14 @@ export default function Main({ children, sx, ...other }: BoxProps) {
 
   const isDesktop = useResponsive('up', 'lg');
 
+  // TODO: to be removed after a year 10/21/2024. A temporary fix to give old users a year free trial
+  const PILOT_USER_ID = 18;
+
   const render = () => {
     if (!user?.isApproved) return <UserSuspended />;
     if (!user?.business) return <UserApproved />;
-    if (!user.hasSubscription && user?.premuimSub?.length === 0) return <UserSubscribe />;
+    if (!user.hasSubscription && user?.premuimSub?.length === 0 && user?.ngo?.id !== PILOT_USER_ID)
+      return <UserSubscribe />;
     return children;
   };
 

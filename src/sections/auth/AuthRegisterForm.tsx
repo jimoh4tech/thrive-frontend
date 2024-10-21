@@ -60,7 +60,7 @@ export default function AuthRegisterForm() {
     password: '',
     dob: '',
     confirmPassword: '',
-    ngoId: null,
+    ngoId: 1,
   };
 
   const methods = useForm<FormValuesProps>({
@@ -126,8 +126,7 @@ export default function AuthRegisterForm() {
   const getNgos = useCallback(async () => {
     try {
       const _ngos = await loader('ngos');
-
-      setNgos(_ngos);
+      setNgos(_ngos?.filter(({ id }: { id: number; name: string }) => id !== 18));
     } catch (error) {
       enqueueSnackbar(error.message || 'Could not fetch ngos', { variant: 'error' });
     }
@@ -155,7 +154,6 @@ export default function AuthRegisterForm() {
           <RHFTextField name="phone" label="Phone Number" />
 
           <RHFSelect native name="ngoId" label="Partner Organization">
-            <option value="" />
             {ngos?.map(({ id, name }) => (
               <option key={id} value={id}>
                 {name}

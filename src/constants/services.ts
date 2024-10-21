@@ -2,12 +2,12 @@ const services = [
   {
     title: 'Digital Address',
     icon: 'gis:poi-map-o',
-    text: '<p>The platform provides a mini website extension i.e. (www.thrivebizng.com/bolajitailors) that is searchable with pre-formatted template pages which can be edited by the MSME beneficiaries to fit their company brand and theme.</p> <p>You will have the option to upgrade to a standalone website and still maintain a presence on the platform.</p>',
+    text: '<p>The platform provides a mini website extension i.e. (www.thrivebizng.com/bolajitailors) that is searchable with pre-formatted template pages which can be edited by the Entrepreneurs beneficiaries to fit their company brand and theme.</p> <p>You will have the option to upgrade to a standalone website and still maintain a presence on the platform.</p>',
   },
   {
     title: 'Virtual Office',
     icon: 'mdi:office-building-location-outline',
-    text: "<p>The virtual business address, visitor/mail reception, call answering service (VOIP-based call transferring), and other services will be available at 16a Trinity Avenue Victoria Island Lagos.</p> <p>For simple client access, MSMEs will incorporate Enterprise Hubs' contact information on their websites and stationery With this service, Enterprise Hubs reception will serve as the business owner's receptionist, taking customer inquiries and directing them to you the business owner.</p>",
+    text: "<p>The virtual business address, visitor/mail reception, call answering service (VOIP-based call transferring), and other services will be available at 16a Trinity Avenue Victoria Island Lagos.</p> <p>For simple client access, Entrepreneurs will incorporate Enterprise Hubs' contact information on their websites and stationery With this service, Enterprise Hubs reception will serve as the business owner's receptionist, taking customer inquiries and directing them to you the business owner.</p>",
   },
   {
     title: 'Workplace Booking',
@@ -17,7 +17,7 @@ const services = [
   {
     title: 'Business Library',
     icon: 'material-symbols:perm-media-outline',
-    text: '<p>We have integrated these service tools to help MSMEs save money by giving them access to high-quality, up-to-date resources like business journals, training materials, webinars, marketing strategies, financial planning, management techniques, legal compliance, etc.</p> <p>You need continuous improvement and learning while starting your business, which is why we believe that you should never stop learning and improving.</p>',
+    text: '<p>We have integrated these service tools to help Entrepreneurs save money by giving them access to high-quality, up-to-date resources like business journals, training materials, webinars, marketing strategies, financial planning, management techniques, legal compliance, etc.</p> <p>You need continuous improvement and learning while starting your business, which is why we believe that you should never stop learning and improving.</p>',
   },
   {
     title: 'Business Toolkit',
@@ -27,7 +27,7 @@ const services = [
   {
     title: 'Business Directory',
     icon: 'iconoir:page-search',
-    text: '<p>The THRIVE Business directory is a crucial tool for MSMEs to  reach more people and be searchable online.</p> <p>As a THRIVE beneficiary who have registered businesses on the site, Consumers can communicate with you by finding your contact information, address, business hours, and other pertinent information quickly on the business listing page. This makes it simpler for customers to interact with you as a business owner.</p>',
+    text: '<p>The THRIVE Business directory is a crucial tool for Entrepreneurs to  reach more people and be searchable online.</p> <p>As a THRIVE beneficiary who have registered businesses on the site, Consumers can communicate with you by finding your contact information, address, business hours, and other pertinent information quickly on the business listing page. This makes it simpler for customers to interact with you as a business owner.</p>',
   },
   {
     title: 'Collaboration Tools',
@@ -42,12 +42,12 @@ const services = [
   {
     title: 'Access to Events',
     icon: 'fa6-solid:people-line',
-    text: '<p>Signing up on the portal provides MSMEs with various avenues to gain access to business events, including industry associations, government organizations, online events, business incubators, and accelerators.</p> <p>MSMEs will gain exposure to potential buyers, investors, and industry peers, and learn about industry trends and best practices. It will also provide an opportunity for MSMEs to showcase their products and services to potential buyers and investors.</p>',
+    text: '<p>Signing up on the portal provides Entrepreneurs with various avenues to gain access to business events, including industry associations, government organizations, online events, business incubators, and accelerators.</p> <p>Entrepreneurs will gain exposure to potential buyers, investors, and industry peers, and learn about industry trends and best practices. It will also provide an opportunity for Entrepreneurs to showcase their products and services to potential buyers and investors.</p>',
   },
   {
     title: 'Access to Finance',
     icon: 'guidance:bank',
-    text: '<p>Access to finance is crucial for the growth and sustainability of MSMEs, THRIVE Business solution provides MSMEs with avenues to access financial programs organized by Microfinance banks (MFB) and Money deposit banks (MDB) that are offering subsidized interest rates, collateral-free loans, subsidized equipment leasing and other benefits.</p> <p>THRIVE will provide registered users with information and opportunities in various state-level organizations and assistance in accessing these schemes.</p>',
+    text: '<p>Access to finance is crucial for the growth and sustainability of Entrepreneurs, THRIVE Business solution provides Entrepreneurs with avenues to access financial programs organized by Microfinance banks (MFB) and Money deposit banks (MDB) that are offering subsidized interest rates, collateral-free loans, subsidized equipment leasing and other benefits.</p> <p>THRIVE will provide registered users with information and opportunities in various state-level organizations and assistance in accessing these schemes.</p>',
   },
   {
     title: 'Health and Wellness',

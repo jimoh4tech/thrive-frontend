@@ -3,12 +3,12 @@ import { MSME1, MSME2 } from 'src/assets/images';
 const msme = {
   title: 'Entrepreneurship in Nigeria',
   intro:
-    'The MSME sector is the growth engine of any economy contributing to its development, job creation and export amongst others. SMEs contribute nearly 50% of the country’s GDP and account for over 80% of employment in the country.',
+    'The Entrepreneurs sector is the growth engine of any economy contributing to its development, job creation and export amongst others. SMEs contribute nearly 50% of the country’s GDP and account for over 80% of employment in the country.',
   body1: {
     image: MSME1.src,
     text: `
     <p>The growth and development of Entrepreneurship into sustainable businesses depends largely on the business environment they operate in. The Entrepreneurship Space seeks to achieve this by ensuring relevant actors constantly engage and come up with suitable conditions for ease of doing business.</p> 
-    <p>According to the “National Policy on Micro, Small and Medium Enterprises” Federal Republic of Nigeria by SMEDAN 2020. The key pillars within the MSME/Entrepreneurship space are. </p>
+    <p>According to the “National Policy on Micro, Small and Medium Enterprises” Federal Republic of Nigeria by SMEDAN 2020. The key pillars within the Entrepreneurship space are. </p>
     
     <ul style="padding: revert;">
         <li>Legal and Regulatory Framework & Infrastructure</li>

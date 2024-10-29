@@ -3,7 +3,7 @@ import { Box, Card, CardContent, Grid, Typography, styled } from '@mui/material'
 // layouts
 import { BoltSharp } from '@mui/icons-material';
 import { Container, Stack } from '@mui/system';
-import { aboutBg, logoIconLg } from 'src/assets/images';
+import { logoIconLg } from 'src/assets/images';
 import Iconify from 'src/components/iconify/Iconify';
 import { LogoFull } from 'src/components/logo/Logo';
 import { intro, lone, missVis, objectives } from 'src/constants/about';
@@ -60,9 +60,7 @@ export default function HomePage() {
 
       <Box
         sx={{
-          backgroundImage: `linear-gradient(to left, rgba(245, 246, 252, 0), rgba(0, 0, 0, 1)), url(${aboutBg.src})`,
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
+          bgcolor: 'gray',
           py: 6,
           mt: 4,
         }}

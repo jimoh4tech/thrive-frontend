@@ -1,18 +1,16 @@
 // next
 // @mui
-import { Box, Card, CardContent, Stack, Typography } from '@mui/material';
+import { Box, Card, CardContent, Typography } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
 // routes
 // hooks
 import Link from 'next/link';
 import useResponsive from '../../hooks/useResponsive';
 // utils
-import { fShortenNumber } from '../../utils/formatNumber';
 import { fDate } from '../../utils/formatTime';
 // @types
 import { IBlogPost } from '../../@types/blog';
 // components
-import Iconify from '../../components/iconify';
 import Image from '../../components/image';
 import TextMaxLine from '../../components/text-max-line';
 
@@ -52,10 +50,10 @@ export default function BlogPostCard({ post, index }: Props) {
             createdAt={createdAt}
             index={index}
           />
-
           <StyledOverlay />
 
-          <Image alt="cover" src={image} sx={{ height: 360, width: '90%', objectFit: 'cover' }} />
+          <Image alt="cover" src={image} />
+          {/* sx={{ height: 360, width: '90%', objectFit: 'cover' }} */}
         </Link>
       </Card>
     );
@@ -65,7 +63,7 @@ export default function BlogPostCard({ post, index }: Props) {
     <Card>
       <Link href={href || '#'} target="_blank" style={{ textDecoration: 'none', color: 'black' }}>
         <Box sx={{ position: 'relative' }}>
-          <Image alt="image" src={image} ratio="4/3" />
+          <Image alt="image" src={image} ratio="1/1" />
         </Box>
 
         <PostContent title={title} comment={comment} like={like} createdAt={createdAt} />
@@ -93,10 +91,10 @@ export function PostContent({ title, comment, like, createdAt, index }: PostCont
 
   const latestPostSmall = index === 1 || index === 2;
 
-  const POST_INFO = [
-    { id: 'comment', value: comment, icon: 'eva:message-circle-fill' },
-    { id: 'like', value: like, icon: 'solar:like-bold-duotone' },
-  ];
+  // const POST_INFO = [
+  //   { id: 'comment', value: comment, icon: 'eva:message-circle-fill' },
+  //   { id: 'like', value: like, icon: 'solar:like-bold-duotone' },
+  // ];
 
   return (
     <CardContent
@@ -133,7 +131,7 @@ export function PostContent({ title, comment, like, createdAt, index }: PostCont
       </TextMaxLine>
       {/* </Link> */}
 
-      <Stack
+      {/* <Stack
         flexWrap="wrap"
         direction="row"
         justifyContent="flex-end"
@@ -157,7 +155,7 @@ export function PostContent({ title, comment, like, createdAt, index }: PostCont
             {fShortenNumber(info.value)}
           </Stack>
         ))}
-      </Stack>
+      </Stack> */}
     </CardContent>
   );
 }

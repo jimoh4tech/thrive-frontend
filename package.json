@@ -42,6 +42,7 @@
     "@mui/system": "^6.0.2",
     "@mui/x-data-grid": "^5.17.24",
     "@mui/x-date-pickers": "^5.0.19",
+    "@next/swc-win32-x64-msvc": "^15.0.2",
     "@paystack/inline-js": "^2.12.6",
     "@react-pdf/renderer": "^3.1.5",
     "@reduxjs/toolkit": "^1.9.2",

@@ -37,13 +37,13 @@ export default function HomePage() {
             </Grid>
 
             <Box>
-              <Grid container spacing={4} alignItems="center">
+              <Grid container spacing={4}>
                 <Grid item md={6} pl={0}>
                   <Image src={body1.image} />
                 </Grid>
                 <Grid item md={6}>
-                  <Card>
-                    <CardContent>
+                  <Card sx={{ height: '100%' }}>
+                    <CardContent sx={{ marginY: 'auto' }}>
                       <Typography
                         mt={2}
                         component="div"

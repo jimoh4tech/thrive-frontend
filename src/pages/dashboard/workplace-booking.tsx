@@ -106,7 +106,7 @@ export default function FileManagerPage() {
             my: 6,
           }}
         >
-          <Typography variant="h2"> Coming soon!</Typography>
+          <Typography variant="h2">Under maintenance</Typography>
         </Stack>
 
         {/* <Stack

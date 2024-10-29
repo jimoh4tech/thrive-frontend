@@ -106,6 +106,20 @@ export default function ContactForm() {
             </LoadingButton>
           </m.div>
         </Stack>
+        <Stack gap={1}>
+          <Typography color="primary.main" component="div" variant="overline">
+            Contact Us
+          </Typography>
+          <Typography color="inherit" variant="body2">
+            support@thrivebizng.com
+          </Typography>
+          <Typography color="inherit" variant="body2">
+            +2349066189699, +2349067325337
+          </Typography>
+          <Typography color="inherit" variant="body2">
+            THRIVE – Enterprise Hubs, 16a Trinity Avenue, Off Ligali Ayorinde, Victoria Island.
+          </Typography>
+        </Stack>
       </Stack>
     </FormProvider>
   );

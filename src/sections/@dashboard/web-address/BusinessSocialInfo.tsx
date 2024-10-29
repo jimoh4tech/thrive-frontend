@@ -71,7 +71,7 @@ export default function BusinessSocialInfo({ socialLinks }: Props) {
               {(link.value === 'facebook' && ('Visit Page' || 'Not Available')) ||
                 (link.value === 'instagram' && ('Visit Page' || 'Not Available')) ||
                 (link.value === 'linkedin' && ('Visit Page' || 'Not Available')) ||
-                (link.value === 'twitter' && ('VIEW PAGE' || 'Not Available')) ||
+                (link.value === 'twitter' && ('View Page' || 'Not Available')) ||
                 'Not Available'}
             </Button>
           </Stack>

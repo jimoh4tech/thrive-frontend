@@ -1,6 +1,6 @@
 // next
 // @mui
-import { Box, Button, Grid, Paper, Typography } from '@mui/material';
+import { Box, Button, Grid, Paper, Typography, useMediaQuery } from '@mui/material';
 // layouts
 import { Container, Stack } from '@mui/system';
 import Iconify from 'src/components/iconify/Iconify';
@@ -10,7 +10,7 @@ import Announcement from 'src/sections/home/Announcement';
 import LandingScreen from 'src/sections/home/LandingScreen';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ads } from 'src/assets/images';
+import { ads, ads_mobile } from 'src/assets/images';
 import MainLayout from '../layouts/main';
 
 // ----------------------------------------------------------------------
@@ -24,6 +24,7 @@ HomePage.getLayout = (page: React.ReactElement) => (
 // ----------------------------------------------------------------------
 
 export default function HomePage() {
+  const lessThan600 = useMediaQuery('(min-width:800px)');
   return (
     <Box
       sx={{
@@ -84,7 +85,12 @@ export default function HomePage() {
           }}
         >
           {/* <Typography variant="h2">YOUR ADVERT APPEARS HERE</Typography> */}
-          <Image alt="Advertisment" src={ads} width={1000} height={600} />
+          <Image
+            alt="Advertisment"
+            src={lessThan600 ? ads : ads_mobile}
+            width={lessThan600 ? 800 : 500}
+            height={lessThan600 ? 600 : 350}
+          />
         </Stack>
         {/* <Grid item md={6}>
           <Image alt="Advertisment" src={ads} />

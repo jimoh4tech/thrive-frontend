@@ -39,3 +39,5 @@ yarn-error.log*
 .netlify
 
 _static
+yarn1.lock
+yarn2.lock

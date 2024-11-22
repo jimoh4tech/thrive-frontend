@@ -89,7 +89,7 @@ const LandingScreen = () => {
               Take A Tour
             </Button>
           </Stack>
-          <Box>
+          {/* <Box>
             <Typography variant="h6">Registered User</Typography>
             <Stack direction="row" spacing={1} mt={1}>
               {`000${totalUsers}`
@@ -111,7 +111,7 @@ const LandingScreen = () => {
                   </Box>
                 ))}
             </Stack>
-          </Box>
+          </Box> */}
         </Stack>
       </Grid>
       <Grid item xs={12} lg={7}>

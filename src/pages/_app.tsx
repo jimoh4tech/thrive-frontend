@@ -97,8 +97,8 @@ export default function MyApp(props: MyAppProps) {
                         {getLayout(<Component {...pageProps} />)}
 
                         <TawkMessengerReact
-                          propertyId="645e1dc0ad80445890ec91d2"
-                          widgetId="1h07q8emq"
+                          propertyId="6748527c4304e3196ae9d357"
+                          widgetId="1idp84ec3"
                         />
                       </SnackbarProvider>
                     </ThemeLocalization>
@@ -112,3 +112,5 @@ export default function MyApp(props: MyAppProps) {
     </CacheProvider>
   );
 }
+// propertyId = '645e1dc0ad80445890ec91d2';
+// widgetId = '1h07q8emq';

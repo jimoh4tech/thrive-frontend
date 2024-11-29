@@ -8,16 +8,16 @@ import { banner1, banner2, banner3, banner4 } from 'src/assets/images';
 import Iconify from 'src/components/iconify/Iconify';
 import Link from 'next/link';
 import { PATH_AUTH } from 'src/routes/paths';
-import { useCallback, useEffect, useState } from 'react';
-import { loader } from 'src/actions';
-import { useSnackbar } from 'notistack';
+import { useState } from 'react';
+// import { loader } from 'src/actions';
+// import { useSnackbar } from 'notistack';
 import { Tour } from '@mui/icons-material';
 import TourVideo from 'src/components/TourVideo';
 import Image from '../../components/image';
 
 const LandingScreen = () => {
   const theme = useTheme();
-  const { enqueueSnackbar } = useSnackbar();
+  // const { enqueueSnackbar } = useSnackbar();
   const [watch, setWatch] = useState(false);
 
   const carouselSettings = {
@@ -39,19 +39,19 @@ const LandingScreen = () => {
     }),
   };
 
-  const [totalUsers, setTotalUsers] = useState(0);
-  const getUsersCount = useCallback(async () => {
-    try {
-      const { count } = await loader('countUsers');
-      setTotalUsers(count);
-    } catch (error) {
-      enqueueSnackbar(error.message || error, { variant: 'error' });
-    }
-  }, [enqueueSnackbar]);
+  // const [totalUsers, setTotalUsers] = useState(0);
+  // const getUsersCount = useCallback(async () => {
+  //   try {
+  //     const { count } = await loader('countUsers');
+  //     setTotalUsers(count);
+  //   } catch (error) {
+  //     enqueueSnackbar(error.message || error, { variant: 'error' });
+  //   }
+  // }, [enqueueSnackbar]);
 
-  useEffect(() => {
-    getUsersCount();
-  }, [getUsersCount]);
+  // useEffect(() => {
+  //   getUsersCount();
+  // }, [getUsersCount]);
 
   return (
     <Grid container justifyContent="center" alignItems="center" pt={{ md: 16 }} spacing={4}>

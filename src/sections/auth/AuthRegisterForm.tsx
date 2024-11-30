@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import { LoadingButton } from '@mui/lab';
 import { Alert, IconButton, InputAdornment, Stack, Typography } from '@mui/material';
 import { requestVerifyEmail } from 'src/actions/authAction';
-import { phoneRegExp } from 'src/utils/regexp';
+// import { phoneRegExp } from 'src/utils/regexp';
 import { useSnackbar } from 'notistack';
 import { loader } from 'src/actions';
 import { useAuthContext } from '../../auth/useAuthContext';
@@ -43,7 +43,7 @@ export default function AuthRegisterForm() {
     lastName: Yup.string().required('Last name required'),
     // ngoId: Yup.string().required('Partner Organization is required'),
     email: Yup.string().required('Email is required').email('Email must be a valid email address'),
-    phone: Yup.string().matches(phoneRegExp, 'Phone number is not valid'),
+    phone: Yup.string().optional(),
     password: Yup.string()
       .required('Password is required')
       .min(6, 'Pass must not be less than 6 characters'),
